@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="rpg_meta" nsURI="rpg_meta" nsPrefix="rpg_meta">
+  <eClassifiers xsi:type="ecore:EClass" name="CharacterClass">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="characterstatistic" lowerBound="1"
+        upperBound="-1" eType="#//CharacterStatistic" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Lore" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
+        eType="#//CharacterClass" eOpposite="#//CharacterClass/parents"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parents" upperBound="-1"
+        eType="#//CharacterClass" eOpposite="#//CharacterClass/children"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="branches" lowerBound="1"
+        upperBound="-1" eType="#//BranchRootNode"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CharacterStatistic">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Lore" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="MinValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="MaxValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="StartValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BranchRootNode" eSuperTypes="#//BranchNode">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="BranchName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="BranchType" eType="#//BranchTypes"
+        defaultValueLiteral="TALENT"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="branchnodes" lowerBound="1"
+        upperBound="-1" eType="#//BranchNode"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="BranchTypes">
+    <eLiterals name="TALENT"/>
+    <eLiterals name="ABILITY" value="1"/>
+    <eLiterals name="MIXED" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BranchNode">
+    <eAnnotations source="http://www.obeo.fr/dsl/dnc/archetype">
+      <details key="archetype" value="Role"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Lore" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nextNodes" upperBound="-1"
+        eType="#//BranchNode" eOpposite="#//BranchNode/parentNode"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentNode" lowerBound="1"
+        eType="#//BranchNode" eOpposite="#//BranchNode/nextNodes"/>
+  </eClassifiers>
+</ecore:EPackage>
