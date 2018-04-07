@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="ASCII"?>
+<RPG xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="rpg/domij"
+    xsi:schemaLocation="rpg/domij rpg.ecore"
+    name="Bobi's Lame Programming RPG"
+    lore="Follow the adventures of Bobi as he struggles to become the best programmer that ever was.">
+  <allClasses
+      name="Playable Character"
+      lore=""
+      hasStatistics="//@allStatistics.0 //@allStatistics.1"
+      description="All playable characters in the game."/>
+  <allStatistics
+      name="Health"
+      lore=""
+      description="The amount of damage a character can sustain before dying."
+      tooltip="Amount of current health."
+      maxValue="25000.0"
+      startMaxValue="150.0"/>
+  <allStatistics
+      name="Level"
+      description="The amout of progress a character has reached."
+      tooltip="Shows how much a character has progressed along the leveling path."
+      minValue="1.0"
+      maxValue="80.0"
+      startMaxValue="1.0"/>
+</RPG>
