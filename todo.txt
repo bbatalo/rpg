@@ -1,0 +1,1 @@
+-change reference type between class and stat to containment?
