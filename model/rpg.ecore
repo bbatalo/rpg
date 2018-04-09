@@ -68,13 +68,97 @@
     <eLiterals name="DESCENDING" value="1"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Branch">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="ValidStartNodes"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="ValidStartNodes" value="&#xA;&#x9;&#x9;&#x9;self.startNodes->forAll(node | node.nodeType = NodeType::ROOT or node.nodeType = NodeType::STANDALONE)"/>
+      <details key="ValidStartNodes$message" value="'Start nodes must have either ROOT or STANDALONE type'"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="lore" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="branchType" eType="#//BranchType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="branchType" lowerBound="1"
+        eType="#//BranchType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="startNodes" lowerBound="1"
+        upperBound="-1" eType="#//Node" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tooltip" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="BranchType">
     <eLiterals name="TALENT"/>
     <eLiterals name="ABILITY" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Node">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="RootNodeChildren RootNodeParents StandardNodeChildren StandardNodeParents StandaloneNodeConnections ActivationIntegrity MinimalNodeActivation"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="RootNodeChildren" value="self.nodeType = NodeType::ROOT implies self.childNodes->forAll(node | node.nodeType = NodeType::STANDARD)"/>
+      <details key="RootNodeChildren$message" value="'ROOT nodes can have only STANDARD nodes for children.'"/>
+      <details key="RootNodeParents" value="self.nodeType = NodeType::ROOT implies self.parentNodes->size() = 0"/>
+      <details key="RootNodeParents$message" value="'ROOT nodes can not have any parents.'"/>
+      <details key="StandardNodeChildren" value="self.nodeType = NodeType::STANDARD implies self.childNodes->forAll(node | node.nodeType = NodeType::STANDARD)"/>
+      <details key="StandardNodeChildren$message" value="'STANDARD nodes can have only STANDARD nodes for children.'"/>
+      <details key="StandardNodeParents" value="self.nodeType = NodeType::STANDARD implies self.parentNodes->forAll(node | node.nodeType = NodeType::ROOT or node.nodeType = NodeType::STANDARD)"/>
+      <details key="StandardNodeParents$message" value="'STANDARD nodes can have only ROOT or STANDARD nodes for parents.'"/>
+      <details key="StandaloneNodeConnections" value="self.nodeType = NodeType::STANDALONE implies self.parentNodes->size() = 0 and self.childNodes->size() = 0"/>
+      <details key="StandaloneNodeConnections$message" value="'STANDALONE nodes can not have parent or child nodes.'"/>
+      <details key="ActivationIntegrity" value="self.isActivated = true implies self.activationLevel >= self.minActivationLevel and self.activationLevel &lt;= self.maxActivationLevel"/>
+      <details key="ActivationIntegrity$message" value="'Activated nodes must have activation level between minimum and maximum activation levels.'"/>
+      <details key="MinimalNodeActivation" value="self.isActivated = false implies self.activation->size() > 0 and self.activationLevel &lt; self.minActivationLevel"/>
+      <details key="MinimalNodeActivation$message" value="'Non-activated nodes must have at least one node activation rule and have activation level below minimum.'"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lore" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tooltip" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nodeType" lowerBound="1"
+        eType="#//NodeType" defaultValueLiteral="STANDARD"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="childNodes" eType="#//Node"
+        eOpposite="#//Node/parentNodes"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentNodes" eType="#//Node"
+        eOpposite="#//Node/childNodes"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="activation" upperBound="-1"
+        eType="#//NodeActivation" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="minActivationLevel" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="1"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxActivationLevel" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="1"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="activationLevel" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isActivated" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="NodeType">
+    <eLiterals name="STANDARD"/>
+    <eLiterals name="ROOT" value="1"/>
+    <eLiterals name="STANDALONE" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NodeActivation" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAuto" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="level" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NodeActivationBuy" eSuperTypes="#//NodeActivation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="costs" lowerBound="1" upperBound="-1"
+        eType="#//ActivationCost" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NodeActivationPropgate" eSuperTypes="#//NodeActivation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="followsActivationOf" lowerBound="1"
+        eType="#//Node"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="requiredLevel" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ActivationCost">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="consume" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cost" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="statistic" lowerBound="1"
+        eType="#//CharacterStatistic"/>
   </eClassifiers>
 </ecore:EPackage>

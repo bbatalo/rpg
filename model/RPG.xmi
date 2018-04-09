@@ -14,29 +14,76 @@
       description="All playable characters in the game."
       childClasses="//@allClasses.1 //@allClasses.2 //@allClasses.3">
     <branches
-        name="Character Talent Branch"/>
+        name="Character Ability Branch"
+        description="Abilities"
+        branchType="ABILITY"
+        tooltip="Abilities">
+      <startNodes
+          name="Sign into DoobTimer"
+          tooltip="Clock yourself in!"
+          description="Signs you into DoobTimer, making sure you are at your workplace in a timely fashion"
+          nodeType="ROOT"
+          activationLevel="1"
+          isActivated="true"/>
+    </branches>
   </allClasses>
   <allClasses
       name="Programmer"
       lore=""
+      statistics="//@allStatistics.3"
       description="Solves development-related tasks. Some complex, other not so much."
       parentClasses="//@allClasses.0">
     <branches
-        name="Programmer Talent Branch"/>
+        name="Programmer Ability Branch"
+        description="Abilities"
+        branchType="ABILITY"
+        tooltip="Abilities">
+      <startNodes
+          name="Code"
+          tooltip="Code a bit on a standard project."
+          description="The programmer codes on an assigned project."
+          nodeType="ROOT"
+          maxActivationLevel="5"
+          activationLevel="1"
+          isActivated="true"/>
+    </branches>
   </allClasses>
   <allClasses
       name="Designer"
       description="Designs user interfaces and MPCE pamflets. Because why not."
       parentClasses="//@allClasses.0">
     <branches
-        name="Designer Talent Branch"/>
+        name="Designer Ability Branch"
+        description="Abilities"
+        branchType="ABILITY"
+        tooltip="Abilities">
+      <startNodes
+          name="Design"
+          lore=""
+          tooltip="Design an UI item."
+          description="The designer designs an item of a user interface on an assigned project."
+          nodeType="ROOT"
+          activationLevel="1"
+          isActivated="true"/>
+    </branches>
   </allClasses>
   <allClasses
       name="Animator"
       description="Animates 3D models. Does not sleep."
       parentClasses="//@allClasses.0">
     <branches
-        name="Animator Talent Branch"/>
+        name="Animator Abilities Branch"
+        description="Abilities"
+        branchType="ABILITY"
+        tooltip="Abilities">
+      <startNodes
+          name="Animate"
+          tooltip="Animate a 3D model"
+          description="The animator animates a 3D model on an assigned project."
+          nodeType="ROOT"
+          activationLevel="1"
+          isActivated="true"/>
+    </branches>
   </allClasses>
   <allStatistics
       name="Health"
@@ -59,4 +106,8 @@
       tooltip="Amount of experience a player has"
       maxValue="10000.0"
       startLimitValue="100.0"/>
+  <allStatistics
+      name="Coding Mojo"
+      description="psudhgpuaierg"
+      tooltip="Primary resource for unlocking programmer abilities."/>
 </rpg_meta:RPG>

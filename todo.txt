@@ -1,1 +1,5 @@
 -change reference type between class and stat to containment?
+-ok to sto node sadrzi ostale nodove?
+-ocl: activated ali ima vise levela -> nema activation za activation level i manje, ima za ostale
+
+exotic:
