@@ -69,6 +69,7 @@
             text="Level 2 Activation"
             level="2">
           <costs
+              cost="10.0"
               statistic="//@allStatistics.4"/>
         </activation>
         <activation

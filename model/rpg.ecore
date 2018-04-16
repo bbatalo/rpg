@@ -157,12 +157,26 @@
         eType="#//ActivationCost" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NodeActivationPropagate" eSuperTypes="#//NodeActivation">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="ProperRequiredLevel"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="ProperRequiredLevel" value="self.requiredLevel >= self.followsActivationOf.minActivationLevel and self.requiredLevel &lt;= self.followsActivationOf.maxActivationLevel"/>
+      <details key="ProperRequiredLevel$message" value="'Required level must be between minimum and maximum possible values of the level.'"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="followsActivationOf" lowerBound="1"
         eType="#//Node"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="requiredLevel" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ActivationCost">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="ProperCost"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="ProperCost" value="self.cost >= self.statistic.minValue and self.cost &lt;= self.statistic.startLimitValue"/>
+      <details key="ProperCost$message" value="'The cost must be between minimum and maximum values of the statistic.'"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="consume" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="cost" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
