@@ -16,6 +16,8 @@
         upperBound="-1" eType="#//CharacterClass" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="allStatistics" lowerBound="1"
         upperBound="-1" eType="#//CharacterStatistic" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rangeUnits" lowerBound="1"
+        upperBound="-1" eType="#//RangeUnit" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CharacterClass">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
@@ -182,5 +184,26 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="cost" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="statistic" lowerBound="1"
         eType="#//CharacterStatistic"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RangeUnit">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Ability"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="CastType">
+    <eLiterals name="NO_CAST"/>
+    <eLiterals name="INSTANT" value="1"/>
+    <eLiterals name="CAST" value="2"/>
+    <eLiterals name="CHANNELED" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="AbilityType">
+    <eLiterals name="SINGLE"/>
+    <eLiterals name="AOE" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TargetType">
+    <eLiterals name="SELF"/>
+    <eLiterals name="SINGLE" value="1"/>
+    <eLiterals name="MULTIPLE" value="2"/>
   </eClassifiers>
 </ecore:EPackage>
