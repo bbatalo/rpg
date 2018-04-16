@@ -12,14 +12,14 @@
       lore=""
       statistics="//@allStatistics.0 //@allStatistics.1"
       description="All playable characters in the game."
-      childClasses="//@allClasses.1 //@allClasses.2 //@allClasses.3">
+      childClasses="//@allClasses.1">
     <branches
         name="Character Ability Branch"
         description="Abilities"
         branchType="ABILITY"
         tooltip="Abilities">
       <startNodes
-          name="Sign into DoobTimer"
+          name="DoobTimer"
           tooltip="Clock yourself in!"
           description="Signs you into DoobTimer, making sure you are at your workplace in a timely fashion"
           nodeType="ROOT"
@@ -42,6 +42,15 @@
               cost="30.0"
               statistic="//@allStatistics.3"/>
         </activation>
+        <abilities
+            name="Sign in"
+            lore="Sign in"
+            tooltip="Sign in"
+            castType="CAST"
+            castTime="2.0"
+            range="1.0"
+            rangeUnit="//@rangeUnits.0"
+            onLevel="1"/>
       </startNodes>
     </branches>
   </allClasses>
@@ -57,9 +66,9 @@
         branchType="ABILITY"
         tooltip="Abilities">
       <startNodes
-          name="Code"
-          tooltip="Code a bit on a standard project."
-          description="The programmer codes on an assigned project."
+          name="Coding"
+          tooltip="Able to code."
+          description="The programmer can code on assigned (and not assigned) projects."
           nodeType="ROOT"
           maxActivationLevel="3"
           activationLevel="1"
@@ -79,11 +88,20 @@
           <costs
               statistic="//@allStatistics.4"/>
         </activation>
+        <abilities
+            name="Code"
+            lore="Code"
+            tooltip="Code"
+            castType="CHANNELED"
+            castTime="60.0"
+            range="1.0"
+            rangeUnit="//@rangeUnits.0"
+            onLevel="1"/>
       </startNodes>
       <startNodes
-          name="Report a Bug"
-          tooltip="Reports a bug"
-          description="Reports a bug"
+          name="Bugs!"
+          tooltip="Bugs!"
+          description="Bugs!"
           nodeType="ROOT">
         <activation
             xsi:type="rpg_meta:NodeActivationPropagate"
@@ -92,44 +110,17 @@
             level="1"
             followsActivationOf="//@allClasses.1/@branches.0/@startNodes.0"
             requiredLevel="2"/>
+        <abilities
+            name="Report a Bug"
+            lore="Report a Bug"
+            tooltip="Report a Bug"
+            castType="CHANNELED"
+            abilityType="AOE"
+            castTime="15.0"
+            range="10.0"
+            rangeUnit="//@rangeUnits.0"
+            onLevel="1"/>
       </startNodes>
-    </branches>
-  </allClasses>
-  <allClasses
-      name="Designer"
-      description="Designs user interfaces and MPCE pamflets. Because why not."
-      parentClasses="//@allClasses.0">
-    <branches
-        name="Designer Ability Branch"
-        description="Abilities"
-        branchType="ABILITY"
-        tooltip="Abilities">
-      <startNodes
-          name="Design"
-          lore=""
-          tooltip="Design an UI item."
-          description="The designer designs an item of a user interface on an assigned project."
-          nodeType="ROOT"
-          activationLevel="1"
-          isActivated="true"/>
-    </branches>
-  </allClasses>
-  <allClasses
-      name="Animator"
-      description="Animates 3D models. Does not sleep."
-      parentClasses="//@allClasses.0">
-    <branches
-        name="Animator Abilities Branch"
-        description="Abilities"
-        branchType="ABILITY"
-        tooltip="Abilities">
-      <startNodes
-          name="Animate"
-          tooltip="Animate a 3D model"
-          description="The animator animates a 3D model on an assigned project."
-          nodeType="ROOT"
-          activationLevel="1"
-          isActivated="true"/>
     </branches>
   </allClasses>
   <allStatistics
@@ -177,4 +168,7 @@
       tooltip="Reported Bug"
       maxValue="999.0"
       startLimitValue="10.0"/>
+  <rangeUnits
+      name="Meter"
+      description="One meter of real life range."/>
 </rpg_meta:RPG>

@@ -1,5 +1,6 @@
-
-
+za sada abilities donji kardinalitet 1 -> to prebaciti u 0 i omoguciti talente, kao u oridjidjiju
+abilities je sada containment, to razmotriti jos jednom
+za sada samo jedan parent node -> omoguciti vise njih
 
 
 
@@ -8,3 +9,4 @@ exotic:
 
 much later:
 -change reference type between class and stat to containment?
+-locked ability -> unlock talentom ili nekim uslovom...

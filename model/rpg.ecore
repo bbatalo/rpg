@@ -96,7 +96,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Node">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="RootNodeChildren RootNodeParents StandardNodeChildren StandardNodeParents StandaloneNodeConnections ActivationIntegrity MinimalNodeActivation MaximalNodeActivation UniqueNodeActivationLevels ProperNodeActivationLevels"/>
+      <details key="constraints" value="RootNodeChildren RootNodeParents StandardNodeChildren StandardNodeParents StandaloneNodeConnections ActivationIntegrity MinimalNodeActivation MaximalNodeActivation UniqueNodeActivationLevels ProperNodeActivationLevels ProperAbilityLevels"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
       <details key="RootNodeChildren" value="self.nodeType = NodeType::ROOT implies self.childNodes->forAll(node | node.nodeType = NodeType::STANDARD)"/>
@@ -119,6 +119,8 @@
       <details key="UniqueNodeActivationLevels$message" value="'All node activations must have unique levels.'"/>
       <details key="ProperNodeActivationLevels" value="&#xA;&#x9;&#x9;if self.isActivated = true then&#xA;&#x9;&#x9;&#x9;self.activation->forAll(n: NodeActivation | n.level > self.activationLevel and n.level &lt;= self.maxActivationLevel)&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;self.activation->forAll(n: NodeActivation | n.level >= self.minActivationLevel and n.level &lt;= self.maxActivationLevel)&#xA;&#x9;&#x9;endif"/>
       <details key="ProperNodeActivationLevels$message" value="'All node activations must have levels between min and max activation levels.'"/>
+      <details key="ProperAbilityLevels" value="self.abilities->forAll(a: Ability | a.onLevel >= self.minActivationLevel and a.onLevel &lt;= self.maxActivationLevel)"/>
+      <details key="ProperAbilityLevels$message" value="'All abilities must reference an appropriate node level.'"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="lore" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -128,8 +130,8 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="nodeType" lowerBound="1"
         eType="#//NodeType" defaultValueLiteral="STANDARD"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="childNodes" eType="#//Node"
-        eOpposite="#//Node/parentNodes"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="childNodes" upperBound="-1"
+        eType="#//Node" eOpposite="#//Node/parentNodes"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parentNodes" eType="#//Node"
         eOpposite="#//Node/childNodes"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="activation" upperBound="-1"
@@ -142,6 +144,8 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="0"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isActivated" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="abilities" lowerBound="1"
+        upperBound="-1" eType="#//Ability" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="NodeType">
     <eLiterals name="STANDARD"/>
@@ -190,7 +194,29 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Ability"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Ability">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="ValidCastTime"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="ValidCastTime" value="&#xA;&#x9;&#x9;if self.castType = CastType::NO_CAST or self.castType = CastType::INSTANT then&#xA;&#x9;&#x9;&#x9;self.castTime = 0.0&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;self.castTime > 0.0&#xA;&#x9;&#x9;endif"/>
+      <details key="ValidCastTime$message" value="'NO_CAST and INSTANT abilities have no cast time, the rest do.'"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lore" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tooltip" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="castType" lowerBound="1"
+        eType="#//CastType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="abilityType" lowerBound="1"
+        eType="#//AbilityType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="castTime" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="range" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rangeUnit" lowerBound="1"
+        eType="#//RangeUnit"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="onLevel" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="CastType">
     <eLiterals name="NO_CAST"/>
     <eLiterals name="INSTANT" value="1"/>
