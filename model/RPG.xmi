@@ -23,8 +23,26 @@
           tooltip="Clock yourself in!"
           description="Signs you into DoobTimer, making sure you are at your workplace in a timely fashion"
           nodeType="ROOT"
+          maxActivationLevel="3"
           activationLevel="1"
-          isActivated="true"/>
+          isActivated="true">
+        <activation
+            xsi:type="rpg_meta:NodeActivationBuy"
+            text="Level 2 Activation"
+            level="2">
+          <costs
+              cost="20.0"
+              statistic="//@allStatistics.3"/>
+        </activation>
+        <activation
+            xsi:type="rpg_meta:NodeActivationBuy"
+            text="Level 3 Activation"
+            level="3">
+          <costs
+              cost="30.0"
+              statistic="//@allStatistics.3"/>
+        </activation>
+      </startNodes>
     </branches>
   </allClasses>
   <allClasses
@@ -43,9 +61,37 @@
           tooltip="Code a bit on a standard project."
           description="The programmer codes on an assigned project."
           nodeType="ROOT"
-          maxActivationLevel="5"
+          maxActivationLevel="3"
           activationLevel="1"
-          isActivated="true"/>
+          isActivated="true">
+        <activation
+            xsi:type="rpg_meta:NodeActivationBuy"
+            text="Level 2 Activation"
+            level="2">
+          <costs
+              statistic="//@allStatistics.4"/>
+        </activation>
+        <activation
+            xsi:type="rpg_meta:NodeActivationBuy"
+            text="Level 3 Activation"
+            level="3">
+          <costs
+              statistic="//@allStatistics.4"/>
+        </activation>
+      </startNodes>
+      <startNodes
+          name="Report a Bug"
+          tooltip="Reports a bug"
+          description="Reports a bug"
+          nodeType="ROOT">
+        <activation
+            xsi:type="rpg_meta:NodeActivationPropagate"
+            text="Level 1 Activation"
+            isAuto="true"
+            level="1"
+            followsActivationOf="//@allClasses.1/@branches.0/@startNodes.0"
+            requiredLevel="2"/>
+      </startNodes>
     </branches>
   </allClasses>
   <allClasses
@@ -107,7 +153,27 @@
       maxValue="10000.0"
       startLimitValue="100.0"/>
   <allStatistics
-      name="Coding Mojo"
+      name="ERP Coin"
       description="psudhgpuaierg"
-      tooltip="Primary resource for unlocking programmer abilities."/>
+      tooltip="Primary resource for unlocking programmer abilities."
+      maxValue="100.0"
+      startLimitValue="100.0"/>
+  <allStatistics
+      name="Janko Coin"
+      description="Coins that Janko gives out"
+      tooltip="Coins that Janko gives out"
+      maxValue="100.0"
+      startLimitValue="100.0"/>
+  <allStatistics
+      name="Programming Task"
+      description="Programming Task"
+      tooltip="Programming Task"
+      maxValue="999.0"
+      startLimitValue="5.0"/>
+  <allStatistics
+      name="Reported Bug"
+      description="Reported Bug"
+      tooltip="Reported Bug"
+      maxValue="999.0"
+      startLimitValue="10.0"/>
 </rpg_meta:RPG>
