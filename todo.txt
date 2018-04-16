@@ -2,7 +2,13 @@ za sada abilities donji kardinalitet 1 -> to prebaciti u 0 i omoguciti talente, 
 abilities je sada containment, to razmotriti jos jednom
 za sada samo jedan parent node -> omoguciti vise njih
 
+dodati uslove aktivacije nodeova...
+ubaciti level noda kao faktor za modifier efekta nekako
+dodati tick modifier?
 
+srediti default vrednosti svih polja
+
+definisati metu kao klasu kako bi se mogle odrediti statistike za menjanje
 
 exotic:
 

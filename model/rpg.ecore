@@ -96,7 +96,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Node">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="RootNodeChildren RootNodeParents StandardNodeChildren StandardNodeParents StandaloneNodeConnections ActivationIntegrity MinimalNodeActivation MaximalNodeActivation UniqueNodeActivationLevels ProperNodeActivationLevels ProperAbilityLevels"/>
+      <details key="constraints" value="RootNodeChildren RootNodeParents StandardNodeChildren StandardNodeParents StandaloneNodeConnections ActivationIntegrity MinimalNodeActivation MaximalNodeActivation UniqueNodeActivationLevels ProperNodeActivationLevels ProperAbilityLevels ProperEffectLevels"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
       <details key="RootNodeChildren" value="self.nodeType = NodeType::ROOT implies self.childNodes->forAll(node | node.nodeType = NodeType::STANDARD)"/>
@@ -121,6 +121,8 @@
       <details key="ProperNodeActivationLevels$message" value="'All node activations must have levels between min and max activation levels.'"/>
       <details key="ProperAbilityLevels" value="self.abilities->forAll(a: Ability | a.onLevel >= self.minActivationLevel and a.onLevel &lt;= self.maxActivationLevel)"/>
       <details key="ProperAbilityLevels$message" value="'All abilities must reference an appropriate node level.'"/>
+      <details key="ProperEffectLevels" value="self.abilities->forAll(a: Ability | a.effects->forAll(e: Effect | e.onLevel >= self.minActivationLevel and e.onLevel &lt;= self.maxActivationLevel))"/>
+      <details key="ProperEffectLevels$message" value="'All ability effects must reference an appropriate node level.'"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="lore" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -216,6 +218,8 @@
         eType="#//RangeUnit"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="onLevel" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="effects" lowerBound="1"
+        upperBound="-1" eType="#//Effect" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="CastType">
     <eLiterals name="NO_CAST"/>
@@ -231,5 +235,64 @@
     <eLiterals name="SELF"/>
     <eLiterals name="SINGLE" value="1"/>
     <eLiterals name="MULTIPLE" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Effect">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="MeaningfulEffect"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="MeaningfulEffect" value="&#xA;&#x9;&#x9;if self.effectType = EffectType::INSTANTIATE then&#xA;&#x9;&#x9;&#x9;self.instantiate->size() = 1&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;self.statChange->size() > 0&#xA;&#x9;&#x9;endif"/>
+      <details key="MeaningfulEffect$message" value="'An effect must either instantiate a class or change a stat.'"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tooltip" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="effectType" lowerBound="1"
+        eType="#//EffectType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetType" lowerBound="1"
+        eType="#//TargetType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="onLevel" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instantiate" eType="#//CharacterClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="statChange" eType="#//StatChange"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="EffectType">
+    <eLiterals name="PASSIVE"/>
+    <eLiterals name="ACTIVE" value="1"/>
+    <eLiterals name="INSTANTIATE" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StatChange">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="changeType" lowerBound="1"
+        eType="#//ChangeType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tickType" lowerBound="1"
+        eType="#//TickType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="baseValue" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tickValue" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="changesStatistic" lowerBound="1"
+        eType="#//CharacterStatistic"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="modifiers" upperBound="-1"
+        eType="#//Modifier" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Modifier">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="changeType" eType="#//ChangeType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="basedOnModifier" eType="#//ChangeType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="priorityOrder" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="basedOn" eType="#//CharacterStatistic"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="basedOnValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ChangeType">
+    <eLiterals name="ADD"/>
+    <eLiterals name="SUBSTRACT" value="1"/>
+    <eLiterals name="MULTIPLY" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TickType">
+    <eLiterals name="FLAT"/>
+    <eLiterals name="PER_TICK" value="1"/>
+    <eLiterals name="DELAYED" value="2"/>
   </eClassifiers>
 </ecore:EPackage>

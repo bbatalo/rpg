@@ -10,7 +10,7 @@
   <allClasses
       name="Character"
       lore=""
-      statistics="//@allStatistics.0 //@allStatistics.1"
+      statistics="//@allStatistics.0 //@allStatistics.1 //@allStatistics.2 //@allStatistics.3 //@allStatistics.7"
       description="All playable characters in the game."
       childClasses="//@allClasses.1">
     <branches
@@ -50,14 +50,62 @@
             castTime="2.0"
             range="1.0"
             rangeUnit="//@rangeUnits.0"
-            onLevel="1"/>
+            onLevel="1">
+          <effects
+              name="Basic Sign In"
+              tooltip="Signs in"
+              effectType="ACTIVE"
+              onLevel="1">
+            <statChange
+                baseValue="5.0"
+                tickValue="1"
+                changesStatistic="//@allStatistics.3">
+              <modifiers
+                  value="1.0"
+                  basedOnModifier="MULTIPLY"
+                  priorityOrder="1"
+                  basedOn="//@allStatistics.1"
+                  basedOnValue="2.0"/>
+            </statChange>
+          </effects>
+          <effects
+              name="Signed in!"
+              tooltip="Signed in!"
+              onLevel="1">
+            <statChange
+                tickType="PER_TICK"
+                baseValue="1.0"
+                tickValue="480"
+                changesStatistic="//@allStatistics.7"/>
+          </effects>
+        </abilities>
+        <abilities
+            name="Sign Out"
+            lore="Sign Out"
+            tooltip="Sign Out"
+            castType="CAST"
+            castTime="5.0"
+            range="1.0"
+            rangeUnit="//@rangeUnits.0"
+            onLevel="1">
+          <effects
+              name="Sign Out"
+              tooltip="Sign Out"
+              effectType="ACTIVE"
+              onLevel="1">
+            <statChange
+                baseValue="5.0"
+                tickValue="1"
+                changesStatistic="//@allStatistics.3"/>
+          </effects>
+        </abilities>
       </startNodes>
     </branches>
   </allClasses>
   <allClasses
       name="Programmer"
       lore=""
-      statistics="//@allStatistics.3"
+      statistics="//@allStatistics.4 //@allStatistics.5 //@allStatistics.6"
       description="Solves development-related tasks. Some complex, other not so much."
       parentClasses="//@allClasses.0">
     <branches
@@ -96,7 +144,12 @@
             castTime="60.0"
             range="1.0"
             rangeUnit="//@rangeUnits.0"
-            onLevel="1"/>
+            onLevel="1">
+          <effects
+              name="ssss"
+              tooltip="ssss"
+              onLevel="1"/>
+        </abilities>
       </startNodes>
       <startNodes
           name="Bugs!"
@@ -119,7 +172,12 @@
             castTime="15.0"
             range="10.0"
             rangeUnit="//@rangeUnits.0"
-            onLevel="1"/>
+            onLevel="1">
+          <effects
+              name="ssss"
+              tooltip="ssssss"
+              onLevel="1"/>
+        </abilities>
       </startNodes>
     </branches>
   </allClasses>
@@ -168,6 +226,13 @@
       tooltip="Reported Bug"
       maxValue="999.0"
       startLimitValue="10.0"/>
+  <allStatistics
+      name="VREME"
+      lore="VREME"
+      description="VREME"
+      tooltip="VREME"
+      maxValue="40.0"
+      startLimitValue="40.0"/>
   <rangeUnits
       name="Meter"
       description="One meter of real life range."/>
