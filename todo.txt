@@ -1,17 +1,25 @@
+-change reference type between class and stat to containment
+-set up default values for all attributes where needed
+-isTargetable should be meaningful -> constraint
+-how to change the limit value of a stat? -> via ability or talent(preferable)
+-node activation condition -> one for each activation level (other constraints may apply)
+
+
+-locked ability -> unlock with a talent
+
+
+-allow multiple parent nodes (later)
+
+
+staro:
 za sada abilities donji kardinalitet 1 -> to prebaciti u 0 i omoguciti talente, kao u oridjidjiju
 abilities je sada containment, to razmotriti jos jednom
 za sada samo jedan parent node -> omoguciti vise njih
-
 dodati uslove aktivacije nodeova...
 ubaciti level noda kao faktor za modifier efekta nekako
 dodati tick modifier?
-
 srediti default vrednosti svih polja
-
 definisati metu kao klasu kako bi se mogle odrediti statistike za menjanje
-
-exotic:
-
 
 much later:
 -change reference type between class and stat to containment?

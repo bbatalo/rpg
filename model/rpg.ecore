@@ -24,7 +24,7 @@
       <details key="constraints" value="MeaningfulInheritance"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-      <details key="MeaningfulInheritance" value="self.parentClasses->size() > 0 implies statistics->size() > 0 or branches->size() > 0"/>
+      <details key="MeaningfulInheritance" value="&#xA;&#x9;&#x9;&#x9;self.parentClasses->size() > 0 implies statistics->size() > 0 or branches->size() > 0"/>
       <details key="MeaningfulInheritance$message" value="'Child classes should have their own statistics or branches.'"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
