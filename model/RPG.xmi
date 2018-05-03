@@ -6,117 +6,95 @@
     xmlns:rpg_meta="rpg_meta"
     xsi:schemaLocation="rpg_meta rpg.ecore"
     name="Dubious DOOB"
-    lore="Follow the adventures of the ERP team in order to survive the great invasion from Dubai.">
+    lore="Follow the advantures of dubious characters...">
   <allClasses
       name="Character"
       lore=""
-      statistics="//@allStatistics.0 //@allStatistics.1 //@allStatistics.2 //@allStatistics.3 //@allStatistics.7"
-      description="All playable characters in the game."
-      childClasses="//@allClasses.1">
+      description="Generic character class, to be inherited by specific classes. Contains generic statistics and trees.">
+    <statistics
+        name="Mental Health"
+        description="The amount of mental health a character has. When dropped to 0, the character freaks out and quits."
+        tooltip="Current amount of Mental Health"
+        minValue="0.0"
+        maxValue="100.0"
+        startLimitValue="20.0"/>
+    <statistics
+        name="Experience"
+        description="How battle-tested a character is. Higher experience means higher level, which brings about many benefits for the character and the company."
+        tooltip="You are this far on the way to the next level."
+        minValue="0.0"
+        maxValue="40000.0"
+        startLimitValue="1000.0"/>
+    <statistics
+        name="Level"
+        description="Character level"
+        tooltip="Character level"/>
+    <statistics
+        name="Energy"
+        description="Energy levels. Allows the character to perform certain tasks"
+        tooltip="Energy level fuels all character doings"
+        minValue="0.0"
+        maxValue="100.0"
+        startLimitValue="50.0"/>
+    <statistics
+        name="Dooblet"
+        description="Used for unlocking nodes"
+        tooltip="Used for unlocking nodes"
+        maxValue="100.0"
+        startLimitValue="100.0"/>
     <branches
-        name="Character Ability Branch"
-        description="Abilities"
+        name="Generic Ability Tree"
+        lore=""
+        description="Abilities that all characters have"
         branchType="ABILITY"
-        tooltip="Abilities">
-      <startNodes
-          name="DoobTimer"
-          tooltip="Clock yourself in!"
-          description="Signs you into DoobTimer, making sure you are at your workplace in a timely fashion"
+        startNodes="//@allClasses.0/@branches.0/@nodes.0 //@allClasses.0/@branches.0/@nodes.1 //@allClasses.0/@branches.0/@nodes.2"
+        tooltip="">
+      <nodes
+          name="Level up"
+          tooltip="Level up"
+          description="Level Up"
           nodeType="ROOT"
-          maxActivationLevel="3"
           activationLevel="1"
           isActivated="true">
-        <activation
-            xsi:type="rpg_meta:NodeActivationBuy"
-            text="Level 2 Activation"
-            level="2">
-          <costs
-              cost="20.0"
-              statistic="//@allStatistics.3"/>
-        </activation>
-        <activation
-            xsi:type="rpg_meta:NodeActivationBuy"
-            text="Level 3 Activation"
-            level="3">
-          <costs
-              cost="30.0"
-              statistic="//@allStatistics.3"/>
-        </activation>
         <abilities
-            name="Sign in"
-            lore="Sign in"
-            tooltip="Sign in"
-            castType="CAST"
-            castTime="2.0"
-            range="1.0"
+            name="Level up!"
+            lore="Level up!"
+            tooltip="Level up!"
             rangeUnit="//@rangeUnits.0"
             onLevel="1">
           <effects
-              name="Basic Sign In"
-              tooltip="Signs in"
-              effectType="ACTIVE"
+              name="Level Up"
+              tooltip="Level Up"
               onLevel="1">
             <statChange
-                baseValue="5.0"
-                tickValue="1"
-                changesStatistic="//@allStatistics.3">
+                baseValue="1.0"
+                changesStatistic="//@allClasses.0/@statistics.2"/>
+            <statChange
+                changeType="MOVE_LIMIT"
+                baseValue="1000.0"
+                changesStatistic="//@allClasses.0/@statistics.1">
               <modifiers
+                  changeType="MULTIPLY"
                   value="1.0"
                   basedOnModifier="MULTIPLY"
                   priorityOrder="1"
-                  basedOn="//@allStatistics.1"
-                  basedOnValue="2.0"/>
+                  basedOn="//@allClasses.0/@statistics.2"
+                  basedOnValue="1.0"/>
             </statChange>
           </effects>
-          <effects
-              name="Signed in!"
-              tooltip="Signed in!"
-              onLevel="1">
-            <statChange
-                tickType="PER_TICK"
-                baseValue="1.0"
-                tickValue="480"
-                changesStatistic="//@allStatistics.7"/>
-          </effects>
         </abilities>
-        <abilities
-            name="Sign Out"
-            lore="Sign Out"
-            tooltip="Sign Out"
-            castType="CAST"
-            castTime="5.0"
-            range="1.0"
-            rangeUnit="//@rangeUnits.0"
-            onLevel="1">
-          <effects
-              name="Sign Out"
-              tooltip="Sign Out"
-              effectType="ACTIVE"
-              onLevel="1">
-            <statChange
-                baseValue="5.0"
-                tickValue="1"
-                changesStatistic="//@allStatistics.3"/>
-          </effects>
-        </abilities>
-      </startNodes>
-    </branches>
-  </allClasses>
-  <allClasses
-      name="Programmer"
-      lore=""
-      statistics="//@allStatistics.4 //@allStatistics.5 //@allStatistics.6"
-      description="Solves development-related tasks. Some complex, other not so much."
-      parentClasses="//@allClasses.0">
-    <branches
-        name="Programmer Ability Branch"
-        description="Abilities"
-        branchType="ABILITY"
-        tooltip="Abilities">
-      <startNodes
-          name="Coding"
-          tooltip="Able to code."
-          description="The programmer can code on assigned (and not assigned) projects."
+      </nodes>
+      <nodes
+          name="Freak Out"
+          tooltip="Freak Out"
+          description="Freak Out"
+          nodeType="ROOT"
+          activationLevel="1"
+          isActivated="true"/>
+      <nodes
+          name="DoobTimer"
+          tooltip="DoobTimer"
+          description="DoobTimer"
           nodeType="ROOT"
           maxActivationLevel="3"
           activationLevel="1"
@@ -126,114 +104,21 @@
             text="Level 2 Activation"
             level="2">
           <costs
-              cost="10.0"
-              statistic="//@allStatistics.4"/>
+              cost="2.0"
+              statistic="//@allClasses.0/@statistics.4"/>
         </activation>
         <activation
             xsi:type="rpg_meta:NodeActivationBuy"
             text="Level 3 Activation"
             level="3">
           <costs
-              statistic="//@allStatistics.4"/>
+              cost="3.0"
+              statistic="//@allClasses.0/@statistics.4"/>
         </activation>
-        <abilities
-            name="Code"
-            lore="Code"
-            tooltip="Code"
-            castType="CHANNELED"
-            castTime="60.0"
-            range="1.0"
-            rangeUnit="//@rangeUnits.0"
-            onLevel="1">
-          <effects
-              name="ssss"
-              tooltip="ssss"
-              onLevel="1"/>
-        </abilities>
-      </startNodes>
-      <startNodes
-          name="Bugs!"
-          tooltip="Bugs!"
-          description="Bugs!"
-          nodeType="ROOT">
-        <activation
-            xsi:type="rpg_meta:NodeActivationPropagate"
-            text="Level 1 Activation"
-            isAuto="true"
-            level="1"
-            followsActivationOf="//@allClasses.1/@branches.0/@startNodes.0"
-            requiredLevel="2"/>
-        <abilities
-            name="Report a Bug"
-            lore="Report a Bug"
-            tooltip="Report a Bug"
-            castType="CHANNELED"
-            abilityType="AOE"
-            castTime="15.0"
-            range="10.0"
-            rangeUnit="//@rangeUnits.0"
-            onLevel="1">
-          <effects
-              name="ssss"
-              tooltip="ssssss"
-              onLevel="1"/>
-        </abilities>
-      </startNodes>
+      </nodes>
     </branches>
   </allClasses>
-  <allStatistics
-      name="Health"
-      lore=""
-      description="The amount of damage a character can sustain before dying."
-      tooltip="Amount of current health."
-      minValue="1.0"
-      maxValue="25000.0"
-      startLimitValue="150.0"/>
-  <allStatistics
-      name="Level"
-      description="The amout of progress a character has reached."
-      tooltip="Shows how much a character has progressed along the leveling path."
-      minValue="1.0"
-      maxValue="80.0"
-      startLimitValue="1.0"/>
-  <allStatistics
-      name="Experience"
-      description="Amount of experience a player has."
-      tooltip="Amount of experience a player has"
-      maxValue="10000.0"
-      startLimitValue="100.0"/>
-  <allStatistics
-      name="ERP Coin"
-      description="psudhgpuaierg"
-      tooltip="Primary resource for unlocking programmer abilities."
-      maxValue="100.0"
-      startLimitValue="100.0"/>
-  <allStatistics
-      name="Janko Coin"
-      description="Coins that Janko gives out"
-      tooltip="Coins that Janko gives out"
-      maxValue="100.0"
-      startLimitValue="100.0"/>
-  <allStatistics
-      name="Programming Task"
-      description="Programming Task"
-      tooltip="Programming Task"
-      maxValue="999.0"
-      startLimitValue="5.0"/>
-  <allStatistics
-      name="Reported Bug"
-      description="Reported Bug"
-      tooltip="Reported Bug"
-      maxValue="999.0"
-      startLimitValue="10.0"/>
-  <allStatistics
-      name="VREME"
-      lore="VREME"
-      description="VREME"
-      tooltip="VREME"
-      maxValue="40.0"
-      startLimitValue="40.0"/>
   <rangeUnits
       name="Meter"
-      description="One meter of real life range."/>
+      description="Each point of unit is exactly one meter"/>
 </rpg_meta:RPG>

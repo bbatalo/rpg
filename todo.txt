@@ -1,13 +1,17 @@
--change reference type between class and stat to containment
--set up default values for all attributes where needed
--isTargetable should be meaningful -> constraint
--how to change the limit value of a stat? -> via ability or talent(preferable)
--node activation condition -> one for each activation level (other constraints may apply)
--define target as a class... -> limit possible targets and define them better
--add talent branch and move lower cardinality to 0 from 1 -> implies a constraint on having talents or abilities
--locked ability -> unlock with a talent
--factor in node levels for effect modifiers somehow
--add modifier for ticks?
+-change reference type between class and stat to containment														DONE
+-set up default values for all attributes where needed																
+-how to change the limit value of a stat? -> via ability or talent(preferable)										DONE
+-node activation condition -> one for each activation level (other constraints may apply)							
+-define target as a class... -> limit possible targets and define them better										
+-add talent branch and move lower cardinality to 0 from 1 -> constraint on having talents or abilities				DONE
+-branches contain NODES, but reference start nodes within those nodes												DONE
+-locked ability -> unlock with a talent																				
+-factor in node levels for effect modifiers somehow																	
+
+
+
+-isTargetable should be meaningful -> constraint	
+-add modifier for ticks?																																							
 
 possible?
 -allow multiple parent nodes (later)
