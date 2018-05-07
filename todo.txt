@@ -1,16 +1,19 @@
--define target as a class... -> limit possible targets and define them better						
--locked ability -> unlock with a talent																
--factor in node levels for effect modifiers somehow													
--add ability costs																					DONE
-
-
-
+------------------------------------------------------------------------------------------
+metamodel:
 -isTargetable should be meaningful -> constraint	
 -add modifier for ticks?																																							
 -set up default values for all attributes where needed																
 -node activation condition -> one for each activation level (other constraints may apply)
 -add randomizers to modifiers
+-locked ability -> unlock with a talent		
+-define target as a class... -> limit possible targets and define them better						
+-factor in node levels for effect modifiers somehow																			
 
 possible?
 -allow multiple parent nodes (later)
 -change abilities reference from contantment?
+------------------------------------------------------------------------------------------
+syntax:
+-genmodel
+
+------------------------------------------------------------------------------------------

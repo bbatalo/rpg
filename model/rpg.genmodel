@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/rpg/src" modelPluginID="rpg" modelName="Rpg" rootExtendsInterface="org.eclipse.emf.cdo.CDOObject"
+    rootExtendsClass="org.eclipse.emf.internal.cdo.CDOObjectImpl" reflectiveDelegation="true"
+    importerID="org.eclipse.emf.importer.cdo" featureDelegation="Reflective" copyrightFields="false"
+    operationReflection="false" importOrganizing="true">
+  <foreignModel>rpg.ecore</foreignModel>
+  <modelPluginVariables>CDO=org.eclipse.emf.cdo</modelPluginVariables>
+  <genPackages prefix="Rpg" disposableProviderFactory="true" ecorePackage="rpg.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="rpg.ecore#//StatType">
+      <genEnumLiterals ecoreEnumLiteral="rpg.ecore#//StatType/ASCENDING"/>
+      <genEnumLiterals ecoreEnumLiteral="rpg.ecore#//StatType/DESCENDING"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="rpg.ecore#//BranchType">
+      <genEnumLiterals ecoreEnumLiteral="rpg.ecore#//BranchType/TALENT"/>
+      <genEnumLiterals ecoreEnumLiteral="rpg.ecore#//BranchType/ABILITY"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="rpg.ecore#//NodeType">
+      <genEnumLiterals ecoreEnumLiteral="rpg.ecore#//NodeType/STANDARD"/>
+      <genEnumLiterals ecoreEnumLiteral="rpg.ecore#//NodeType/ROOT"/>
+      <genEnumLiterals ecoreEnumLiteral="rpg.ecore#//NodeType/STANDALONE"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="rpg.ecore#//CastType">
+      <genEnumLiterals ecoreEnumLiteral="rpg.ecore#//CastType/NO_CAST"/>
+      <genEnumLiterals ecoreEnumLiteral="rpg.ecore#//CastType/INSTANT"/>
+      <genEnumLiterals ecoreEnumLiteral="rpg.ecore#//CastType/CAST"/>
+      <genEnumLiterals ecoreEnumLiteral="rpg.ecore#//CastType/CHANNELED"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="rpg.ecore#//AbilityType">
+      <genEnumLiterals ecoreEnumLiteral="rpg.ecore#//AbilityType/SINGLE"/>
+      <genEnumLiterals ecoreEnumLiteral="rpg.ecore#//AbilityType/AOE"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="rpg.ecore#//TargetType">
+      <genEnumLiterals ecoreEnumLiteral="rpg.ecore#//TargetType/SELF"/>
+      <genEnumLiterals ecoreEnumLiteral="rpg.ecore#//TargetType/SINGLE"/>
+      <genEnumLiterals ecoreEnumLiteral="rpg.ecore#//TargetType/MULTIPLE"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="rpg.ecore#//EffectType">
+      <genEnumLiterals ecoreEnumLiteral="rpg.ecore#//EffectType/PASSIVE"/>
+      <genEnumLiterals ecoreEnumLiteral="rpg.ecore#//EffectType/ACTIVE"/>
+      <genEnumLiterals ecoreEnumLiteral="rpg.ecore#//EffectType/INSTANTIATE"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="rpg.ecore#//ChangeType">
+      <genEnumLiterals ecoreEnumLiteral="rpg.ecore#//ChangeType/ADD"/>
+      <genEnumLiterals ecoreEnumLiteral="rpg.ecore#//ChangeType/SUBSTRACT"/>
+      <genEnumLiterals ecoreEnumLiteral="rpg.ecore#//ChangeType/MULTIPLY"/>
+      <genEnumLiterals ecoreEnumLiteral="rpg.ecore#//ChangeType/MOVE_LIMIT"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="rpg.ecore#//TickType">
+      <genEnumLiterals ecoreEnumLiteral="rpg.ecore#//TickType/FLAT"/>
+      <genEnumLiterals ecoreEnumLiteral="rpg.ecore#//TickType/PER_TICK"/>
+      <genEnumLiterals ecoreEnumLiteral="rpg.ecore#//TickType/DELAYED"/>
+    </genEnums>
+    <genClasses ecoreClass="rpg.ecore#//RPG">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//RPG/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//RPG/lore"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rpg.ecore#//RPG/allClasses"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rpg.ecore#//RPG/rangeUnits"/>
+    </genClasses>
+    <genClasses ecoreClass="rpg.ecore#//CharacterClass">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//CharacterClass/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//CharacterClass/lore"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rpg.ecore#//CharacterClass/statistics"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//CharacterClass/description"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rpg.ecore#//CharacterClass/childClasses"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rpg.ecore#//CharacterClass/parentClasses"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rpg.ecore#//CharacterClass/branches"/>
+    </genClasses>
+    <genClasses ecoreClass="rpg.ecore#//CharacterStatistic">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//CharacterStatistic/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//CharacterStatistic/lore"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//CharacterStatistic/description"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//CharacterStatistic/tooltip"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//CharacterStatistic/minValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//CharacterStatistic/maxValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//CharacterStatistic/startLimitValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//CharacterStatistic/statType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//CharacterStatistic/isTargetable"/>
+    </genClasses>
+    <genClasses ecoreClass="rpg.ecore#//Branch">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//Branch/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//Branch/lore"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//Branch/description"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//Branch/branchType"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rpg.ecore#//Branch/startNodes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//Branch/tooltip"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//Branch/isInheritable"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rpg.ecore#//Branch/nodes"/>
+    </genClasses>
+    <genClasses ecoreClass="rpg.ecore#//Node">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//Node/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//Node/lore"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//Node/tooltip"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//Node/description"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//Node/nodeType"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rpg.ecore#//Node/childNodes"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rpg.ecore#//Node/parentNodes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rpg.ecore#//Node/activation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//Node/minActivationLevel"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//Node/maxActivationLevel"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//Node/activationLevel"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//Node/isActivated"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rpg.ecore#//Node/abilities"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rpg.ecore#//Node/talents"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="rpg.ecore#//NodeActivation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//NodeActivation/text"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//NodeActivation/isAuto"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//NodeActivation/level"/>
+    </genClasses>
+    <genClasses ecoreClass="rpg.ecore#//NodeActivationBuy">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rpg.ecore#//NodeActivationBuy/costs"/>
+    </genClasses>
+    <genClasses ecoreClass="rpg.ecore#//NodeActivationPropagate">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rpg.ecore#//NodeActivationPropagate/followsActivationOf"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//NodeActivationPropagate/requiredLevel"/>
+    </genClasses>
+    <genClasses ecoreClass="rpg.ecore#//ActivationCost">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//ActivationCost/consume"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//ActivationCost/cost"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rpg.ecore#//ActivationCost/statistic"/>
+    </genClasses>
+    <genClasses ecoreClass="rpg.ecore#//RangeUnit">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//RangeUnit/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//RangeUnit/description"/>
+    </genClasses>
+    <genClasses ecoreClass="rpg.ecore#//Ability">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//Ability/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//Ability/lore"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//Ability/tooltip"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//Ability/castType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//Ability/abilityType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//Ability/castTime"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//Ability/range"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rpg.ecore#//Ability/rangeUnit"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//Ability/onLevel"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rpg.ecore#//Ability/effects"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rpg.ecore#//Ability/costs"/>
+    </genClasses>
+    <genClasses ecoreClass="rpg.ecore#//Effect">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//Effect/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//Effect/tooltip"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//Effect/effectType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//Effect/targetType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//Effect/onLevel"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rpg.ecore#//Effect/instantiate"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rpg.ecore#//Effect/statChange"/>
+    </genClasses>
+    <genClasses ecoreClass="rpg.ecore#//StatChange">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//StatChange/changeType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//StatChange/tickType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//StatChange/baseValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//StatChange/tickValue"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rpg.ecore#//StatChange/changesStatistic"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rpg.ecore#//StatChange/modifiers"/>
+    </genClasses>
+    <genClasses ecoreClass="rpg.ecore#//Modifier">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//Modifier/changeType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//Modifier/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//Modifier/basedOnModifier"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//Modifier/priorityOrder"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rpg.ecore#//Modifier/basedOn"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//Modifier/basedOnValue"/>
+    </genClasses>
+    <genClasses ecoreClass="rpg.ecore#//Talent">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//Talent/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//Talent/tooltip"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//Talent/lore"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//Talent/description"/>
+    </genClasses>
+    <genClasses ecoreClass="rpg.ecore#//AbilityCost">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//AbilityCost/consume"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpg.ecore#//AbilityCost/cost"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rpg.ecore#//AbilityCost/statistic"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
