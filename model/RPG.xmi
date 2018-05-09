@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <rpg:RPG xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rpg="rpg" name="Dubious DOOB" lore="Follow the advantures of dubious characters...">
-  <allClasses name="Character" lore="" description="Generic character class, to be inherited by specific classes. Contains generic statistics and trees." childClasses="//@allClasses.1">
+  <allClasses name="Character" lore="" description="Generic character class, to be inherited by specific classes. Contains generic statistics and trees.">
     <statistics name="Mental Health" description="The amount of mental health a character has. When dropped to 0, the character freaks out and quits." tooltip="Current amount of Mental Health" minValue="0.0" maxValue="100.0" startLimitValue="20.0"/>
     <statistics name="Experience" description="How battle-tested a character is. Higher experience means higher level, which brings about many benefits for the character and the company." tooltip="You are this far on the way to the next level." minValue="0.0" maxValue="40000.0" startLimitValue="1000.0"/>
     <statistics name="Level" description="Character level" tooltip="Character level"/>
@@ -46,9 +46,6 @@
         </activation>
       </nodes>
     </branches>
-  </allClasses>
-  <allClasses name="Programmer" description="Programmer" parentClasses="//@allClasses.0">
-    <statistics name="Coding Mojo" lore="gfkhjfgu" description="Coding Mojo" tooltip="sadsdas"/>
   </allClasses>
   <rangeUnits name="Meter" description="Each point of unit is exactly one meter"/>
 </rpg:RPG>
