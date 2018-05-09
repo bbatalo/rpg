@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="ASCII"?>
-<rpg_meta:RPG
+<rpg:RPG
     xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:rpg_meta="rpg_meta"
-    xsi:schemaLocation="rpg_meta rpg.ecore"
+    xmlns:rpg="rpg"
+    xsi:schemaLocation="rpg rpg.ecore"
     name="Dubious DOOB"
     lore="Follow the advantures of dubious characters...">
   <allClasses
@@ -104,7 +104,7 @@
           activationLevel="1"
           isActivated="true">
         <activation
-            xsi:type="rpg_meta:NodeActivationBuy"
+            xsi:type="rpg:NodeActivationBuy"
             text="Level 2 Activation"
             level="2">
           <costs
@@ -169,7 +169,7 @@
           activationLevel="1"
           isActivated="true">
         <activation
-            xsi:type="rpg_meta:NodeActivationBuy"
+            xsi:type="rpg:NodeActivationBuy"
             text="Level 2 Activation"
             level="2">
           <costs
@@ -177,7 +177,7 @@
               statistic="//@allClasses.0/@statistics.4"/>
         </activation>
         <activation
-            xsi:type="rpg_meta:NodeActivationBuy"
+            xsi:type="rpg:NodeActivationBuy"
             text="Level 3 Activation"
             level="3">
           <costs
@@ -190,4 +190,4 @@
   <rangeUnits
       name="Meter"
       description="Each point of unit is exactly one meter"/>
-</rpg_meta:RPG>
+</rpg:RPG>
