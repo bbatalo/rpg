@@ -83,8 +83,8 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="branchType" lowerBound="1"
         eType="#//BranchType"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="startNodes" lowerBound="1"
-        upperBound="-1" eType="#//Node"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="startNodes" upperBound="-1"
+        eType="#//Node"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="tooltip" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isInheritable" lowerBound="1"

@@ -47,6 +47,5 @@
       </nodes>
     </branches>
   </allClasses>
-  <allClasses name="Programmer" description="Programmer"/>
   <rangeUnits name="Meter" description="Each point of unit is exactly one meter"/>
 </rpg:RPG>

@@ -150,7 +150,7 @@ public interface Branch extends CDOObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Start Nodes</em>' reference list.
 	 * @see rpg.RpgPackage#getBranch_StartNodes()
-	 * @model type="rpg.Node" required="true"
+	 * @model type="rpg.Node"
 	 * @generated
 	 */
 	EList getStartNodes();
