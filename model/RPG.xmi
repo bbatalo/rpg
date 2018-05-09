@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="ASCII"?>
 <rpg:RPG xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rpg="rpg" name="Dubious DOOB" lore="Follow the advantures of dubious characters...">
-  <allClasses name="Character" lore="" description="Generic character class, to be inherited by specific classes. Contains generic statistics and trees.">
+  <allClasses name="Character" lore="" description="Generic character class, to be inherited by specific classes. Contains generic statistics and trees." childClasses="//@allClasses.1">
     <statistics name="Mental Health" description="The amount of mental health a character has. When dropped to 0, the character freaks out and quits." tooltip="Current amount of Mental Health" minValue="0.0" maxValue="100.0" startLimitValue="20.0"/>
     <statistics name="Experience" description="How battle-tested a character is. Higher experience means higher level, which brings about many benefits for the character and the company." tooltip="You are this far on the way to the next level." minValue="0.0" maxValue="40000.0" startLimitValue="1000.0"/>
     <statistics name="Level" description="Character level" tooltip="Character level"/>
     <statistics name="Energy" description="Energy levels. Allows the character to perform certain tasks" tooltip="Energy level fuels all character doings" minValue="0.0" maxValue="100.0" startLimitValue="50.0"/>
     <statistics name="Dooblet" description="Used for unlocking nodes" tooltip="Used for unlocking nodes" maxValue="100.0" startLimitValue="100.0"/>
     <statistics name="Salary" lore="" description="Salary" tooltip="Salary" maxValue="5000.0" startLimitValue="5000.0"/>
-    <branches name="Generic Ability Tree" lore="" description="Abilities that all characters have" branchType="ABILITY" tooltip="">
+    <branches name="Generic Ability Tree" lore="" description="Abilities that all characters have" branchType="ABILITY" startNodes="//@allClasses.0/@branches.0/@nodes.0 //@allClasses.0/@branches.0/@nodes.1 //@allClasses.0/@branches.0/@nodes.2" tooltip="">
       <nodes name="Level up" tooltip="Level up" description="Level Up" nodeType="ROOT" activationLevel="1" isActivated="true">
         <abilities name="Level up!" lore="Level up!" tooltip="Level up!" rangeUnit="//@rangeUnits.0" onLevel="1">
           <effects name="Level Up" tooltip="Level Up" effectType="ACTIVE" onLevel="1">
@@ -47,6 +47,8 @@
       </nodes>
     </branches>
   </allClasses>
-  <allClasses name="Programmer" description="Programmer"/>
+  <allClasses name="Programmer" description="Programmer" parentClasses="//@allClasses.0">
+    <statistics name="Coding Mojo" lore="gfkhjfgu" description="Coding Mojo" tooltip="sadsdas"/>
+  </allClasses>
   <rangeUnits name="Meter" description="Each point of unit is exactly one meter"/>
 </rpg:RPG>
