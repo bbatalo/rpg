@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ASCII"?>
+<rpg:RPG xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:rpg="rpg"
+    xsi:schemaLocation="rpg rpg.ecore"
+    name="LameGame"
+    lore="">
+  <allClasses
+      name="Mage"
+      lore="Deep in his tower, the mage ponders..."
+      description="Fabulous spellcaster"/>
+  <allClasses
+      name="Warrior"
+      lore="Going around and killing"
+      description="Brawn over brain mate."/>
+</rpg:RPG>
