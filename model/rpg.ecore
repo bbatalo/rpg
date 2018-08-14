@@ -10,8 +10,10 @@
     <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
   </eAnnotations>
   <eClassifiers xsi:type="ecore:EClass" name="RPG">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lore" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="My Role-Playing Game"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lore" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="My lore"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="allClasses" lowerBound="1"
         upperBound="-1" eType="#//CharacterClass" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="rangeUnits" lowerBound="1"
