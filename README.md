@@ -21,7 +21,7 @@ Since this project is a proof-of-concept, code generation will be supported only
 
 ## Getting Started
 
-To start working on this project, it is enough to clone the repo and setup the required Eclipse IDE with specified plugins. 
+To start working on this project, it is enough to clone the repo and setup the required Eclipse IDE with specified plugins.
 
 ### Prerequisites
 
@@ -37,7 +37,25 @@ For FTN students: provided Eclipse IDE installation (for DSL course) contains ev
 
 All development work should be done on .ecore and .ecorediag files (which are synced), and for testing, it is possible to create .xmi files.
 
+The project consists of following main files and directories:
 
+* src (dir) - Java source files generated from the metamodel (using the genmodel)
+* rpg.ecore - metamodel in ecore notation
+* rpg.ecorediag - metamodel in diagram notation
+* rpg.genmodel - file used in model and editor code generation
+* *.xmi - example dynamic model files that (should) conform to the ecore metamodel
+
+The rest of the files are eclipse project-related files.
+
+### Genmodel
+
+The genmodel is a file created from the .ecore metamodel, that is used for generating Java source code for the metamodel, editor etc. To generate these source code, do the following:
+
+* Open the genmodel
+* Right-click on the root element
+* Select the type of code to generate
+
+Model, edit and editor codes must be generated (this is essentially an Eclipse plug-in) for use in concrete syntax and code generator projects.
 
 ## Todo
 
