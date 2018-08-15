@@ -10,6 +10,13 @@
     <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
   </eAnnotations>
   <eClassifiers xsi:type="ecore:EClass" name="RPG">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="ClassyGame"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="ClassyGame" value="&#xA;&#x9;&#x9;&#x9;self.allClasses->size() > 0"/>
+      <details key="ClassyGame$message" value="'The game should contain at least one class'"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral="My Role-Playing Game"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="lore" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
@@ -27,12 +34,13 @@
       <details key="MeaningfulInheritance" value="&#xA;&#x9;&#x9;&#x9;self.parentClasses->size() > 0 implies statistics->size() > 0 or branches->size() > 0"/>
       <details key="MeaningfulInheritance$message" value="'Child classes should have their own statistics or branches.'"/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="My class"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="lore" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="statistics" upperBound="-1"
         eType="#//CharacterStatistic" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral="Placeholder description"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="childClasses" upperBound="-1"
         eType="#//CharacterClass" eOpposite="#//CharacterClass/parentClasses"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parentClasses" upperBound="-1"
@@ -42,18 +50,21 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CharacterStatistic">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="LimitBetweenMinAndMax"/>
+      <details key="constraints" value="LimitBetweenMinAndMax ValidMinMax"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
       <details key="LimitBetweenMinAndMax" value="&#xA;&#x9;&#x9;&#x9;startLimitValue &lt;= maxValue and startLimitValue >= minValue"/>
       <details key="LimitBetweenMinAndMax$message" value="'Value of startLimitValue must be between the values of minValue and maxValue.'"/>
+      <details key="ValidMinMax" value="&#xA;&#x9;&#x9;&#x9;maxValue >= minValue"/>
+      <details key="ValidMinMax$message" value="'Value of max must be equal to or greater than value of min.'"/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="My statistic"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="lore" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral="Placeholder description"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="tooltip" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral="Placeholder tooltip"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="minValue" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble" defaultValueLiteral="1"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxValue" lowerBound="1"
@@ -61,13 +72,13 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="startLimitValue" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble" defaultValueLiteral="1"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="statType" lowerBound="1"
-        eType="#//StatType" defaultValueLiteral="ASCENDING"/>
+        eType="#//StatType" defaultValueLiteral="STAT"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isTargetable" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="StatType">
-    <eLiterals name="ASCENDING"/>
-    <eLiterals name="DESCENDING" value="1"/>
+    <eLiterals name="STAT"/>
+    <eLiterals name="FUEL" value="1"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Branch">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
