@@ -95,14 +95,6 @@
   <children xmi:type="notation:Node" xmi:id="_ByXX8Ds7EeiWHuLxUcR3IQ" type="1005">
     <children xmi:type="notation:Node" xmi:id="_Bygh4Ds7EeiWHuLxUcR3IQ" type="4010"/>
     <children xmi:type="notation:Node" xmi:id="_Byi-IDs7EeiWHuLxUcR3IQ" type="5008">
-      <children xmi:type="notation:Node" xmi:id="_DSzP8Ds7EeiWHuLxUcR3IQ" type="2006">
-        <element xmi:type="ecore:EEnumLiteral" href="rpg.ecore#//StatType/ASCENDING"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_DSzP8Ts7EeiWHuLxUcR3IQ"/>
-      </children>
-      <children xmi:type="notation:Node" xmi:id="_EFMWMDs7EeiWHuLxUcR3IQ" type="2006">
-        <element xmi:type="ecore:EEnumLiteral" href="rpg.ecore#//StatType/DESCENDING"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_EFMWMTs7EeiWHuLxUcR3IQ"/>
-      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_Byi-ITs7EeiWHuLxUcR3IQ"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_Byi-Ijs7EeiWHuLxUcR3IQ"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_Byi-Izs7EeiWHuLxUcR3IQ"/>
