@@ -7,7 +7,7 @@
     <statistics name="Energy" description="Energy levels. Allows the character to perform certain tasks" tooltip="Energy level fuels all character doings" minValue="0.0" maxValue="100.0" startLimitValue="50.0"/>
     <statistics name="Dooblet" description="Used for unlocking nodes" tooltip="Used for unlocking nodes" maxValue="100.0" startLimitValue="100.0"/>
     <statistics name="Salary" lore="" description="Salary" tooltip="Salary" maxValue="5000.0" startLimitValue="5000.0"/>
-    <branches name="Generic Ability Tree" lore="" description="Abilities that all characters have" branchType="ABILITY" startNodes="//@allClasses.0/@branches.0/@nodes.0 //@allClasses.0/@branches.0/@nodes.1 //@allClasses.0/@branches.0/@nodes.2" tooltip="">
+    <branches name="Generic Ability Tree" lore="" description="Abilities that all characters have" branchType="ABILITY" tooltip="">
       <nodes name="Level up" tooltip="Level up" description="Level Up" nodeType="ROOT" activationLevel="1" isActivated="true">
         <abilities name="Level up!" lore="Level up!" tooltip="Level up!" rangeUnit="//@rangeUnits.0" onLevel="1">
           <effects name="Level Up" tooltip="Level Up" effectType="ACTIVE" onLevel="1">
