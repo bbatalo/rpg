@@ -78,6 +78,8 @@ Improvements:
 
 * Add randomizers to effect modifiers
 * Factor in node levels for effect modifiers
+* ~~Remove 'startingNodes' relationship between Branch and Node~~
+* ~~Constraint: A branch must have at least one ROOT Node~~
 
 Possible:
 
