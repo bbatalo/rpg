@@ -85,8 +85,8 @@
       <details key="constraints" value="ExistingRootNode ValidBranchTypeImplication"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-      <details key="ExistingRootNode" value="&#xA;&#x9;&#x9;&#x9;self.nodes->exists(nodeType = NodeType::ROOT)"/>
-      <details key="ExistingRootNode$message" value="'Branch must have at least one ROOT node.'"/>
+      <details key="ExistingRootNode" value="&#xA;&#x9;&#x9;&#x9;self.nodes->exists(nodeType = NodeType::ROOT or nodeType = NodeType::STANDALONE)"/>
+      <details key="ExistingRootNode$message" value="'Branch must have at least one ROOT or STANDALONE node.'"/>
       <details key="ValidBranchTypeImplication" value="&#xA;&#x9;&#x9;&#x9;if self.branchType = BranchType::TALENT then&#xA;&#x9;&#x9;&#x9;&#x9;self.nodes->forAll(node | node.talents->size() >= 0 and node.abilities->size() = 0)&#xA;&#x9;&#x9;&#x9;else &#xA;&#x9;&#x9;&#x9;&#x9;self.nodes->forAll(node | node.talents->size() = 0 and node.abilities->size() >= 0)&#xA;&#x9;&#x9;&#x9;endif"/>
       <details key="ValidBranchTypeImplication$message" value="'Branch type dictates what the nodes can contain: abilities or talents.'"/>
     </eAnnotations>
