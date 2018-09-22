@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="ASCII"?>
+<rpg:RPG xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:rpg="rpg"
+    xsi:schemaLocation="rpg rpg.ecore"
+    name="World of Warcraft"
+    lore="Enter the world... of Warcraft!">
+  <allClasses
+      name="Character"
+      lore="No lore, generic class."
+      description="A class to model any character in the game. Should be inherited for further customization">
+    <statistics
+        name="Health"
+        lore="Every living being is... living. Until it is not."
+        description="The amount of damage a character can sustain before dying."
+        tooltip="You can sustain this much damage until you die."
+        maxValue="999999.0"/>
+    <statistics
+        name="Level"
+        lore="Epic levels of awesomeness."
+        description="An indicator of the strenght of the character."
+        tooltip="You are this level."
+        maxValue="10.0"
+        startLimitValue="10.0"/>
+    <statistics
+        name="Experience"
+        lore="Are you a wise one?"
+        description="The amount of experience that a character has. Reaching the limit value will result in a level up."
+        maxValue="10000.0"
+        startLimitValue="1000.0"/>
+    <branches
+        name="Basic Abiilities"
+        lore="No lore, generic branch."
+        description="Abilites that all characters posses. Serves as a base functional branch."
+        branchType="ABILITY"
+        tooltip="Basic abilities.">
+      <nodes
+          name="Level up"
+          lore=""
+          tooltip="Gives you the ability to level up!"
+          description="Contains the ability to level up a character."
+          nodeType="STANDALONE"
+          activationLevel="1">
+        <abilities
+            name="Level up"
+            lore="Experience is key to growth."
+            tooltip="Level up! Will increase your level and move experience limit to set you up for progress."
+            rangeUnit="//@rangeUnits.0"
+            onLevel="1">
+          <effects
+              name="Level up!"
+              tooltip="Raises your level by 1. Moves experience limit by 1000."
+              onLevel="1">
+            <statChange
+                baseValue="1.0"
+                changesStatistic="//@allClasses.0/@statistics.1"/>
+          </effects>
+        </abilities>
+      </nodes>
+    </branches>
+  </allClasses>
+  <rangeUnits
+      name="Yard"
+      description="One unit of in-game range is equal to one yard."/>
+</rpg:RPG>

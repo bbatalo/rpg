@@ -28,11 +28,11 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CharacterClass">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="MeaningfulInheritance"/>
+      <details key="constraints" value="MeaningfulClass"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-      <details key="MeaningfulInheritance" value="&#xA;&#x9;&#x9;&#x9;self.parentClasses->size() > 0 implies statistics->size() > 0 or branches->size() > 0"/>
-      <details key="MeaningfulInheritance$message" value="'Child classes should have their own statistics or branches.'"/>
+      <details key="MeaningfulClass" value="&#xA;&#x9;&#x9;&#x9;statistics->size() > 0 or branches->size() > 0"/>
+      <details key="MeaningfulClass$message" value="'A class should have at least one statistic or branch.'"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral="My class"/>
@@ -47,6 +47,8 @@
         eType="#//CharacterClass" eOpposite="#//CharacterClass/childClasses"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="branches" upperBound="-1"
         eType="#//Branch" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isPlayable" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CharacterStatistic">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
@@ -122,7 +124,7 @@
       <details key="StandardNodeParents$message" value="'STANDARD nodes can have only ROOT or STANDARD nodes for parents.'"/>
       <details key="StandaloneNodeConnections" value="self.nodeType = NodeType::STANDALONE implies self.parentNodes->size() = 0 and self.childNodes->size() = 0"/>
       <details key="StandaloneNodeConnections$message" value="'STANDALONE nodes can not have parent or child nodes.'"/>
-      <details key="ActivationCondition" value="&#xA;&#x9;&#x9;self.activationLevel >= self.minActivationLevel implies self.parentNodes.activationLevel >= self.parentNodes.minActivationLevel"/>
+      <details key="ActivationCondition" value="&#xA;&#x9;&#x9;self.nodeType = NodeType::STANDARD implies&#xA;&#x9;&#x9;(self.activationLevel >= self.minActivationLevel implies self.parentNodes.activationLevel >= self.parentNodes.minActivationLevel)"/>
       <details key="ActivationCondition$message" value="'Before STANDARD nodes can be activated, their parents must be activated.'"/>
       <details key="ActivationIntegrity" value="&#xA;&#x9;&#x9;self.activationLevel >= self.minActivationLevel and self.activationLevel &lt;= self.maxActivationLevel"/>
       <details key="ActivationIntegrity$message" value="'Activation level must be between minimum and maximum activation levels.'"/>
@@ -226,8 +228,6 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="effects" lowerBound="1"
         upperBound="-1" eType="#//Effect" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="costs" lowerBound="1" upperBound="-1"
-        eType="#//AbilityCost" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="CastType">
     <eLiterals name="NO_CAST"/>
@@ -271,6 +271,13 @@
     <eLiterals name="INSTANTIATE" value="2"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StatChange">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="ProperTick"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="ProperTick" value="&#xA;&#x9;&#x9;&#x9;self.tickType = TickType::FLAT implies self.tickValue = 0.0"/>
+      <details key="ProperTick$message" value="'FLAT StatChange should have tickValue of 0.0'"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="changeType" lowerBound="1"
         eType="#//ChangeType"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="tickType" lowerBound="1"
@@ -311,13 +318,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="lore" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AbilityCost">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="consume" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cost" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="statistic" lowerBound="1"
-        eType="#//CharacterStatistic"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PropagationRequirement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">

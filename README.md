@@ -64,6 +64,18 @@ This section outlines features that will be implemented, as well as bug fixes an
 Demo:
 
 * Create dummy RPG for showcasing everything in the meta-model
+* Add talents that provide basic stats for different classes
+* Add talents to override certain parent class abilities (e.g. leveling up - playable classes gain talent points)
+* Create a generic character class
+* Create a generic NPC class
+* Create a generic playable class
+* Create a simple enemy
+* Create a stronger enemy
+* Create a mega-creep enemy
+* Create a boss
+* Create a mage, with stats, abilities and talents
+* Create a warrior, with stats, abilities and talents
+* Create a hunter, with stats, abilities and talents
 
 Maintenance:
 
@@ -76,7 +88,8 @@ Features:
 * Add talent trees
 * Add modifiers for ticks
 * Setup activation conditions for each node activation level
-* Add locked nodes (and the ability to unlock them)
+* ~~Add locked nodes~~
+* Talent to unlock nodes
 * Optionally merge branches upon inheritance
 
 Improvements:
@@ -86,8 +99,12 @@ Improvements:
 * ~~Remove 'startingNodes' relationship between Branch and Node~~
 * ~~Constraint: A branch must have at least one ROOT Node~~
 * ~~Remove isActivated flag -> redundant, activationLevel is present and carries same semantics~~
-* ActivationCost must consume statistic of host Class or parent Class
 * ~~Parent Node must be activated in order to activate Child Node~~
+* ActivationCost must consume statistic of host Class or parent (recursive) Class
+* PropagationRequirement must reference Node of host Class or parent (recursive) Class
+* ~~Add a 'playable' flag for easier code generation~~
+* ~~Remove ability costs, should be modeled through Effects on FUEL stats~~
+
 
 Possible:
 
