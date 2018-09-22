@@ -87,6 +87,7 @@ Improvements:
 * ~~Constraint: A branch must have at least one ROOT Node~~
 * ~~Remove isActivated flag -> redundant, activationLevel is present and carries same semantics~~
 * ActivationCost must consume statistic of host Class or parent Class
+* ~~Parent Node must be activated in order to activate Child Node~~
 
 Possible:
 
