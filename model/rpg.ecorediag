@@ -185,10 +185,6 @@
         <element xmi:type="ecore:EAttribute" href="rpg.ecore#//Node/nodeType"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_4SiN8TveEeiptuY3t9w8pw"/>
       </children>
-      <children xmi:type="notation:Node" xmi:id="_AsByADvrEeiptuY3t9w8pw" type="2001">
-        <element xmi:type="ecore:EAttribute" href="rpg.ecore#//Node/isActivated"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_AsByATvrEeiptuY3t9w8pw"/>
-      </children>
       <children xmi:type="notation:Node" xmi:id="_AJgwQDvqEeiptuY3t9w8pw" type="2001">
         <element xmi:type="ecore:EAttribute" href="rpg.ecore#//Node/activationLevel"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_AJgwQTvqEeiptuY3t9w8pw"/>

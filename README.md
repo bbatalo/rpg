@@ -61,6 +61,10 @@ Model, edit and editor codes must be generated (this is essentially an Eclipse p
 
 This section outlines features that will be implemented, as well as bug fixes and adjustments that need to be made.
 
+Demo:
+
+* Create dummy RPG for showcasing everything in the meta-model
+
 Maintenance:
 
 * Check the current implementation for possible improvements
@@ -73,6 +77,7 @@ Features:
 * Add modifiers for ticks
 * Setup activation conditions for each node activation level
 * Add locked nodes (and the ability to unlock them)
+* Optionally merge branches upon inheritance
 
 Improvements:
 
@@ -80,6 +85,8 @@ Improvements:
 * Factor in node levels for effect modifiers
 * ~~Remove 'startingNodes' relationship between Branch and Node~~
 * ~~Constraint: A branch must have at least one ROOT Node~~
+* ~~Remove isActivated flag -> redundant, activationLevel is present and carries same semantics~~
+* ActivationCost must consume statistic of host Class or parent Class
 
 Possible:
 
