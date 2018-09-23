@@ -9,7 +9,8 @@
   <allClasses
       name="Character"
       lore="No lore, generic class."
-      description="A class to model any character in the game. Should be inherited for further customization">
+      description="A class to model any character in the game. Should be inherited for further customization"
+      childClasses="//@allClasses.1">
     <statistics
         name="Health"
         lore="Every living being is... living. Until it is not."
@@ -55,10 +56,60 @@
             <statChange
                 baseValue="1.0"
                 changesStatistic="//@allClasses.0/@statistics.1"/>
+            <statChange
+                baseValue="1000.0"
+                changesStatistic="//@allClasses.0/@statistics.2"/>
           </effects>
         </abilities>
       </nodes>
     </branches>
+  </allClasses>
+  <allClasses
+      name="Playable"
+      description="A generic class for playable characters"
+      childClasses="//@allClasses.2 //@allClasses.4 //@allClasses.3"
+      parentClasses="//@allClasses.0"
+      isPlayable="true">
+    <statistics
+        name="Talent points"
+        description="Usable for unlocking different talents."
+        tooltip="Use these points to unlock talents. One point unlocks one level of a node."
+        maxValue="999.0"
+        startLimitValue="10.0"
+        statType="FUEL"/>
+  </allClasses>
+  <allClasses
+      name="Mage"
+      lore="A magical caster, wielder of the arcane arts."
+      description="Ranged playable character. Can cast damaging spells and summon magical minions."
+      parentClasses="//@allClasses.1"
+      isPlayable="true">
+    <statistics
+        name="Mana"
+        lore="A mystical energy used by mages. Infused and transformed to unleash a spell."
+        description="Used to fuel mage abilities."
+        tooltip="For use in abilities."
+        maxValue="10000.0"
+        startLimitValue="1000.0"/>
+  </allClasses>
+  <allClasses
+      name="Warrior"
+      description="Warrior"
+      parentClasses="//@allClasses.1"
+      isPlayable="true">
+    <statistics
+        name="Rage"
+        maxValue="100.0"
+        startLimitValue="100.0"/>
+  </allClasses>
+  <allClasses
+      name="Hunter"
+      parentClasses="//@allClasses.1"
+      isPlayable="true">
+    <statistics
+        name="Focus"
+        maxValue="100.0"
+        startLimitValue="100.0"/>
   </allClasses>
   <rangeUnits
       name="Yard"
