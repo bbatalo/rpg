@@ -28,11 +28,13 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CharacterClass">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="MeaningfulClass"/>
+      <details key="constraints" value="MeaningfulClass RecursiveInheritance"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
       <details key="MeaningfulClass" value="&#xA;&#x9;&#x9;&#x9;statistics->size() > 0 or branches->size() > 0"/>
       <details key="MeaningfulClass$message" value="'A class should have at least one statistic or branch.'"/>
+      <details key="RecursiveInheritance" value="&#xA;&#x9;&#x9;&#x9;self.parentClasses->forAll(parent | self._'&lt;>'(parent))"/>
+      <details key="RecursiveInheritance$message" value="'A class cannot inherit itself.'"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral="My class"/>
@@ -46,7 +48,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="parentClasses" upperBound="-1"
         eType="#//CharacterClass" eOpposite="#//CharacterClass/childClasses"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="branches" upperBound="-1"
-        eType="#//Branch" containment="true"/>
+        eType="#//Branch" containment="true" eOpposite="#//Branch/characterClass"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isPlayable" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
   </eClassifiers>
@@ -103,7 +105,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isInheritable" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" lowerBound="1" upperBound="-1"
-        eType="#//Node" containment="true"/>
+        eType="#//Node" containment="true" eOpposite="#//Node/branch"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="characterClass" lowerBound="1"
+        eType="#//CharacterClass" eOpposite="#//CharacterClass/branches"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="BranchType">
     <eLiterals name="TALENT"/>
@@ -154,7 +158,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="parentNodes" eType="#//Node"
         eOpposite="#//Node/childNodes"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="activation" upperBound="-1"
-        eType="#//NodeActivation" containment="true"/>
+        eType="#//NodeActivation" containment="true" eOpposite="#//NodeActivation/node"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="minActivationLevel" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="1"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxActivationLevel" lowerBound="1"
@@ -167,6 +171,8 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isLocked" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="branch" lowerBound="1"
+        eType="#//Branch" eOpposite="#//Branch/nodes"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="NodeType">
     <eLiterals name="STANDARD"/>
@@ -174,30 +180,35 @@
     <eLiterals name="STANDALONE" value="2"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NodeActivation">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAuto" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="level" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="costs" lowerBound="1" upperBound="-1"
-        eType="#//ActivationCost" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="requirements" lowerBound="1"
-        upperBound="-1" eType="#//PropagationRequirement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="costs" upperBound="-1"
+        eType="#//ActivationCost" containment="true" eOpposite="#//ActivationCost/nodeActivation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="requirements" upperBound="-1"
+        eType="#//PropagationRequirement" containment="true" eOpposite="#//PropagationRequirement/nodeActivation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="node" lowerBound="1" eType="#//Node"
+        eOpposite="#//Node/activation"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NodeActivationBuy" eSuperTypes="#//NodeActivation"/>
   <eClassifiers xsi:type="ecore:EClass" name="NodeActivationPropagate" eSuperTypes="#//NodeActivation"/>
   <eClassifiers xsi:type="ecore:EClass" name="ActivationCost">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="ProperCost"/>
+      <details key="constraints" value="ProperCost ProperCostReference"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
       <details key="ProperCost" value="self.cost >= self.statistic.minValue and self.cost &lt;= self.statistic.startLimitValue"/>
       <details key="ProperCost$message" value="'The cost must be between minimum and maximum values of the statistic.'"/>
+      <details key="ProperCostReference" value="&#xA;&#x9;&#x9;&#x9;self.nodeActivation.node.branch.characterClass.statistics->includes(self.statistic) or&#xA;&#x9;&#x9;&#x9;self.nodeActivation.node.branch.characterClass->closure(parentClasses)->exists(charClass | charClass.statistics->includes(self.statistic))"/>
+      <details key="ProperCostReference$message" value="'Referenced statistic must be in host clas or parent class, recursively.'"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="consume" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="cost" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="statistic" lowerBound="1"
         eType="#//CharacterStatistic"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nodeActivation" lowerBound="1"
+        eType="#//NodeActivation" eOpposite="#//NodeActivation/costs"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RangeUnit">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -331,5 +342,7 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="followsActivationOf" lowerBound="1"
         eType="#//Node"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nodeActivation" lowerBound="1"
+        eType="#//NodeActivation" eOpposite="#//NodeActivation/requirements"/>
   </eClassifiers>
 </ecore:EPackage>

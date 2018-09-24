@@ -77,6 +77,9 @@
         maxValue="999.0"
         startLimitValue="10.0"
         statType="FUEL"/>
+    <statistics
+        name="Skill points"
+        maxValue="99.0"/>
   </allClasses>
   <allClasses
       name="Mage"
@@ -91,6 +94,62 @@
         tooltip="For use in abilities."
         maxValue="10000.0"
         startLimitValue="1000.0"/>
+    <branches
+        name="Fire Abilities"
+        lore="Fire Abilities"
+        description="Fire Abilities"
+        branchType="ABILITY"
+        tooltip="Fire Abilities">
+      <nodes
+          name="Fire destruction"
+          tooltip="Fireball"
+          description="Fireball"
+          nodeType="ROOT"
+          minActivationLevel="0"
+          maxActivationLevel="3">
+        <activation
+            level="1">
+          <costs
+              cost="1.0"
+              statistic="//@allClasses.1/@statistics.1"/>
+        </activation>
+        <activation
+            level="2"/>
+        <activation
+            level="3"/>
+        <abilities
+            name="Fireball"
+            lore="Fireball"
+            tooltip="Casts a fireball, damaging a single enemy."
+            castType="CAST"
+            castTime="2.0"
+            range="16.0"
+            rangeUnit="//@rangeUnits.0"
+            onLevel="1">
+          <effects
+              name="Consume mana"
+              tooltip="Drains mana"
+              effectType="ACTIVE"
+              onLevel="1">
+            <statChange
+                changeType="SUBSTRACT"
+                baseValue="10.0"
+                changesStatistic="//@allClasses.2/@statistics.0"/>
+          </effects>
+          <effects
+              name="Fire damage"
+              tooltip="Damages an enemy with fire damage"
+              effectType="ACTIVE"
+              targetType="SINGLE"
+              onLevel="1">
+            <statChange
+                changeType="SUBSTRACT"
+                baseValue="20.0"
+                changesStatistic="//@allClasses.0/@statistics.0"/>
+          </effects>
+        </abilities>
+      </nodes>
+    </branches>
   </allClasses>
   <allClasses
       name="Warrior"

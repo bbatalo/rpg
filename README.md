@@ -100,11 +100,13 @@ Improvements:
 * ~~Constraint: A branch must have at least one ROOT Node~~
 * ~~Remove isActivated flag -> redundant, activationLevel is present and carries same semantics~~
 * ~~Parent Node must be activated in order to activate Child Node~~
-* ActivationCost must consume statistic of host Class or parent (recursive) Class
-* PropagationRequirement must reference Node of host Class or parent (recursive) Class
+* ~~ActivationCost must consume statistic of host Class or parent (recursive) Class~~
+* PropagationRequirement must reference Node of host Class or parent (recursive) Class, excluding self
 * ~~Add a 'playable' flag for easier code generation~~
 * ~~Remove ability costs, should be modeled through Effects on FUEL stats~~
-* Parent Class cannot be recursively defined
+* ~~Parent Class cannot be recursively defined~~
+* NodeActivation constraint: at least one cost or propagation requirement
+* Move BranchType implication constraint to Node
 
 
 Possible:
