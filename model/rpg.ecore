@@ -86,13 +86,11 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Branch">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="ExistingRootNode ValidBranchTypeImplication"/>
+      <details key="constraints" value="ExistingRootNode"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
       <details key="ExistingRootNode" value="&#xA;&#x9;&#x9;&#x9;self.nodes->exists(nodeType = NodeType::ROOT or nodeType = NodeType::STANDALONE)"/>
       <details key="ExistingRootNode$message" value="'Branch must have at least one ROOT or STANDALONE node.'"/>
-      <details key="ValidBranchTypeImplication" value="&#xA;&#x9;&#x9;&#x9;if self.branchType = BranchType::TALENT then&#xA;&#x9;&#x9;&#x9;&#x9;self.nodes->forAll(node | node.talents->size() > 0 and node.abilities->size() = 0)&#xA;&#x9;&#x9;&#x9;else &#xA;&#x9;&#x9;&#x9;&#x9;self.nodes->forAll(node | node.talents->size() = 0 and node.abilities->size() > 0)&#xA;&#x9;&#x9;&#x9;endif"/>
-      <details key="ValidBranchTypeImplication$message" value="'Branch type dictates what the nodes can contain: abilities or talents.'"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="lore" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -115,35 +113,27 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Node">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="RootNodeChildren RootNodeParents StandardNodeChildren StandardNodeParents StandaloneNodeConnections ActivationCondition ActivationIntegrity MinimalNodeActivation MaximalNodeActivation UniqueNodeActivationLevels ProperNodeActivationLevels ProperAbilityLevels ProperEffectLevels"/>
+      <details key="constraints" value="RootNodeChildren StandardNodeChildren StandaloneNodeConnections ActivationCondition ActivationIntegrity MinimalNodeActivation MaximalNodeActivation UniqueNodeActivationLevels ValidBranchTypeImplication"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-      <details key="RootNodeChildren" value="self.nodeType = NodeType::ROOT implies self.childNodes->forAll(node | node.nodeType = NodeType::STANDARD)"/>
-      <details key="RootNodeChildren$message" value="'ROOT nodes can have only STANDARD nodes for children.'"/>
-      <details key="RootNodeParents" value="self.nodeType = NodeType::ROOT implies self.parentNodes->size() = 0"/>
-      <details key="RootNodeParents$message" value="'ROOT nodes can not have any parents.'"/>
-      <details key="StandardNodeChildren" value="self.nodeType = NodeType::STANDARD implies self.childNodes->forAll(node | node.nodeType = NodeType::STANDARD)"/>
-      <details key="StandardNodeChildren$message" value="'STANDARD nodes can have only STANDARD nodes for children.'"/>
-      <details key="StandardNodeParents" value="self.nodeType = NodeType::STANDARD implies self.parentNodes->forAll(node | node.nodeType = NodeType::ROOT or node.nodeType = NodeType::STANDARD)"/>
-      <details key="StandardNodeParents$message" value="'STANDARD nodes can have only ROOT or STANDARD nodes for parents.'"/>
-      <details key="StandaloneNodeConnections" value="self.nodeType = NodeType::STANDALONE implies self.parentNodes->size() = 0 and self.childNodes->size() = 0"/>
+      <details key="RootNodeChildren" value="&#xA;&#x9;&#x9;&#x9;self.nodeType = NodeType::ROOT implies &#xA;&#x9;&#x9;&#x9;(self.childNodes->forAll(node | node.nodeType = NodeType::STANDARD) and self.parentNodes->size() = 0)"/>
+      <details key="RootNodeChildren$message" value="'ROOT nodes can have only STANDARD nodes for children and can not have any parents.'"/>
+      <details key="StandardNodeChildren" value="&#xA;&#x9;&#x9;&#x9;self.nodeType = NodeType::STANDARD implies &#xA;&#x9;&#x9;&#x9;(self.childNodes->forAll(node | node.nodeType = NodeType::STANDARD) and&#xA;&#x9;&#x9;&#x9;self.parentNodes->forAll(node | node.nodeType = NodeType::ROOT or node.nodeType = NodeType::STANDARD))"/>
+      <details key="StandardNodeChildren$message" value="'STANDARD nodes can have only STANDARD nodes for children and ROOT or STANDARD nodes for parents'"/>
+      <details key="StandaloneNodeConnections" value="&#xA;&#x9;&#x9;&#x9;self.nodeType = NodeType::STANDALONE implies self.parentNodes->size() = 0 and self.childNodes->size() = 0"/>
       <details key="StandaloneNodeConnections$message" value="'STANDALONE nodes can not have parent or child nodes.'"/>
-      <details key="ActivationCondition" value="&#xA;&#x9;&#x9;self.nodeType = NodeType::STANDARD implies&#xA;&#x9;&#x9;(self.activationLevel >= self.minActivationLevel implies self.parentNodes.activationLevel >= self.parentNodes.minActivationLevel)"/>
-      <details key="ActivationCondition$message" value="'Before STANDARD nodes can be activated, their parents must be activated.'"/>
-      <details key="ActivationIntegrity" value="&#xA;&#x9;&#x9;self.activationLevel >= self.minActivationLevel and self.activationLevel &lt;= self.maxActivationLevel"/>
+      <details key="ActivationCondition" value="&#xA;&#x9;&#x9;&#x9;self.nodeType = NodeType::STANDARD implies &#xA;&#x9;&#x9;&#x9;(self.activationLevel >= self.minActivationLevel implies self.parentNodes->exists(parentNode | parentNode.activationLevel >= parentNode.minActivationLevel))"/>
+      <details key="ActivationCondition$message" value="'Before a node can be activated, at least one parent must be activated.'"/>
+      <details key="ActivationIntegrity" value="&#xA;&#x9;&#x9;&#x9;self.activationLevel >= self.minActivationLevel and self.activationLevel &lt;= self.maxActivationLevel"/>
       <details key="ActivationIntegrity$message" value="'Activation level must be between minimum and maximum activation levels.'"/>
-      <details key="MinimalNodeActivation" value="&#xA;&#x9;&#x9;self.activationLevel &lt; self.minActivationLevel implies self.activation->size() = (self.maxActivationLevel - self.minActivationLevel + 1) and self.activationLevel &lt; self.minActivationLevel"/>
+      <details key="MinimalNodeActivation" value="&#xA;&#x9;&#x9;&#x9;self.activationLevel &lt; self.minActivationLevel implies &#xA;&#x9;&#x9;&#x9;self.activation->size() = (self.maxActivationLevel - self.minActivationLevel + 1) and self.activationLevel &lt; self.minActivationLevel"/>
       <details key="MinimalNodeActivation$message" value="'Non-activated nodes must have at least one node activation rule and have activation level below minimum.'"/>
-      <details key="MaximalNodeActivation" value="&#xA;&#x9;&#x9;self.activationLevel >= self.minActivationLevel implies self.activation->size() = (self.maxActivationLevel - self.activationLevel)"/>
+      <details key="MaximalNodeActivation" value="&#xA;&#x9;&#x9;&#x9;self.activationLevel >= self.minActivationLevel implies self.activation->size() = (self.maxActivationLevel - self.activationLevel)"/>
       <details key="MaximalNodeActivation$message" value="'Activated nodes must have proper number of node activations.'"/>
-      <details key="UniqueNodeActivationLevels" value="self.activation->forAll(n1: NodeActivation, n2: NodeActivation | n1 &lt;> n2 implies n1.level &lt;> n2.level)"/>
+      <details key="UniqueNodeActivationLevels" value="&#xA;&#x9;&#x9;&#x9;self.activation->forAll(n1: NodeActivation, n2: NodeActivation | n1 &lt;> n2 implies n1.level &lt;> n2.level)"/>
       <details key="UniqueNodeActivationLevels$message" value="'All node activations must have unique levels.'"/>
-      <details key="ProperNodeActivationLevels" value="&#xA;&#x9;&#x9;if self.activationLevel >= self.minActivationLevel = true then&#xA;&#x9;&#x9;&#x9;self.activation->forAll(n: NodeActivation | n.level > self.activationLevel and n.level &lt;= self.maxActivationLevel)&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;self.activation->forAll(n: NodeActivation | n.level >= self.minActivationLevel and n.level &lt;= self.maxActivationLevel)&#xA;&#x9;&#x9;endif"/>
-      <details key="ProperNodeActivationLevels$message" value="'All node activations must have levels between min and max activation levels.'"/>
-      <details key="ProperAbilityLevels" value="self.abilities->forAll(a: Ability | a.onLevel >= self.minActivationLevel and a.onLevel &lt;= self.maxActivationLevel)"/>
-      <details key="ProperAbilityLevels$message" value="'All abilities must reference an appropriate node level.'"/>
-      <details key="ProperEffectLevels" value="self.abilities->forAll(a: Ability | a.effects->forAll(e: Effect | e.onLevel >= self.minActivationLevel and e.onLevel &lt;= self.maxActivationLevel))"/>
-      <details key="ProperEffectLevels$message" value="'All ability effects must reference an appropriate node level.'"/>
+      <details key="ValidBranchTypeImplication" value="&#xA;&#x9;&#x9;&#x9;if self.branch.branchType = BranchType::TALENT then&#xA;&#x9;&#x9;&#x9;&#x9;self.talents->size() > 0 and self.abilities->size() = 0&#xA;&#x9;&#x9;&#x9;else &#xA;&#x9;&#x9;&#x9;&#x9;self.talents->size() = 0 and self.abilities->size() > 0&#xA;&#x9;&#x9;&#x9;endif"/>
+      <details key="ValidBranchTypeImplication$message" value="'Branch type dictates what the nodes can contain: abilities or talents.'"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="lore" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -155,8 +145,8 @@
         eType="#//NodeType" defaultValueLiteral="STANDARD"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="childNodes" upperBound="-1"
         eType="#//Node" eOpposite="#//Node/parentNodes"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parentNodes" eType="#//Node"
-        eOpposite="#//Node/childNodes"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentNodes" upperBound="-1"
+        eType="#//Node" eOpposite="#//Node/childNodes"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="activation" upperBound="-1"
         eType="#//NodeActivation" containment="true" eOpposite="#//NodeActivation/node"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="minActivationLevel" lowerBound="1"
@@ -166,9 +156,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="activationLevel" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="0"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="abilities" upperBound="-1"
-        eType="#//Ability" containment="true"/>
+        eType="#//Ability" containment="true" eOpposite="#//Ability/node"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="talents" eType="#//Talent"
-        containment="true"/>
+        containment="true" eOpposite="#//Talent/node"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isLocked" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="branch" lowerBound="1"
@@ -180,6 +170,13 @@
     <eLiterals name="STANDALONE" value="2"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NodeActivation">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="ProperNodeActivationLevels"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="ProperNodeActivationLevels" value="&#xA;&#x9;&#x9;&#x9;if self.node.activationLevel >= self.node.minActivationLevel then&#xA;&#x9;&#x9;&#x9;&#x9;self.level > self.node.activationLevel and self.level &lt;= self.node.maxActivationLevel&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;self.level >= self.node.minActivationLevel and self.level &lt;= self.node.maxActivationLevel&#xA;&#x9;&#x9;&#x9;endif"/>
+      <details key="ProperNodeActivationLevels$message" value="'All node activations must have levels between min and max activation levels.'"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAuto" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="level" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
@@ -197,7 +194,7 @@
       <details key="constraints" value="ProperCost ProperCostReference"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-      <details key="ProperCost" value="self.cost >= self.statistic.minValue and self.cost &lt;= self.statistic.startLimitValue"/>
+      <details key="ProperCost" value="&#xA;&#x9;&#x9;&#x9;self.cost >= self.statistic.minValue and self.cost &lt;= self.statistic.startLimitValue"/>
       <details key="ProperCost$message" value="'The cost must be between minimum and maximum values of the statistic.'"/>
       <details key="ProperCostReference" value="&#xA;&#x9;&#x9;&#x9;self.nodeActivation.node.branch.characterClass.statistics->includes(self.statistic) or&#xA;&#x9;&#x9;&#x9;self.nodeActivation.node.branch.characterClass->closure(parentClasses)->exists(charClass | charClass.statistics->includes(self.statistic))"/>
       <details key="ProperCostReference$message" value="'Referenced statistic must be in host clas or parent class, recursively.'"/>
@@ -217,9 +214,11 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Ability">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="ValidCastTime"/>
+      <details key="constraints" value="ProperAbilityLevels ValidCastTime"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="ProperAbilityLevels" value="&#xA;&#x9;&#x9;&#x9;self.onLevel >= self.node.minActivationLevel and self.onLevel &lt;= self.node.maxActivationLevel"/>
+      <details key="ProperAbilityLevels$message" value="'All abilities must reference an appropriate node level.'"/>
       <details key="ValidCastTime" value="&#xA;&#x9;&#x9;if self.castType = CastType::NO_CAST or self.castType = CastType::INSTANT then&#xA;&#x9;&#x9;&#x9;self.castTime = 0.0&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;self.castTime > 0.0&#xA;&#x9;&#x9;endif"/>
       <details key="ValidCastTime$message" value="'NO_CAST and INSTANT abilities have no cast time, the rest do.'"/>
     </eAnnotations>
@@ -238,7 +237,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="onLevel" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="effects" lowerBound="1"
-        upperBound="-1" eType="#//Effect" containment="true"/>
+        upperBound="-1" eType="#//Effect" containment="true" eOpposite="#//Effect/ability"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="node" lowerBound="1" eType="#//Node"
+        eOpposite="#//Node/abilities"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="CastType">
     <eLiterals name="NO_CAST"/>
@@ -257,9 +258,11 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Effect">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="MeaningfulEffect"/>
+      <details key="constraints" value="ProperEffectLevels MeaningfulEffect"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="ProperEffectLevels" value="&#xA;&#x9;&#x9;&#x9;self.onLevel >= self.ability.node.minActivationLevel and self.onLevel &lt;= self.ability.node.maxActivationLevel"/>
+      <details key="ProperEffectLevels$message" value="'Effects must reference an appropriate node level.'"/>
       <details key="MeaningfulEffect" value="&#xA;&#x9;&#x9;if self.effectType = EffectType::INSTANTIATE then&#xA;&#x9;&#x9;&#x9;self.instantiate->size() = 1&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;self.statChange->size() > 0&#xA;&#x9;&#x9;endif"/>
       <details key="MeaningfulEffect$message" value="'An effect must either instantiate a class or change a stat.'"/>
     </eAnnotations>
@@ -275,6 +278,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="instantiate" eType="#//CharacterClass"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="statChange" upperBound="-1"
         eType="#//StatChange" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ability" lowerBound="1"
+        eType="#//Ability" eOpposite="#//Ability/effects"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="EffectType">
     <eLiterals name="PASSIVE"/>
@@ -329,6 +334,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="lore" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="node" lowerBound="1" eType="#//Node"
+        eOpposite="#//Node/talents"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PropagationRequirement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
