@@ -79,7 +79,8 @@
         statType="FUEL"/>
     <statistics
         name="Skill points"
-        maxValue="99.0"/>
+        maxValue="99.0"
+        startLimitValue="99.0"/>
   </allClasses>
   <allClasses
       name="Mage"
@@ -114,9 +115,17 @@
               statistic="//@allClasses.1/@statistics.1"/>
         </activation>
         <activation
-            level="2"/>
+            level="2">
+          <costs
+              cost="2.0"
+              statistic="//@allClasses.1/@statistics.1"/>
+        </activation>
         <activation
-            level="3"/>
+            level="3">
+          <costs
+              cost="5.0"
+              statistic="//@allClasses.1/@statistics.1"/>
+        </activation>
         <abilities
             name="Fireball"
             lore="Fireball"
@@ -146,6 +155,42 @@
                 changeType="SUBSTRACT"
                 baseValue="20.0"
                 changesStatistic="//@allClasses.0/@statistics.0"/>
+          </effects>
+        </abilities>
+      </nodes>
+      <nodes
+          name="Fire shield"
+          lore="A shield of fire"
+          tooltip="Raises a fire shield"
+          description="Raises a fire shield"
+          nodeType="ROOT">
+        <activation
+            level="1">
+          <requirements
+              requiredLevel="2"
+              followsActivationOf="//@allClasses.2/@branches.0/@nodes.0"/>
+        </activation>
+        <abilities
+            name="Fire shield"
+            lore="Channels a defensive fire shield"
+            tooltip="Channels a defensive fire shield."
+            castType="CHANNELED"
+            abilityType="AOE"
+            castTime="10.0"
+            range="3.0"
+            rangeUnit="//@rangeUnits.0"
+            onLevel="1">
+          <effects
+              name="Consume mana"
+              tooltip="Consumes mana per tick"
+              effectType="ACTIVE"
+              onLevel="1">
+            <statChange
+                changeType="SUBSTRACT"
+                tickType="PER_TICK"
+                baseValue="5.0"
+                tickValue="10"
+                changesStatistic="//@allClasses.2/@statistics.0"/>
           </effects>
         </abilities>
       </nodes>

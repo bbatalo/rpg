@@ -124,8 +124,8 @@
       <details key="StandaloneNodeConnections$message" value="'STANDALONE nodes can not have parent or child nodes.'"/>
       <details key="ActivationCondition" value="&#xA;&#x9;&#x9;&#x9;self.nodeType = NodeType::STANDARD implies &#xA;&#x9;&#x9;&#x9;(self.activationLevel >= self.minActivationLevel implies self.parentNodes->exists(parentNode | parentNode.activationLevel >= parentNode.minActivationLevel))"/>
       <details key="ActivationCondition$message" value="'Before a node can be activated, at least one parent must be activated.'"/>
-      <details key="ActivationIntegrity" value="&#xA;&#x9;&#x9;&#x9;self.activationLevel >= self.minActivationLevel and self.activationLevel &lt;= self.maxActivationLevel"/>
-      <details key="ActivationIntegrity$message" value="'Activation level must be between minimum and maximum activation levels.'"/>
+      <details key="ActivationIntegrity" value="&#xA;&#x9;&#x9;&#x9;self.activationLevel &lt;= self.maxActivationLevel"/>
+      <details key="ActivationIntegrity$message" value="'Activation level must be cannot exceed maximum activation levels.'"/>
       <details key="MinimalNodeActivation" value="&#xA;&#x9;&#x9;&#x9;self.activationLevel &lt; self.minActivationLevel implies &#xA;&#x9;&#x9;&#x9;self.activation->size() = (self.maxActivationLevel - self.minActivationLevel + 1) and self.activationLevel &lt; self.minActivationLevel"/>
       <details key="MinimalNodeActivation$message" value="'Non-activated nodes must have at least one node activation rule and have activation level below minimum.'"/>
       <details key="MaximalNodeActivation" value="&#xA;&#x9;&#x9;&#x9;self.activationLevel >= self.minActivationLevel implies self.activation->size() = (self.maxActivationLevel - self.activationLevel)"/>
@@ -339,11 +339,15 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PropagationRequirement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="ProperRequiredLevel"/>
+      <details key="constraints" value="ProperRequiredLevel SelfReference ProperPropagationReference"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-      <details key="ProperRequiredLevel" value="&#xA;&#x9;&#x9;self.requiredLevel >= self.followsActivationOf.minActivationLevel and self.requiredLevel &lt;= self.followsActivationOf.maxActivationLevel"/>
+      <details key="ProperRequiredLevel" value="&#xA;&#x9;&#x9;&#x9;self.requiredLevel >= self.followsActivationOf.minActivationLevel and self.requiredLevel &lt;= self.followsActivationOf.maxActivationLevel"/>
       <details key="ProperRequiredLevel$message" value="'Required level must be between minimum and maximum possible values of the level.'"/>
+      <details key="SelfReference" value="&#xA;&#x9;&#x9;&#x9;self.nodeActivation.node &lt;> self.followsActivationOf"/>
+      <details key="SelfReference$message" value="'Cannot reference host Node.'"/>
+      <details key="ProperPropagationReference" value="&#xA;&#x9;&#x9;&#x9;self.nodeActivation.node.branch.characterClass->select(branch: Branch | branch.nodes)->includes(self.followsActivationOf)"/>
+      <details key="ProperPropagationReference$message" value="'Referenced Node must be within host class or parent classes, recursively.'"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="requiredLevel" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>

@@ -105,7 +105,7 @@ Improvements:
 * ~~Add a 'playable' flag for easier code generation~~
 * ~~Remove ability costs, should be modeled through Effects on FUEL stats~~
 * ~~Parent Class cannot be recursively defined~~
-* NodeActivation constraint: at least one cost or propagation requirement
+* ~~NodeActivation constraint: at least one cost or propagation requirement~~
 * ~~Move BranchType implication constraint to Node~~
 * ~~Move Node constraints to where they make sense to be moved to~~
 
