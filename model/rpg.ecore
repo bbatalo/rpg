@@ -171,11 +171,13 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NodeActivation">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="ProperNodeActivationLevels"/>
+      <details key="constraints" value="ProperNodeActivationLevels MeaningfulActivationCondition"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
       <details key="ProperNodeActivationLevels" value="&#xA;&#x9;&#x9;&#x9;if self.node.activationLevel >= self.node.minActivationLevel then&#xA;&#x9;&#x9;&#x9;&#x9;self.level > self.node.activationLevel and self.level &lt;= self.node.maxActivationLevel&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;self.level >= self.node.minActivationLevel and self.level &lt;= self.node.maxActivationLevel&#xA;&#x9;&#x9;&#x9;endif"/>
       <details key="ProperNodeActivationLevels$message" value="'All node activations must have levels between min and max activation levels.'"/>
+      <details key="MeaningfulActivationCondition" value="&#xA;&#x9;&#x9;&#x9;self.costs->size() > 0 or self.requirements->size() > 0"/>
+      <details key="MeaningfulActivationCondition$message" value="'Node activation should have at least one cost or propagation requirement.'"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAuto" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
@@ -187,8 +189,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="node" lowerBound="1" eType="#//Node"
         eOpposite="#//Node/activation"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="NodeActivationBuy" eSuperTypes="#//NodeActivation"/>
-  <eClassifiers xsi:type="ecore:EClass" name="NodeActivationPropagate" eSuperTypes="#//NodeActivation"/>
   <eClassifiers xsi:type="ecore:EClass" name="ActivationCost">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
       <details key="constraints" value="ProperCost ProperCostReference"/>
