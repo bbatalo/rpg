@@ -113,7 +113,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Node">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="RootNodeChildren StandardNodeChildren StandaloneNodeConnections ActivationCondition ActivationIntegrity MinimalNodeActivation MaximalNodeActivation UniqueNodeActivationLevels ValidBranchTypeImplication"/>
+      <details key="constraints" value="RootNodeChildren StandardNodeChildren StandaloneNodeConnections SelfReference CircularReference ProperReference ActivationCondition ActivationIntegrity MinimalNodeActivation MaximalNodeActivation UniqueNodeActivationLevels ValidBranchTypeImplication"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
       <details key="RootNodeChildren" value="&#xA;&#x9;&#x9;&#x9;self.nodeType = NodeType::ROOT implies &#xA;&#x9;&#x9;&#x9;(self.childNodes->forAll(node | node.nodeType = NodeType::STANDARD) and self.parentNodes->size() = 0)"/>
@@ -121,7 +121,13 @@
       <details key="StandardNodeChildren" value="&#xA;&#x9;&#x9;&#x9;self.nodeType = NodeType::STANDARD implies &#xA;&#x9;&#x9;&#x9;(self.childNodes->forAll(node | node.nodeType = NodeType::STANDARD) and&#xA;&#x9;&#x9;&#x9;self.parentNodes->forAll(node | node.nodeType = NodeType::ROOT or node.nodeType = NodeType::STANDARD))"/>
       <details key="StandardNodeChildren$message" value="'STANDARD nodes can have only STANDARD nodes for children and ROOT or STANDARD nodes for parents'"/>
       <details key="StandaloneNodeConnections" value="&#xA;&#x9;&#x9;&#x9;self.nodeType = NodeType::STANDALONE implies self.parentNodes->size() = 0 and self.childNodes->size() = 0"/>
-      <details key="StandaloneNodeConnections$message" value="'STANDALONE nodes can not have parent or child nodes.'"/>
+      <details key="StandaloneNodeConnections$message" value="'STANDALONE nodes cannot have parent or child nodes.'"/>
+      <details key="SelfReference" value="&#xA;&#x9;&#x9;&#x9;self.childNodes->forAll(node | node &lt;> self) and self.parentNodes->forAll(node | node &lt;> self)"/>
+      <details key="SelfReference$message" value="'Nodes cannot reference themselves as either parent or child. '"/>
+      <details key="CircularReference" value="&#xA;&#x9;&#x9;&#x9;self->closure(childNodes)->excludes(self) and self->closure(parentNodes)->excludes(self)"/>
+      <details key="CircularReference$message" value="'Nodes cannot form circular references to themselves through parent and child relationships.'"/>
+      <details key="ProperReference" value="&#xA;&#x9;&#x9;&#x9;self.childNodes->forAll(node | self.branch.nodes->includes(node)) and self.parentNodes->forAll(node | self.branch.nodes->includes(node))"/>
+      <details key="ProperReference$message" value="'Nodes can only reference nodes within the same Branch.'"/>
       <details key="ActivationCondition" value="&#xA;&#x9;&#x9;&#x9;self.nodeType = NodeType::STANDARD implies &#xA;&#x9;&#x9;&#x9;(self.activationLevel >= self.minActivationLevel implies self.parentNodes->exists(parentNode | parentNode.activationLevel >= parentNode.minActivationLevel))"/>
       <details key="ActivationCondition$message" value="'Before a node can be activated, at least one parent must be activated.'"/>
       <details key="ActivationIntegrity" value="&#xA;&#x9;&#x9;&#x9;self.activationLevel &lt;= self.maxActivationLevel"/>
@@ -277,7 +283,7 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="instantiate" eType="#//CharacterClass"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="statChange" upperBound="-1"
-        eType="#//StatChange" containment="true"/>
+        eType="#//StatChange" containment="true" eOpposite="#//StatChange/effect"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ability" lowerBound="1"
         eType="#//Ability" eOpposite="#//Ability/effects"/>
   </eClassifiers>
@@ -305,7 +311,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="changesStatistic" lowerBound="1"
         eType="#//CharacterStatistic"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="modifiers" upperBound="-1"
-        eType="#//Modifier" containment="true"/>
+        eType="#//Modifier" containment="true" eOpposite="#//Modifier/statChange"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="effect" lowerBound="1"
+        eType="#//Effect" eOpposite="#//Effect/statChange"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Modifier">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="changeType" eType="#//ChangeType"/>
@@ -315,6 +323,8 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="basedOn" eType="#//CharacterStatistic"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="basedOnValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="statChange" lowerBound="1"
+        eType="#//StatChange" eOpposite="#//StatChange/modifiers"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="ChangeType">
     <eLiterals name="ADD"/>

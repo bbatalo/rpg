@@ -89,31 +89,22 @@ Features:
 * Add modifiers for ticks
 * ~~Setup activation conditions for each node activation level~~
 * ~~Add locked nodes~~
-* Talent to unlock nodes
-* Optionally merge branches upon inheritance
 
 Improvements:
 
 * Add randomizers to effect modifiers
 * Factor in node levels for effect modifiers
-* ~~Remove 'startingNodes' relationship between Branch and Node~~
-* ~~Constraint: A branch must have at least one ROOT Node~~
-* ~~Remove isActivated flag -> redundant, activationLevel is present and carries same semantics~~
-* ~~Parent Node must be activated in order to activate Child Node~~
-* ~~ActivationCost must consume statistic of host Class or parent (recursive) Class~~
-* PropagationRequirement must reference Node of host Class or parent (recursive) Class, excluding self
-* ~~Add a 'playable' flag for easier code generation~~
-* ~~Remove ability costs, should be modeled through Effects on FUEL stats~~
-* ~~Parent Class cannot be recursively defined~~
-* ~~NodeActivation constraint: at least one cost or propagation requirement~~
-* ~~Move BranchType implication constraint to Node~~
-* ~~Move Node constraints to where they make sense to be moved to~~
+* ~~Nodes cannot reference themselves as child/parent~~
+* ~~Nodes cannot create circular references through child/parent~~
+* ~~Nodes cannot reference nodes from other branches~~
+* StatChanges belonging to Effects with SELF TargetType can reference only statistics in host/parent classes
 
 Possible:
 
-* Define ability targets as classes?
-* Allow multiple parent nodes in trees?
-* Change containment relationship to reference for (node -> ability/talent)?
+* ~~Define ability targets as classes? NO: Should leave this to the game engine.~~
+* ~~Allow multiple parent nodes in trees? YES: Solved.~~
+* ~~Change containment relationship to reference for (node -> ability/talent)? -- NO: Would take too much time. Besides, this question arises for many constructs, as the model is quite complex.~~
+* Optionally merge branches upon inheritance
 
 ## Licence
 
