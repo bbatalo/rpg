@@ -346,7 +346,7 @@
       <details key="ProperRequiredLevel$message" value="'Required level must be between minimum and maximum possible values of the level.'"/>
       <details key="SelfReference" value="&#xA;&#x9;&#x9;&#x9;self.nodeActivation.node &lt;> self.followsActivationOf"/>
       <details key="SelfReference$message" value="'Cannot reference host Node.'"/>
-      <details key="ProperPropagationReference" value="&#xA;&#x9;&#x9;&#x9;self.nodeActivation.node.branch.characterClass->select(branch: Branch | branch.nodes)->includes(self.followsActivationOf)"/>
+      <details key="ProperPropagationReference" value="&#xA;&#x9;&#x9;&#x9;self.nodeActivation.node.branch.characterClass.branches->collect(nodes)->includes(self.followsActivationOf) or&#xA;&#x9;&#x9;&#x9;self.nodeActivation.node.branch.characterClass->closure(parentClasses)->exists(charClass | charClass.branches->collect(nodes)->includes(self.followsActivationOf))"/>
       <details key="ProperPropagationReference$message" value="'Referenced Node must be within host class or parent classes, recursively.'"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="requiredLevel" lowerBound="1"
