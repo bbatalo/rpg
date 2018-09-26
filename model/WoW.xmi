@@ -22,8 +22,8 @@
         lore="Epic levels of awesomeness."
         description="An indicator of the strenght of the character."
         tooltip="You are this level."
-        maxValue="10.0"
-        startLimitValue="10.0"/>
+        maxValue="70.0"
+        startLimitValue="70.0"/>
     <statistics
         name="Experience"
         lore="Are you a wise one?"
@@ -67,7 +67,7 @@
   <allClasses
       name="Playable"
       description="A generic class for playable characters"
-      childClasses="//@allClasses.2 //@allClasses.4 //@allClasses.3"
+      childClasses="//@allClasses.2"
       parentClasses="//@allClasses.0"
       isPlayable="true">
     <statistics
@@ -96,16 +96,17 @@
         maxValue="10000.0"
         startLimitValue="1000.0"/>
     <branches
-        name="Fire Abilities"
+        name="Fire"
         lore="Fire Abilities"
         description="Fire Abilities"
         branchType="ABILITY"
         tooltip="Fire Abilities">
       <nodes
-          name="Fire destruction"
+          name="Fireball"
           tooltip="Fireball"
           description="Fireball"
           nodeType="ROOT"
+          childNodes="//@allClasses.2/@branches.0/@nodes.1 //@allClasses.2/@branches.0/@nodes.2"
           minActivationLevel="0"
           maxActivationLevel="3">
         <activation
@@ -132,7 +133,7 @@
             tooltip="Casts a fireball, damaging a single enemy."
             castType="CAST"
             castTime="2.0"
-            range="16.0"
+            range="40.0"
             rangeUnit="//@rangeUnits.0"
             onLevel="1">
           <effects
@@ -159,61 +160,126 @@
         </abilities>
       </nodes>
       <nodes
-          name="Fire shield"
-          lore="A shield of fire"
-          tooltip="Raises a fire shield"
-          description="Raises a fire shield"
-          nodeType="ROOT">
+          name="Pyroblast"
+          tooltip="Hurls a large boulder of fire at the enemy."
+          description="Hurls a large boulder of fire at the enemy."
+          childNodes="//@allClasses.2/@branches.0/@nodes.4"
+          parentNodes="//@allClasses.2/@branches.0/@nodes.0"
+          maxActivationLevel="2">
         <activation
             level="1">
-          <requirements
-              requiredLevel="2"
-              followsActivationOf="//@allClasses.2/@branches.0/@nodes.0"/>
+          <costs
+              cost="1.0"
+              statistic="//@allClasses.1/@statistics.1"/>
+        </activation>
+        <activation
+            level="2">
+          <costs
+              cost="3.0"
+              statistic="//@allClasses.1/@statistics.1"/>
         </activation>
         <abilities
-            name="Fire shield"
-            lore="Channels a defensive fire shield"
-            tooltip="Channels a defensive fire shield."
-            castType="CHANNELED"
-            abilityType="AOE"
-            castTime="10.0"
-            range="3.0"
+            name="Pyroblast"
+            lore="Pyroblast"
+            tooltip="Pyroblast"
+            castType="CAST"
+            castTime="6.0"
             rangeUnit="//@rangeUnits.0"
             onLevel="1">
           <effects
               name="Consume mana"
-              tooltip="Consumes mana per tick"
+              tooltip="Consumes mana"
               effectType="ACTIVE"
               onLevel="1">
             <statChange
                 changeType="SUBSTRACT"
-                tickType="PER_TICK"
-                baseValue="5.0"
-                tickValue="10"
+                baseValue="50.0"
                 changesStatistic="//@allClasses.2/@statistics.0"/>
+          </effects>
+          <effects
+              name="Massive fire damage"
+              tooltip="Deals massive fire damage to a single target"
+              effectType="ACTIVE"
+              targetType="SINGLE"
+              onLevel="1">
+            <statChange
+                changeType="SUBSTRACT"
+                baseValue="100.0"
+                changesStatistic="//@allClasses.0/@statistics.0"/>
           </effects>
         </abilities>
       </nodes>
+      <nodes
+          name="Scorch"
+          tooltip="Scorch"
+          description="Scorch"
+          childNodes="//@allClasses.2/@branches.0/@nodes.4"
+          parentNodes="//@allClasses.2/@branches.0/@nodes.0"
+          maxActivationLevel="3">
+        <activation
+            level="1">
+          <costs
+              cost="1.0"
+              statistic="//@allClasses.1/@statistics.0"/>
+        </activation>
+        <activation
+            level="2">
+          <costs
+              cost="3.0"
+              statistic="//@allClasses.1/@statistics.0"/>
+        </activation>
+        <activation
+            level="3">
+          <costs
+              cost="5.0"
+              statistic="//@allClasses.1/@statistics.0"/>
+        </activation>
+        <abilities
+            name="Scorch"
+            lore="Scorch"
+            tooltip="Scorch"
+            castType="INSTANT"
+            castTime="1.0"
+            range="45.0"
+            rangeUnit="//@rangeUnits.0"
+            onLevel="1">
+          <effects
+              name="Consume mana"
+              tooltip="Consumes mana"
+              effectType="ACTIVE"
+              onLevel="1">
+            <statChange/>
+          </effects>
+        </abilities>
+      </nodes>
+      <nodes
+          name="Flamestrike"/>
+      <nodes
+          name="Fire Blast"
+          childNodes="//@allClasses.2/@branches.0/@nodes.5 //@allClasses.2/@branches.0/@nodes.6 //@allClasses.2/@branches.0/@nodes.7"
+          parentNodes="//@allClasses.2/@branches.0/@nodes.1 //@allClasses.2/@branches.0/@nodes.2"/>
+      <nodes
+          name="Flamestrike"
+          childNodes="//@allClasses.2/@branches.0/@nodes.8"
+          parentNodes="//@allClasses.2/@branches.0/@nodes.4"/>
+      <nodes
+          name="Dragon Breath"
+          childNodes="//@allClasses.2/@branches.0/@nodes.8"
+          parentNodes="//@allClasses.2/@branches.0/@nodes.4"/>
+      <nodes
+          name="Blazing Barrier"
+          childNodes="//@allClasses.2/@branches.0/@nodes.8"
+          parentNodes="//@allClasses.2/@branches.0/@nodes.4"/>
+      <nodes
+          name="Fire Elemental"
+          parentNodes="//@allClasses.2/@branches.0/@nodes.5 //@allClasses.2/@branches.0/@nodes.6 //@allClasses.2/@branches.0/@nodes.7"/>
+      <nodes
+          name="Critical Mass"
+          nodeType="STANDALONE"/>
+      <nodes
+          name="Hot Streak"
+          nodeType="STANDALONE"/>
     </branches>
-  </allClasses>
-  <allClasses
-      name="Warrior"
-      description="Warrior"
-      parentClasses="//@allClasses.1"
-      isPlayable="true">
-    <statistics
-        name="Rage"
-        maxValue="100.0"
-        startLimitValue="100.0"/>
-  </allClasses>
-  <allClasses
-      name="Hunter"
-      parentClasses="//@allClasses.1"
-      isPlayable="true">
-    <statistics
-        name="Focus"
-        maxValue="100.0"
-        startLimitValue="100.0"/>
   </allClasses>
   <rangeUnits
       name="Yard"

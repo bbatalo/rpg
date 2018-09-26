@@ -75,7 +75,6 @@ Demo:
 * Create a boss
 * Create a mage, with stats, abilities and talents
 * Create a warrior, with stats, abilities and talents
-* Create a hunter, with stats, abilities and talents
 
 Maintenance:
 
@@ -97,7 +96,7 @@ Improvements:
 * ~~Nodes cannot reference themselves as child/parent~~
 * ~~Nodes cannot create circular references through child/parent~~
 * ~~Nodes cannot reference nodes from other branches~~
-* StatChanges belonging to Effects with SELF TargetType can reference only statistics in host/parent classes
+* ~~StatChanges belonging to Effects with SELF TargetType can reference only statistics in host/parent classes~~
 
 Possible:
 
@@ -105,6 +104,7 @@ Possible:
 * ~~Allow multiple parent nodes in trees? YES: Solved.~~
 * ~~Change containment relationship to reference for (node -> ability/talent)? -- NO: Would take too much time. Besides, this question arises for many constructs, as the model is quite complex.~~
 * Optionally merge branches upon inheritance
+* Buffs and debuffs? How to model these?
 
 ## Licence
 
