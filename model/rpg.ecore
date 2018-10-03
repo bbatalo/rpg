@@ -264,13 +264,15 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Effect">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="ProperEffectLevels MeaningfulEffect"/>
+      <details key="constraints" value="ProperEffectLevels MeaningfulEffect InstantiateConstraint"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
       <details key="ProperEffectLevels" value="&#xA;&#x9;&#x9;&#x9;self.onLevel >= self.ability.node.minActivationLevel and self.onLevel &lt;= self.ability.node.maxActivationLevel"/>
       <details key="ProperEffectLevels$message" value="'Effects must reference an appropriate node level.'"/>
       <details key="MeaningfulEffect" value="&#xA;&#x9;&#x9;&#x9;if self.effectType = EffectType::INSTANTIATE then&#xA;&#x9;&#x9;&#x9;&#x9;self.instantiate->size() = 1&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;self.statChange->size() > 0&#xA;&#x9;&#x9;&#x9;endif"/>
       <details key="MeaningfulEffect$message" value="'An effect must either instantiate a class or change a stat.'"/>
+      <details key="InstantiateConstraint" value="&#xA;&#x9;&#x9;&#x9;self.effectType = EffectType::INSTANTIATE implies self.targetType = TargetType::SELF"/>
+      <details key="InstantiateConstraint$message" value="'Instantiate effects can only target SELF.'"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="tooltip" lowerBound="1"
@@ -308,6 +310,7 @@
         eType="#//TickType"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="baseValue" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="changeValueType" eType="#//ChangeValueType"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="tickValue" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="changesStatistic" lowerBound="1"
@@ -367,5 +370,9 @@
         eType="#//Node"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="nodeActivation" lowerBound="1"
         eType="#//NodeActivation" eOpposite="#//NodeActivation/requirements"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ChangeValueType">
+    <eLiterals name="VALUE"/>
+    <eLiterals name="PERCENTAGE" value="1"/>
   </eClassifiers>
 </ecore:EPackage>

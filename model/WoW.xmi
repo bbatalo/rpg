@@ -10,7 +10,7 @@
       name="Character"
       lore="No lore, generic class."
       description="A class to model any character in the game. Should be inherited for further customization"
-      childClasses="//@allClasses.1">
+      childClasses="//@allClasses.1 //@allClasses.3">
     <statistics
         name="Health"
         lore="Every living being is... living. Until it is not."
@@ -81,6 +81,13 @@
         name="Skill points"
         maxValue="99.0"
         startLimitValue="99.0"/>
+    <statistics
+        name="Critical chance"
+        description="Indicates a chance for an ability to critically hit"
+        tooltip="Indicates a chance for an ability to critically hit"
+        minValue="0.0"
+        maxValue="100.0"
+        startLimitValue="100.0"/>
   </allClasses>
   <allClasses
       name="Mage"
@@ -95,8 +102,13 @@
         tooltip="For use in abilities."
         maxValue="10000.0"
         startLimitValue="1000.0"/>
+    <statistics
+        name="Spell power"
+        description="Spell power"
+        tooltip="Spell power"
+        maxValue="100.0"/>
     <branches
-        name="Fire"
+        name="Fire Specialization"
         lore="Fire Abilities"
         description="Fire Abilities"
         branchType="ABILITY"
@@ -163,7 +175,7 @@
           name="Pyroblast"
           tooltip="Hurls a large boulder of fire at the enemy."
           description="Hurls a large boulder of fire at the enemy."
-          childNodes="//@allClasses.2/@branches.0/@nodes.4"
+          childNodes="//@allClasses.2/@branches.0/@nodes.3"
           parentNodes="//@allClasses.2/@branches.0/@nodes.0"
           maxActivationLevel="2">
         <activation
@@ -184,6 +196,7 @@
             tooltip="Pyroblast"
             castType="CAST"
             castTime="6.0"
+            range="35.0"
             rangeUnit="//@rangeUnits.0"
             onLevel="1">
           <effects
@@ -213,7 +226,7 @@
           name="Scorch"
           tooltip="Scorch"
           description="Scorch"
-          childNodes="//@allClasses.2/@branches.0/@nodes.4"
+          childNodes="//@allClasses.2/@branches.0/@nodes.3"
           parentNodes="//@allClasses.2/@branches.0/@nodes.0"
           maxActivationLevel="3">
         <activation
@@ -238,7 +251,7 @@
             name="Scorch"
             lore="Scorch"
             tooltip="Scorch"
-            castType="INSTANT"
+            castType="CAST"
             castTime="1.0"
             range="45.0"
             rangeUnit="//@rangeUnits.0"
@@ -248,39 +261,222 @@
               tooltip="Consumes mana"
               effectType="ACTIVE"
               onLevel="1">
-            <statChange/>
+            <statChange
+                changeType="SUBSTRACT"
+                baseValue="5.0"
+                changesStatistic="//@allClasses.2/@statistics.0"/>
+          </effects>
+          <effects
+              name="Tiny fire damage"
+              tooltip="Deals tiny amounts of fire damage"
+              effectType="ACTIVE"
+              targetType="SINGLE"
+              onLevel="1">
+            <statChange
+                changeType="SUBSTRACT"
+                baseValue="10.0"
+                changesStatistic="//@allClasses.0/@statistics.0"/>
           </effects>
         </abilities>
       </nodes>
       <nodes
-          name="Flamestrike"/>
-      <nodes
           name="Fire Blast"
-          childNodes="//@allClasses.2/@branches.0/@nodes.5 //@allClasses.2/@branches.0/@nodes.6 //@allClasses.2/@branches.0/@nodes.7"
-          parentNodes="//@allClasses.2/@branches.0/@nodes.1 //@allClasses.2/@branches.0/@nodes.2"/>
+          tooltip="Instantly blasts the target with a burst of fire"
+          description="Instantly blasts the target with a burst of fire"
+          childNodes="//@allClasses.2/@branches.0/@nodes.5 //@allClasses.2/@branches.0/@nodes.4"
+          parentNodes="//@allClasses.2/@branches.0/@nodes.1 //@allClasses.2/@branches.0/@nodes.2">
+        <activation
+            level="1">
+          <costs
+              cost="5.0"
+              statistic="//@allClasses.1/@statistics.1"/>
+        </activation>
+        <abilities
+            name="Fire Blast"
+            lore="Instantly blasts the target with a burst of fire"
+            tooltip="Instantly blasts the target with a burst of fire"
+            castType="INSTANT"
+            range="25.0"
+            rangeUnit="//@rangeUnits.0"
+            onLevel="1">
+          <effects
+              name="Consume mana"
+              tooltip="Consumes mana"
+              effectType="ACTIVE"
+              onLevel="1">
+            <statChange
+                changeType="SUBSTRACT"
+                baseValue="15.0"
+                changesStatistic="//@allClasses.2/@statistics.0"/>
+          </effects>
+          <effects
+              name="Instant fire damage"
+              tooltip="Instant fire damage"
+              effectType="ACTIVE"
+              targetType="SINGLE"
+              onLevel="1">
+            <statChange
+                changeType="SUBSTRACT"
+                baseValue="25.0"
+                changesStatistic="//@allClasses.0/@statistics.0"/>
+          </effects>
+        </abilities>
+      </nodes>
       <nodes
           name="Flamestrike"
-          childNodes="//@allClasses.2/@branches.0/@nodes.8"
-          parentNodes="//@allClasses.2/@branches.0/@nodes.4"/>
+          tooltip="Conjures a field of fire"
+          description="Conjures a field of fire"
+          childNodes="//@allClasses.2/@branches.0/@nodes.6"
+          parentNodes="//@allClasses.2/@branches.0/@nodes.3"
+          maxActivationLevel="2">
+        <activation
+            level="1">
+          <costs
+              cost="3.0"
+              statistic="//@allClasses.1/@statistics.1"/>
+        </activation>
+        <activation
+            level="2">
+          <costs
+              cost="5.0"
+              statistic="//@allClasses.1/@statistics.1"/>
+        </activation>
+        <abilities
+            name="Flamestrike"
+            lore="Flamestrike"
+            tooltip="Flamestrike"
+            castType="CAST"
+            abilityType="AOE"
+            castTime="5.0"
+            range="35.0"
+            rangeUnit="//@rangeUnits.0"
+            onLevel="1">
+          <effects
+              name="Consume mana"
+              tooltip="Consume mana"
+              effectType="ACTIVE"
+              onLevel="1">
+            <statChange
+                changeType="SUBSTRACT"
+                baseValue="20.0"
+                changesStatistic="//@allClasses.2/@statistics.0"/>
+          </effects>
+          <effects
+              name="AOE Fire damage"
+              tooltip="Deals fire damage to multiple enemies"
+              effectType="ACTIVE"
+              targetType="MULTIPLE"
+              onLevel="1">
+            <statChange
+                changeType="SUBSTRACT"
+                baseValue="15.0"
+                changesStatistic="//@allClasses.0/@statistics.0"/>
+          </effects>
+        </abilities>
+      </nodes>
       <nodes
           name="Dragon Breath"
-          childNodes="//@allClasses.2/@branches.0/@nodes.8"
-          parentNodes="//@allClasses.2/@branches.0/@nodes.4"/>
-      <nodes
-          name="Blazing Barrier"
-          childNodes="//@allClasses.2/@branches.0/@nodes.8"
-          parentNodes="//@allClasses.2/@branches.0/@nodes.4"/>
+          tooltip="Breathes fire in a cone forward"
+          description="Breathes fire in a cone forward"
+          childNodes="//@allClasses.2/@branches.0/@nodes.6"
+          parentNodes="//@allClasses.2/@branches.0/@nodes.3">
+        <activation
+            level="1">
+          <costs
+              cost="5.0"
+              statistic="//@allClasses.1/@statistics.1"/>
+        </activation>
+        <abilities
+            name="Dragon Breath"
+            lore=""
+            tooltip="Breathes fire in a cone forward"
+            castType="INSTANT"
+            abilityType="AOE"
+            range="10.0"
+            rangeUnit="//@rangeUnits.0"
+            onLevel="1">
+          <effects
+              name="Consume mana"
+              tooltip="Consumes mana"
+              effectType="ACTIVE"
+              onLevel="1">
+            <statChange
+                changeType="SUBSTRACT"
+                baseValue="20.0"
+                changesStatistic="//@allClasses.2/@statistics.0"/>
+          </effects>
+          <effects
+              name="Cone fire damage"
+              tooltip="Deals fire damage in a cone"
+              effectType="ACTIVE"
+              targetType="MULTIPLE"
+              onLevel="1">
+            <statChange
+                changeType="SUBSTRACT"
+                baseValue="20.0"
+                changesStatistic="//@allClasses.0/@statistics.0"/>
+          </effects>
+        </abilities>
+      </nodes>
       <nodes
           name="Fire Elemental"
-          parentNodes="//@allClasses.2/@branches.0/@nodes.5 //@allClasses.2/@branches.0/@nodes.6 //@allClasses.2/@branches.0/@nodes.7"/>
+          tooltip="Summons a Fire Elemental to serve the caster's bidding"
+          description="Summons a Fire Elemental to serve the caster's bidding"
+          parentNodes="//@allClasses.2/@branches.0/@nodes.5 //@allClasses.2/@branches.0/@nodes.4">
+        <activation
+            level="1">
+          <costs
+              cost="10.0"
+              statistic="//@allClasses.1/@statistics.1"/>
+        </activation>
+        <abilities
+            name="Summon Fire Elemental"
+            lore="Summons a fire elemental to fight for you"
+            tooltip="Summons a fire elemental to fight for you"
+            castType="CAST"
+            castTime="5.0"
+            range="5.0"
+            rangeUnit="//@rangeUnits.0"
+            onLevel="1">
+          <effects
+              name="Consume mana"
+              tooltip="Consumes mana"
+              effectType="ACTIVE"
+              onLevel="1">
+            <statChange
+                changeType="SUBSTRACT"
+                baseValue="30.0"
+                changesStatistic="//@allClasses.2/@statistics.0"/>
+          </effects>
+          <effects
+              name="Summon Fire Elemental"
+              tooltip="Summons a fire elemental to do the player's bidding"
+              effectType="INSTANTIATE"
+              onLevel="1"
+              instantiate="//@allClasses.3"/>
+        </abilities>
+      </nodes>
       <nodes
           name="Critical Mass"
-          nodeType="STANDALONE"/>
+          tooltip="Increases your critical chance "
+          description="Increases your critical chance "
+          nodeType="STANDALONE">
+        <activation/>
+        <abilities/>
+      </nodes>
       <nodes
           name="Hot Streak"
-          nodeType="STANDALONE"/>
+          tooltip="After two critical strikes, next Fireball or Pyroblast is instant cast"
+          description="After two critical strikes, next Fireball or Pyroblast is instant cast"
+          nodeType="STANDALONE">
+        <activation/>
+        <abilities/>
+      </nodes>
     </branches>
   </allClasses>
+  <allClasses
+      name="Player's Fire Elemental"
+      parentClasses="//@allClasses.0"/>
   <rangeUnits
       name="Yard"
       description="One unit of in-game range is equal to one yard."/>

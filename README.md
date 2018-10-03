@@ -73,8 +73,12 @@ Demo:
 * Create a stronger enemy
 * Create a mega-creep enemy
 * Create a boss
-* Create a mage, with stats, abilities and talents
-* Create a warrior, with stats, abilities and talents
+* Create a mage, with stats
+* Create abilities for a mage
+* Create talents for a mage
+* Create a warrior, with stats (using concrete syntax)
+* Create abilities for a warrior (using concrete syntax)
+* Create talents for a warrior (using concrete syntax)
 
 Maintenance:
 
@@ -97,6 +101,8 @@ Improvements:
 * ~~Nodes cannot create circular references through child/parent~~
 * ~~Nodes cannot reference nodes from other branches~~
 * ~~StatChanges belonging to Effects with SELF TargetType can reference only statistics in host/parent classes~~
+* ~~Add percentage-based stat changes~~
+* ~~Instantiate effects should be limited to SELF~~
 
 Possible:
 
@@ -105,6 +111,7 @@ Possible:
 * ~~Change containment relationship to reference for (node -> ability/talent)? -- NO: Would take too much time. Besides, this question arises for many constructs, as the model is quite complex.~~
 * Optionally merge branches upon inheritance
 * Buffs and debuffs? How to model these?
+* How to model cooldowns?
 
 ## Licence
 
