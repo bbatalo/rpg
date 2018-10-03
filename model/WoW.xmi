@@ -459,10 +459,18 @@
       <nodes
           name="Critical Mass"
           tooltip="Increases your critical chance "
-          description="Increases your critical chance "
+          description="Increases your critical chance for fire spells"
           nodeType="STANDALONE">
-        <activation/>
-        <abilities/>
+        <activation
+            level="1">
+          <requirements
+              requiredLevel="1"
+              followsActivationOf="//@allClasses.2/@branches.0/@nodes.3"/>
+        </activation>
+        <abilities>
+          <effects
+              name="Increases critical chance"/>
+        </abilities>
       </nodes>
       <nodes
           name="Hot Streak"

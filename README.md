@@ -97,6 +97,7 @@ Improvements:
 
 * Add randomizers to effect modifiers
 * Factor in node levels for effect modifiers
+* Define how randomizers model critical chance or something similar
 * ~~Nodes cannot reference themselves as child/parent~~
 * ~~Nodes cannot create circular references through child/parent~~
 * ~~Nodes cannot reference nodes from other branches~~
