@@ -288,6 +288,8 @@
         eType="#//StatChange" containment="true" eOpposite="#//StatChange/effect"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ability" lowerBound="1"
         eType="#//Ability" eOpposite="#//Ability/effects"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="randomizer" eType="#//Randomizer"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="EffectType">
     <eLiterals name="PASSIVE"/>
@@ -319,8 +321,17 @@
         eType="#//Modifier" containment="true" eOpposite="#//Modifier/statChange"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="effect" lowerBound="1"
         eType="#//Effect" eOpposite="#//Effect/statChange"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="randomizer" eType="#//Randomizer"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Modifier">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="NoMovingLimits"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="NoMovingLimits" value="&#xA;&#x9;&#x9;&#x9;self.changeType &lt;> ChangeType::MOVE_LIMIT"/>
+      <details key="NoMovingLimits$message" value="'A modifier cannot move a statistic limit.'"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="changeType" eType="#//ChangeType"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="basedOnModifier" eType="#//ChangeType"/>
@@ -330,6 +341,12 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="basedOnValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="statChange" lowerBound="1"
         eType="#//StatChange" eOpposite="#//StatChange/modifiers"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="randomizer" eType="#//Randomizer"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="onLevel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="1"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="exclusive" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="ChangeType">
     <eLiterals name="ADD"/>
@@ -374,5 +391,19 @@
   <eClassifiers xsi:type="ecore:EEnum" name="ChangeValueType">
     <eLiterals name="VALUE"/>
     <eLiterals name="PERCENTAGE" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Randomizer">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="MeaningfulRandomizer ProperStatisticBase"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="MeaningfulRandomizer" value="&#xA;&#x9;&#x9;&#x9;(self.value > 0 implies self.basedOn = null) and &#xA;&#x9;&#x9;&#x9;(self.basedOn &lt;> null implies self.value = 0)"/>
+      <details key="MeaningfulRandomizer$message" value="'Randomizer should have value greater than zero or be based on character statistic.'"/>
+      <details key="ProperStatisticBase" value="&#xA;&#x9;&#x9;&#x9;self.basedOn.minValue >= 0 and self.basedOn.maxValue &lt;= 100 and self.basedOn.maxValue = self.basedOn.startLimitValue"/>
+      <details key="ProperStatisticBase$message" value="'Referenced statistics should model chance, therefore values should be between 0 and 100.'"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
+        defaultValueLiteral="0"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="basedOn" eType="#//CharacterStatistic"/>
   </eClassifiers>
 </ecore:EPackage>

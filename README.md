@@ -95,15 +95,10 @@ Features:
 
 Improvements:
 
-* Add randomizers to effect modifiers
-* Factor in node levels for effect modifiers
-* Define how randomizers model critical chance or something similar
-* ~~Nodes cannot reference themselves as child/parent~~
-* ~~Nodes cannot create circular references through child/parent~~
-* ~~Nodes cannot reference nodes from other branches~~
-* ~~StatChanges belonging to Effects with SELF TargetType can reference only statistics in host/parent classes~~
-* ~~Add percentage-based stat changes~~
-* ~~Instantiate effects should be limited to SELF~~
+* ~~Add randomizers to effects~~
+* ~~Add randomizers to effect modifiers~~
+* ~~Factor in node levels for effect modifiers~~
+* ~~Define how randomizers model critical chance or something similar~~
 
 Possible:
 

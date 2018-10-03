@@ -22,8 +22,8 @@
         lore="Epic levels of awesomeness."
         description="An indicator of the strenght of the character."
         tooltip="You are this level."
-        maxValue="70.0"
-        startLimitValue="70.0"/>
+        maxValue="10.0"
+        startLimitValue="10.0"/>
     <statistics
         name="Experience"
         lore="Are you a wise one?"
@@ -120,28 +120,23 @@
           nodeType="ROOT"
           childNodes="//@allClasses.2/@branches.0/@nodes.1 //@allClasses.2/@branches.0/@nodes.2"
           minActivationLevel="0"
-          maxActivationLevel="3">
+          maxActivationLevel="3"
+          activationLevel="1">
         <activation
-            level="1">
+            level="2">
           <costs
               cost="1.0"
               statistic="//@allClasses.1/@statistics.1"/>
         </activation>
         <activation
-            level="2">
-          <costs
-              cost="2.0"
-              statistic="//@allClasses.1/@statistics.1"/>
-        </activation>
-        <activation
             level="3">
           <costs
-              cost="5.0"
+              cost="3.0"
               statistic="//@allClasses.1/@statistics.1"/>
         </activation>
         <abilities
             name="Fireball"
-            lore="Fireball"
+            lore="Casts a fireball, damaging a single enemy."
             tooltip="Casts a fireball, damaging a single enemy."
             castType="CAST"
             castTime="2.0"
@@ -155,8 +150,16 @@
               onLevel="1">
             <statChange
                 changeType="SUBSTRACT"
-                baseValue="10.0"
-                changesStatistic="//@allClasses.2/@statistics.0"/>
+                baseValue="4.0"
+                changeValueType="PERCENTAGE"
+                changesStatistic="//@allClasses.2/@statistics.0">
+              <modifiers
+                  changeType="MULTIPLY"
+                  value="0.9"
+                  basedOnModifier="MULTIPLY"
+                  priorityOrder="1"
+                  onLevel="2"/>
+            </statChange>
           </effects>
           <effects
               name="Fire damage"
@@ -167,8 +170,20 @@
             <statChange
                 changeType="SUBSTRACT"
                 baseValue="20.0"
-                changesStatistic="//@allClasses.0/@statistics.0"/>
+                changesStatistic="//@allClasses.0/@statistics.0">
+              <modifiers
+                  changeType="MULTIPLY"
+                  value="2.0"
+                  priorityOrder="1">
+                <randomizer
+                    basedOn="//@allClasses.1/@statistics.2"/>
+              </modifiers>
+            </statChange>
           </effects>
+          <effects
+              name="Enhanced pyrotechnics"
+              tooltip="Stacks critical chance until third consecutive Fireball cast"
+              onLevel="3"/>
         </abilities>
       </nodes>
       <nodes
