@@ -60,11 +60,15 @@
               name="Level up!"
               tooltip="Raises your level by 1. Moves experience limit by 1000."
               onLevel="1">
-            <statChange
+            <changes
+                xsi:type="rpg:StatChange"
                 baseValue="1.0"
+                changeType="MOVE_LIMIT"
                 changesStatistic="//@allClasses.0/@statistics.1"/>
-            <statChange
+            <changes
+                xsi:type="rpg:StatChange"
                 baseValue="1000.0"
+                changeType="MOVE_LIMIT"
                 changesStatistic="//@allClasses.0/@statistics.2"/>
           </effects>
         </abilities>
@@ -155,18 +159,12 @@
               tooltip="Drains mana"
               effectType="ACTIVE"
               onLevel="1">
-            <statChange
-                changeType="SUBSTRACT"
+            <changes
+                xsi:type="rpg:StatChange"
                 baseValue="4.0"
                 changeValueType="PERCENTAGE"
-                changesStatistic="//@allClasses.2/@statistics.0">
-              <modifiers
-                  changeType="MULTIPLY"
-                  value="0.9"
-                  basedOnModifier="MULTIPLY"
-                  priorityOrder="1"
-                  onLevel="2"/>
-            </statChange>
+                changeType="SUBSTRACT"
+                changesStatistic="//@allClasses.2/@statistics.0"/>
           </effects>
           <effects
               name="Fire damage"
@@ -174,29 +172,11 @@
               effectType="ACTIVE"
               targetType="SINGLE"
               onLevel="1">
-            <statChange
-                changeType="SUBSTRACT"
+            <changes
+                xsi:type="rpg:StatChange"
                 baseValue="20.0"
-                changesStatistic="//@allClasses.0/@statistics.0">
-              <modifiers
-                  changeType="MULTIPLY"
-                  value="2.0"
-                  priorityOrder="3">
-                <randomizer
-                    basedOn="//@allClasses.1/@statistics.2"/>
-              </modifiers>
-              <modifiers
-                  basedOnModifier="MULTIPLY"
-                  priorityOrder="1"
-                  basedOn="//@allClasses.2/@statistics.1"
-                  basedOnValue="0.4"/>
-              <modifiers
-                  changeType="MULTIPLY"
-                  basedOnModifier="MULTIPLY"
-                  basedOn="//@allClasses.0/@statistics.3"
-                  basedOnValue="0.01"
-                  targetStatistic="true"/>
-            </statChange>
+                changeType="SUBSTRACT"
+                changesStatistic="//@allClasses.0/@statistics.0"/>
           </effects>
         </abilities>
       </nodes>
@@ -233,9 +213,11 @@
               tooltip="Consumes mana"
               effectType="ACTIVE"
               onLevel="1">
-            <statChange
+            <changes
+                xsi:type="rpg:StatChange"
+                baseValue="20.0"
+                changeValueType="PERCENTAGE"
                 changeType="SUBSTRACT"
-                baseValue="50.0"
                 changesStatistic="//@allClasses.2/@statistics.0"/>
           </effects>
           <effects
@@ -244,9 +226,10 @@
               effectType="ACTIVE"
               targetType="SINGLE"
               onLevel="1">
-            <statChange
-                changeType="SUBSTRACT"
+            <changes
+                xsi:type="rpg:StatChange"
                 baseValue="100.0"
+                changeType="SUBSTRACT"
                 changesStatistic="//@allClasses.0/@statistics.0"/>
           </effects>
         </abilities>
@@ -290,9 +273,11 @@
               tooltip="Consumes mana"
               effectType="ACTIVE"
               onLevel="1">
-            <statChange
+            <changes
+                xsi:type="rpg:StatChange"
+                baseValue="2.0"
+                changeValueType="PERCENTAGE"
                 changeType="SUBSTRACT"
-                baseValue="5.0"
                 changesStatistic="//@allClasses.2/@statistics.0"/>
           </effects>
           <effects
@@ -301,10 +286,29 @@
               effectType="ACTIVE"
               targetType="SINGLE"
               onLevel="1">
-            <statChange
-                changeType="SUBSTRACT"
+            <changes
+                xsi:type="rpg:StatChange"
                 baseValue="10.0"
+                changeType="SUBSTRACT"
                 changesStatistic="//@allClasses.0/@statistics.0"/>
+          </effects>
+          <effects
+              name="Tiny burn"
+              tooltip="Burns a target for additional fire damage over time"
+              effectType="ACTIVE"
+              targetType="SINGLE"
+              onLevel="2">
+            <randomizer
+                value="15.0"/>
+            <changes
+                xsi:type="rpg:StatChange"
+                baseValue="5.0"
+                changeType="SUBSTRACT"
+                changesStatistic="//@allClasses.0/@statistics.0">
+              <tick
+                  value="3.0"
+                  duration="3.0"/>
+            </changes>
           </effects>
         </abilities>
       </nodes>
@@ -325,6 +329,7 @@
             lore="Instantly blasts the target with a burst of fire"
             tooltip="Instantly blasts the target with a burst of fire"
             castType="INSTANT"
+            cooldown="5.0"
             range="25.0"
             rangeUnit="//@rangeUnits.0"
             onLevel="1">
@@ -333,9 +338,11 @@
               tooltip="Consumes mana"
               effectType="ACTIVE"
               onLevel="1">
-            <statChange
+            <changes
+                xsi:type="rpg:StatChange"
+                baseValue="8.0"
+                changeValueType="PERCENTAGE"
                 changeType="SUBSTRACT"
-                baseValue="15.0"
                 changesStatistic="//@allClasses.2/@statistics.0"/>
           </effects>
           <effects
@@ -344,10 +351,23 @@
               effectType="ACTIVE"
               targetType="SINGLE"
               onLevel="1">
-            <statChange
-                changeType="SUBSTRACT"
+            <changes
+                xsi:type="rpg:StatChange"
                 baseValue="25.0"
+                changeType="SUBSTRACT"
                 changesStatistic="//@allClasses.0/@statistics.0"/>
+          </effects>
+          <effects
+              name="Backdraft"
+              tooltip="Has a chance to reduce cooldown"
+              onLevel="1">
+            <randomizer
+                value="10.0"/>
+            <changes
+                xsi:type="rpg:CooldownChange"
+                baseValue="1.0"
+                changeType="SUBSTRACT"
+                ability="//@allClasses.2/@branches.0/@nodes.3/@abilities.0"/>
           </effects>
         </abilities>
       </nodes>
@@ -385,9 +405,11 @@
               tooltip="Consume mana"
               effectType="ACTIVE"
               onLevel="1">
-            <statChange
-                changeType="SUBSTRACT"
+            <changes
+                xsi:type="rpg:StatChange"
                 baseValue="20.0"
+                changeValueType="PERCENTAGE"
+                changeType="SUBSTRACT"
                 changesStatistic="//@allClasses.2/@statistics.0"/>
           </effects>
           <effects
@@ -396,9 +418,10 @@
               effectType="ACTIVE"
               targetType="MULTIPLE"
               onLevel="1">
-            <statChange
+            <changes
+                xsi:type="rpg:StatChange"
+                baseValue="30.0"
                 changeType="SUBSTRACT"
-                baseValue="15.0"
                 changesStatistic="//@allClasses.0/@statistics.0"/>
           </effects>
         </abilities>
@@ -429,9 +452,11 @@
               tooltip="Consumes mana"
               effectType="ACTIVE"
               onLevel="1">
-            <statChange
+            <changes
+                xsi:type="rpg:StatChange"
+                baseValue="15.0"
+                changeValueType="PERCENTAGE"
                 changeType="SUBSTRACT"
-                baseValue="20.0"
                 changesStatistic="//@allClasses.2/@statistics.0"/>
           </effects>
           <effects
@@ -440,9 +465,10 @@
               effectType="ACTIVE"
               targetType="MULTIPLE"
               onLevel="1">
-            <statChange
+            <changes
+                xsi:type="rpg:StatChange"
+                baseValue="35.0"
                 changeType="SUBSTRACT"
-                baseValue="20.0"
                 changesStatistic="//@allClasses.0/@statistics.0"/>
           </effects>
         </abilities>
@@ -472,9 +498,11 @@
               tooltip="Consumes mana"
               effectType="ACTIVE"
               onLevel="1">
-            <statChange
+            <changes
+                xsi:type="rpg:StatChange"
+                baseValue="40.0"
+                changeValueType="PERCENTAGE"
                 changeType="SUBSTRACT"
-                baseValue="30.0"
                 changesStatistic="//@allClasses.2/@statistics.0"/>
           </effects>
           <effects
@@ -489,7 +517,14 @@
   </allClasses>
   <allClasses
       name="Player's Fire Elemental"
-      parentClasses="//@allClasses.0"/>
+      parentClasses="//@allClasses.0">
+    <branches>
+      <nodes>
+        <abilities
+            name="TEST"/>
+      </nodes>
+    </branches>
+  </allClasses>
   <rangeUnits
       name="Yard"
       description="One unit of in-game range is equal to one yard."/>

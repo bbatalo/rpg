@@ -90,8 +90,8 @@ Features:
 
 * ~~Add stat talents - they change status (duh)~~
 * Add unlock talents - unlock a specific concept used in an ability node
-* Cooldowns on abilities
-* Cooldowns on talents
+* ~~Cooldowns on abilities~~
+* ~~Cooldowns on talents~~
 
 Improvements:
 
@@ -100,6 +100,8 @@ Improvements:
 * ~~Factor in node levels for effect modifiers~~
 * ~~Define how randomizers model critical chance or something similar~~
 * ~~Modifiers for the same StatChange cannot have same priorities~~
+* ~~Create a parent concept for StatChange and CooldownChange~~
+* CooldownChange can reference only abilities and talents of the host or parent class
 
 Possible:
 
