@@ -248,6 +248,8 @@
         upperBound="-1" eType="#//Effect" containment="true" eOpposite="#//Effect/ability"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="node" lowerBound="1" eType="#//Node"
         eOpposite="#//Node/abilities"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isLocked" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="CastType">
     <eLiterals name="NO_CAST"/>
@@ -292,6 +294,8 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="changes" upperBound="-1"
         eType="#//Change" containment="true" eOpposite="#//Change/effect"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isLocked" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="EffectType">
     <eLiterals name="PASSIVE"/>
@@ -445,6 +449,8 @@
         eType="#//ChangeType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="effect" eType="#//Effect"
         eOpposite="#//Effect/changes"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isLocked" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="UnlockTalent" abstract="true" eSuperTypes="#//Talent"/>
   <eClassifiers xsi:type="ecore:EClass" name="UnlockAbility" eSuperTypes="#//UnlockTalent">

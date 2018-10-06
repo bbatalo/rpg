@@ -656,6 +656,50 @@
         </abilities>
       </nodes>
     </branches>
+    <branches
+        name="Startup abilities"
+        description="Startup abilities"
+        branchType="ABILITY"
+        tooltip="Startup abilities">
+      <nodes
+          name="Startup abilities"
+          tooltip="Startup abilities"
+          description="Startup abilities"
+          nodeType="STANDALONE"
+          activationLevel="1">
+        <abilities
+            name="Level up!"
+            lore="Level up!"
+            tooltip="Level up!"
+            rangeUnit="//@rangeUnits.0"
+            onLevel="1">
+          <effects
+              name="Mage level up!"
+              tooltip="Mage level up!"
+              onLevel="1"
+              isLocked="true">
+            <changes
+                xsi:type="rpg:StatChange"
+                baseValue="15.0"
+                changeValueType="PERCENTAGE"
+                changeType="MOVE_LIMIT_UP"
+                changesStatistic="//@allClasses.2/@statistics.0"/>
+            <changes
+                xsi:type="rpg:StatChange"
+                baseValue="10.0"
+                changeValueType="PERCENTAGE"
+                changeType="MOVE_LIMIT_UP"
+                changesStatistic="//@allClasses.0/@statistics.0"/>
+            <changes
+                xsi:type="rpg:StatChange"
+                baseValue="5.0"
+                changeValueType="PERCENTAGE"
+                changeType="MOVE_LIMIT_UP"
+                changesStatistic="//@allClasses.2/@statistics.1"/>
+          </effects>
+        </abilities>
+      </nodes>
+    </branches>
   </allClasses>
   <allClasses
       name="Player's Fire Elemental"
