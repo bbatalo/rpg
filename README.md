@@ -88,26 +88,14 @@ Maintenance:
 
 Features:
 
-* ~~Add stat talents - they change status (duh)~~
-* Add unlock talents - unlock a specific concept used in an ability node
-* ~~Cooldowns on abilities~~
-* ~~Cooldowns on talents~~
+All done for now.
 
 Improvements:
 
-* ~~Add randomizers to effects~~
-* ~~Add randomizers to effect modifiers~~
-* ~~Factor in node levels for effect modifiers~~
-* ~~Define how randomizers model critical chance or something similar~~
-* ~~Modifiers for the same StatChange cannot have same priorities~~
-* ~~Create a parent concept for StatChange and CooldownChange~~
 * CooldownChange can reference only abilities and talents of the host or parent class
 
 Possible:
 
-* ~~Define ability targets as classes? NO: Should leave this to the game engine.~~
-* ~~Allow multiple parent nodes in trees? YES: Solved.~~
-* ~~Change containment relationship to reference for (node -> ability/talent)? -- NO: Would take too much time. Besides, this question arises for many constructs, as the model is quite complex.~~
 * Optionally merge branches upon inheritance
 * Buffs and debuffs? How to model these?
 * Add modifiers for ticks

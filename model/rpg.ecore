@@ -362,6 +362,8 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="node" lowerBound="1" eType="#//Node"
         eOpposite="#//Node/talents"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="onLevel" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PropagationRequirement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
@@ -435,5 +437,25 @@
         eType="#//ChangeType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="effect" lowerBound="1"
         eType="#//Effect" eOpposite="#//Effect/changes"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UnlockTalent" abstract="true" eSuperTypes="#//Talent"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UnlockAbility" eSuperTypes="#//UnlockTalent">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ability" lowerBound="1"
+        eType="#//Ability"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UnlockEffect" eSuperTypes="#//UnlockTalent">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="effect" lowerBound="1"
+        eType="#//Effect"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UnlockChange" eSuperTypes="#//UnlockTalent">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="change" lowerBound="1"
+        eType="#//Change"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CooldownTalent" eSuperTypes="#//Talent">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cooldownChanges" eType="#//CooldownChange"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UnlockModifier" eSuperTypes="#//UnlockTalent">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="modifier" lowerBound="1"
+        eType="#//Modifier"/>
   </eClassifiers>
 </ecore:EPackage>
