@@ -37,6 +37,14 @@
         tooltip="Reduces magic damage dealt"
         maxValue="100.0"
         startLimitValue="100.0"/>
+    <statistics
+        name="Location X"
+        lore=""
+        description="A location along an X axis of the game world"
+        tooltip="A location along an X axis of the game world"
+        minValue="0.0"
+        maxValue="100.0"
+        startLimitValue="100.0"/>
     <branches
         name="Basic Abiilities"
         lore="No lore, generic branch."
@@ -63,13 +71,57 @@
             <changes
                 xsi:type="rpg:StatChange"
                 baseValue="1.0"
-                changeType="MOVE_LIMIT"
+                changeType="MOVE_LIMIT_UP"
                 changesStatistic="//@allClasses.0/@statistics.1"/>
             <changes
                 xsi:type="rpg:StatChange"
                 baseValue="1000.0"
-                changeType="MOVE_LIMIT"
+                changeType="MOVE_LIMIT_UP"
                 changesStatistic="//@allClasses.0/@statistics.2"/>
+          </effects>
+        </abilities>
+      </nodes>
+      <nodes
+          name="Move"
+          tooltip="Move"
+          description="Move"
+          nodeType="STANDALONE"
+          activationLevel="1">
+        <abilities
+            name="Move Forward"
+            lore="Moves forward in space"
+            tooltip="Moves forward in space"
+            castType="INSTANT"
+            rangeUnit="//@rangeUnits.0"
+            onLevel="1">
+          <effects
+              name="Move forward"
+              tooltip="Moves forward in space"
+              effectType="ACTIVE"
+              onLevel="1">
+            <changes
+                xsi:type="rpg:StatChange"
+                baseValue="10.0"
+                changesStatistic="//@allClasses.0/@statistics.4"/>
+          </effects>
+        </abilities>
+        <abilities
+            name="Move backward"
+            lore="Moves backwards"
+            tooltip="Moves backwards"
+            castType="INSTANT"
+            rangeUnit="//@rangeUnits.0"
+            onLevel="1">
+          <effects
+              name="Move backward"
+              tooltip="Moves the character backwards"
+              effectType="ACTIVE"
+              onLevel="1">
+            <changes
+                xsi:type="rpg:StatChange"
+                baseValue="5.0"
+                changeType="SUBSTRACT"
+                changesStatistic="//@allClasses.0/@statistics.4"/>
           </effects>
         </abilities>
       </nodes>
@@ -89,7 +141,7 @@
         startLimitValue="10.0"
         statType="FUEL"/>
     <statistics
-        name="Skill points"
+        name="Ability points"
         maxValue="99.0"
         startLimitValue="99.0"/>
     <statistics
@@ -119,6 +171,96 @@
         tooltip="Spell power"
         maxValue="100.0"/>
     <branches
+        name="Startup talents"
+        description="Startup talents"
+        tooltip="Startup talents">
+      <nodes
+          name="Stat talents"
+          tooltip="Stat talents"
+          description="St"
+          nodeType="STANDALONE"
+          activationLevel="1">
+        <talents
+            xsi:type="rpg:StatTalent"
+            name="Health"
+            tooltip="Health"
+            lore="Health"
+            description="Health"
+            onLevel="1">
+          <statChanges
+              baseValue="120.0"
+              changeType="SET_LIMIT"
+              changesStatistic="//@allClasses.0/@statistics.0"/>
+        </talents>
+        <talents
+            xsi:type="rpg:StatTalent"
+            name="Mana"
+            tooltip="Mana"
+            description="Mana"
+            onLevel="1">
+          <statChanges
+              baseValue="100.0"
+              changeType="SET_LIMIT"
+              changesStatistic="//@allClasses.2/@statistics.0"/>
+        </talents>
+        <talents
+            xsi:type="rpg:StatTalent"
+            name="Level"
+            tooltip="Level"
+            lore=""
+            description="Level"
+            onLevel="1">
+          <statChanges
+              baseValue="1.0"
+              changeType="SET_LIMIT"
+              changesStatistic="//@allClasses.0/@statistics.1"/>
+        </talents>
+        <talents
+            xsi:type="rpg:StatTalent"
+            name="Magic resistance"
+            tooltip="Magic resistance"
+            description="Magic resistance"
+            onLevel="1">
+          <statChanges
+              baseValue="5.0"
+              changeType="SET_LIMIT"
+              changesStatistic="//@allClasses.0/@statistics.3"/>
+        </talents>
+        <talents
+            xsi:type="rpg:StatTalent"
+            name="Location X"
+            tooltip="Location X"
+            description="Location X"
+            onLevel="1">
+          <statChanges
+              baseValue="1.0"
+              changeType="SET_LIMIT"
+              changesStatistic="//@allClasses.0/@statistics.4"/>
+        </talents>
+        <talents
+            xsi:type="rpg:StatTalent"
+            name="Critical chance"
+            tooltip="Critical chance"
+            description="Critical chance"
+            onLevel="1">
+          <statChanges
+              baseValue="10.0"
+              changeType="SET_LIMIT"
+              changesStatistic="//@allClasses.1/@statistics.2"/>
+        </talents>
+        <talents
+            xsi:type="rpg:StatTalent"
+            name="Spell power"
+            tooltip="Spell power"
+            description="Spell power">
+          <statChanges
+              baseValue="1.0"
+              changeType="SET_LIMIT"
+              changesStatistic="//@allClasses.2/@statistics.1"/>
+        </talents>
+      </nodes>
+    </branches>
+    <branches
         name="Fire Specialization"
         lore="Fire Abilities"
         description="Fire Abilities"
@@ -129,7 +271,7 @@
           tooltip="Fireball"
           description="Fireball"
           nodeType="ROOT"
-          childNodes="//@allClasses.2/@branches.0/@nodes.1 //@allClasses.2/@branches.0/@nodes.2"
+          childNodes="//@allClasses.2/@branches.1/@nodes.1 //@allClasses.2/@branches.1/@nodes.2"
           minActivationLevel="0"
           maxActivationLevel="3"
           activationLevel="1">
@@ -184,8 +326,8 @@
           name="Pyroblast"
           tooltip="Hurls a large boulder of fire at the enemy."
           description="Hurls a large boulder of fire at the enemy."
-          childNodes="//@allClasses.2/@branches.0/@nodes.3"
-          parentNodes="//@allClasses.2/@branches.0/@nodes.0"
+          childNodes="//@allClasses.2/@branches.1/@nodes.3"
+          parentNodes="//@allClasses.2/@branches.1/@nodes.0"
           maxActivationLevel="2">
         <activation
             level="1">
@@ -238,8 +380,8 @@
           name="Scorch"
           tooltip="Scorch"
           description="Scorch"
-          childNodes="//@allClasses.2/@branches.0/@nodes.3"
-          parentNodes="//@allClasses.2/@branches.0/@nodes.0"
+          childNodes="//@allClasses.2/@branches.1/@nodes.3"
+          parentNodes="//@allClasses.2/@branches.1/@nodes.0"
           maxActivationLevel="3">
         <activation
             level="1">
@@ -316,8 +458,8 @@
           name="Fire Blast"
           tooltip="Instantly blasts the target with a burst of fire"
           description="Instantly blasts the target with a burst of fire"
-          childNodes="//@allClasses.2/@branches.0/@nodes.5 //@allClasses.2/@branches.0/@nodes.4"
-          parentNodes="//@allClasses.2/@branches.0/@nodes.1 //@allClasses.2/@branches.0/@nodes.2">
+          childNodes="//@allClasses.2/@branches.1/@nodes.5 //@allClasses.2/@branches.1/@nodes.4"
+          parentNodes="//@allClasses.2/@branches.1/@nodes.1 //@allClasses.2/@branches.1/@nodes.2">
         <activation
             level="1">
           <costs
@@ -367,7 +509,7 @@
                 xsi:type="rpg:CooldownChange"
                 baseValue="1.0"
                 changeType="SUBSTRACT"
-                ability="//@allClasses.2/@branches.0/@nodes.3/@abilities.0"/>
+                ability="//@allClasses.2/@branches.1/@nodes.3/@abilities.0"/>
           </effects>
         </abilities>
       </nodes>
@@ -375,8 +517,8 @@
           name="Flamestrike"
           tooltip="Conjures a field of fire"
           description="Conjures a field of fire"
-          childNodes="//@allClasses.2/@branches.0/@nodes.6"
-          parentNodes="//@allClasses.2/@branches.0/@nodes.3"
+          childNodes="//@allClasses.2/@branches.1/@nodes.6"
+          parentNodes="//@allClasses.2/@branches.1/@nodes.3"
           maxActivationLevel="2">
         <activation
             level="1">
@@ -430,8 +572,8 @@
           name="Dragon Breath"
           tooltip="Breathes fire in a cone forward"
           description="Breathes fire in a cone forward"
-          childNodes="//@allClasses.2/@branches.0/@nodes.6"
-          parentNodes="//@allClasses.2/@branches.0/@nodes.3">
+          childNodes="//@allClasses.2/@branches.1/@nodes.6"
+          parentNodes="//@allClasses.2/@branches.1/@nodes.3">
         <activation
             level="1">
           <costs
@@ -477,7 +619,7 @@
           name="Fire Elemental"
           tooltip="Summons a Fire Elemental to serve the caster's bidding"
           description="Summons a Fire Elemental to serve the caster's bidding"
-          parentNodes="//@allClasses.2/@branches.0/@nodes.5 //@allClasses.2/@branches.0/@nodes.4">
+          parentNodes="//@allClasses.2/@branches.1/@nodes.5 //@allClasses.2/@branches.1/@nodes.4">
         <activation
             level="1">
           <costs
@@ -517,14 +659,7 @@
   </allClasses>
   <allClasses
       name="Player's Fire Elemental"
-      parentClasses="//@allClasses.0">
-    <branches>
-      <nodes>
-        <abilities
-            name="TEST"/>
-      </nodes>
-    </branches>
-  </allClasses>
+      parentClasses="//@allClasses.0"/>
   <rangeUnits
       name="Yard"
       description="One unit of in-game range is equal to one yard."/>

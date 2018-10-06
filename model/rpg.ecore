@@ -300,11 +300,13 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StatChange" eSuperTypes="#//Change">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="SelfStatChange SingularModifierOrder"/>
+      <details key="constraints" value="SelfEffectStatChange SelfTalentStatChange SingularModifierOrder"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-      <details key="SelfStatChange" value="&#xA;&#x9;&#x9;&#x9;self.effect.targetType = TargetType::SELF implies self.effect.ability.node.branch.characterClass.statistics->includes(self.changesStatistic)"/>
-      <details key="SelfStatChange$message" value="'If StatChange is a part of SELF Effect, it can reference only statistics in host or parent classes.'"/>
+      <details key="SelfEffectStatChange" value="&#xA;&#x9;&#x9;&#x9;self.effect.targetType = TargetType::SELF and self.effect &lt;> null implies &#xA;&#x9;&#x9;&#x9;(self.effect.ability.node.branch.characterClass.statistics->includes(self.changesStatistic)&#xA;&#x9;&#x9;&#x9;or self.effect.ability.node.branch.characterClass->closure(parentClasses)->exists(charClass | charClass.statistics->includes(self.changesStatistic)))"/>
+      <details key="SelfEffectStatChange$message" value="'If StatChange is a part of SELF Effect, it can reference only statistics in host or parent classes.'"/>
+      <details key="SelfTalentStatChange" value="&#xA;&#x9;&#x9;&#x9;self.statTalent &lt;> null implies &#xA;&#x9;&#x9;&#x9;(self.statTalent.node.branch.characterClass.statistics->includes(self.changesStatistic)&#xA;&#x9;&#x9;&#x9;or self.statTalent.node.branch.characterClass->closure(parentClasses)->exists(charClass | charClass.statistics->includes(self.changesStatistic)))"/>
+      <details key="SelfTalentStatChange$message" value="'If StatChange is a part of StatTalent, it can reference only statistics in host or parent classes.'"/>
       <details key="SingularModifierOrder" value="&#xA;&#x9;&#x9;&#x9;self.modifiers->forAll(m1, m2 | m1 &lt;> m2 implies m1.priorityOrder &lt;> m2.priorityOrder)"/>
       <details key="SingularModifierOrder$message" value="'Each modifier has to have a unique priority order.'"/>
     </eAnnotations>
@@ -316,13 +318,15 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="tick" eType="#//Tick" containment="true"
         eOpposite="#//Tick/statChange"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="statTalent" eType="#//StatTalent"
+        eOpposite="#//StatTalent/statChanges"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Modifier">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
       <details key="constraints" value="NoMovingLimits"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-      <details key="NoMovingLimits" value="&#xA;&#x9;&#x9;&#x9;self.changeType &lt;> ChangeType::MOVE_LIMIT"/>
+      <details key="NoMovingLimits" value="&#xA;&#x9;&#x9;&#x9;self.changeType &lt;> ChangeType::MOVE_LIMIT_UP and self.changeType &lt;> ChangeType::MOVE_LIMIT_DOWN and self.changeType &lt;> ChangeType::SET_LIMIT"/>
       <details key="NoMovingLimits$message" value="'A modifier cannot move a statistic limit.'"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="changeType" eType="#//ChangeType"/>
@@ -347,7 +351,9 @@
     <eLiterals name="ADD"/>
     <eLiterals name="SUBSTRACT" value="1"/>
     <eLiterals name="MULTIPLY" value="2"/>
-    <eLiterals name="MOVE_LIMIT" value="3"/>
+    <eLiterals name="MOVE_LIMIT_UP" value="3"/>
+    <eLiterals name="MOVE_LIMIT_DOWN" value="4"/>
+    <eLiterals name="SET_LIMIT" value="5"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="TickType">
     <eLiterals name="PER_TICK" value="1"/>
@@ -404,7 +410,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StatTalent" eSuperTypes="#//Talent">
     <eStructuralFeatures xsi:type="ecore:EReference" name="statChanges" lowerBound="1"
-        upperBound="-1" eType="#//StatChange"/>
+        upperBound="-1" eType="#//StatChange" containment="true" eOpposite="#//StatChange/statTalent"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Tick">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="tickType" lowerBound="1"
@@ -427,6 +433,8 @@
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ability" eType="#//Ability"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="talent" eType="#//Talent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cooldownTalent" eType="#//CooldownTalent"
+        eOpposite="#//CooldownTalent/cooldownChanges"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Change" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="baseValue" lowerBound="1"
@@ -435,8 +443,8 @@
         eType="#//ChangeValueType"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="changeType" lowerBound="1"
         eType="#//ChangeType"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="effect" lowerBound="1"
-        eType="#//Effect" eOpposite="#//Effect/changes"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="effect" eType="#//Effect"
+        eOpposite="#//Effect/changes"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="UnlockTalent" abstract="true" eSuperTypes="#//Talent"/>
   <eClassifiers xsi:type="ecore:EClass" name="UnlockAbility" eSuperTypes="#//UnlockTalent">
@@ -452,7 +460,8 @@
         eType="#//Change"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CooldownTalent" eSuperTypes="#//Talent">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="cooldownChanges" eType="#//CooldownChange"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cooldownChanges" lowerBound="1"
+        upperBound="-1" eType="#//CooldownChange" containment="true" eOpposite="#//CooldownChange/cooldownTalent"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="UnlockModifier" eSuperTypes="#//UnlockTalent">
     <eStructuralFeatures xsi:type="ecore:EReference" name="modifier" lowerBound="1"

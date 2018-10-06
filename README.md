@@ -49,7 +49,7 @@ The rest of the files are eclipse project-related files.
 
 ### Genmodel
 
-The genmodel is a file created from the .ecore metamodel, that is used for generating Java source code for the metamodel, editor etc. To generate these source code, do the following:
+The genmodel is a file created from the .ecore metamodel, that is used for generating Java source code for the metamodel, editor etc. To generate these source codes, do the following:
 
 * Open the genmodel
 * Right-click on the root element
@@ -64,17 +64,17 @@ This section outlines features that will be implemented, as well as bug fixes an
 Demo:
 
 * Create dummy RPG for showcasing everything in the meta-model
-* Add talents that provide basic stats for different classes
+* ~~Add talents that provide basic stats for different classes~~
 * Add talents to override certain parent class abilities (e.g. leveling up - playable classes gain talent points)
 * ~~Create a generic character class~~
 * Create a generic NPC class
-* Create a generic playable class
+* ~~Create a generic playable class~~
 * Create a simple enemy
 * Create a stronger enemy
 * Create a mega-creep enemy
 * Create a boss
-* Create a mage, with stats
-* Create abilities for a mage
+* ~~Create a mage, with stats~~
+* ~~Create abilities for a mage~~
 * Create talents for a mage
 * Create a warrior, with stats (using concrete syntax)
 * Create abilities for a warrior (using concrete syntax)
@@ -92,7 +92,10 @@ All done for now.
 
 Improvements:
 
-* CooldownChange can reference only abilities and talents of the host or parent class
+* A Change should be contained in either Effect, StatTalent or CooldownTalent
+* CooldownChange for SELF effects/talents can reference only abilities and talents of the host or parent class
+* ~~StatChange for SELF/talents can reference only abilities and talents of the host or parent class~~
+* Check Instantiate effects and their viability
 
 Possible:
 
