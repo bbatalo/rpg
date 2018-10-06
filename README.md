@@ -90,7 +90,6 @@ Features:
 
 * ~~Add stat talents - they change status (duh)~~
 * Add unlock talents - unlock a specific concept used in an ability node
-* Add modifiers for ticks
 * Cooldowns on abilities
 * Cooldowns on talents
 
@@ -109,6 +108,7 @@ Possible:
 * ~~Change containment relationship to reference for (node -> ability/talent)? -- NO: Would take too much time. Besides, this question arises for many constructs, as the model is quite complex.~~
 * Optionally merge branches upon inheritance
 * Buffs and debuffs? How to model these?
+* Add modifiers for ticks
 
 ## Licence
 

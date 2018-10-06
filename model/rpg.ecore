@@ -406,7 +406,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="basedOn" eType="#//CharacterStatistic"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StatTalent" eSuperTypes="#//Talent">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="statChanges" eType="#//StatChange"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="statChanges" lowerBound="1"
+        upperBound="-1" eType="#//StatChange"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Tick">
     <eStructuralFeatures xsi:type="ecore:EReference" name="value"/>
