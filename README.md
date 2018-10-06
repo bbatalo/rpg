@@ -88,10 +88,11 @@ Maintenance:
 
 Features:
 
-* Add talent trees
+* ~~Add stat talents - they change status (duh)~~
+* Add unlock talents - unlock a specific concept used in an ability node
 * Add modifiers for ticks
-* ~~Setup activation conditions for each node activation level~~
-* ~~Add locked nodes~~
+* Cooldowns on abilities
+* Cooldowns on talents
 
 Improvements:
 
@@ -99,6 +100,7 @@ Improvements:
 * ~~Add randomizers to effect modifiers~~
 * ~~Factor in node levels for effect modifiers~~
 * ~~Define how randomizers model critical chance or something similar~~
+* ~~Modifiers for the same StatChange cannot have same priorities~~
 
 Possible:
 
@@ -107,7 +109,6 @@ Possible:
 * ~~Change containment relationship to reference for (node -> ability/talent)? -- NO: Would take too much time. Besides, this question arises for many constructs, as the model is quite complex.~~
 * Optionally merge branches upon inheritance
 * Buffs and debuffs? How to model these?
-* How to model cooldowns?
 
 ## Licence
 

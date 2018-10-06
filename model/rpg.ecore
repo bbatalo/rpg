@@ -163,8 +163,8 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="0"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="abilities" upperBound="-1"
         eType="#//Ability" containment="true" eOpposite="#//Ability/node"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="talents" eType="#//Talent"
-        containment="true" eOpposite="#//Talent/node"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="talents" upperBound="-1"
+        eType="#//Talent" containment="true" eOpposite="#//Talent/node"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isLocked" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="branch" lowerBound="1"
@@ -298,23 +298,19 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StatChange">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="ProperTick SelfStatChange"/>
+      <details key="constraints" value="SelfStatChange SingularModifierOrder"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-      <details key="ProperTick" value="&#xA;&#x9;&#x9;&#x9;self.tickType = TickType::FLAT implies self.tickValue = 0.0"/>
-      <details key="ProperTick$message" value="'FLAT StatChange should have tickValue of 0.0'"/>
       <details key="SelfStatChange" value="&#xA;&#x9;&#x9;&#x9;self.effect.targetType = TargetType::SELF implies self.effect.ability.node.branch.characterClass.statistics->includes(self.changesStatistic)"/>
       <details key="SelfStatChange$message" value="'If StatChange is a part of SELF Effect, it can reference only statistics in host or parent classes.'"/>
+      <details key="SingularModifierOrder" value="&#xA;&#x9;&#x9;&#x9;self.modifiers->forAll(m1, m2 | m1 &lt;> m2 implies m1.priorityOrder &lt;> m2.priorityOrder)"/>
+      <details key="SingularModifierOrder$message" value="'Each modifier has to have a unique priority order.'"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="changeType" lowerBound="1"
         eType="#//ChangeType"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tickType" lowerBound="1"
-        eType="#//TickType"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="baseValue" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="changeValueType" eType="#//ChangeValueType"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tickValue" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="changesStatistic" lowerBound="1"
         eType="#//CharacterStatistic"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="modifiers" upperBound="-1"
@@ -323,6 +319,8 @@
         eType="#//Effect" eOpposite="#//Effect/statChange"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="randomizer" eType="#//Randomizer"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tick" eType="#//Tick" containment="true"
+        eOpposite="#//Tick/statChange"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Modifier">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
@@ -347,6 +345,8 @@
         defaultValueLiteral="1"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="exclusive" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetStatistic" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="ChangeType">
     <eLiterals name="ADD"/>
@@ -355,11 +355,10 @@
     <eLiterals name="MOVE_LIMIT" value="3"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="TickType">
-    <eLiterals name="FLAT"/>
     <eLiterals name="PER_TICK" value="1"/>
     <eLiterals name="DELAYED" value="2"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Talent">
+  <eClassifiers xsi:type="ecore:EClass" name="Talent" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="tooltip" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -405,5 +404,16 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
         defaultValueLiteral="0"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="basedOn" eType="#//CharacterStatistic"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StatTalent" eSuperTypes="#//Talent">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="statChanges" eType="#//StatChange"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Tick">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tickType" lowerBound="1"
+        eType="#//TickType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="statChange" lowerBound="1"
+        eType="#//StatChange" eOpposite="#//StatChange/tick"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
   </eClassifiers>
 </ecore:EPackage>

@@ -30,6 +30,13 @@
         description="The amount of experience that a character has. Reaching the limit value will result in a level up."
         maxValue="10000.0"
         startLimitValue="1000.0"/>
+    <statistics
+        name="Magic resistance"
+        lore="Reduces magic damage dealt"
+        description="Reduces magic damage dealt"
+        tooltip="Reduces magic damage dealt"
+        maxValue="100.0"
+        startLimitValue="100.0"/>
     <branches
         name="Basic Abiilities"
         lore="No lore, generic branch."
@@ -174,16 +181,23 @@
               <modifiers
                   changeType="MULTIPLY"
                   value="2.0"
-                  priorityOrder="1">
+                  priorityOrder="3">
                 <randomizer
                     basedOn="//@allClasses.1/@statistics.2"/>
               </modifiers>
+              <modifiers
+                  basedOnModifier="MULTIPLY"
+                  priorityOrder="1"
+                  basedOn="//@allClasses.2/@statistics.1"
+                  basedOnValue="0.4"/>
+              <modifiers
+                  changeType="MULTIPLY"
+                  basedOnModifier="MULTIPLY"
+                  basedOn="//@allClasses.0/@statistics.3"
+                  basedOnValue="0.01"
+                  targetStatistic="true"/>
             </statChange>
           </effects>
-          <effects
-              name="Enhanced pyrotechnics"
-              tooltip="Stacks critical chance until third consecutive Fireball cast"
-              onLevel="3"/>
         </abilities>
       </nodes>
       <nodes
@@ -470,30 +484,6 @@
               onLevel="1"
               instantiate="//@allClasses.3"/>
         </abilities>
-      </nodes>
-      <nodes
-          name="Critical Mass"
-          tooltip="Increases your critical chance "
-          description="Increases your critical chance for fire spells"
-          nodeType="STANDALONE">
-        <activation
-            level="1">
-          <requirements
-              requiredLevel="1"
-              followsActivationOf="//@allClasses.2/@branches.0/@nodes.3"/>
-        </activation>
-        <abilities>
-          <effects
-              name="Increases critical chance"/>
-        </abilities>
-      </nodes>
-      <nodes
-          name="Hot Streak"
-          tooltip="After two critical strikes, next Fireball or Pyroblast is instant cast"
-          description="After two critical strikes, next Fireball or Pyroblast is instant cast"
-          nodeType="STANDALONE">
-        <activation/>
-        <abilities/>
       </nodes>
     </branches>
   </allClasses>
