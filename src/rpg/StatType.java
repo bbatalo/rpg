@@ -19,54 +19,54 @@ import org.eclipse.emf.common.util.AbstractEnumerator;
  */
 public final class StatType extends AbstractEnumerator {
 	/**
-	 * The '<em><b>ASCENDING</b></em>' literal value.
+	 * The '<em><b>STAT</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>ASCENDING</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>STAT</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #ASCENDING_LITERAL
+	 * @see #STAT_LITERAL
 	 * @model
 	 * @generated
 	 * @ordered
 	 */
-	public static final int ASCENDING = 0;
+	public static final int STAT = 0;
 
 	/**
-	 * The '<em><b>DESCENDING</b></em>' literal value.
+	 * The '<em><b>FUEL</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>DESCENDING</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>FUEL</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #DESCENDING_LITERAL
+	 * @see #FUEL_LITERAL
 	 * @model
 	 * @generated
 	 * @ordered
 	 */
-	public static final int DESCENDING = 1;
+	public static final int FUEL = 1;
 
 	/**
-	 * The '<em><b>ASCENDING</b></em>' literal object.
+	 * The '<em><b>STAT</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #ASCENDING
+	 * @see #STAT
 	 * @generated
 	 * @ordered
 	 */
-	public static final StatType ASCENDING_LITERAL = new StatType(ASCENDING, "ASCENDING", "ASCENDING");
+	public static final StatType STAT_LITERAL = new StatType(STAT, "STAT", "STAT");
 
 	/**
-	 * The '<em><b>DESCENDING</b></em>' literal object.
+	 * The '<em><b>FUEL</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #DESCENDING
+	 * @see #FUEL
 	 * @generated
 	 * @ordered
 	 */
-	public static final StatType DESCENDING_LITERAL = new StatType(DESCENDING, "DESCENDING", "DESCENDING");
+	public static final StatType FUEL_LITERAL = new StatType(FUEL, "FUEL", "FUEL");
 
 	/**
 	 * An array of all the '<em><b>Stat Type</b></em>' enumerators.
@@ -76,8 +76,8 @@ public final class StatType extends AbstractEnumerator {
 	 */
 	private static final StatType[] VALUES_ARRAY =
 		new StatType[] {
-			ASCENDING_LITERAL,
-			DESCENDING_LITERAL,
+			STAT_LITERAL,
+			FUEL_LITERAL,
 		};
 
 	/**
@@ -128,8 +128,8 @@ public final class StatType extends AbstractEnumerator {
 	 */
 	public static StatType get(int value) {
 		switch (value) {
-			case ASCENDING: return ASCENDING_LITERAL;
-			case DESCENDING: return DESCENDING_LITERAL;
+			case STAT: return STAT_LITERAL;
+			case FUEL: return FUEL_LITERAL;
 		}
 		return null;
 	}

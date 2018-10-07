@@ -2,9 +2,9 @@
  */
 package rpg;
 
-import org.eclipse.emf.cdo.CDOObject;
-
 import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,19 +25,19 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link rpg.Node#getMinActivationLevel <em>Min Activation Level</em>}</li>
  *   <li>{@link rpg.Node#getMaxActivationLevel <em>Max Activation Level</em>}</li>
  *   <li>{@link rpg.Node#getActivationLevel <em>Activation Level</em>}</li>
- *   <li>{@link rpg.Node#isIsActivated <em>Is Activated</em>}</li>
  *   <li>{@link rpg.Node#getAbilities <em>Abilities</em>}</li>
  *   <li>{@link rpg.Node#getTalents <em>Talents</em>}</li>
+ *   <li>{@link rpg.Node#isIsLocked <em>Is Locked</em>}</li>
+ *   <li>{@link rpg.Node#getBranch <em>Branch</em>}</li>
  * </ul>
  * </p>
  *
  * @see rpg.RpgPackage#getNode()
- * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='RootNodeChildren RootNodeParents StandardNodeChildren StandardNodeParents StandaloneNodeConnections ActivationIntegrity MinimalNodeActivation MaximalNodeActivation UniqueNodeActivationLevels ProperNodeActivationLevels ProperAbilityLevels ProperEffectLevels'"
- *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot RootNodeChildren='self.nodeType = NodeType::ROOT implies self.childNodes->forAll(node | node.nodeType = NodeType::STANDARD)' RootNodeChildren$message='\'ROOT nodes can have only STANDARD nodes for children.\'' RootNodeParents='self.nodeType = NodeType::ROOT implies self.parentNodes->size() = 0' RootNodeParents$message='\'ROOT nodes can not have any parents.\'' StandardNodeChildren='self.nodeType = NodeType::STANDARD implies self.childNodes->forAll(node | node.nodeType = NodeType::STANDARD)' StandardNodeChildren$message='\'STANDARD nodes can have only STANDARD nodes for children.\'' StandardNodeParents='self.nodeType = NodeType::STANDARD implies self.parentNodes->forAll(node | node.nodeType = NodeType::ROOT or node.nodeType = NodeType::STANDARD)' StandardNodeParents$message='\'STANDARD nodes can have only ROOT or STANDARD nodes for parents.\'' StandaloneNodeConnections='self.nodeType = NodeType::STANDALONE implies self.parentNodes->size() = 0 and self.childNodes->size() = 0' StandaloneNodeConnections$message='\'STANDALONE nodes can not have parent or child nodes.\'' ActivationIntegrity='self.isActivated = true implies self.activationLevel >= self.minActivationLevel and self.activationLevel <= self.maxActivationLevel' ActivationIntegrity$message='\'Activated nodes must have activation level between minimum and maximum activation levels.\'' MinimalNodeActivation='self.isActivated = false implies self.activation->size() = (self.maxActivationLevel - self.minActivationLevel + 1) and self.activationLevel < self.minActivationLevel' MinimalNodeActivation$message='\'Non-activated nodes must have at least one node activation rule and have activation level below minimum.\'' MaximalNodeActivation='self.isActivated = true implies self.activation->size() = (self.maxActivationLevel - self.activationLevel)' MaximalNodeActivation$message='\'Activated nodes must have proper number of node activations.\'' UniqueNodeActivationLevels='self.activation->forAll(n1: NodeActivation, n2: NodeActivation | n1 <> n2 implies n1.level <> n2.level)' UniqueNodeActivationLevels$message='\'All node activations must have unique levels.\'' ProperNodeActivationLevels='\n\t\tif self.isActivated = true then\n\t\t\tself.activation->forAll(n: NodeActivation | n.level > self.activationLevel and n.level <= self.maxActivationLevel)\n\t\telse\n\t\t\tself.activation->forAll(n: NodeActivation | n.level >= self.minActivationLevel and n.level <= self.maxActivationLevel)\n\t\tendif' ProperNodeActivationLevels$message='\'All node activations must have levels between min and max activation levels.\'' ProperAbilityLevels='self.abilities->forAll(a: Ability | a.onLevel >= self.minActivationLevel and a.onLevel <= self.maxActivationLevel)' ProperAbilityLevels$message='\'All abilities must reference an appropriate node level.\'' ProperEffectLevels='self.abilities->forAll(a: Ability | a.effects->forAll(e: Effect | e.onLevel >= self.minActivationLevel and e.onLevel <= self.maxActivationLevel))' ProperEffectLevels$message='\'All ability effects must reference an appropriate node level.\''"
- * @extends CDOObject
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='RootNodeChildren StandardNodeChildren StandaloneNodeConnections SelfReference CircularReference ProperReference ActivationCondition ActivationIntegrity MinimalNodeActivation MaximalNodeActivation UniqueNodeActivationLevels ValidBranchTypeImplication'"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot RootNodeChildren='\n\t\t\tself.nodeType = NodeType::ROOT implies \n\t\t\t(self.childNodes->forAll(node | node.nodeType = NodeType::STANDARD) and self.parentNodes->size() = 0)' RootNodeChildren$message='\'ROOT nodes can have only STANDARD nodes for children and can not have any parents.\'' StandardNodeChildren='\n\t\t\tself.nodeType = NodeType::STANDARD implies \n\t\t\t(self.childNodes->forAll(node | node.nodeType = NodeType::STANDARD) and\n\t\t\tself.parentNodes->forAll(node | node.nodeType = NodeType::ROOT or node.nodeType = NodeType::STANDARD))' StandardNodeChildren$message='\'STANDARD nodes can have only STANDARD nodes for children and ROOT or STANDARD nodes for parents\'' StandaloneNodeConnections='\n\t\t\tself.nodeType = NodeType::STANDALONE implies self.parentNodes->size() = 0 and self.childNodes->size() = 0' StandaloneNodeConnections$message='\'STANDALONE nodes cannot have parent or child nodes.\'' SelfReference='\n\t\t\tself.childNodes->forAll(node | node <> self) and self.parentNodes->forAll(node | node <> self)' SelfReference$message='\'Nodes cannot reference themselves as either parent or child. \'' CircularReference='\n\t\t\tself->closure(childNodes)->excludes(self) and self->closure(parentNodes)->excludes(self)' CircularReference$message='\'Nodes cannot form circular references to themselves through parent and child relationships.\'' ProperReference='\n\t\t\tself.childNodes->forAll(node | self.branch.nodes->includes(node)) and self.parentNodes->forAll(node | self.branch.nodes->includes(node))' ProperReference$message='\'Nodes can only reference nodes within the same Branch.\'' ActivationCondition='\n\t\t\tself.nodeType = NodeType::STANDARD implies \n\t\t\t(self.activationLevel >= self.minActivationLevel implies self.parentNodes->exists(parentNode | parentNode.activationLevel >= parentNode.minActivationLevel))' ActivationCondition$message='\'Before a node can be activated, at least one parent must be activated.\'' ActivationIntegrity='\n\t\t\tself.activationLevel <= self.maxActivationLevel' ActivationIntegrity$message='\'Activation level must be cannot exceed maximum activation levels.\'' MinimalNodeActivation='\n\t\t\tself.activationLevel < self.minActivationLevel implies \n\t\t\tself.activation->size() = (self.maxActivationLevel - self.minActivationLevel + 1) and self.activationLevel < self.minActivationLevel' MinimalNodeActivation$message='\'Non-activated nodes must have at least one node activation rule and have activation level below minimum.\'' MaximalNodeActivation='\n\t\t\tself.activationLevel >= self.minActivationLevel implies self.activation->size() = (self.maxActivationLevel - self.activationLevel)' MaximalNodeActivation$message='\'Activated nodes must have proper number of node activations.\'' UniqueNodeActivationLevels='\n\t\t\tself.activation->forAll(n1: NodeActivation, n2: NodeActivation | n1 <> n2 implies n1.level <> n2.level)' UniqueNodeActivationLevels$message='\'All node activations must have unique levels.\'' ValidBranchTypeImplication='\n\t\t\tif self.branch.branchType = BranchType::TALENT then\n\t\t\t\tself.talents->size() > 0 and self.abilities->size() = 0\n\t\t\telse \n\t\t\t\tself.talents->size() = 0 and self.abilities->size() > 0\n\t\t\tendif' ValidBranchTypeImplication$message='\'Branch type dictates what the nodes can contain: abilities or talents.\''"
  * @generated
  */
-public interface Node extends CDOObject {
+public interface Node extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -191,36 +191,27 @@ public interface Node extends CDOObject {
 	EList getChildNodes();
 
 	/**
-	 * Returns the value of the '<em><b>Parent Nodes</b></em>' reference.
+	 * Returns the value of the '<em><b>Parent Nodes</b></em>' reference list.
+	 * The list contents are of type {@link rpg.Node}.
 	 * It is bidirectional and its opposite is '{@link rpg.Node#getChildNodes <em>Child Nodes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Parent Nodes</em>' reference isn't clear,
+	 * If the meaning of the '<em>Parent Nodes</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Parent Nodes</em>' reference.
-	 * @see #setParentNodes(Node)
+	 * @return the value of the '<em>Parent Nodes</em>' reference list.
 	 * @see rpg.RpgPackage#getNode_ParentNodes()
 	 * @see rpg.Node#getChildNodes
-	 * @model opposite="childNodes"
+	 * @model type="rpg.Node" opposite="childNodes"
 	 * @generated
 	 */
-	Node getParentNodes();
-
-	/**
-	 * Sets the value of the '{@link rpg.Node#getParentNodes <em>Parent Nodes</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Parent Nodes</em>' reference.
-	 * @see #getParentNodes()
-	 * @generated
-	 */
-	void setParentNodes(Node value);
+	EList getParentNodes();
 
 	/**
 	 * Returns the value of the '<em><b>Activation</b></em>' containment reference list.
 	 * The list contents are of type {@link rpg.NodeActivation}.
+	 * It is bidirectional and its opposite is '{@link rpg.NodeActivation#getNode <em>Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Activation</em>' containment reference list isn't clear,
@@ -229,7 +220,8 @@ public interface Node extends CDOObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Activation</em>' containment reference list.
 	 * @see rpg.RpgPackage#getNode_Activation()
-	 * @model type="rpg.NodeActivation" containment="true"
+	 * @see rpg.NodeActivation#getNode
+	 * @model type="rpg.NodeActivation" opposite="node" containment="true"
 	 * @generated
 	 */
 	EList getActivation();
@@ -316,35 +308,9 @@ public interface Node extends CDOObject {
 	void setActivationLevel(int value);
 
 	/**
-	 * Returns the value of the '<em><b>Is Activated</b></em>' attribute.
-	 * The default value is <code>"false"</code>.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Is Activated</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Is Activated</em>' attribute.
-	 * @see #setIsActivated(boolean)
-	 * @see rpg.RpgPackage#getNode_IsActivated()
-	 * @model default="false" required="true"
-	 * @generated
-	 */
-	boolean isIsActivated();
-
-	/**
-	 * Sets the value of the '{@link rpg.Node#isIsActivated <em>Is Activated</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Is Activated</em>' attribute.
-	 * @see #isIsActivated()
-	 * @generated
-	 */
-	void setIsActivated(boolean value);
-
-	/**
 	 * Returns the value of the '<em><b>Abilities</b></em>' containment reference list.
 	 * The list contents are of type {@link rpg.Ability}.
+	 * It is bidirectional and its opposite is '{@link rpg.Ability#getNode <em>Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Abilities</em>' containment reference list isn't clear,
@@ -353,35 +319,83 @@ public interface Node extends CDOObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Abilities</em>' containment reference list.
 	 * @see rpg.RpgPackage#getNode_Abilities()
-	 * @model type="rpg.Ability" containment="true"
+	 * @see rpg.Ability#getNode
+	 * @model type="rpg.Ability" opposite="node" containment="true"
 	 * @generated
 	 */
 	EList getAbilities();
 
 	/**
-	 * Returns the value of the '<em><b>Talents</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Talents</b></em>' containment reference list.
+	 * The list contents are of type {@link rpg.Talent}.
+	 * It is bidirectional and its opposite is '{@link rpg.Talent#getNode <em>Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Talents</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Talents</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Talents</em>' containment reference.
-	 * @see #setTalents(Talent)
+	 * @return the value of the '<em>Talents</em>' containment reference list.
 	 * @see rpg.RpgPackage#getNode_Talents()
-	 * @model containment="true"
+	 * @see rpg.Talent#getNode
+	 * @model type="rpg.Talent" opposite="node" containment="true"
 	 * @generated
 	 */
-	Talent getTalents();
+	EList getTalents();
 
 	/**
-	 * Sets the value of the '{@link rpg.Node#getTalents <em>Talents</em>}' containment reference.
+	 * Returns the value of the '<em><b>Is Locked</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Is Locked</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Talents</em>' containment reference.
-	 * @see #getTalents()
+	 * @return the value of the '<em>Is Locked</em>' attribute.
+	 * @see #setIsLocked(boolean)
+	 * @see rpg.RpgPackage#getNode_IsLocked()
+	 * @model default="false" required="true"
 	 * @generated
 	 */
-	void setTalents(Talent value);
+	boolean isIsLocked();
+
+	/**
+	 * Sets the value of the '{@link rpg.Node#isIsLocked <em>Is Locked</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Locked</em>' attribute.
+	 * @see #isIsLocked()
+	 * @generated
+	 */
+	void setIsLocked(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Branch</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link rpg.Branch#getNodes <em>Nodes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Branch</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Branch</em>' container reference.
+	 * @see #setBranch(Branch)
+	 * @see rpg.RpgPackage#getNode_Branch()
+	 * @see rpg.Branch#getNodes
+	 * @model opposite="nodes" required="true" transient="false"
+	 * @generated
+	 */
+	Branch getBranch();
+
+	/**
+	 * Sets the value of the '{@link rpg.Node#getBranch <em>Branch</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Branch</em>' container reference.
+	 * @see #getBranch()
+	 * @generated
+	 */
+	void setBranch(Branch value);
 
 } // Node

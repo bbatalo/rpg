@@ -2,8 +2,6 @@
  */
 package rpg;
 
-import org.eclipse.emf.cdo.CDOObject;
-
 import org.eclipse.emf.common.util.EList;
 
 /**
@@ -14,131 +12,20 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link rpg.StatChange#getChangeType <em>Change Type</em>}</li>
- *   <li>{@link rpg.StatChange#getTickType <em>Tick Type</em>}</li>
- *   <li>{@link rpg.StatChange#getBaseValue <em>Base Value</em>}</li>
- *   <li>{@link rpg.StatChange#getTickValue <em>Tick Value</em>}</li>
  *   <li>{@link rpg.StatChange#getChangesStatistic <em>Changes Statistic</em>}</li>
  *   <li>{@link rpg.StatChange#getModifiers <em>Modifiers</em>}</li>
+ *   <li>{@link rpg.StatChange#getRandomizer <em>Randomizer</em>}</li>
+ *   <li>{@link rpg.StatChange#getTick <em>Tick</em>}</li>
+ *   <li>{@link rpg.StatChange#getStatTalent <em>Stat Talent</em>}</li>
  * </ul>
  * </p>
  *
  * @see rpg.RpgPackage#getStatChange()
- * @model
- * @extends CDOObject
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='SelfEffectStatChange SelfTalentStatChange SingularModifierOrder'"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot SelfEffectStatChange='\n\t\t\tself.effect.targetType = TargetType::SELF and self.effect <> null implies \n\t\t\t(self.effect.ability.node.branch.characterClass.statistics->includes(self.changesStatistic)\n\t\t\tor self.effect.ability.node.branch.characterClass->closure(parentClasses)->exists(charClass | charClass.statistics->includes(self.changesStatistic)))' SelfEffectStatChange$message='\'If StatChange is a part of SELF Effect, it can reference only statistics in host or parent classes.\'' SelfTalentStatChange='\n\t\t\tself.statTalent <> null implies \n\t\t\t(self.statTalent.node.branch.characterClass.statistics->includes(self.changesStatistic)\n\t\t\tor self.statTalent.node.branch.characterClass->closure(parentClasses)->exists(charClass | charClass.statistics->includes(self.changesStatistic)))' SelfTalentStatChange$message='\'If StatChange is a part of StatTalent, it can reference only statistics in host or parent classes.\'' SingularModifierOrder='\n\t\t\tself.modifiers->forAll(m1, m2 | m1 <> m2 implies m1.priorityOrder <> m2.priorityOrder)' SingularModifierOrder$message='\'Each modifier has to have a unique priority order.\''"
  * @generated
  */
-public interface StatChange extends CDOObject {
-	/**
-	 * Returns the value of the '<em><b>Change Type</b></em>' attribute.
-	 * The literals are from the enumeration {@link rpg.ChangeType}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Change Type</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Change Type</em>' attribute.
-	 * @see rpg.ChangeType
-	 * @see #setChangeType(ChangeType)
-	 * @see rpg.RpgPackage#getStatChange_ChangeType()
-	 * @model required="true"
-	 * @generated
-	 */
-	ChangeType getChangeType();
-
-	/**
-	 * Sets the value of the '{@link rpg.StatChange#getChangeType <em>Change Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Change Type</em>' attribute.
-	 * @see rpg.ChangeType
-	 * @see #getChangeType()
-	 * @generated
-	 */
-	void setChangeType(ChangeType value);
-
-	/**
-	 * Returns the value of the '<em><b>Tick Type</b></em>' attribute.
-	 * The literals are from the enumeration {@link rpg.TickType}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Tick Type</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Tick Type</em>' attribute.
-	 * @see rpg.TickType
-	 * @see #setTickType(TickType)
-	 * @see rpg.RpgPackage#getStatChange_TickType()
-	 * @model required="true"
-	 * @generated
-	 */
-	TickType getTickType();
-
-	/**
-	 * Sets the value of the '{@link rpg.StatChange#getTickType <em>Tick Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Tick Type</em>' attribute.
-	 * @see rpg.TickType
-	 * @see #getTickType()
-	 * @generated
-	 */
-	void setTickType(TickType value);
-
-	/**
-	 * Returns the value of the '<em><b>Base Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Base Value</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Base Value</em>' attribute.
-	 * @see #setBaseValue(double)
-	 * @see rpg.RpgPackage#getStatChange_BaseValue()
-	 * @model required="true"
-	 * @generated
-	 */
-	double getBaseValue();
-
-	/**
-	 * Sets the value of the '{@link rpg.StatChange#getBaseValue <em>Base Value</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Base Value</em>' attribute.
-	 * @see #getBaseValue()
-	 * @generated
-	 */
-	void setBaseValue(double value);
-
-	/**
-	 * Returns the value of the '<em><b>Tick Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Tick Value</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Tick Value</em>' attribute.
-	 * @see #setTickValue(int)
-	 * @see rpg.RpgPackage#getStatChange_TickValue()
-	 * @model required="true"
-	 * @generated
-	 */
-	int getTickValue();
-
-	/**
-	 * Sets the value of the '{@link rpg.StatChange#getTickValue <em>Tick Value</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Tick Value</em>' attribute.
-	 * @see #getTickValue()
-	 * @generated
-	 */
-	void setTickValue(int value);
-
+public interface StatChange extends Change {
 	/**
 	 * Returns the value of the '<em><b>Changes Statistic</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -168,6 +55,7 @@ public interface StatChange extends CDOObject {
 	/**
 	 * Returns the value of the '<em><b>Modifiers</b></em>' containment reference list.
 	 * The list contents are of type {@link rpg.Modifier}.
+	 * It is bidirectional and its opposite is '{@link rpg.Modifier#getStatChange <em>Stat Change</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Modifiers</em>' containment reference list isn't clear,
@@ -176,9 +64,92 @@ public interface StatChange extends CDOObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Modifiers</em>' containment reference list.
 	 * @see rpg.RpgPackage#getStatChange_Modifiers()
-	 * @model type="rpg.Modifier" containment="true"
+	 * @see rpg.Modifier#getStatChange
+	 * @model type="rpg.Modifier" opposite="statChange" containment="true"
 	 * @generated
 	 */
 	EList getModifiers();
+
+	/**
+	 * Returns the value of the '<em><b>Randomizer</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Randomizer</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Randomizer</em>' containment reference.
+	 * @see #setRandomizer(Randomizer)
+	 * @see rpg.RpgPackage#getStatChange_Randomizer()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Randomizer getRandomizer();
+
+	/**
+	 * Sets the value of the '{@link rpg.StatChange#getRandomizer <em>Randomizer</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Randomizer</em>' containment reference.
+	 * @see #getRandomizer()
+	 * @generated
+	 */
+	void setRandomizer(Randomizer value);
+
+	/**
+	 * Returns the value of the '<em><b>Tick</b></em>' containment reference.
+	 * It is bidirectional and its opposite is '{@link rpg.Tick#getStatChange <em>Stat Change</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Tick</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Tick</em>' containment reference.
+	 * @see #setTick(Tick)
+	 * @see rpg.RpgPackage#getStatChange_Tick()
+	 * @see rpg.Tick#getStatChange
+	 * @model opposite="statChange" containment="true"
+	 * @generated
+	 */
+	Tick getTick();
+
+	/**
+	 * Sets the value of the '{@link rpg.StatChange#getTick <em>Tick</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Tick</em>' containment reference.
+	 * @see #getTick()
+	 * @generated
+	 */
+	void setTick(Tick value);
+
+	/**
+	 * Returns the value of the '<em><b>Stat Talent</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link rpg.StatTalent#getStatChanges <em>Stat Changes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Stat Talent</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Stat Talent</em>' container reference.
+	 * @see #setStatTalent(StatTalent)
+	 * @see rpg.RpgPackage#getStatChange_StatTalent()
+	 * @see rpg.StatTalent#getStatChanges
+	 * @model opposite="statChanges" transient="false"
+	 * @generated
+	 */
+	StatTalent getStatTalent();
+
+	/**
+	 * Sets the value of the '{@link rpg.StatChange#getStatTalent <em>Stat Talent</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Stat Talent</em>' container reference.
+	 * @see #getStatTalent()
+	 * @generated
+	 */
+	void setStatTalent(StatTalent value);
 
 } // StatChange

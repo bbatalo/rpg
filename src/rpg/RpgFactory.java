@@ -67,22 +67,13 @@ public interface RpgFactory extends EFactory {
 	Node createNode();
 
 	/**
-	 * Returns a new object of class '<em>Node Activation Buy</em>'.
+	 * Returns a new object of class '<em>Node Activation</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Node Activation Buy</em>'.
+	 * @return a new object of class '<em>Node Activation</em>'.
 	 * @generated
 	 */
-	NodeActivationBuy createNodeActivationBuy();
-
-	/**
-	 * Returns a new object of class '<em>Node Activation Propagate</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Node Activation Propagate</em>'.
-	 * @generated
-	 */
-	NodeActivationPropagate createNodeActivationPropagate();
+	NodeActivation createNodeActivation();
 
 	/**
 	 * Returns a new object of class '<em>Activation Cost</em>'.
@@ -139,22 +130,94 @@ public interface RpgFactory extends EFactory {
 	Modifier createModifier();
 
 	/**
-	 * Returns a new object of class '<em>Talent</em>'.
+	 * Returns a new object of class '<em>Propagation Requirement</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Talent</em>'.
+	 * @return a new object of class '<em>Propagation Requirement</em>'.
 	 * @generated
 	 */
-	Talent createTalent();
+	PropagationRequirement createPropagationRequirement();
 
 	/**
-	 * Returns a new object of class '<em>Ability Cost</em>'.
+	 * Returns a new object of class '<em>Randomizer</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Ability Cost</em>'.
+	 * @return a new object of class '<em>Randomizer</em>'.
 	 * @generated
 	 */
-	AbilityCost createAbilityCost();
+	Randomizer createRandomizer();
+
+	/**
+	 * Returns a new object of class '<em>Stat Talent</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Stat Talent</em>'.
+	 * @generated
+	 */
+	StatTalent createStatTalent();
+
+	/**
+	 * Returns a new object of class '<em>Tick</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Tick</em>'.
+	 * @generated
+	 */
+	Tick createTick();
+
+	/**
+	 * Returns a new object of class '<em>Cooldown Change</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Cooldown Change</em>'.
+	 * @generated
+	 */
+	CooldownChange createCooldownChange();
+
+	/**
+	 * Returns a new object of class '<em>Unlock Ability</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Unlock Ability</em>'.
+	 * @generated
+	 */
+	UnlockAbility createUnlockAbility();
+
+	/**
+	 * Returns a new object of class '<em>Unlock Effect</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Unlock Effect</em>'.
+	 * @generated
+	 */
+	UnlockEffect createUnlockEffect();
+
+	/**
+	 * Returns a new object of class '<em>Unlock Change</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Unlock Change</em>'.
+	 * @generated
+	 */
+	UnlockChange createUnlockChange();
+
+	/**
+	 * Returns a new object of class '<em>Cooldown Talent</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Cooldown Talent</em>'.
+	 * @generated
+	 */
+	CooldownTalent createCooldownTalent();
+
+	/**
+	 * Returns a new object of class '<em>Unlock Modifier</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Unlock Modifier</em>'.
+	 * @generated
+	 */
+	UnlockModifier createUnlockModifier();
 
 	/**
 	 * Returns the package supported by this factory.

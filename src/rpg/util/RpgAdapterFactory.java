@@ -84,12 +84,6 @@ public class RpgAdapterFactory extends AdapterFactoryImpl {
 			public Object caseNodeActivation(NodeActivation object) {
 				return createNodeActivationAdapter();
 			}
-			public Object caseNodeActivationBuy(NodeActivationBuy object) {
-				return createNodeActivationBuyAdapter();
-			}
-			public Object caseNodeActivationPropagate(NodeActivationPropagate object) {
-				return createNodeActivationPropagateAdapter();
-			}
 			public Object caseActivationCost(ActivationCost object) {
 				return createActivationCostAdapter();
 			}
@@ -111,8 +105,41 @@ public class RpgAdapterFactory extends AdapterFactoryImpl {
 			public Object caseTalent(Talent object) {
 				return createTalentAdapter();
 			}
-			public Object caseAbilityCost(AbilityCost object) {
-				return createAbilityCostAdapter();
+			public Object casePropagationRequirement(PropagationRequirement object) {
+				return createPropagationRequirementAdapter();
+			}
+			public Object caseRandomizer(Randomizer object) {
+				return createRandomizerAdapter();
+			}
+			public Object caseStatTalent(StatTalent object) {
+				return createStatTalentAdapter();
+			}
+			public Object caseTick(Tick object) {
+				return createTickAdapter();
+			}
+			public Object caseCooldownChange(CooldownChange object) {
+				return createCooldownChangeAdapter();
+			}
+			public Object caseChange(Change object) {
+				return createChangeAdapter();
+			}
+			public Object caseUnlockTalent(UnlockTalent object) {
+				return createUnlockTalentAdapter();
+			}
+			public Object caseUnlockAbility(UnlockAbility object) {
+				return createUnlockAbilityAdapter();
+			}
+			public Object caseUnlockEffect(UnlockEffect object) {
+				return createUnlockEffectAdapter();
+			}
+			public Object caseUnlockChange(UnlockChange object) {
+				return createUnlockChangeAdapter();
+			}
+			public Object caseCooldownTalent(CooldownTalent object) {
+				return createCooldownTalentAdapter();
+			}
+			public Object caseUnlockModifier(UnlockModifier object) {
+				return createUnlockModifierAdapter();
 			}
 			public Object defaultCase(EObject object) {
 				return createEObjectAdapter();
@@ -217,34 +244,6 @@ public class RpgAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link rpg.NodeActivationBuy <em>Node Activation Buy</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see rpg.NodeActivationBuy
-	 * @generated
-	 */
-	public Adapter createNodeActivationBuyAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link rpg.NodeActivationPropagate <em>Node Activation Propagate</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see rpg.NodeActivationPropagate
-	 * @generated
-	 */
-	public Adapter createNodeActivationPropagateAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link rpg.ActivationCost <em>Activation Cost</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -343,16 +342,170 @@ public class RpgAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link rpg.AbilityCost <em>Ability Cost</em>}'.
+	 * Creates a new adapter for an object of class '{@link rpg.PropagationRequirement <em>Propagation Requirement</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see rpg.AbilityCost
+	 * @see rpg.PropagationRequirement
 	 * @generated
 	 */
-	public Adapter createAbilityCostAdapter() {
+	public Adapter createPropagationRequirementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link rpg.Randomizer <em>Randomizer</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see rpg.Randomizer
+	 * @generated
+	 */
+	public Adapter createRandomizerAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link rpg.StatTalent <em>Stat Talent</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see rpg.StatTalent
+	 * @generated
+	 */
+	public Adapter createStatTalentAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link rpg.Tick <em>Tick</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see rpg.Tick
+	 * @generated
+	 */
+	public Adapter createTickAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link rpg.CooldownChange <em>Cooldown Change</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see rpg.CooldownChange
+	 * @generated
+	 */
+	public Adapter createCooldownChangeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link rpg.Change <em>Change</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see rpg.Change
+	 * @generated
+	 */
+	public Adapter createChangeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link rpg.UnlockTalent <em>Unlock Talent</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see rpg.UnlockTalent
+	 * @generated
+	 */
+	public Adapter createUnlockTalentAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link rpg.UnlockAbility <em>Unlock Ability</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see rpg.UnlockAbility
+	 * @generated
+	 */
+	public Adapter createUnlockAbilityAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link rpg.UnlockEffect <em>Unlock Effect</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see rpg.UnlockEffect
+	 * @generated
+	 */
+	public Adapter createUnlockEffectAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link rpg.UnlockChange <em>Unlock Change</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see rpg.UnlockChange
+	 * @generated
+	 */
+	public Adapter createUnlockChangeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link rpg.CooldownTalent <em>Cooldown Talent</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see rpg.CooldownTalent
+	 * @generated
+	 */
+	public Adapter createCooldownTalentAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link rpg.UnlockModifier <em>Unlock Modifier</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see rpg.UnlockModifier
+	 * @generated
+	 */
+	public Adapter createUnlockModifierAdapter() {
 		return null;
 	}
 

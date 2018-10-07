@@ -12,31 +12,41 @@ import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import rpg.Ability;
-import rpg.AbilityCost;
 import rpg.AbilityType;
 import rpg.ActivationCost;
 import rpg.Branch;
 import rpg.BranchType;
 import rpg.CastType;
+import rpg.Change;
 import rpg.ChangeType;
+import rpg.ChangeValueType;
 import rpg.CharacterClass;
 import rpg.CharacterStatistic;
+import rpg.CooldownChange;
+import rpg.CooldownTalent;
 import rpg.Effect;
 import rpg.EffectType;
 import rpg.Modifier;
 import rpg.Node;
 import rpg.NodeActivation;
-import rpg.NodeActivationBuy;
-import rpg.NodeActivationPropagate;
 import rpg.NodeType;
+import rpg.PropagationRequirement;
+import rpg.Randomizer;
 import rpg.RangeUnit;
 import rpg.RpgFactory;
 import rpg.RpgPackage;
 import rpg.StatChange;
+import rpg.StatTalent;
 import rpg.StatType;
 import rpg.Talent;
 import rpg.TargetType;
+import rpg.Tick;
 import rpg.TickType;
+import rpg.UnlockAbility;
+import rpg.UnlockChange;
+import rpg.UnlockEffect;
+import rpg.UnlockModifier;
+import rpg.UnlockTalent;
 
 import rpg.util.RpgValidator;
 
@@ -94,20 +104,6 @@ public class RpgPackageImpl extends EPackageImpl implements RpgPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass nodeActivationBuyEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass nodeActivationPropagateEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass activationCostEClass = null;
 
 	/**
@@ -157,7 +153,84 @@ public class RpgPackageImpl extends EPackageImpl implements RpgPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass abilityCostEClass = null;
+	private EClass propagationRequirementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass randomizerEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass statTalentEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass tickEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass cooldownChangeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass changeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass unlockTalentEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass unlockAbilityEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass unlockEffectEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass unlockChangeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass cooldownTalentEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass unlockModifierEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -221,6 +294,13 @@ public class RpgPackageImpl extends EPackageImpl implements RpgPackage {
 	 * @generated
 	 */
 	private EEnum tickTypeEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum changeValueTypeEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -414,6 +494,15 @@ public class RpgPackageImpl extends EPackageImpl implements RpgPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getCharacterClass_IsPlayable() {
+		return (EAttribute)characterClassEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getCharacterStatistic() {
 		return characterStatisticEClass;
 	}
@@ -549,17 +638,8 @@ public class RpgPackageImpl extends EPackageImpl implements RpgPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getBranch_StartNodes() {
-		return (EReference)branchEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getBranch_Tooltip() {
-		return (EAttribute)branchEClass.getEStructuralFeatures().get(5);
+		return (EAttribute)branchEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -568,7 +648,7 @@ public class RpgPackageImpl extends EPackageImpl implements RpgPackage {
 	 * @generated
 	 */
 	public EAttribute getBranch_IsInheritable() {
-		return (EAttribute)branchEClass.getEStructuralFeatures().get(6);
+		return (EAttribute)branchEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -577,6 +657,15 @@ public class RpgPackageImpl extends EPackageImpl implements RpgPackage {
 	 * @generated
 	 */
 	public EReference getBranch_Nodes() {
+		return (EReference)branchEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getBranch_CharacterClass() {
 		return (EReference)branchEClass.getEStructuralFeatures().get(7);
 	}
 
@@ -693,17 +782,8 @@ public class RpgPackageImpl extends EPackageImpl implements RpgPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getNode_IsActivated() {
-		return (EAttribute)nodeEClass.getEStructuralFeatures().get(11);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getNode_Abilities() {
-		return (EReference)nodeEClass.getEStructuralFeatures().get(12);
+		return (EReference)nodeEClass.getEStructuralFeatures().get(11);
 	}
 
 	/**
@@ -712,7 +792,25 @@ public class RpgPackageImpl extends EPackageImpl implements RpgPackage {
 	 * @generated
 	 */
 	public EReference getNode_Talents() {
-		return (EReference)nodeEClass.getEStructuralFeatures().get(13);
+		return (EReference)nodeEClass.getEStructuralFeatures().get(12);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getNode_IsLocked() {
+		return (EAttribute)nodeEClass.getEStructuralFeatures().get(13);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getNode_Branch() {
+		return (EReference)nodeEClass.getEStructuralFeatures().get(14);
 	}
 
 	/**
@@ -729,7 +827,7 @@ public class RpgPackageImpl extends EPackageImpl implements RpgPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getNodeActivation_Text() {
+	public EAttribute getNodeActivation_IsAuto() {
 		return (EAttribute)nodeActivationEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -738,7 +836,7 @@ public class RpgPackageImpl extends EPackageImpl implements RpgPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getNodeActivation_IsAuto() {
+	public EAttribute getNodeActivation_Level() {
 		return (EAttribute)nodeActivationEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -747,8 +845,8 @@ public class RpgPackageImpl extends EPackageImpl implements RpgPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getNodeActivation_Level() {
-		return (EAttribute)nodeActivationEClass.getEStructuralFeatures().get(2);
+	public EReference getNodeActivation_Costs() {
+		return (EReference)nodeActivationEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -756,8 +854,8 @@ public class RpgPackageImpl extends EPackageImpl implements RpgPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getNodeActivationBuy() {
-		return nodeActivationBuyEClass;
+	public EReference getNodeActivation_Requirements() {
+		return (EReference)nodeActivationEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -765,35 +863,8 @@ public class RpgPackageImpl extends EPackageImpl implements RpgPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getNodeActivationBuy_Costs() {
-		return (EReference)nodeActivationBuyEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getNodeActivationPropagate() {
-		return nodeActivationPropagateEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getNodeActivationPropagate_FollowsActivationOf() {
-		return (EReference)nodeActivationPropagateEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getNodeActivationPropagate_RequiredLevel() {
-		return (EAttribute)nodeActivationPropagateEClass.getEStructuralFeatures().get(1);
+	public EReference getNodeActivation_Node() {
+		return (EReference)nodeActivationEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -830,6 +901,15 @@ public class RpgPackageImpl extends EPackageImpl implements RpgPackage {
 	 */
 	public EReference getActivationCost_Statistic() {
 		return (EReference)activationCostEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getActivationCost_NodeActivation() {
+		return (EReference)activationCostEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -909,7 +989,7 @@ public class RpgPackageImpl extends EPackageImpl implements RpgPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAbility_AbilityType() {
+	public EAttribute getAbility_Cooldown() {
 		return (EAttribute)abilityEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -918,7 +998,7 @@ public class RpgPackageImpl extends EPackageImpl implements RpgPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAbility_CastTime() {
+	public EAttribute getAbility_AbilityType() {
 		return (EAttribute)abilityEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -927,7 +1007,7 @@ public class RpgPackageImpl extends EPackageImpl implements RpgPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAbility_Range() {
+	public EAttribute getAbility_CastTime() {
 		return (EAttribute)abilityEClass.getEStructuralFeatures().get(6);
 	}
 
@@ -936,8 +1016,17 @@ public class RpgPackageImpl extends EPackageImpl implements RpgPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getAbility_Range() {
+		return (EAttribute)abilityEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EReference getAbility_RangeUnit() {
-		return (EReference)abilityEClass.getEStructuralFeatures().get(7);
+		return (EReference)abilityEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -946,7 +1035,7 @@ public class RpgPackageImpl extends EPackageImpl implements RpgPackage {
 	 * @generated
 	 */
 	public EAttribute getAbility_OnLevel() {
-		return (EAttribute)abilityEClass.getEStructuralFeatures().get(8);
+		return (EAttribute)abilityEClass.getEStructuralFeatures().get(9);
 	}
 
 	/**
@@ -955,7 +1044,7 @@ public class RpgPackageImpl extends EPackageImpl implements RpgPackage {
 	 * @generated
 	 */
 	public EReference getAbility_Effects() {
-		return (EReference)abilityEClass.getEStructuralFeatures().get(9);
+		return (EReference)abilityEClass.getEStructuralFeatures().get(10);
 	}
 
 	/**
@@ -963,8 +1052,17 @@ public class RpgPackageImpl extends EPackageImpl implements RpgPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAbility_Costs() {
-		return (EReference)abilityEClass.getEStructuralFeatures().get(10);
+	public EReference getAbility_Node() {
+		return (EReference)abilityEClass.getEStructuralFeatures().get(11);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAbility_IsLocked() {
+		return (EAttribute)abilityEClass.getEStructuralFeatures().get(12);
 	}
 
 	/**
@@ -1035,8 +1133,35 @@ public class RpgPackageImpl extends EPackageImpl implements RpgPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEffect_StatChange() {
+	public EReference getEffect_Ability() {
 		return (EReference)effectEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getEffect_Randomizer() {
+		return (EReference)effectEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getEffect_Changes() {
+		return (EReference)effectEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEffect_IsLocked() {
+		return (EAttribute)effectEClass.getEStructuralFeatures().get(9);
 	}
 
 	/**
@@ -1053,44 +1178,8 @@ public class RpgPackageImpl extends EPackageImpl implements RpgPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getStatChange_ChangeType() {
-		return (EAttribute)statChangeEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getStatChange_TickType() {
-		return (EAttribute)statChangeEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getStatChange_BaseValue() {
-		return (EAttribute)statChangeEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getStatChange_TickValue() {
-		return (EAttribute)statChangeEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getStatChange_ChangesStatistic() {
-		return (EReference)statChangeEClass.getEStructuralFeatures().get(4);
+		return (EReference)statChangeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1099,7 +1188,34 @@ public class RpgPackageImpl extends EPackageImpl implements RpgPackage {
 	 * @generated
 	 */
 	public EReference getStatChange_Modifiers() {
-		return (EReference)statChangeEClass.getEStructuralFeatures().get(5);
+		return (EReference)statChangeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getStatChange_Randomizer() {
+		return (EReference)statChangeEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getStatChange_Tick() {
+		return (EReference)statChangeEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getStatChange_StatTalent() {
+		return (EReference)statChangeEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -1170,6 +1286,51 @@ public class RpgPackageImpl extends EPackageImpl implements RpgPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getModifier_StatChange() {
+		return (EReference)modifierEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getModifier_Randomizer() {
+		return (EReference)modifierEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getModifier_OnLevel() {
+		return (EAttribute)modifierEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getModifier_Exclusive() {
+		return (EAttribute)modifierEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getModifier_TargetStatistic() {
+		return (EAttribute)modifierEClass.getEStructuralFeatures().get(10);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getTalent() {
 		return talentEClass;
 	}
@@ -1215,8 +1376,8 @@ public class RpgPackageImpl extends EPackageImpl implements RpgPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getAbilityCost() {
-		return abilityCostEClass;
+	public EReference getTalent_Node() {
+		return (EReference)talentEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -1224,8 +1385,8 @@ public class RpgPackageImpl extends EPackageImpl implements RpgPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAbilityCost_Consume() {
-		return (EAttribute)abilityCostEClass.getEStructuralFeatures().get(0);
+	public EAttribute getTalent_OnLevel() {
+		return (EAttribute)talentEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -1233,8 +1394,8 @@ public class RpgPackageImpl extends EPackageImpl implements RpgPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAbilityCost_Cost() {
-		return (EAttribute)abilityCostEClass.getEStructuralFeatures().get(1);
+	public EClass getPropagationRequirement() {
+		return propagationRequirementEClass;
 	}
 
 	/**
@@ -1242,8 +1403,305 @@ public class RpgPackageImpl extends EPackageImpl implements RpgPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAbilityCost_Statistic() {
-		return (EReference)abilityCostEClass.getEStructuralFeatures().get(2);
+	public EAttribute getPropagationRequirement_RequiredLevel() {
+		return (EAttribute)propagationRequirementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getPropagationRequirement_FollowsActivationOf() {
+		return (EReference)propagationRequirementEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getPropagationRequirement_NodeActivation() {
+		return (EReference)propagationRequirementEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getRandomizer() {
+		return randomizerEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getRandomizer_Value() {
+		return (EAttribute)randomizerEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRandomizer_BasedOn() {
+		return (EReference)randomizerEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getStatTalent() {
+		return statTalentEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getStatTalent_StatChanges() {
+		return (EReference)statTalentEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTick() {
+		return tickEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTick_TickType() {
+		return (EAttribute)tickEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTick_StatChange() {
+		return (EReference)tickEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTick_Value() {
+		return (EAttribute)tickEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTick_Duration() {
+		return (EAttribute)tickEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCooldownChange() {
+		return cooldownChangeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCooldownChange_Ability() {
+		return (EReference)cooldownChangeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCooldownChange_Talent() {
+		return (EReference)cooldownChangeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCooldownChange_CooldownTalent() {
+		return (EReference)cooldownChangeEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getChange() {
+		return changeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getChange_BaseValue() {
+		return (EAttribute)changeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getChange_ChangeValueType() {
+		return (EAttribute)changeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getChange_ChangeType() {
+		return (EAttribute)changeEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getChange_Effect() {
+		return (EReference)changeEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getChange_IsLocked() {
+		return (EAttribute)changeEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getUnlockTalent() {
+		return unlockTalentEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getUnlockAbility() {
+		return unlockAbilityEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getUnlockAbility_Ability() {
+		return (EReference)unlockAbilityEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getUnlockEffect() {
+		return unlockEffectEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getUnlockEffect_Effect() {
+		return (EReference)unlockEffectEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getUnlockChange() {
+		return unlockChangeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getUnlockChange_Change() {
+		return (EReference)unlockChangeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCooldownTalent() {
+		return cooldownTalentEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCooldownTalent_CooldownChanges() {
+		return (EReference)cooldownTalentEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getUnlockModifier() {
+		return unlockModifierEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getUnlockModifier_Modifier() {
+		return (EReference)unlockModifierEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1332,6 +1790,15 @@ public class RpgPackageImpl extends EPackageImpl implements RpgPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getChangeValueType() {
+		return changeValueTypeEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public RpgFactory getRpgFactory() {
 		return (RpgFactory)getEFactoryInstance();
 	}
@@ -1369,6 +1836,7 @@ public class RpgPackageImpl extends EPackageImpl implements RpgPackage {
 		createEReference(characterClassEClass, CHARACTER_CLASS__CHILD_CLASSES);
 		createEReference(characterClassEClass, CHARACTER_CLASS__PARENT_CLASSES);
 		createEReference(characterClassEClass, CHARACTER_CLASS__BRANCHES);
+		createEAttribute(characterClassEClass, CHARACTER_CLASS__IS_PLAYABLE);
 
 		characterStatisticEClass = createEClass(CHARACTER_STATISTIC);
 		createEAttribute(characterStatisticEClass, CHARACTER_STATISTIC__NAME);
@@ -1386,10 +1854,10 @@ public class RpgPackageImpl extends EPackageImpl implements RpgPackage {
 		createEAttribute(branchEClass, BRANCH__LORE);
 		createEAttribute(branchEClass, BRANCH__DESCRIPTION);
 		createEAttribute(branchEClass, BRANCH__BRANCH_TYPE);
-		createEReference(branchEClass, BRANCH__START_NODES);
 		createEAttribute(branchEClass, BRANCH__TOOLTIP);
 		createEAttribute(branchEClass, BRANCH__IS_INHERITABLE);
 		createEReference(branchEClass, BRANCH__NODES);
+		createEReference(branchEClass, BRANCH__CHARACTER_CLASS);
 
 		nodeEClass = createEClass(NODE);
 		createEAttribute(nodeEClass, NODE__NAME);
@@ -1403,26 +1871,23 @@ public class RpgPackageImpl extends EPackageImpl implements RpgPackage {
 		createEAttribute(nodeEClass, NODE__MIN_ACTIVATION_LEVEL);
 		createEAttribute(nodeEClass, NODE__MAX_ACTIVATION_LEVEL);
 		createEAttribute(nodeEClass, NODE__ACTIVATION_LEVEL);
-		createEAttribute(nodeEClass, NODE__IS_ACTIVATED);
 		createEReference(nodeEClass, NODE__ABILITIES);
 		createEReference(nodeEClass, NODE__TALENTS);
+		createEAttribute(nodeEClass, NODE__IS_LOCKED);
+		createEReference(nodeEClass, NODE__BRANCH);
 
 		nodeActivationEClass = createEClass(NODE_ACTIVATION);
-		createEAttribute(nodeActivationEClass, NODE_ACTIVATION__TEXT);
 		createEAttribute(nodeActivationEClass, NODE_ACTIVATION__IS_AUTO);
 		createEAttribute(nodeActivationEClass, NODE_ACTIVATION__LEVEL);
-
-		nodeActivationBuyEClass = createEClass(NODE_ACTIVATION_BUY);
-		createEReference(nodeActivationBuyEClass, NODE_ACTIVATION_BUY__COSTS);
-
-		nodeActivationPropagateEClass = createEClass(NODE_ACTIVATION_PROPAGATE);
-		createEReference(nodeActivationPropagateEClass, NODE_ACTIVATION_PROPAGATE__FOLLOWS_ACTIVATION_OF);
-		createEAttribute(nodeActivationPropagateEClass, NODE_ACTIVATION_PROPAGATE__REQUIRED_LEVEL);
+		createEReference(nodeActivationEClass, NODE_ACTIVATION__COSTS);
+		createEReference(nodeActivationEClass, NODE_ACTIVATION__REQUIREMENTS);
+		createEReference(nodeActivationEClass, NODE_ACTIVATION__NODE);
 
 		activationCostEClass = createEClass(ACTIVATION_COST);
 		createEAttribute(activationCostEClass, ACTIVATION_COST__CONSUME);
 		createEAttribute(activationCostEClass, ACTIVATION_COST__COST);
 		createEReference(activationCostEClass, ACTIVATION_COST__STATISTIC);
+		createEReference(activationCostEClass, ACTIVATION_COST__NODE_ACTIVATION);
 
 		rangeUnitEClass = createEClass(RANGE_UNIT);
 		createEAttribute(rangeUnitEClass, RANGE_UNIT__NAME);
@@ -1433,13 +1898,15 @@ public class RpgPackageImpl extends EPackageImpl implements RpgPackage {
 		createEAttribute(abilityEClass, ABILITY__LORE);
 		createEAttribute(abilityEClass, ABILITY__TOOLTIP);
 		createEAttribute(abilityEClass, ABILITY__CAST_TYPE);
+		createEAttribute(abilityEClass, ABILITY__COOLDOWN);
 		createEAttribute(abilityEClass, ABILITY__ABILITY_TYPE);
 		createEAttribute(abilityEClass, ABILITY__CAST_TIME);
 		createEAttribute(abilityEClass, ABILITY__RANGE);
 		createEReference(abilityEClass, ABILITY__RANGE_UNIT);
 		createEAttribute(abilityEClass, ABILITY__ON_LEVEL);
 		createEReference(abilityEClass, ABILITY__EFFECTS);
-		createEReference(abilityEClass, ABILITY__COSTS);
+		createEReference(abilityEClass, ABILITY__NODE);
+		createEAttribute(abilityEClass, ABILITY__IS_LOCKED);
 
 		effectEClass = createEClass(EFFECT);
 		createEAttribute(effectEClass, EFFECT__NAME);
@@ -1448,15 +1915,17 @@ public class RpgPackageImpl extends EPackageImpl implements RpgPackage {
 		createEAttribute(effectEClass, EFFECT__TARGET_TYPE);
 		createEAttribute(effectEClass, EFFECT__ON_LEVEL);
 		createEReference(effectEClass, EFFECT__INSTANTIATE);
-		createEReference(effectEClass, EFFECT__STAT_CHANGE);
+		createEReference(effectEClass, EFFECT__ABILITY);
+		createEReference(effectEClass, EFFECT__RANDOMIZER);
+		createEReference(effectEClass, EFFECT__CHANGES);
+		createEAttribute(effectEClass, EFFECT__IS_LOCKED);
 
 		statChangeEClass = createEClass(STAT_CHANGE);
-		createEAttribute(statChangeEClass, STAT_CHANGE__CHANGE_TYPE);
-		createEAttribute(statChangeEClass, STAT_CHANGE__TICK_TYPE);
-		createEAttribute(statChangeEClass, STAT_CHANGE__BASE_VALUE);
-		createEAttribute(statChangeEClass, STAT_CHANGE__TICK_VALUE);
 		createEReference(statChangeEClass, STAT_CHANGE__CHANGES_STATISTIC);
 		createEReference(statChangeEClass, STAT_CHANGE__MODIFIERS);
+		createEReference(statChangeEClass, STAT_CHANGE__RANDOMIZER);
+		createEReference(statChangeEClass, STAT_CHANGE__TICK);
+		createEReference(statChangeEClass, STAT_CHANGE__STAT_TALENT);
 
 		modifierEClass = createEClass(MODIFIER);
 		createEAttribute(modifierEClass, MODIFIER__CHANGE_TYPE);
@@ -1465,17 +1934,66 @@ public class RpgPackageImpl extends EPackageImpl implements RpgPackage {
 		createEAttribute(modifierEClass, MODIFIER__PRIORITY_ORDER);
 		createEReference(modifierEClass, MODIFIER__BASED_ON);
 		createEAttribute(modifierEClass, MODIFIER__BASED_ON_VALUE);
+		createEReference(modifierEClass, MODIFIER__STAT_CHANGE);
+		createEReference(modifierEClass, MODIFIER__RANDOMIZER);
+		createEAttribute(modifierEClass, MODIFIER__ON_LEVEL);
+		createEAttribute(modifierEClass, MODIFIER__EXCLUSIVE);
+		createEAttribute(modifierEClass, MODIFIER__TARGET_STATISTIC);
 
 		talentEClass = createEClass(TALENT);
 		createEAttribute(talentEClass, TALENT__NAME);
 		createEAttribute(talentEClass, TALENT__TOOLTIP);
 		createEAttribute(talentEClass, TALENT__LORE);
 		createEAttribute(talentEClass, TALENT__DESCRIPTION);
+		createEReference(talentEClass, TALENT__NODE);
+		createEAttribute(talentEClass, TALENT__ON_LEVEL);
 
-		abilityCostEClass = createEClass(ABILITY_COST);
-		createEAttribute(abilityCostEClass, ABILITY_COST__CONSUME);
-		createEAttribute(abilityCostEClass, ABILITY_COST__COST);
-		createEReference(abilityCostEClass, ABILITY_COST__STATISTIC);
+		propagationRequirementEClass = createEClass(PROPAGATION_REQUIREMENT);
+		createEAttribute(propagationRequirementEClass, PROPAGATION_REQUIREMENT__REQUIRED_LEVEL);
+		createEReference(propagationRequirementEClass, PROPAGATION_REQUIREMENT__FOLLOWS_ACTIVATION_OF);
+		createEReference(propagationRequirementEClass, PROPAGATION_REQUIREMENT__NODE_ACTIVATION);
+
+		randomizerEClass = createEClass(RANDOMIZER);
+		createEAttribute(randomizerEClass, RANDOMIZER__VALUE);
+		createEReference(randomizerEClass, RANDOMIZER__BASED_ON);
+
+		statTalentEClass = createEClass(STAT_TALENT);
+		createEReference(statTalentEClass, STAT_TALENT__STAT_CHANGES);
+
+		tickEClass = createEClass(TICK);
+		createEAttribute(tickEClass, TICK__TICK_TYPE);
+		createEReference(tickEClass, TICK__STAT_CHANGE);
+		createEAttribute(tickEClass, TICK__VALUE);
+		createEAttribute(tickEClass, TICK__DURATION);
+
+		cooldownChangeEClass = createEClass(COOLDOWN_CHANGE);
+		createEReference(cooldownChangeEClass, COOLDOWN_CHANGE__ABILITY);
+		createEReference(cooldownChangeEClass, COOLDOWN_CHANGE__TALENT);
+		createEReference(cooldownChangeEClass, COOLDOWN_CHANGE__COOLDOWN_TALENT);
+
+		changeEClass = createEClass(CHANGE);
+		createEAttribute(changeEClass, CHANGE__BASE_VALUE);
+		createEAttribute(changeEClass, CHANGE__CHANGE_VALUE_TYPE);
+		createEAttribute(changeEClass, CHANGE__CHANGE_TYPE);
+		createEReference(changeEClass, CHANGE__EFFECT);
+		createEAttribute(changeEClass, CHANGE__IS_LOCKED);
+
+		unlockTalentEClass = createEClass(UNLOCK_TALENT);
+
+		unlockAbilityEClass = createEClass(UNLOCK_ABILITY);
+		createEReference(unlockAbilityEClass, UNLOCK_ABILITY__ABILITY);
+
+		unlockEffectEClass = createEClass(UNLOCK_EFFECT);
+		createEReference(unlockEffectEClass, UNLOCK_EFFECT__EFFECT);
+
+		unlockChangeEClass = createEClass(UNLOCK_CHANGE);
+		createEReference(unlockChangeEClass, UNLOCK_CHANGE__CHANGE);
+
+		cooldownTalentEClass = createEClass(COOLDOWN_TALENT);
+		createEReference(cooldownTalentEClass, COOLDOWN_TALENT__COOLDOWN_CHANGES);
+
+		unlockModifierEClass = createEClass(UNLOCK_MODIFIER);
+		createEReference(unlockModifierEClass, UNLOCK_MODIFIER__MODIFIER);
 
 		// Create enums
 		statTypeEEnum = createEEnum(STAT_TYPE);
@@ -1487,6 +2005,7 @@ public class RpgPackageImpl extends EPackageImpl implements RpgPackage {
 		effectTypeEEnum = createEEnum(EFFECT_TYPE);
 		changeTypeEEnum = createEEnum(CHANGE_TYPE);
 		tickTypeEEnum = createEEnum(TICK_TYPE);
+		changeValueTypeEEnum = createEEnum(CHANGE_VALUE_TYPE);
 	}
 
 	/**
@@ -1513,34 +2032,42 @@ public class RpgPackageImpl extends EPackageImpl implements RpgPackage {
 		setNsURI(eNS_URI);
 
 		// Add supertypes to classes
-		nodeActivationBuyEClass.getESuperTypes().add(this.getNodeActivation());
-		nodeActivationPropagateEClass.getESuperTypes().add(this.getNodeActivation());
+		statChangeEClass.getESuperTypes().add(this.getChange());
+		statTalentEClass.getESuperTypes().add(this.getTalent());
+		cooldownChangeEClass.getESuperTypes().add(this.getChange());
+		unlockTalentEClass.getESuperTypes().add(this.getTalent());
+		unlockAbilityEClass.getESuperTypes().add(this.getUnlockTalent());
+		unlockEffectEClass.getESuperTypes().add(this.getUnlockTalent());
+		unlockChangeEClass.getESuperTypes().add(this.getUnlockTalent());
+		cooldownTalentEClass.getESuperTypes().add(this.getTalent());
+		unlockModifierEClass.getESuperTypes().add(this.getUnlockTalent());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(rpgEClass, rpg.RPG.class, "RPG", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getRPG_Name(), ecorePackage.getEString(), "name", null, 1, 1, rpg.RPG.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getRPG_Lore(), ecorePackage.getEString(), "lore", null, 1, 1, rpg.RPG.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRPG_Name(), ecorePackage.getEString(), "name", "My Role-Playing Game", 1, 1, rpg.RPG.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRPG_Lore(), ecorePackage.getEString(), "lore", "My lore", 1, 1, rpg.RPG.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRPG_AllClasses(), this.getCharacterClass(), null, "allClasses", null, 1, -1, rpg.RPG.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRPG_RangeUnits(), this.getRangeUnit(), null, "rangeUnits", null, 1, -1, rpg.RPG.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(characterClassEClass, CharacterClass.class, "CharacterClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getCharacterClass_Name(), ecorePackage.getEString(), "name", null, 1, 1, CharacterClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCharacterClass_Name(), ecorePackage.getEString(), "name", "My class", 1, 1, CharacterClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCharacterClass_Lore(), ecorePackage.getEString(), "lore", null, 0, 1, CharacterClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCharacterClass_Statistics(), this.getCharacterStatistic(), null, "statistics", null, 0, -1, CharacterClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCharacterClass_Description(), ecorePackage.getEString(), "description", null, 1, 1, CharacterClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCharacterClass_Description(), ecorePackage.getEString(), "description", "Placeholder description", 1, 1, CharacterClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCharacterClass_ChildClasses(), this.getCharacterClass(), this.getCharacterClass_ParentClasses(), "childClasses", null, 0, -1, CharacterClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCharacterClass_ParentClasses(), this.getCharacterClass(), this.getCharacterClass_ChildClasses(), "parentClasses", null, 0, -1, CharacterClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCharacterClass_Branches(), this.getBranch(), null, "branches", null, 0, -1, CharacterClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCharacterClass_Branches(), this.getBranch(), this.getBranch_CharacterClass(), "branches", null, 0, -1, CharacterClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCharacterClass_IsPlayable(), ecorePackage.getEBoolean(), "isPlayable", "false", 1, 1, CharacterClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(characterStatisticEClass, CharacterStatistic.class, "CharacterStatistic", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getCharacterStatistic_Name(), ecorePackage.getEString(), "name", null, 1, 1, CharacterStatistic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCharacterStatistic_Name(), ecorePackage.getEString(), "name", "My statistic", 1, 1, CharacterStatistic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCharacterStatistic_Lore(), ecorePackage.getEString(), "lore", null, 0, 1, CharacterStatistic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCharacterStatistic_Description(), ecorePackage.getEString(), "description", null, 1, 1, CharacterStatistic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCharacterStatistic_Tooltip(), ecorePackage.getEString(), "tooltip", null, 1, 1, CharacterStatistic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCharacterStatistic_Description(), ecorePackage.getEString(), "description", "Placeholder description", 1, 1, CharacterStatistic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCharacterStatistic_Tooltip(), ecorePackage.getEString(), "tooltip", "Placeholder tooltip", 1, 1, CharacterStatistic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCharacterStatistic_MinValue(), ecorePackage.getEDouble(), "minValue", "1", 1, 1, CharacterStatistic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCharacterStatistic_MaxValue(), ecorePackage.getEDouble(), "maxValue", "1", 1, 1, CharacterStatistic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCharacterStatistic_StartLimitValue(), ecorePackage.getEDouble(), "startLimitValue", "1", 1, 1, CharacterStatistic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCharacterStatistic_StatType(), this.getStatType(), "statType", "ASCENDING", 1, 1, CharacterStatistic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCharacterStatistic_StatType(), this.getStatType(), "statType", "STAT", 1, 1, CharacterStatistic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCharacterStatistic_IsTargetable(), ecorePackage.getEBoolean(), "isTargetable", "true", 1, 1, CharacterStatistic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(branchEClass, Branch.class, "Branch", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1548,10 +2075,10 @@ public class RpgPackageImpl extends EPackageImpl implements RpgPackage {
 		initEAttribute(getBranch_Lore(), ecorePackage.getEString(), "lore", null, 0, 1, Branch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBranch_Description(), ecorePackage.getEString(), "description", null, 1, 1, Branch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBranch_BranchType(), this.getBranchType(), "branchType", null, 1, 1, Branch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getBranch_StartNodes(), this.getNode(), null, "startNodes", null, 0, -1, Branch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBranch_Tooltip(), ecorePackage.getEString(), "tooltip", null, 1, 1, Branch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBranch_IsInheritable(), ecorePackage.getEBoolean(), "isInheritable", "true", 1, 1, Branch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getBranch_Nodes(), this.getNode(), null, "nodes", null, 1, -1, Branch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBranch_Nodes(), this.getNode(), this.getNode_Branch(), "nodes", null, 1, -1, Branch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBranch_CharacterClass(), this.getCharacterClass(), this.getCharacterClass_Branches(), "characterClass", null, 1, 1, Branch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(nodeEClass, Node.class, "Node", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getNode_Name(), ecorePackage.getEString(), "name", null, 1, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1560,31 +2087,28 @@ public class RpgPackageImpl extends EPackageImpl implements RpgPackage {
 		initEAttribute(getNode_Description(), ecorePackage.getEString(), "description", null, 1, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getNode_NodeType(), this.getNodeType(), "nodeType", "STANDARD", 1, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getNode_ChildNodes(), this.getNode(), this.getNode_ParentNodes(), "childNodes", null, 0, -1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getNode_ParentNodes(), this.getNode(), this.getNode_ChildNodes(), "parentNodes", null, 0, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getNode_Activation(), this.getNodeActivation(), null, "activation", null, 0, -1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getNode_ParentNodes(), this.getNode(), this.getNode_ChildNodes(), "parentNodes", null, 0, -1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getNode_Activation(), this.getNodeActivation(), this.getNodeActivation_Node(), "activation", null, 0, -1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getNode_MinActivationLevel(), ecorePackage.getEInt(), "minActivationLevel", "1", 1, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getNode_MaxActivationLevel(), ecorePackage.getEInt(), "maxActivationLevel", "1", 1, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getNode_ActivationLevel(), ecorePackage.getEInt(), "activationLevel", "0", 1, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getNode_IsActivated(), ecorePackage.getEBoolean(), "isActivated", "false", 1, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getNode_Abilities(), this.getAbility(), null, "abilities", null, 0, -1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getNode_Talents(), this.getTalent(), null, "talents", null, 0, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getNode_Abilities(), this.getAbility(), this.getAbility_Node(), "abilities", null, 0, -1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getNode_Talents(), this.getTalent(), this.getTalent_Node(), "talents", null, 0, -1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getNode_IsLocked(), ecorePackage.getEBoolean(), "isLocked", "false", 1, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getNode_Branch(), this.getBranch(), this.getBranch_Nodes(), "branch", null, 1, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(nodeActivationEClass, NodeActivation.class, "NodeActivation", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getNodeActivation_Text(), ecorePackage.getEString(), "text", null, 1, 1, NodeActivation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(nodeActivationEClass, NodeActivation.class, "NodeActivation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getNodeActivation_IsAuto(), ecorePackage.getEBoolean(), "isAuto", null, 1, 1, NodeActivation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getNodeActivation_Level(), ecorePackage.getEInt(), "level", null, 1, 1, NodeActivation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(nodeActivationBuyEClass, NodeActivationBuy.class, "NodeActivationBuy", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getNodeActivationBuy_Costs(), this.getActivationCost(), null, "costs", null, 1, -1, NodeActivationBuy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(nodeActivationPropagateEClass, NodeActivationPropagate.class, "NodeActivationPropagate", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getNodeActivationPropagate_FollowsActivationOf(), this.getNode(), null, "followsActivationOf", null, 1, 1, NodeActivationPropagate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getNodeActivationPropagate_RequiredLevel(), ecorePackage.getEInt(), "requiredLevel", null, 1, 1, NodeActivationPropagate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getNodeActivation_Costs(), this.getActivationCost(), this.getActivationCost_NodeActivation(), "costs", null, 0, -1, NodeActivation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getNodeActivation_Requirements(), this.getPropagationRequirement(), this.getPropagationRequirement_NodeActivation(), "requirements", null, 0, -1, NodeActivation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getNodeActivation_Node(), this.getNode(), this.getNode_Activation(), "node", null, 1, 1, NodeActivation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(activationCostEClass, ActivationCost.class, "ActivationCost", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getActivationCost_Consume(), ecorePackage.getEBoolean(), "consume", "true", 1, 1, ActivationCost.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getActivationCost_Cost(), ecorePackage.getEDouble(), "cost", null, 1, 1, ActivationCost.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getActivationCost_Statistic(), this.getCharacterStatistic(), null, "statistic", null, 1, 1, ActivationCost.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getActivationCost_NodeActivation(), this.getNodeActivation(), this.getNodeActivation_Costs(), "nodeActivation", null, 1, 1, ActivationCost.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(rangeUnitEClass, RangeUnit.class, "RangeUnit", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getRangeUnit_Name(), ecorePackage.getEString(), "name", null, 1, 1, RangeUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1595,13 +2119,15 @@ public class RpgPackageImpl extends EPackageImpl implements RpgPackage {
 		initEAttribute(getAbility_Lore(), ecorePackage.getEString(), "lore", null, 1, 1, Ability.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAbility_Tooltip(), ecorePackage.getEString(), "tooltip", null, 1, 1, Ability.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAbility_CastType(), this.getCastType(), "castType", null, 1, 1, Ability.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAbility_Cooldown(), ecorePackage.getEDouble(), "cooldown", "0", 1, 1, Ability.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAbility_AbilityType(), this.getAbilityType(), "abilityType", null, 1, 1, Ability.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAbility_CastTime(), ecorePackage.getEDouble(), "castTime", null, 0, 1, Ability.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAbility_Range(), ecorePackage.getEDouble(), "range", null, 1, 1, Ability.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAbility_RangeUnit(), this.getRangeUnit(), null, "rangeUnit", null, 1, 1, Ability.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAbility_OnLevel(), ecorePackage.getEInt(), "onLevel", null, 1, 1, Ability.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAbility_Effects(), this.getEffect(), null, "effects", null, 1, -1, Ability.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAbility_Costs(), this.getAbilityCost(), null, "costs", null, 1, -1, Ability.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAbility_Effects(), this.getEffect(), this.getEffect_Ability(), "effects", null, 1, -1, Ability.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAbility_Node(), this.getNode(), this.getNode_Abilities(), "node", null, 1, 1, Ability.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAbility_IsLocked(), ecorePackage.getEBoolean(), "isLocked", "false", 1, 1, Ability.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(effectEClass, Effect.class, "Effect", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getEffect_Name(), ecorePackage.getEString(), "name", null, 1, 1, Effect.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1610,15 +2136,17 @@ public class RpgPackageImpl extends EPackageImpl implements RpgPackage {
 		initEAttribute(getEffect_TargetType(), this.getTargetType(), "targetType", null, 1, 1, Effect.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEffect_OnLevel(), ecorePackage.getEInt(), "onLevel", null, 1, 1, Effect.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEffect_Instantiate(), this.getCharacterClass(), null, "instantiate", null, 0, 1, Effect.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getEffect_StatChange(), this.getStatChange(), null, "statChange", null, 0, -1, Effect.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEffect_Ability(), this.getAbility(), this.getAbility_Effects(), "ability", null, 1, 1, Effect.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEffect_Randomizer(), this.getRandomizer(), null, "randomizer", null, 0, 1, Effect.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEffect_Changes(), this.getChange(), this.getChange_Effect(), "changes", null, 0, -1, Effect.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEffect_IsLocked(), ecorePackage.getEBoolean(), "isLocked", "false", 1, 1, Effect.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(statChangeEClass, StatChange.class, "StatChange", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getStatChange_ChangeType(), this.getChangeType(), "changeType", null, 1, 1, StatChange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getStatChange_TickType(), this.getTickType(), "tickType", null, 1, 1, StatChange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getStatChange_BaseValue(), ecorePackage.getEDouble(), "baseValue", null, 1, 1, StatChange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getStatChange_TickValue(), ecorePackage.getEInt(), "tickValue", null, 1, 1, StatChange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getStatChange_ChangesStatistic(), this.getCharacterStatistic(), null, "changesStatistic", null, 1, 1, StatChange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getStatChange_Modifiers(), this.getModifier(), null, "modifiers", null, 0, -1, StatChange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getStatChange_Modifiers(), this.getModifier(), this.getModifier_StatChange(), "modifiers", null, 0, -1, StatChange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getStatChange_Randomizer(), this.getRandomizer(), null, "randomizer", null, 0, 1, StatChange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getStatChange_Tick(), this.getTick(), this.getTick_StatChange(), "tick", null, 0, 1, StatChange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getStatChange_StatTalent(), this.getStatTalent(), this.getStatTalent_StatChanges(), "statTalent", null, 0, 1, StatChange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(modifierEClass, Modifier.class, "Modifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getModifier_ChangeType(), this.getChangeType(), "changeType", null, 0, 1, Modifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1627,22 +2155,71 @@ public class RpgPackageImpl extends EPackageImpl implements RpgPackage {
 		initEAttribute(getModifier_PriorityOrder(), ecorePackage.getEInt(), "priorityOrder", null, 1, 1, Modifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getModifier_BasedOn(), this.getCharacterStatistic(), null, "basedOn", null, 0, 1, Modifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getModifier_BasedOnValue(), ecorePackage.getEDouble(), "basedOnValue", null, 0, 1, Modifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModifier_StatChange(), this.getStatChange(), this.getStatChange_Modifiers(), "statChange", null, 1, 1, Modifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModifier_Randomizer(), this.getRandomizer(), null, "randomizer", null, 0, 1, Modifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getModifier_OnLevel(), ecorePackage.getEInt(), "onLevel", "1", 0, 1, Modifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getModifier_Exclusive(), ecorePackage.getEBoolean(), "exclusive", "false", 1, 1, Modifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getModifier_TargetStatistic(), ecorePackage.getEBoolean(), "targetStatistic", "false", 1, 1, Modifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(talentEClass, Talent.class, "Talent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(talentEClass, Talent.class, "Talent", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTalent_Name(), ecorePackage.getEString(), "name", null, 1, 1, Talent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTalent_Tooltip(), ecorePackage.getEString(), "tooltip", null, 1, 1, Talent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTalent_Lore(), ecorePackage.getEString(), "lore", null, 0, 1, Talent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTalent_Description(), ecorePackage.getEString(), "description", null, 1, 1, Talent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTalent_Node(), this.getNode(), this.getNode_Talents(), "node", null, 1, 1, Talent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTalent_OnLevel(), ecorePackage.getEInt(), "onLevel", null, 1, 1, Talent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(abilityCostEClass, AbilityCost.class, "AbilityCost", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getAbilityCost_Consume(), ecorePackage.getEBoolean(), "consume", "true", 1, 1, AbilityCost.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAbilityCost_Cost(), ecorePackage.getEDouble(), "cost", null, 0, 1, AbilityCost.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAbilityCost_Statistic(), this.getCharacterStatistic(), null, "statistic", null, 1, 1, AbilityCost.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(propagationRequirementEClass, PropagationRequirement.class, "PropagationRequirement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getPropagationRequirement_RequiredLevel(), ecorePackage.getEInt(), "requiredLevel", null, 1, 1, PropagationRequirement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPropagationRequirement_FollowsActivationOf(), this.getNode(), null, "followsActivationOf", null, 1, 1, PropagationRequirement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPropagationRequirement_NodeActivation(), this.getNodeActivation(), this.getNodeActivation_Requirements(), "nodeActivation", null, 1, 1, PropagationRequirement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(randomizerEClass, Randomizer.class, "Randomizer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getRandomizer_Value(), ecorePackage.getEDouble(), "value", "0", 1, 1, Randomizer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRandomizer_BasedOn(), this.getCharacterStatistic(), null, "basedOn", null, 0, 1, Randomizer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(statTalentEClass, StatTalent.class, "StatTalent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getStatTalent_StatChanges(), this.getStatChange(), this.getStatChange_StatTalent(), "statChanges", null, 1, -1, StatTalent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(tickEClass, Tick.class, "Tick", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getTick_TickType(), this.getTickType(), "tickType", null, 1, 1, Tick.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTick_StatChange(), this.getStatChange(), this.getStatChange_Tick(), "statChange", null, 1, 1, Tick.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTick_Value(), ecorePackage.getEDouble(), "value", null, 0, 1, Tick.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTick_Duration(), ecorePackage.getEDouble(), "duration", null, 1, 1, Tick.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(cooldownChangeEClass, CooldownChange.class, "CooldownChange", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCooldownChange_Ability(), this.getAbility(), null, "ability", null, 0, 1, CooldownChange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCooldownChange_Talent(), this.getTalent(), null, "talent", null, 0, 1, CooldownChange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCooldownChange_CooldownTalent(), this.getCooldownTalent(), this.getCooldownTalent_CooldownChanges(), "cooldownTalent", null, 0, 1, CooldownChange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(changeEClass, Change.class, "Change", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getChange_BaseValue(), ecorePackage.getEDouble(), "baseValue", null, 1, 1, Change.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getChange_ChangeValueType(), this.getChangeValueType(), "changeValueType", null, 1, 1, Change.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getChange_ChangeType(), this.getChangeType(), "changeType", null, 1, 1, Change.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getChange_Effect(), this.getEffect(), this.getEffect_Changes(), "effect", null, 0, 1, Change.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getChange_IsLocked(), ecorePackage.getEBoolean(), "isLocked", "false", 1, 1, Change.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(unlockTalentEClass, UnlockTalent.class, "UnlockTalent", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(unlockAbilityEClass, UnlockAbility.class, "UnlockAbility", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getUnlockAbility_Ability(), this.getAbility(), null, "ability", null, 1, 1, UnlockAbility.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(unlockEffectEClass, UnlockEffect.class, "UnlockEffect", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getUnlockEffect_Effect(), this.getEffect(), null, "effect", null, 1, 1, UnlockEffect.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(unlockChangeEClass, UnlockChange.class, "UnlockChange", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getUnlockChange_Change(), this.getChange(), null, "change", null, 1, 1, UnlockChange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(cooldownTalentEClass, CooldownTalent.class, "CooldownTalent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCooldownTalent_CooldownChanges(), this.getCooldownChange(), this.getCooldownChange_CooldownTalent(), "cooldownChanges", null, 1, -1, CooldownTalent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(unlockModifierEClass, UnlockModifier.class, "UnlockModifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getUnlockModifier_Modifier(), this.getModifier(), null, "modifier", null, 1, 1, UnlockModifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(statTypeEEnum, StatType.class, "StatType");
-		addEEnumLiteral(statTypeEEnum, StatType.ASCENDING_LITERAL);
-		addEEnumLiteral(statTypeEEnum, StatType.DESCENDING_LITERAL);
+		addEEnumLiteral(statTypeEEnum, StatType.STAT_LITERAL);
+		addEEnumLiteral(statTypeEEnum, StatType.FUEL_LITERAL);
 
 		initEEnum(branchTypeEEnum, BranchType.class, "BranchType");
 		addEEnumLiteral(branchTypeEEnum, BranchType.TALENT_LITERAL);
@@ -1677,12 +2254,17 @@ public class RpgPackageImpl extends EPackageImpl implements RpgPackage {
 		addEEnumLiteral(changeTypeEEnum, ChangeType.ADD_LITERAL);
 		addEEnumLiteral(changeTypeEEnum, ChangeType.SUBSTRACT_LITERAL);
 		addEEnumLiteral(changeTypeEEnum, ChangeType.MULTIPLY_LITERAL);
-		addEEnumLiteral(changeTypeEEnum, ChangeType.MOVE_LIMIT_LITERAL);
+		addEEnumLiteral(changeTypeEEnum, ChangeType.MOVE_LIMIT_UP_LITERAL);
+		addEEnumLiteral(changeTypeEEnum, ChangeType.MOVE_LIMIT_DOWN_LITERAL);
+		addEEnumLiteral(changeTypeEEnum, ChangeType.SET_LIMIT_LITERAL);
 
 		initEEnum(tickTypeEEnum, TickType.class, "TickType");
-		addEEnumLiteral(tickTypeEEnum, TickType.FLAT_LITERAL);
 		addEEnumLiteral(tickTypeEEnum, TickType.PER_TICK_LITERAL);
 		addEEnumLiteral(tickTypeEEnum, TickType.DELAYED_LITERAL);
+
+		initEEnum(changeValueTypeEEnum, ChangeValueType.class, "ChangeValueType");
+		addEEnumLiteral(changeValueTypeEEnum, ChangeValueType.VALUE_LITERAL);
+		addEEnumLiteral(changeValueTypeEEnum, ChangeValueType.PERCENTAGE_LITERAL);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -1709,7 +2291,7 @@ public class RpgPackageImpl extends EPackageImpl implements RpgPackage {
 		   source, 
 		   new String[] {
 			 "ecore", "http://www.eclipse.org/emf/2002/Ecore#/"
-		   });																	
+		   });																													
 	}
 
 	/**
@@ -1729,52 +2311,88 @@ public class RpgPackageImpl extends EPackageImpl implements RpgPackage {
 			 "validationDelegates", "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"
 		   });		
 		addAnnotation
+		  (rpgEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "ClassyGame"
+		   });			
+		addAnnotation
 		  (characterClassEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "MeaningfulInheritance"
+			 "constraints", "MeaningfulClass RecursiveInheritance"
 		   });			
 		addAnnotation
 		  (characterStatisticEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "LimitBetweenMinAndMax"
+			 "constraints", "LimitBetweenMinAndMax ValidMinMax"
 		   });			
 		addAnnotation
 		  (branchEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "ValidStartNodes ValidBranchTypeImplication"
+			 "constraints", "ExistingRootNode"
 		   });			
 		addAnnotation
 		  (nodeEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "RootNodeChildren RootNodeParents StandardNodeChildren StandardNodeParents StandaloneNodeConnections ActivationIntegrity MinimalNodeActivation MaximalNodeActivation UniqueNodeActivationLevels ProperNodeActivationLevels ProperAbilityLevels ProperEffectLevels"
+			 "constraints", "RootNodeChildren StandardNodeChildren StandaloneNodeConnections SelfReference CircularReference ProperReference ActivationCondition ActivationIntegrity MinimalNodeActivation MaximalNodeActivation UniqueNodeActivationLevels ValidBranchTypeImplication"
 		   });			
 		addAnnotation
-		  (nodeActivationPropagateEClass, 
+		  (nodeActivationEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "ProperRequiredLevel"
+			 "constraints", "ProperNodeActivationLevels MeaningfulActivationCondition"
 		   });			
 		addAnnotation
 		  (activationCostEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "ProperCost"
+			 "constraints", "ProperCost ProperCostReference"
 		   });			
 		addAnnotation
 		  (abilityEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "ValidCastTime"
+			 "constraints", "ProperAbilityLevels ValidCastTime"
 		   });			
 		addAnnotation
 		  (effectEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "MeaningfulEffect"
+			 "constraints", "ProperEffectLevels MeaningfulEffect InstantiateConstraint"
+		   });			
+		addAnnotation
+		  (statChangeEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "SelfEffectStatChange SelfTalentStatChange SingularModifierOrder"
+		   });			
+		addAnnotation
+		  (modifierEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "NoMovingLimits"
+		   });			
+		addAnnotation
+		  (propagationRequirementEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "ProperRequiredLevel SelfReference ProperPropagationReference"
+		   });			
+		addAnnotation
+		  (randomizerEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "MeaningfulRandomizer ProperStatisticBase"
+		   });			
+		addAnnotation
+		  (cooldownChangeEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "MeaningfullCooldownChange ProperAbilityReference"
 		   });	
 	}
 
@@ -1787,75 +2405,90 @@ public class RpgPackageImpl extends EPackageImpl implements RpgPackage {
 	protected void createPivotAnnotations() {
 		String source = "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot";					
 		addAnnotation
+		  (rpgEClass, 
+		   source, 
+		   new String[] {
+			 "ClassyGame", "\n\t\t\tself.allClasses->size() > 0",
+			 "ClassyGame$message", "\'The game should contain at least one class\'"
+		   });			
+		addAnnotation
 		  (characterClassEClass, 
 		   source, 
 		   new String[] {
-			 "MeaningfulInheritance", "\n\t\t\tself.parentClasses->size() > 0 implies statistics->size() > 0 or branches->size() > 0",
-			 "MeaningfulInheritance$message", "\'Child classes should have their own statistics or branches.\'"
+			 "MeaningfulClass", "\n\t\t\tstatistics->size() > 0 or branches->size() > 0",
+			 "MeaningfulClass$message", "\'A class should have at least one statistic or branch.\'",
+			 "RecursiveInheritance", "\n\t\t\tself.parentClasses->forAll(parent | self._\'<>\'(parent))",
+			 "RecursiveInheritance$message", "\'A class cannot inherit itself.\'"
 		   });			
 		addAnnotation
 		  (characterStatisticEClass, 
 		   source, 
 		   new String[] {
 			 "LimitBetweenMinAndMax", "\n\t\t\tstartLimitValue <= maxValue and startLimitValue >= minValue",
-			 "LimitBetweenMinAndMax$message", "\'Value of startLimitValue must be between the values of minValue and maxValue.\'"
+			 "LimitBetweenMinAndMax$message", "\'Value of startLimitValue must be between the values of minValue and maxValue.\'",
+			 "ValidMinMax", "\n\t\t\tmaxValue >= minValue",
+			 "ValidMinMax$message", "\'Value of max must be equal to or greater than value of min.\'"
 		   });			
 		addAnnotation
 		  (branchEClass, 
 		   source, 
 		   new String[] {
-			 "ValidStartNodes", "\n\t\t\tself.startNodes->forAll(node | node.nodeType = NodeType::ROOT or node.nodeType = NodeType::STANDALONE)",
-			 "ValidStartNodes$message", "\'Start nodes must have either ROOT or STANDALONE type\'",
-			 "ValidBranchTypeImplication", "\n\t\t\tif self.branchType = BranchType::TALENT then\n\t\t\t\tself.nodes->forAll(node | node.talents->size() >= 0 and node.abilities->size() = 0)\n\t\t\telse \n\t\t\t\tself.nodes->forAll(node | node.talents->size() = 0 and node.abilities->size() >= 0)\n\t\t\tendif",
-			 "ValidBranchTypeImplication$message", "\'Branch type dictates what the nodes can contain: abilities or talents.\'"
+			 "ExistingRootNode", "\n\t\t\tself.nodes->exists(nodeType = NodeType::ROOT or nodeType = NodeType::STANDALONE)",
+			 "ExistingRootNode$message", "\'Branch must have at least one ROOT or STANDALONE node.\'"
 		   });			
 		addAnnotation
 		  (nodeEClass, 
 		   source, 
 		   new String[] {
-			 "RootNodeChildren", "self.nodeType = NodeType::ROOT implies self.childNodes->forAll(node | node.nodeType = NodeType::STANDARD)",
-			 "RootNodeChildren$message", "\'ROOT nodes can have only STANDARD nodes for children.\'",
-			 "RootNodeParents", "self.nodeType = NodeType::ROOT implies self.parentNodes->size() = 0",
-			 "RootNodeParents$message", "\'ROOT nodes can not have any parents.\'",
-			 "StandardNodeChildren", "self.nodeType = NodeType::STANDARD implies self.childNodes->forAll(node | node.nodeType = NodeType::STANDARD)",
-			 "StandardNodeChildren$message", "\'STANDARD nodes can have only STANDARD nodes for children.\'",
-			 "StandardNodeParents", "self.nodeType = NodeType::STANDARD implies self.parentNodes->forAll(node | node.nodeType = NodeType::ROOT or node.nodeType = NodeType::STANDARD)",
-			 "StandardNodeParents$message", "\'STANDARD nodes can have only ROOT or STANDARD nodes for parents.\'",
-			 "StandaloneNodeConnections", "self.nodeType = NodeType::STANDALONE implies self.parentNodes->size() = 0 and self.childNodes->size() = 0",
-			 "StandaloneNodeConnections$message", "\'STANDALONE nodes can not have parent or child nodes.\'",
-			 "ActivationIntegrity", "self.isActivated = true implies self.activationLevel >= self.minActivationLevel and self.activationLevel <= self.maxActivationLevel",
-			 "ActivationIntegrity$message", "\'Activated nodes must have activation level between minimum and maximum activation levels.\'",
-			 "MinimalNodeActivation", "self.isActivated = false implies self.activation->size() = (self.maxActivationLevel - self.minActivationLevel + 1) and self.activationLevel < self.minActivationLevel",
+			 "RootNodeChildren", "\n\t\t\tself.nodeType = NodeType::ROOT implies \n\t\t\t(self.childNodes->forAll(node | node.nodeType = NodeType::STANDARD) and self.parentNodes->size() = 0)",
+			 "RootNodeChildren$message", "\'ROOT nodes can have only STANDARD nodes for children and can not have any parents.\'",
+			 "StandardNodeChildren", "\n\t\t\tself.nodeType = NodeType::STANDARD implies \n\t\t\t(self.childNodes->forAll(node | node.nodeType = NodeType::STANDARD) and\n\t\t\tself.parentNodes->forAll(node | node.nodeType = NodeType::ROOT or node.nodeType = NodeType::STANDARD))",
+			 "StandardNodeChildren$message", "\'STANDARD nodes can have only STANDARD nodes for children and ROOT or STANDARD nodes for parents\'",
+			 "StandaloneNodeConnections", "\n\t\t\tself.nodeType = NodeType::STANDALONE implies self.parentNodes->size() = 0 and self.childNodes->size() = 0",
+			 "StandaloneNodeConnections$message", "\'STANDALONE nodes cannot have parent or child nodes.\'",
+			 "SelfReference", "\n\t\t\tself.childNodes->forAll(node | node <> self) and self.parentNodes->forAll(node | node <> self)",
+			 "SelfReference$message", "\'Nodes cannot reference themselves as either parent or child. \'",
+			 "CircularReference", "\n\t\t\tself->closure(childNodes)->excludes(self) and self->closure(parentNodes)->excludes(self)",
+			 "CircularReference$message", "\'Nodes cannot form circular references to themselves through parent and child relationships.\'",
+			 "ProperReference", "\n\t\t\tself.childNodes->forAll(node | self.branch.nodes->includes(node)) and self.parentNodes->forAll(node | self.branch.nodes->includes(node))",
+			 "ProperReference$message", "\'Nodes can only reference nodes within the same Branch.\'",
+			 "ActivationCondition", "\n\t\t\tself.nodeType = NodeType::STANDARD implies \n\t\t\t(self.activationLevel >= self.minActivationLevel implies self.parentNodes->exists(parentNode | parentNode.activationLevel >= parentNode.minActivationLevel))",
+			 "ActivationCondition$message", "\'Before a node can be activated, at least one parent must be activated.\'",
+			 "ActivationIntegrity", "\n\t\t\tself.activationLevel <= self.maxActivationLevel",
+			 "ActivationIntegrity$message", "\'Activation level must be cannot exceed maximum activation levels.\'",
+			 "MinimalNodeActivation", "\n\t\t\tself.activationLevel < self.minActivationLevel implies \n\t\t\tself.activation->size() = (self.maxActivationLevel - self.minActivationLevel + 1) and self.activationLevel < self.minActivationLevel",
 			 "MinimalNodeActivation$message", "\'Non-activated nodes must have at least one node activation rule and have activation level below minimum.\'",
-			 "MaximalNodeActivation", "self.isActivated = true implies self.activation->size() = (self.maxActivationLevel - self.activationLevel)",
+			 "MaximalNodeActivation", "\n\t\t\tself.activationLevel >= self.minActivationLevel implies self.activation->size() = (self.maxActivationLevel - self.activationLevel)",
 			 "MaximalNodeActivation$message", "\'Activated nodes must have proper number of node activations.\'",
-			 "UniqueNodeActivationLevels", "self.activation->forAll(n1: NodeActivation, n2: NodeActivation | n1 <> n2 implies n1.level <> n2.level)",
+			 "UniqueNodeActivationLevels", "\n\t\t\tself.activation->forAll(n1: NodeActivation, n2: NodeActivation | n1 <> n2 implies n1.level <> n2.level)",
 			 "UniqueNodeActivationLevels$message", "\'All node activations must have unique levels.\'",
-			 "ProperNodeActivationLevels", "\n\t\tif self.isActivated = true then\n\t\t\tself.activation->forAll(n: NodeActivation | n.level > self.activationLevel and n.level <= self.maxActivationLevel)\n\t\telse\n\t\t\tself.activation->forAll(n: NodeActivation | n.level >= self.minActivationLevel and n.level <= self.maxActivationLevel)\n\t\tendif",
-			 "ProperNodeActivationLevels$message", "\'All node activations must have levels between min and max activation levels.\'",
-			 "ProperAbilityLevels", "self.abilities->forAll(a: Ability | a.onLevel >= self.minActivationLevel and a.onLevel <= self.maxActivationLevel)",
-			 "ProperAbilityLevels$message", "\'All abilities must reference an appropriate node level.\'",
-			 "ProperEffectLevels", "self.abilities->forAll(a: Ability | a.effects->forAll(e: Effect | e.onLevel >= self.minActivationLevel and e.onLevel <= self.maxActivationLevel))",
-			 "ProperEffectLevels$message", "\'All ability effects must reference an appropriate node level.\'"
+			 "ValidBranchTypeImplication", "\n\t\t\tif self.branch.branchType = BranchType::TALENT then\n\t\t\t\tself.talents->size() > 0 and self.abilities->size() = 0\n\t\t\telse \n\t\t\t\tself.talents->size() = 0 and self.abilities->size() > 0\n\t\t\tendif",
+			 "ValidBranchTypeImplication$message", "\'Branch type dictates what the nodes can contain: abilities or talents.\'"
 		   });			
 		addAnnotation
-		  (nodeActivationPropagateEClass, 
+		  (nodeActivationEClass, 
 		   source, 
 		   new String[] {
-			 "ProperRequiredLevel", "self.requiredLevel >= self.followsActivationOf.minActivationLevel and self.requiredLevel <= self.followsActivationOf.maxActivationLevel",
-			 "ProperRequiredLevel$message", "\'Required level must be between minimum and maximum possible values of the level.\'"
+			 "ProperNodeActivationLevels", "\n\t\t\tif self.node.activationLevel >= self.node.minActivationLevel then\n\t\t\t\tself.level > self.node.activationLevel and self.level <= self.node.maxActivationLevel\n\t\t\telse\n\t\t\t\tself.level >= self.node.minActivationLevel and self.level <= self.node.maxActivationLevel\n\t\t\tendif",
+			 "ProperNodeActivationLevels$message", "\'All node activations must have levels between min and max activation levels.\'",
+			 "MeaningfulActivationCondition", "\n\t\t\tself.costs->size() > 0 or self.requirements->size() > 0",
+			 "MeaningfulActivationCondition$message", "\'Node activation should have at least one cost or propagation requirement.\'"
 		   });			
 		addAnnotation
 		  (activationCostEClass, 
 		   source, 
 		   new String[] {
-			 "ProperCost", "self.cost >= self.statistic.minValue and self.cost <= self.statistic.startLimitValue",
-			 "ProperCost$message", "\'The cost must be between minimum and maximum values of the statistic.\'"
+			 "ProperCost", "\n\t\t\tself.cost >= self.statistic.minValue and self.cost <= self.statistic.startLimitValue",
+			 "ProperCost$message", "\'The cost must be between minimum and maximum values of the statistic.\'",
+			 "ProperCostReference", "\n\t\t\tself.nodeActivation.node.branch.characterClass.statistics->includes(self.statistic) or\n\t\t\tself.nodeActivation.node.branch.characterClass->closure(parentClasses)->exists(charClass | charClass.statistics->includes(self.statistic))",
+			 "ProperCostReference$message", "\'Referenced statistic must be in host clas or parent class, recursively.\'"
 		   });			
 		addAnnotation
 		  (abilityEClass, 
 		   source, 
 		   new String[] {
+			 "ProperAbilityLevels", "\n\t\t\tself.onLevel >= self.node.minActivationLevel and self.onLevel <= self.node.maxActivationLevel",
+			 "ProperAbilityLevels$message", "\'All abilities must reference an appropriate node level.\'",
 			 "ValidCastTime", "\n\t\tif self.castType = CastType::NO_CAST or self.castType = CastType::INSTANT then\n\t\t\tself.castTime = 0.0\n\t\telse\n\t\t\tself.castTime > 0.0\n\t\tendif",
 			 "ValidCastTime$message", "\'NO_CAST and INSTANT abilities have no cast time, the rest do.\'"
 		   });			
@@ -1863,8 +2496,59 @@ public class RpgPackageImpl extends EPackageImpl implements RpgPackage {
 		  (effectEClass, 
 		   source, 
 		   new String[] {
-			 "MeaningfulEffect", "\n\t\tif self.effectType = EffectType::INSTANTIATE then\n\t\t\tself.instantiate->size() = 1\n\t\telse\n\t\t\tself.statChange->size() > 0\n\t\tendif",
-			 "MeaningfulEffect$message", "\'An effect must either instantiate a class or change a stat.\'"
+			 "ProperEffectLevels", "\n\t\t\tself.onLevel >= self.ability.node.minActivationLevel and self.onLevel <= self.ability.node.maxActivationLevel",
+			 "ProperEffectLevels$message", "\'Effects must reference an appropriate node level.\'",
+			 "MeaningfulEffect", "\n\t\t\tif self.effectType = EffectType::INSTANTIATE then\n\t\t\t\tself.instantiate->size() = 1\n\t\t\telse\n\t\t\t\tself.changes->size() > 0\n\t\t\tendif",
+			 "MeaningfulEffect$message", "\'An effect must either instantiate a class or change a stat.\'",
+			 "InstantiateConstraint", "\n\t\t\tself.effectType = EffectType::INSTANTIATE implies self.targetType = TargetType::SELF",
+			 "InstantiateConstraint$message", "\'Instantiate effects can only target SELF.\'"
+		   });			
+		addAnnotation
+		  (statChangeEClass, 
+		   source, 
+		   new String[] {
+			 "SelfEffectStatChange", "\n\t\t\tself.effect.targetType = TargetType::SELF and self.effect <> null implies \n\t\t\t(self.effect.ability.node.branch.characterClass.statistics->includes(self.changesStatistic)\n\t\t\tor self.effect.ability.node.branch.characterClass->closure(parentClasses)->exists(charClass | charClass.statistics->includes(self.changesStatistic)))",
+			 "SelfEffectStatChange$message", "\'If StatChange is a part of SELF Effect, it can reference only statistics in host or parent classes.\'",
+			 "SelfTalentStatChange", "\n\t\t\tself.statTalent <> null implies \n\t\t\t(self.statTalent.node.branch.characterClass.statistics->includes(self.changesStatistic)\n\t\t\tor self.statTalent.node.branch.characterClass->closure(parentClasses)->exists(charClass | charClass.statistics->includes(self.changesStatistic)))",
+			 "SelfTalentStatChange$message", "\'If StatChange is a part of StatTalent, it can reference only statistics in host or parent classes.\'",
+			 "SingularModifierOrder", "\n\t\t\tself.modifiers->forAll(m1, m2 | m1 <> m2 implies m1.priorityOrder <> m2.priorityOrder)",
+			 "SingularModifierOrder$message", "\'Each modifier has to have a unique priority order.\'"
+		   });			
+		addAnnotation
+		  (modifierEClass, 
+		   source, 
+		   new String[] {
+			 "NoMovingLimits", "\n\t\t\tself.changeType <> ChangeType::MOVE_LIMIT_UP and self.changeType <> ChangeType::MOVE_LIMIT_DOWN and self.changeType <> ChangeType::SET_LIMIT",
+			 "NoMovingLimits$message", "\'A modifier cannot move a statistic limit.\'"
+		   });			
+		addAnnotation
+		  (propagationRequirementEClass, 
+		   source, 
+		   new String[] {
+			 "ProperRequiredLevel", "\n\t\t\tself.requiredLevel >= self.followsActivationOf.minActivationLevel and self.requiredLevel <= self.followsActivationOf.maxActivationLevel",
+			 "ProperRequiredLevel$message", "\'Required level must be between minimum and maximum possible values of the level.\'",
+			 "SelfReference", "\n\t\t\tself.nodeActivation.node <> self.followsActivationOf",
+			 "SelfReference$message", "\'Cannot reference host Node.\'",
+			 "ProperPropagationReference", "\n\t\t\tself.nodeActivation.node.branch.characterClass.branches->collect(nodes)->includes(self.followsActivationOf) or\n\t\t\tself.nodeActivation.node.branch.characterClass->closure(parentClasses)->exists(charClass | charClass.branches->collect(nodes)->includes(self.followsActivationOf))",
+			 "ProperPropagationReference$message", "\'Referenced Node must be within host class or parent classes, recursively.\'"
+		   });			
+		addAnnotation
+		  (randomizerEClass, 
+		   source, 
+		   new String[] {
+			 "MeaningfulRandomizer", "\n\t\t\t(self.value > 0 implies self.basedOn = null) and \n\t\t\t(self.basedOn <> null implies self.value = 0)",
+			 "MeaningfulRandomizer$message", "\'Randomizer should have value greater than zero or be based on character statistic.\'",
+			 "ProperStatisticBase", "\n\t\t\tself.basedOn <> null implies\n\t\t\tself.basedOn.minValue >= 0 and self.basedOn.maxValue <= 100 and self.basedOn.maxValue = self.basedOn.startLimitValue",
+			 "ProperStatisticBase$message", "\'Referenced statistics should model chance, therefore values should be between 0 and 100.\'"
+		   });			
+		addAnnotation
+		  (cooldownChangeEClass, 
+		   source, 
+		   new String[] {
+			 "MeaningfullCooldownChange", "\n\t\t\tself.talent <> null or self.ability <> null and\n\t\t\t(self.talent <> null implies self.ability = null) and\n\t\t\t(self.ability <> null implies self.talent = null)",
+			 "MeaningfullCooldownChange$message", "\'A CooldownChange should reference either talent or ability.\'",
+			 "ProperAbilityReference", "\n\t\t\t--TODO: should be tested\n\t\t\tself.effect.ability.node.branch.characterClass.branches->collect(nodes)->collect(abilities)->includes(self.ability) or\n\t\t\tself.effect.ability.node.branch.characterClass->closure(parentClasses)->exists(charClass | charClass.branches->collect(nodes)->collect(abilities->includes(self.ability)))",
+			 "ProperAbilityReference$message", "\'Can only reference abilities of host or parent class.\'"
 		   });
 	}
 

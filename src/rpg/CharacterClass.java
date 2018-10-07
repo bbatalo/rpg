@@ -2,9 +2,9 @@
  */
 package rpg;
 
-import org.eclipse.emf.cdo.CDOObject;
-
 import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -21,18 +21,19 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link rpg.CharacterClass#getChildClasses <em>Child Classes</em>}</li>
  *   <li>{@link rpg.CharacterClass#getParentClasses <em>Parent Classes</em>}</li>
  *   <li>{@link rpg.CharacterClass#getBranches <em>Branches</em>}</li>
+ *   <li>{@link rpg.CharacterClass#isIsPlayable <em>Is Playable</em>}</li>
  * </ul>
  * </p>
  *
  * @see rpg.RpgPackage#getCharacterClass()
- * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='MeaningfulInheritance'"
- *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot MeaningfulInheritance='\n\t\t\tself.parentClasses->size() > 0 implies statistics->size() > 0 or branches->size() > 0' MeaningfulInheritance$message='\'Child classes should have their own statistics or branches.\''"
- * @extends CDOObject
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='MeaningfulClass RecursiveInheritance'"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot MeaningfulClass='\n\t\t\tstatistics->size() > 0 or branches->size() > 0' MeaningfulClass$message='\'A class should have at least one statistic or branch.\'' RecursiveInheritance='\n\t\t\tself.parentClasses->forAll(parent | self._\'<>\'(parent))' RecursiveInheritance$message='\'A class cannot inherit itself.\''"
  * @generated
  */
-public interface CharacterClass extends CDOObject {
+public interface CharacterClass extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	 * The default value is <code>"My class"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
@@ -42,7 +43,7 @@ public interface CharacterClass extends CDOObject {
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see rpg.RpgPackage#getCharacterClass_Name()
-	 * @model required="true"
+	 * @model default="My class" required="true"
 	 * @generated
 	 */
 	String getName();
@@ -101,6 +102,7 @@ public interface CharacterClass extends CDOObject {
 
 	/**
 	 * Returns the value of the '<em><b>Description</b></em>' attribute.
+	 * The default value is <code>"Placeholder description"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Description</em>' attribute isn't clear,
@@ -110,7 +112,7 @@ public interface CharacterClass extends CDOObject {
 	 * @return the value of the '<em>Description</em>' attribute.
 	 * @see #setDescription(String)
 	 * @see rpg.RpgPackage#getCharacterClass_Description()
-	 * @model required="true"
+	 * @model default="Placeholder description" required="true"
 	 * @generated
 	 */
 	String getDescription();
@@ -164,6 +166,7 @@ public interface CharacterClass extends CDOObject {
 	/**
 	 * Returns the value of the '<em><b>Branches</b></em>' containment reference list.
 	 * The list contents are of type {@link rpg.Branch}.
+	 * It is bidirectional and its opposite is '{@link rpg.Branch#getCharacterClass <em>Character Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Branches</em>' containment reference list isn't clear,
@@ -172,9 +175,37 @@ public interface CharacterClass extends CDOObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Branches</em>' containment reference list.
 	 * @see rpg.RpgPackage#getCharacterClass_Branches()
-	 * @model type="rpg.Branch" containment="true"
+	 * @see rpg.Branch#getCharacterClass
+	 * @model type="rpg.Branch" opposite="characterClass" containment="true"
 	 * @generated
 	 */
 	EList getBranches();
+
+	/**
+	 * Returns the value of the '<em><b>Is Playable</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Is Playable</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Is Playable</em>' attribute.
+	 * @see #setIsPlayable(boolean)
+	 * @see rpg.RpgPackage#getCharacterClass_IsPlayable()
+	 * @model default="false" required="true"
+	 * @generated
+	 */
+	boolean isIsPlayable();
+
+	/**
+	 * Sets the value of the '{@link rpg.CharacterClass#isIsPlayable <em>Is Playable</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Playable</em>' attribute.
+	 * @see #isIsPlayable()
+	 * @generated
+	 */
+	void setIsPlayable(boolean value);
 
 } // CharacterClass

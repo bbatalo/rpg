@@ -56,21 +56,28 @@ public class RpgFactoryImpl extends EFactoryImpl implements RpgFactory {
 	 */
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case RpgPackage.RPG: return (EObject)createRPG();
-			case RpgPackage.CHARACTER_CLASS: return (EObject)createCharacterClass();
-			case RpgPackage.CHARACTER_STATISTIC: return (EObject)createCharacterStatistic();
-			case RpgPackage.BRANCH: return (EObject)createBranch();
-			case RpgPackage.NODE: return (EObject)createNode();
-			case RpgPackage.NODE_ACTIVATION_BUY: return (EObject)createNodeActivationBuy();
-			case RpgPackage.NODE_ACTIVATION_PROPAGATE: return (EObject)createNodeActivationPropagate();
-			case RpgPackage.ACTIVATION_COST: return (EObject)createActivationCost();
-			case RpgPackage.RANGE_UNIT: return (EObject)createRangeUnit();
-			case RpgPackage.ABILITY: return (EObject)createAbility();
-			case RpgPackage.EFFECT: return (EObject)createEffect();
-			case RpgPackage.STAT_CHANGE: return (EObject)createStatChange();
-			case RpgPackage.MODIFIER: return (EObject)createModifier();
-			case RpgPackage.TALENT: return (EObject)createTalent();
-			case RpgPackage.ABILITY_COST: return (EObject)createAbilityCost();
+			case RpgPackage.RPG: return createRPG();
+			case RpgPackage.CHARACTER_CLASS: return createCharacterClass();
+			case RpgPackage.CHARACTER_STATISTIC: return createCharacterStatistic();
+			case RpgPackage.BRANCH: return createBranch();
+			case RpgPackage.NODE: return createNode();
+			case RpgPackage.NODE_ACTIVATION: return createNodeActivation();
+			case RpgPackage.ACTIVATION_COST: return createActivationCost();
+			case RpgPackage.RANGE_UNIT: return createRangeUnit();
+			case RpgPackage.ABILITY: return createAbility();
+			case RpgPackage.EFFECT: return createEffect();
+			case RpgPackage.STAT_CHANGE: return createStatChange();
+			case RpgPackage.MODIFIER: return createModifier();
+			case RpgPackage.PROPAGATION_REQUIREMENT: return createPropagationRequirement();
+			case RpgPackage.RANDOMIZER: return createRandomizer();
+			case RpgPackage.STAT_TALENT: return createStatTalent();
+			case RpgPackage.TICK: return createTick();
+			case RpgPackage.COOLDOWN_CHANGE: return createCooldownChange();
+			case RpgPackage.UNLOCK_ABILITY: return createUnlockAbility();
+			case RpgPackage.UNLOCK_EFFECT: return createUnlockEffect();
+			case RpgPackage.UNLOCK_CHANGE: return createUnlockChange();
+			case RpgPackage.COOLDOWN_TALENT: return createCooldownTalent();
+			case RpgPackage.UNLOCK_MODIFIER: return createUnlockModifier();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -101,6 +108,8 @@ public class RpgFactoryImpl extends EFactoryImpl implements RpgFactory {
 				return createChangeTypeFromString(eDataType, initialValue);
 			case RpgPackage.TICK_TYPE:
 				return createTickTypeFromString(eDataType, initialValue);
+			case RpgPackage.CHANGE_VALUE_TYPE:
+				return createChangeValueTypeFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -131,6 +140,8 @@ public class RpgFactoryImpl extends EFactoryImpl implements RpgFactory {
 				return convertChangeTypeToString(eDataType, instanceValue);
 			case RpgPackage.TICK_TYPE:
 				return convertTickTypeToString(eDataType, instanceValue);
+			case RpgPackage.CHANGE_VALUE_TYPE:
+				return convertChangeValueTypeToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -191,19 +202,9 @@ public class RpgFactoryImpl extends EFactoryImpl implements RpgFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NodeActivationBuy createNodeActivationBuy() {
-		NodeActivationBuyImpl nodeActivationBuy = new NodeActivationBuyImpl();
-		return nodeActivationBuy;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NodeActivationPropagate createNodeActivationPropagate() {
-		NodeActivationPropagateImpl nodeActivationPropagate = new NodeActivationPropagateImpl();
-		return nodeActivationPropagate;
+	public NodeActivation createNodeActivation() {
+		NodeActivationImpl nodeActivation = new NodeActivationImpl();
+		return nodeActivation;
 	}
 
 	/**
@@ -271,9 +272,9 @@ public class RpgFactoryImpl extends EFactoryImpl implements RpgFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Talent createTalent() {
-		TalentImpl talent = new TalentImpl();
-		return talent;
+	public PropagationRequirement createPropagationRequirement() {
+		PropagationRequirementImpl propagationRequirement = new PropagationRequirementImpl();
+		return propagationRequirement;
 	}
 
 	/**
@@ -281,9 +282,89 @@ public class RpgFactoryImpl extends EFactoryImpl implements RpgFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AbilityCost createAbilityCost() {
-		AbilityCostImpl abilityCost = new AbilityCostImpl();
-		return abilityCost;
+	public Randomizer createRandomizer() {
+		RandomizerImpl randomizer = new RandomizerImpl();
+		return randomizer;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public StatTalent createStatTalent() {
+		StatTalentImpl statTalent = new StatTalentImpl();
+		return statTalent;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Tick createTick() {
+		TickImpl tick = new TickImpl();
+		return tick;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CooldownChange createCooldownChange() {
+		CooldownChangeImpl cooldownChange = new CooldownChangeImpl();
+		return cooldownChange;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public UnlockAbility createUnlockAbility() {
+		UnlockAbilityImpl unlockAbility = new UnlockAbilityImpl();
+		return unlockAbility;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public UnlockEffect createUnlockEffect() {
+		UnlockEffectImpl unlockEffect = new UnlockEffectImpl();
+		return unlockEffect;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public UnlockChange createUnlockChange() {
+		UnlockChangeImpl unlockChange = new UnlockChangeImpl();
+		return unlockChange;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CooldownTalent createCooldownTalent() {
+		CooldownTalentImpl cooldownTalent = new CooldownTalentImpl();
+		return cooldownTalent;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public UnlockModifier createUnlockModifier() {
+		UnlockModifierImpl unlockModifier = new UnlockModifierImpl();
+		return unlockModifier;
 	}
 
 	/**
@@ -463,6 +544,26 @@ public class RpgFactoryImpl extends EFactoryImpl implements RpgFactory {
 	 * @generated
 	 */
 	public String convertTickTypeToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ChangeValueType createChangeValueTypeFromString(EDataType eDataType, String initialValue) {
+		ChangeValueType result = ChangeValueType.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertChangeValueTypeToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

@@ -2,9 +2,9 @@
  */
 package rpg;
 
-import org.eclipse.emf.cdo.CDOObject;
-
 import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -22,13 +22,14 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see rpg.RpgPackage#getRPG()
- * @model
- * @extends CDOObject
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='ClassyGame'"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot ClassyGame='\n\t\t\tself.allClasses->size() > 0' ClassyGame$message='\'The game should contain at least one class\''"
  * @generated
  */
-public interface RPG extends CDOObject {
+public interface RPG extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	 * The default value is <code>"My Role-Playing Game"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
@@ -38,7 +39,7 @@ public interface RPG extends CDOObject {
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see rpg.RpgPackage#getRPG_Name()
-	 * @model required="true"
+	 * @model default="My Role-Playing Game" required="true"
 	 * @generated
 	 */
 	String getName();
@@ -55,6 +56,7 @@ public interface RPG extends CDOObject {
 
 	/**
 	 * Returns the value of the '<em><b>Lore</b></em>' attribute.
+	 * The default value is <code>"My lore"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Lore</em>' attribute isn't clear,
@@ -64,7 +66,7 @@ public interface RPG extends CDOObject {
 	 * @return the value of the '<em>Lore</em>' attribute.
 	 * @see #setLore(String)
 	 * @see rpg.RpgPackage#getRPG_Lore()
-	 * @model required="true"
+	 * @model default="My lore" required="true"
 	 * @generated
 	 */
 	String getLore();

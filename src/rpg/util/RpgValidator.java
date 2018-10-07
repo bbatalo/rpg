@@ -8,7 +8,6 @@ import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
@@ -99,10 +98,6 @@ public class RpgValidator extends EObjectValidator {
 				return validateNode((Node)value, diagnostics, context);
 			case RpgPackage.NODE_ACTIVATION:
 				return validateNodeActivation((NodeActivation)value, diagnostics, context);
-			case RpgPackage.NODE_ACTIVATION_BUY:
-				return validateNodeActivationBuy((NodeActivationBuy)value, diagnostics, context);
-			case RpgPackage.NODE_ACTIVATION_PROPAGATE:
-				return validateNodeActivationPropagate((NodeActivationPropagate)value, diagnostics, context);
 			case RpgPackage.ACTIVATION_COST:
 				return validateActivationCost((ActivationCost)value, diagnostics, context);
 			case RpgPackage.RANGE_UNIT:
@@ -117,8 +112,30 @@ public class RpgValidator extends EObjectValidator {
 				return validateModifier((Modifier)value, diagnostics, context);
 			case RpgPackage.TALENT:
 				return validateTalent((Talent)value, diagnostics, context);
-			case RpgPackage.ABILITY_COST:
-				return validateAbilityCost((AbilityCost)value, diagnostics, context);
+			case RpgPackage.PROPAGATION_REQUIREMENT:
+				return validatePropagationRequirement((PropagationRequirement)value, diagnostics, context);
+			case RpgPackage.RANDOMIZER:
+				return validateRandomizer((Randomizer)value, diagnostics, context);
+			case RpgPackage.STAT_TALENT:
+				return validateStatTalent((StatTalent)value, diagnostics, context);
+			case RpgPackage.TICK:
+				return validateTick((Tick)value, diagnostics, context);
+			case RpgPackage.COOLDOWN_CHANGE:
+				return validateCooldownChange((CooldownChange)value, diagnostics, context);
+			case RpgPackage.CHANGE:
+				return validateChange((Change)value, diagnostics, context);
+			case RpgPackage.UNLOCK_TALENT:
+				return validateUnlockTalent((UnlockTalent)value, diagnostics, context);
+			case RpgPackage.UNLOCK_ABILITY:
+				return validateUnlockAbility((UnlockAbility)value, diagnostics, context);
+			case RpgPackage.UNLOCK_EFFECT:
+				return validateUnlockEffect((UnlockEffect)value, diagnostics, context);
+			case RpgPackage.UNLOCK_CHANGE:
+				return validateUnlockChange((UnlockChange)value, diagnostics, context);
+			case RpgPackage.COOLDOWN_TALENT:
+				return validateCooldownTalent((CooldownTalent)value, diagnostics, context);
+			case RpgPackage.UNLOCK_MODIFIER:
+				return validateUnlockModifier((UnlockModifier)value, diagnostics, context);
 			case RpgPackage.STAT_TYPE:
 				return validateStatType((StatType)value, diagnostics, context);
 			case RpgPackage.BRANCH_TYPE:
@@ -137,6 +154,8 @@ public class RpgValidator extends EObjectValidator {
 				return validateChangeType((ChangeType)value, diagnostics, context);
 			case RpgPackage.TICK_TYPE:
 				return validateTickType((TickType)value, diagnostics, context);
+			case RpgPackage.CHANGE_VALUE_TYPE:
+				return validateChangeValueType((ChangeValueType)value, diagnostics, context);
 			default:
 				return true;
 		}
@@ -148,31 +167,22 @@ public class RpgValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateRPG(RPG rpg, DiagnosticChain diagnostics, Map context) {
-		return validate_EveryDefaultConstraint((EObject)rpg, diagnostics, context);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateCharacterClass(CharacterClass characterClass, DiagnosticChain diagnostics, Map context) {
-		boolean result = validate_EveryMultiplicityConforms((EObject)characterClass, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)characterClass, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)characterClass, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)characterClass, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)characterClass, diagnostics, context);
-		if (result || diagnostics != null) result &= validateCharacterClass_MeaningfulInheritance(characterClass, diagnostics, context);
+		boolean result = validate_EveryMultiplicityConforms(rpg, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(rpg, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(rpg, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(rpg, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(rpg, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRPG_ClassyGame(rpg, diagnostics, context);
 		return result;
 	}
 
 	/**
-	 * Validates the MeaningfulInheritance constraint of '<em>Character Class</em>'.
+	 * Validates the ClassyGame constraint of '<em>RPG</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateCharacterClass_MeaningfulInheritance(CharacterClass characterClass, DiagnosticChain diagnostics, Map context) {
+	public boolean validateRPG_ClassyGame(RPG rpg, DiagnosticChain diagnostics, Map context) {
 		// TODO implement the constraint
 		// -> specify the condition that violates the constraint
 		// -> verify the diagnostic details, including severity, code, and message
@@ -184,7 +194,75 @@ public class RpgValidator extends EObjectValidator {
 						(Diagnostic.ERROR,
 						 DIAGNOSTIC_SOURCE,
 						 0,
-						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "MeaningfulInheritance", getObjectLabel(characterClass, context) }),
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "ClassyGame", getObjectLabel(rpg, context) }),
+						 new Object[] { rpg }));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateCharacterClass(CharacterClass characterClass, DiagnosticChain diagnostics, Map context) {
+		boolean result = validate_EveryMultiplicityConforms(characterClass, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(characterClass, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(characterClass, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(characterClass, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(characterClass, diagnostics, context);
+		if (result || diagnostics != null) result &= validateCharacterClass_MeaningfulClass(characterClass, diagnostics, context);
+		if (result || diagnostics != null) result &= validateCharacterClass_RecursiveInheritance(characterClass, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the MeaningfulClass constraint of '<em>Character Class</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateCharacterClass_MeaningfulClass(CharacterClass characterClass, DiagnosticChain diagnostics, Map context) {
+		// TODO implement the constraint
+		// -> specify the condition that violates the constraint
+		// -> verify the diagnostic details, including severity, code, and message
+		// Ensure that you remove @generated or mark it @generated NOT
+		if (false) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "MeaningfulClass", getObjectLabel(characterClass, context) }),
+						 new Object[] { characterClass }));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Validates the RecursiveInheritance constraint of '<em>Character Class</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateCharacterClass_RecursiveInheritance(CharacterClass characterClass, DiagnosticChain diagnostics, Map context) {
+		// TODO implement the constraint
+		// -> specify the condition that violates the constraint
+		// -> verify the diagnostic details, including severity, code, and message
+		// Ensure that you remove @generated or mark it @generated NOT
+		if (false) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "RecursiveInheritance", getObjectLabel(characterClass, context) }),
 						 new Object[] { characterClass }));
 			}
 			return false;
@@ -198,12 +276,13 @@ public class RpgValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateCharacterStatistic(CharacterStatistic characterStatistic, DiagnosticChain diagnostics, Map context) {
-		boolean result = validate_EveryMultiplicityConforms((EObject)characterStatistic, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)characterStatistic, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)characterStatistic, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)characterStatistic, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)characterStatistic, diagnostics, context);
+		boolean result = validate_EveryMultiplicityConforms(characterStatistic, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(characterStatistic, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(characterStatistic, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(characterStatistic, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(characterStatistic, diagnostics, context);
 		if (result || diagnostics != null) result &= validateCharacterStatistic_LimitBetweenMinAndMax(characterStatistic, diagnostics, context);
+		if (result || diagnostics != null) result &= validateCharacterStatistic_ValidMinMax(characterStatistic, diagnostics, context);
 		return result;
 	}
 
@@ -234,28 +313,12 @@ public class RpgValidator extends EObjectValidator {
 	}
 
 	/**
+	 * Validates the ValidMinMax constraint of '<em>Character Statistic</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateBranch(Branch branch, DiagnosticChain diagnostics, Map context) {
-		boolean result = validate_EveryMultiplicityConforms((EObject)branch, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)branch, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)branch, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)branch, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)branch, diagnostics, context);
-		if (result || diagnostics != null) result &= validateBranch_ValidStartNodes(branch, diagnostics, context);
-		if (result || diagnostics != null) result &= validateBranch_ValidBranchTypeImplication(branch, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * Validates the ValidStartNodes constraint of '<em>Branch</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateBranch_ValidStartNodes(Branch branch, DiagnosticChain diagnostics, Map context) {
+	public boolean validateCharacterStatistic_ValidMinMax(CharacterStatistic characterStatistic, DiagnosticChain diagnostics, Map context) {
 		// TODO implement the constraint
 		// -> specify the condition that violates the constraint
 		// -> verify the diagnostic details, including severity, code, and message
@@ -267,8 +330,8 @@ public class RpgValidator extends EObjectValidator {
 						(Diagnostic.ERROR,
 						 DIAGNOSTIC_SOURCE,
 						 0,
-						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "ValidStartNodes", getObjectLabel(branch, context) }),
-						 new Object[] { branch }));
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "ValidMinMax", getObjectLabel(characterStatistic, context) }),
+						 new Object[] { characterStatistic }));
 			}
 			return false;
 		}
@@ -276,12 +339,27 @@ public class RpgValidator extends EObjectValidator {
 	}
 
 	/**
-	 * Validates the ValidBranchTypeImplication constraint of '<em>Branch</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateBranch_ValidBranchTypeImplication(Branch branch, DiagnosticChain diagnostics, Map context) {
+	public boolean validateBranch(Branch branch, DiagnosticChain diagnostics, Map context) {
+		boolean result = validate_EveryMultiplicityConforms(branch, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(branch, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(branch, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(branch, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(branch, diagnostics, context);
+		if (result || diagnostics != null) result &= validateBranch_ExistingRootNode(branch, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the ExistingRootNode constraint of '<em>Branch</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateBranch_ExistingRootNode(Branch branch, DiagnosticChain diagnostics, Map context) {
 		// TODO implement the constraint
 		// -> specify the condition that violates the constraint
 		// -> verify the diagnostic details, including severity, code, and message
@@ -293,7 +371,7 @@ public class RpgValidator extends EObjectValidator {
 						(Diagnostic.ERROR,
 						 DIAGNOSTIC_SOURCE,
 						 0,
-						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "ValidBranchTypeImplication", getObjectLabel(branch, context) }),
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "ExistingRootNode", getObjectLabel(branch, context) }),
 						 new Object[] { branch }));
 			}
 			return false;
@@ -307,23 +385,23 @@ public class RpgValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateNode(Node node, DiagnosticChain diagnostics, Map context) {
-		boolean result = validate_EveryMultiplicityConforms((EObject)node, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)node, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)node, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)node, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)node, diagnostics, context);
+		boolean result = validate_EveryMultiplicityConforms(node, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(node, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(node, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(node, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(node, diagnostics, context);
 		if (result || diagnostics != null) result &= validateNode_RootNodeChildren(node, diagnostics, context);
-		if (result || diagnostics != null) result &= validateNode_RootNodeParents(node, diagnostics, context);
 		if (result || diagnostics != null) result &= validateNode_StandardNodeChildren(node, diagnostics, context);
-		if (result || diagnostics != null) result &= validateNode_StandardNodeParents(node, diagnostics, context);
 		if (result || diagnostics != null) result &= validateNode_StandaloneNodeConnections(node, diagnostics, context);
+		if (result || diagnostics != null) result &= validateNode_SelfReference(node, diagnostics, context);
+		if (result || diagnostics != null) result &= validateNode_CircularReference(node, diagnostics, context);
+		if (result || diagnostics != null) result &= validateNode_ProperReference(node, diagnostics, context);
+		if (result || diagnostics != null) result &= validateNode_ActivationCondition(node, diagnostics, context);
 		if (result || diagnostics != null) result &= validateNode_ActivationIntegrity(node, diagnostics, context);
 		if (result || diagnostics != null) result &= validateNode_MinimalNodeActivation(node, diagnostics, context);
 		if (result || diagnostics != null) result &= validateNode_MaximalNodeActivation(node, diagnostics, context);
 		if (result || diagnostics != null) result &= validateNode_UniqueNodeActivationLevels(node, diagnostics, context);
-		if (result || diagnostics != null) result &= validateNode_ProperNodeActivationLevels(node, diagnostics, context);
-		if (result || diagnostics != null) result &= validateNode_ProperAbilityLevels(node, diagnostics, context);
-		if (result || diagnostics != null) result &= validateNode_ProperEffectLevels(node, diagnostics, context);
+		if (result || diagnostics != null) result &= validateNode_ValidBranchTypeImplication(node, diagnostics, context);
 		return result;
 	}
 
@@ -346,32 +424,6 @@ public class RpgValidator extends EObjectValidator {
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "RootNodeChildren", getObjectLabel(node, context) }),
-						 new Object[] { node }));
-			}
-			return false;
-		}
-		return true;
-	}
-
-	/**
-	 * Validates the RootNodeParents constraint of '<em>Node</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateNode_RootNodeParents(Node node, DiagnosticChain diagnostics, Map context) {
-		// TODO implement the constraint
-		// -> specify the condition that violates the constraint
-		// -> verify the diagnostic details, including severity, code, and message
-		// Ensure that you remove @generated or mark it @generated NOT
-		if (false) {
-			if (diagnostics != null) {
-				diagnostics.add
-					(new BasicDiagnostic
-						(Diagnostic.ERROR,
-						 DIAGNOSTIC_SOURCE,
-						 0,
-						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "RootNodeParents", getObjectLabel(node, context) }),
 						 new Object[] { node }));
 			}
 			return false;
@@ -406,32 +458,6 @@ public class RpgValidator extends EObjectValidator {
 	}
 
 	/**
-	 * Validates the StandardNodeParents constraint of '<em>Node</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateNode_StandardNodeParents(Node node, DiagnosticChain diagnostics, Map context) {
-		// TODO implement the constraint
-		// -> specify the condition that violates the constraint
-		// -> verify the diagnostic details, including severity, code, and message
-		// Ensure that you remove @generated or mark it @generated NOT
-		if (false) {
-			if (diagnostics != null) {
-				diagnostics.add
-					(new BasicDiagnostic
-						(Diagnostic.ERROR,
-						 DIAGNOSTIC_SOURCE,
-						 0,
-						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "StandardNodeParents", getObjectLabel(node, context) }),
-						 new Object[] { node }));
-			}
-			return false;
-		}
-		return true;
-	}
-
-	/**
 	 * Validates the StandaloneNodeConnections constraint of '<em>Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -450,6 +476,110 @@ public class RpgValidator extends EObjectValidator {
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "StandaloneNodeConnections", getObjectLabel(node, context) }),
+						 new Object[] { node }));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Validates the SelfReference constraint of '<em>Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateNode_SelfReference(Node node, DiagnosticChain diagnostics, Map context) {
+		// TODO implement the constraint
+		// -> specify the condition that violates the constraint
+		// -> verify the diagnostic details, including severity, code, and message
+		// Ensure that you remove @generated or mark it @generated NOT
+		if (false) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "SelfReference", getObjectLabel(node, context) }),
+						 new Object[] { node }));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Validates the CircularReference constraint of '<em>Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateNode_CircularReference(Node node, DiagnosticChain diagnostics, Map context) {
+		// TODO implement the constraint
+		// -> specify the condition that violates the constraint
+		// -> verify the diagnostic details, including severity, code, and message
+		// Ensure that you remove @generated or mark it @generated NOT
+		if (false) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "CircularReference", getObjectLabel(node, context) }),
+						 new Object[] { node }));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Validates the ProperReference constraint of '<em>Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateNode_ProperReference(Node node, DiagnosticChain diagnostics, Map context) {
+		// TODO implement the constraint
+		// -> specify the condition that violates the constraint
+		// -> verify the diagnostic details, including severity, code, and message
+		// Ensure that you remove @generated or mark it @generated NOT
+		if (false) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "ProperReference", getObjectLabel(node, context) }),
+						 new Object[] { node }));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Validates the ActivationCondition constraint of '<em>Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateNode_ActivationCondition(Node node, DiagnosticChain diagnostics, Map context) {
+		// TODO implement the constraint
+		// -> specify the condition that violates the constraint
+		// -> verify the diagnostic details, including severity, code, and message
+		// Ensure that you remove @generated or mark it @generated NOT
+		if (false) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "ActivationCondition", getObjectLabel(node, context) }),
 						 new Object[] { node }));
 			}
 			return false;
@@ -562,12 +692,12 @@ public class RpgValidator extends EObjectValidator {
 	}
 
 	/**
-	 * Validates the ProperNodeActivationLevels constraint of '<em>Node</em>'.
+	 * Validates the ValidBranchTypeImplication constraint of '<em>Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateNode_ProperNodeActivationLevels(Node node, DiagnosticChain diagnostics, Map context) {
+	public boolean validateNode_ValidBranchTypeImplication(Node node, DiagnosticChain diagnostics, Map context) {
 		// TODO implement the constraint
 		// -> specify the condition that violates the constraint
 		// -> verify the diagnostic details, including severity, code, and message
@@ -579,59 +709,7 @@ public class RpgValidator extends EObjectValidator {
 						(Diagnostic.ERROR,
 						 DIAGNOSTIC_SOURCE,
 						 0,
-						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "ProperNodeActivationLevels", getObjectLabel(node, context) }),
-						 new Object[] { node }));
-			}
-			return false;
-		}
-		return true;
-	}
-
-	/**
-	 * Validates the ProperAbilityLevels constraint of '<em>Node</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateNode_ProperAbilityLevels(Node node, DiagnosticChain diagnostics, Map context) {
-		// TODO implement the constraint
-		// -> specify the condition that violates the constraint
-		// -> verify the diagnostic details, including severity, code, and message
-		// Ensure that you remove @generated or mark it @generated NOT
-		if (false) {
-			if (diagnostics != null) {
-				diagnostics.add
-					(new BasicDiagnostic
-						(Diagnostic.ERROR,
-						 DIAGNOSTIC_SOURCE,
-						 0,
-						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "ProperAbilityLevels", getObjectLabel(node, context) }),
-						 new Object[] { node }));
-			}
-			return false;
-		}
-		return true;
-	}
-
-	/**
-	 * Validates the ProperEffectLevels constraint of '<em>Node</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateNode_ProperEffectLevels(Node node, DiagnosticChain diagnostics, Map context) {
-		// TODO implement the constraint
-		// -> specify the condition that violates the constraint
-		// -> verify the diagnostic details, including severity, code, and message
-		// Ensure that you remove @generated or mark it @generated NOT
-		if (false) {
-			if (diagnostics != null) {
-				diagnostics.add
-					(new BasicDiagnostic
-						(Diagnostic.ERROR,
-						 DIAGNOSTIC_SOURCE,
-						 0,
-						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "ProperEffectLevels", getObjectLabel(node, context) }),
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "ValidBranchTypeImplication", getObjectLabel(node, context) }),
 						 new Object[] { node }));
 			}
 			return false;
@@ -645,40 +723,23 @@ public class RpgValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateNodeActivation(NodeActivation nodeActivation, DiagnosticChain diagnostics, Map context) {
-		return validate_EveryDefaultConstraint((EObject)nodeActivation, diagnostics, context);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateNodeActivationBuy(NodeActivationBuy nodeActivationBuy, DiagnosticChain diagnostics, Map context) {
-		return validate_EveryDefaultConstraint((EObject)nodeActivationBuy, diagnostics, context);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateNodeActivationPropagate(NodeActivationPropagate nodeActivationPropagate, DiagnosticChain diagnostics, Map context) {
-		boolean result = validate_EveryMultiplicityConforms((EObject)nodeActivationPropagate, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)nodeActivationPropagate, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)nodeActivationPropagate, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)nodeActivationPropagate, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)nodeActivationPropagate, diagnostics, context);
-		if (result || diagnostics != null) result &= validateNodeActivationPropagate_ProperRequiredLevel(nodeActivationPropagate, diagnostics, context);
+		boolean result = validate_EveryMultiplicityConforms(nodeActivation, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(nodeActivation, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(nodeActivation, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(nodeActivation, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(nodeActivation, diagnostics, context);
+		if (result || diagnostics != null) result &= validateNodeActivation_ProperNodeActivationLevels(nodeActivation, diagnostics, context);
+		if (result || diagnostics != null) result &= validateNodeActivation_MeaningfulActivationCondition(nodeActivation, diagnostics, context);
 		return result;
 	}
 
 	/**
-	 * Validates the ProperRequiredLevel constraint of '<em>Node Activation Propagate</em>'.
+	 * Validates the ProperNodeActivationLevels constraint of '<em>Node Activation</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateNodeActivationPropagate_ProperRequiredLevel(NodeActivationPropagate nodeActivationPropagate, DiagnosticChain diagnostics, Map context) {
+	public boolean validateNodeActivation_ProperNodeActivationLevels(NodeActivation nodeActivation, DiagnosticChain diagnostics, Map context) {
 		// TODO implement the constraint
 		// -> specify the condition that violates the constraint
 		// -> verify the diagnostic details, including severity, code, and message
@@ -690,8 +751,34 @@ public class RpgValidator extends EObjectValidator {
 						(Diagnostic.ERROR,
 						 DIAGNOSTIC_SOURCE,
 						 0,
-						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "ProperRequiredLevel", getObjectLabel(nodeActivationPropagate, context) }),
-						 new Object[] { nodeActivationPropagate }));
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "ProperNodeActivationLevels", getObjectLabel(nodeActivation, context) }),
+						 new Object[] { nodeActivation }));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Validates the MeaningfulActivationCondition constraint of '<em>Node Activation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateNodeActivation_MeaningfulActivationCondition(NodeActivation nodeActivation, DiagnosticChain diagnostics, Map context) {
+		// TODO implement the constraint
+		// -> specify the condition that violates the constraint
+		// -> verify the diagnostic details, including severity, code, and message
+		// Ensure that you remove @generated or mark it @generated NOT
+		if (false) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "MeaningfulActivationCondition", getObjectLabel(nodeActivation, context) }),
+						 new Object[] { nodeActivation }));
 			}
 			return false;
 		}
@@ -704,12 +791,13 @@ public class RpgValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateActivationCost(ActivationCost activationCost, DiagnosticChain diagnostics, Map context) {
-		boolean result = validate_EveryMultiplicityConforms((EObject)activationCost, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)activationCost, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)activationCost, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)activationCost, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)activationCost, diagnostics, context);
+		boolean result = validate_EveryMultiplicityConforms(activationCost, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(activationCost, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(activationCost, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(activationCost, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(activationCost, diagnostics, context);
 		if (result || diagnostics != null) result &= validateActivationCost_ProperCost(activationCost, diagnostics, context);
+		if (result || diagnostics != null) result &= validateActivationCost_ProperCostReference(activationCost, diagnostics, context);
 		return result;
 	}
 
@@ -740,12 +828,38 @@ public class RpgValidator extends EObjectValidator {
 	}
 
 	/**
+	 * Validates the ProperCostReference constraint of '<em>Activation Cost</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateActivationCost_ProperCostReference(ActivationCost activationCost, DiagnosticChain diagnostics, Map context) {
+		// TODO implement the constraint
+		// -> specify the condition that violates the constraint
+		// -> verify the diagnostic details, including severity, code, and message
+		// Ensure that you remove @generated or mark it @generated NOT
+		if (false) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "ProperCostReference", getObjectLabel(activationCost, context) }),
+						 new Object[] { activationCost }));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public boolean validateRangeUnit(RangeUnit rangeUnit, DiagnosticChain diagnostics, Map context) {
-		return validate_EveryDefaultConstraint((EObject)rangeUnit, diagnostics, context);
+		return validate_EveryDefaultConstraint(rangeUnit, diagnostics, context);
 	}
 
 	/**
@@ -754,13 +868,40 @@ public class RpgValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateAbility(Ability ability, DiagnosticChain diagnostics, Map context) {
-		boolean result = validate_EveryMultiplicityConforms((EObject)ability, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)ability, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)ability, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)ability, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)ability, diagnostics, context);
+		boolean result = validate_EveryMultiplicityConforms(ability, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(ability, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(ability, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(ability, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(ability, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAbility_ProperAbilityLevels(ability, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAbility_ValidCastTime(ability, diagnostics, context);
 		return result;
+	}
+
+	/**
+	 * Validates the ProperAbilityLevels constraint of '<em>Ability</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateAbility_ProperAbilityLevels(Ability ability, DiagnosticChain diagnostics, Map context) {
+		// TODO implement the constraint
+		// -> specify the condition that violates the constraint
+		// -> verify the diagnostic details, including severity, code, and message
+		// Ensure that you remove @generated or mark it @generated NOT
+		if (false) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "ProperAbilityLevels", getObjectLabel(ability, context) }),
+						 new Object[] { ability }));
+			}
+			return false;
+		}
+		return true;
 	}
 
 	/**
@@ -795,13 +936,41 @@ public class RpgValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateEffect(Effect effect, DiagnosticChain diagnostics, Map context) {
-		boolean result = validate_EveryMultiplicityConforms((EObject)effect, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)effect, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)effect, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)effect, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)effect, diagnostics, context);
+		boolean result = validate_EveryMultiplicityConforms(effect, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(effect, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(effect, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(effect, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(effect, diagnostics, context);
+		if (result || diagnostics != null) result &= validateEffect_ProperEffectLevels(effect, diagnostics, context);
 		if (result || diagnostics != null) result &= validateEffect_MeaningfulEffect(effect, diagnostics, context);
+		if (result || diagnostics != null) result &= validateEffect_InstantiateConstraint(effect, diagnostics, context);
 		return result;
+	}
+
+	/**
+	 * Validates the ProperEffectLevels constraint of '<em>Effect</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateEffect_ProperEffectLevels(Effect effect, DiagnosticChain diagnostics, Map context) {
+		// TODO implement the constraint
+		// -> specify the condition that violates the constraint
+		// -> verify the diagnostic details, including severity, code, and message
+		// Ensure that you remove @generated or mark it @generated NOT
+		if (false) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "ProperEffectLevels", getObjectLabel(effect, context) }),
+						 new Object[] { effect }));
+			}
+			return false;
+		}
+		return true;
 	}
 
 	/**
@@ -831,12 +1000,124 @@ public class RpgValidator extends EObjectValidator {
 	}
 
 	/**
+	 * Validates the InstantiateConstraint constraint of '<em>Effect</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateEffect_InstantiateConstraint(Effect effect, DiagnosticChain diagnostics, Map context) {
+		// TODO implement the constraint
+		// -> specify the condition that violates the constraint
+		// -> verify the diagnostic details, including severity, code, and message
+		// Ensure that you remove @generated or mark it @generated NOT
+		if (false) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "InstantiateConstraint", getObjectLabel(effect, context) }),
+						 new Object[] { effect }));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public boolean validateStatChange(StatChange statChange, DiagnosticChain diagnostics, Map context) {
-		return validate_EveryDefaultConstraint((EObject)statChange, diagnostics, context);
+		boolean result = validate_EveryMultiplicityConforms(statChange, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(statChange, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(statChange, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(statChange, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(statChange, diagnostics, context);
+		if (result || diagnostics != null) result &= validateStatChange_SelfEffectStatChange(statChange, diagnostics, context);
+		if (result || diagnostics != null) result &= validateStatChange_SelfTalentStatChange(statChange, diagnostics, context);
+		if (result || diagnostics != null) result &= validateStatChange_SingularModifierOrder(statChange, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the SelfEffectStatChange constraint of '<em>Stat Change</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateStatChange_SelfEffectStatChange(StatChange statChange, DiagnosticChain diagnostics, Map context) {
+		// TODO implement the constraint
+		// -> specify the condition that violates the constraint
+		// -> verify the diagnostic details, including severity, code, and message
+		// Ensure that you remove @generated or mark it @generated NOT
+		if (false) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "SelfEffectStatChange", getObjectLabel(statChange, context) }),
+						 new Object[] { statChange }));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Validates the SelfTalentStatChange constraint of '<em>Stat Change</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateStatChange_SelfTalentStatChange(StatChange statChange, DiagnosticChain diagnostics, Map context) {
+		// TODO implement the constraint
+		// -> specify the condition that violates the constraint
+		// -> verify the diagnostic details, including severity, code, and message
+		// Ensure that you remove @generated or mark it @generated NOT
+		if (false) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "SelfTalentStatChange", getObjectLabel(statChange, context) }),
+						 new Object[] { statChange }));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Validates the SingularModifierOrder constraint of '<em>Stat Change</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateStatChange_SingularModifierOrder(StatChange statChange, DiagnosticChain diagnostics, Map context) {
+		// TODO implement the constraint
+		// -> specify the condition that violates the constraint
+		// -> verify the diagnostic details, including severity, code, and message
+		// Ensure that you remove @generated or mark it @generated NOT
+		if (false) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "SingularModifierOrder", getObjectLabel(statChange, context) }),
+						 new Object[] { statChange }));
+			}
+			return false;
+		}
+		return true;
 	}
 
 	/**
@@ -845,7 +1126,39 @@ public class RpgValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateModifier(Modifier modifier, DiagnosticChain diagnostics, Map context) {
-		return validate_EveryDefaultConstraint((EObject)modifier, diagnostics, context);
+		boolean result = validate_EveryMultiplicityConforms(modifier, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(modifier, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(modifier, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(modifier, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(modifier, diagnostics, context);
+		if (result || diagnostics != null) result &= validateModifier_NoMovingLimits(modifier, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the NoMovingLimits constraint of '<em>Modifier</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateModifier_NoMovingLimits(Modifier modifier, DiagnosticChain diagnostics, Map context) {
+		// TODO implement the constraint
+		// -> specify the condition that violates the constraint
+		// -> verify the diagnostic details, including severity, code, and message
+		// Ensure that you remove @generated or mark it @generated NOT
+		if (false) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "NoMovingLimits", getObjectLabel(modifier, context) }),
+						 new Object[] { modifier }));
+			}
+			return false;
+		}
+		return true;
 	}
 
 	/**
@@ -854,7 +1167,7 @@ public class RpgValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateTalent(Talent talent, DiagnosticChain diagnostics, Map context) {
-		return validate_EveryDefaultConstraint((EObject)talent, diagnostics, context);
+		return validate_EveryDefaultConstraint(talent, diagnostics, context);
 	}
 
 	/**
@@ -862,8 +1175,311 @@ public class RpgValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateAbilityCost(AbilityCost abilityCost, DiagnosticChain diagnostics, Map context) {
-		return validate_EveryDefaultConstraint((EObject)abilityCost, diagnostics, context);
+	public boolean validatePropagationRequirement(PropagationRequirement propagationRequirement, DiagnosticChain diagnostics, Map context) {
+		boolean result = validate_EveryMultiplicityConforms(propagationRequirement, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(propagationRequirement, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(propagationRequirement, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(propagationRequirement, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(propagationRequirement, diagnostics, context);
+		if (result || diagnostics != null) result &= validatePropagationRequirement_ProperRequiredLevel(propagationRequirement, diagnostics, context);
+		if (result || diagnostics != null) result &= validatePropagationRequirement_SelfReference(propagationRequirement, diagnostics, context);
+		if (result || diagnostics != null) result &= validatePropagationRequirement_ProperPropagationReference(propagationRequirement, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the ProperRequiredLevel constraint of '<em>Propagation Requirement</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validatePropagationRequirement_ProperRequiredLevel(PropagationRequirement propagationRequirement, DiagnosticChain diagnostics, Map context) {
+		// TODO implement the constraint
+		// -> specify the condition that violates the constraint
+		// -> verify the diagnostic details, including severity, code, and message
+		// Ensure that you remove @generated or mark it @generated NOT
+		if (false) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "ProperRequiredLevel", getObjectLabel(propagationRequirement, context) }),
+						 new Object[] { propagationRequirement }));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Validates the SelfReference constraint of '<em>Propagation Requirement</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validatePropagationRequirement_SelfReference(PropagationRequirement propagationRequirement, DiagnosticChain diagnostics, Map context) {
+		// TODO implement the constraint
+		// -> specify the condition that violates the constraint
+		// -> verify the diagnostic details, including severity, code, and message
+		// Ensure that you remove @generated or mark it @generated NOT
+		if (false) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "SelfReference", getObjectLabel(propagationRequirement, context) }),
+						 new Object[] { propagationRequirement }));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Validates the ProperPropagationReference constraint of '<em>Propagation Requirement</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validatePropagationRequirement_ProperPropagationReference(PropagationRequirement propagationRequirement, DiagnosticChain diagnostics, Map context) {
+		// TODO implement the constraint
+		// -> specify the condition that violates the constraint
+		// -> verify the diagnostic details, including severity, code, and message
+		// Ensure that you remove @generated or mark it @generated NOT
+		if (false) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "ProperPropagationReference", getObjectLabel(propagationRequirement, context) }),
+						 new Object[] { propagationRequirement }));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateRandomizer(Randomizer randomizer, DiagnosticChain diagnostics, Map context) {
+		boolean result = validate_EveryMultiplicityConforms(randomizer, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(randomizer, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(randomizer, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(randomizer, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(randomizer, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRandomizer_MeaningfulRandomizer(randomizer, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRandomizer_ProperStatisticBase(randomizer, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the MeaningfulRandomizer constraint of '<em>Randomizer</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateRandomizer_MeaningfulRandomizer(Randomizer randomizer, DiagnosticChain diagnostics, Map context) {
+		// TODO implement the constraint
+		// -> specify the condition that violates the constraint
+		// -> verify the diagnostic details, including severity, code, and message
+		// Ensure that you remove @generated or mark it @generated NOT
+		if (false) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "MeaningfulRandomizer", getObjectLabel(randomizer, context) }),
+						 new Object[] { randomizer }));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Validates the ProperStatisticBase constraint of '<em>Randomizer</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateRandomizer_ProperStatisticBase(Randomizer randomizer, DiagnosticChain diagnostics, Map context) {
+		// TODO implement the constraint
+		// -> specify the condition that violates the constraint
+		// -> verify the diagnostic details, including severity, code, and message
+		// Ensure that you remove @generated or mark it @generated NOT
+		if (false) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "ProperStatisticBase", getObjectLabel(randomizer, context) }),
+						 new Object[] { randomizer }));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateStatTalent(StatTalent statTalent, DiagnosticChain diagnostics, Map context) {
+		return validate_EveryDefaultConstraint(statTalent, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateTick(Tick tick, DiagnosticChain diagnostics, Map context) {
+		return validate_EveryDefaultConstraint(tick, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateCooldownChange(CooldownChange cooldownChange, DiagnosticChain diagnostics, Map context) {
+		boolean result = validate_EveryMultiplicityConforms(cooldownChange, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(cooldownChange, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(cooldownChange, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(cooldownChange, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(cooldownChange, diagnostics, context);
+		if (result || diagnostics != null) result &= validateCooldownChange_MeaningfullCooldownChange(cooldownChange, diagnostics, context);
+		if (result || diagnostics != null) result &= validateCooldownChange_ProperAbilityReference(cooldownChange, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the MeaningfullCooldownChange constraint of '<em>Cooldown Change</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateCooldownChange_MeaningfullCooldownChange(CooldownChange cooldownChange, DiagnosticChain diagnostics, Map context) {
+		// TODO implement the constraint
+		// -> specify the condition that violates the constraint
+		// -> verify the diagnostic details, including severity, code, and message
+		// Ensure that you remove @generated or mark it @generated NOT
+		if (false) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "MeaningfullCooldownChange", getObjectLabel(cooldownChange, context) }),
+						 new Object[] { cooldownChange }));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Validates the ProperAbilityReference constraint of '<em>Cooldown Change</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateCooldownChange_ProperAbilityReference(CooldownChange cooldownChange, DiagnosticChain diagnostics, Map context) {
+		// TODO implement the constraint
+		// -> specify the condition that violates the constraint
+		// -> verify the diagnostic details, including severity, code, and message
+		// Ensure that you remove @generated or mark it @generated NOT
+		if (false) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "ProperAbilityReference", getObjectLabel(cooldownChange, context) }),
+						 new Object[] { cooldownChange }));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateChange(Change change, DiagnosticChain diagnostics, Map context) {
+		return validate_EveryDefaultConstraint(change, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateUnlockTalent(UnlockTalent unlockTalent, DiagnosticChain diagnostics, Map context) {
+		return validate_EveryDefaultConstraint(unlockTalent, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateUnlockAbility(UnlockAbility unlockAbility, DiagnosticChain diagnostics, Map context) {
+		return validate_EveryDefaultConstraint(unlockAbility, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateUnlockEffect(UnlockEffect unlockEffect, DiagnosticChain diagnostics, Map context) {
+		return validate_EveryDefaultConstraint(unlockEffect, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateUnlockChange(UnlockChange unlockChange, DiagnosticChain diagnostics, Map context) {
+		return validate_EveryDefaultConstraint(unlockChange, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateCooldownTalent(CooldownTalent cooldownTalent, DiagnosticChain diagnostics, Map context) {
+		return validate_EveryDefaultConstraint(cooldownTalent, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateUnlockModifier(UnlockModifier unlockModifier, DiagnosticChain diagnostics, Map context) {
+		return validate_EveryDefaultConstraint(unlockModifier, diagnostics, context);
 	}
 
 	/**
@@ -944,6 +1560,15 @@ public class RpgValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateTickType(TickType tickType, DiagnosticChain diagnostics, Map context) {
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateChangeValueType(ChangeValueType changeValueType, DiagnosticChain diagnostics, Map context) {
 		return true;
 	}
 

@@ -2,7 +2,7 @@
  */
 package rpg;
 
-import org.eclipse.emf.cdo.CDOObject;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,14 +25,14 @@ import org.eclipse.emf.cdo.CDOObject;
  * </p>
  *
  * @see rpg.RpgPackage#getCharacterStatistic()
- * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='LimitBetweenMinAndMax'"
- *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot LimitBetweenMinAndMax='\n\t\t\tstartLimitValue <= maxValue and startLimitValue >= minValue' LimitBetweenMinAndMax$message='\'Value of startLimitValue must be between the values of minValue and maxValue.\''"
- * @extends CDOObject
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='LimitBetweenMinAndMax ValidMinMax'"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot LimitBetweenMinAndMax='\n\t\t\tstartLimitValue <= maxValue and startLimitValue >= minValue' LimitBetweenMinAndMax$message='\'Value of startLimitValue must be between the values of minValue and maxValue.\'' ValidMinMax='\n\t\t\tmaxValue >= minValue' ValidMinMax$message='\'Value of max must be equal to or greater than value of min.\''"
  * @generated
  */
-public interface CharacterStatistic extends CDOObject {
+public interface CharacterStatistic extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	 * The default value is <code>"My statistic"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
@@ -42,7 +42,7 @@ public interface CharacterStatistic extends CDOObject {
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see rpg.RpgPackage#getCharacterStatistic_Name()
-	 * @model required="true"
+	 * @model default="My statistic" required="true"
 	 * @generated
 	 */
 	String getName();
@@ -85,6 +85,7 @@ public interface CharacterStatistic extends CDOObject {
 
 	/**
 	 * Returns the value of the '<em><b>Description</b></em>' attribute.
+	 * The default value is <code>"Placeholder description"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Description</em>' attribute isn't clear,
@@ -94,7 +95,7 @@ public interface CharacterStatistic extends CDOObject {
 	 * @return the value of the '<em>Description</em>' attribute.
 	 * @see #setDescription(String)
 	 * @see rpg.RpgPackage#getCharacterStatistic_Description()
-	 * @model required="true"
+	 * @model default="Placeholder description" required="true"
 	 * @generated
 	 */
 	String getDescription();
@@ -111,6 +112,7 @@ public interface CharacterStatistic extends CDOObject {
 
 	/**
 	 * Returns the value of the '<em><b>Tooltip</b></em>' attribute.
+	 * The default value is <code>"Placeholder tooltip"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Tooltip</em>' attribute isn't clear,
@@ -120,7 +122,7 @@ public interface CharacterStatistic extends CDOObject {
 	 * @return the value of the '<em>Tooltip</em>' attribute.
 	 * @see #setTooltip(String)
 	 * @see rpg.RpgPackage#getCharacterStatistic_Tooltip()
-	 * @model required="true"
+	 * @model default="Placeholder tooltip" required="true"
 	 * @generated
 	 */
 	String getTooltip();
@@ -218,7 +220,7 @@ public interface CharacterStatistic extends CDOObject {
 
 	/**
 	 * Returns the value of the '<em><b>Stat Type</b></em>' attribute.
-	 * The default value is <code>"ASCENDING"</code>.
+	 * The default value is <code>"STAT"</code>.
 	 * The literals are from the enumeration {@link rpg.StatType}.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -230,7 +232,7 @@ public interface CharacterStatistic extends CDOObject {
 	 * @see rpg.StatType
 	 * @see #setStatType(StatType)
 	 * @see rpg.RpgPackage#getCharacterStatistic_StatType()
-	 * @model default="ASCENDING" required="true"
+	 * @model default="STAT" required="true"
 	 * @generated
 	 */
 	StatType getStatType();

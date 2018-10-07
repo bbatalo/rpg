@@ -2,9 +2,9 @@
  */
 package rpg;
 
-import org.eclipse.emf.cdo.CDOObject;
-
 import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -18,23 +18,24 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link rpg.Ability#getLore <em>Lore</em>}</li>
  *   <li>{@link rpg.Ability#getTooltip <em>Tooltip</em>}</li>
  *   <li>{@link rpg.Ability#getCastType <em>Cast Type</em>}</li>
+ *   <li>{@link rpg.Ability#getCooldown <em>Cooldown</em>}</li>
  *   <li>{@link rpg.Ability#getAbilityType <em>Ability Type</em>}</li>
  *   <li>{@link rpg.Ability#getCastTime <em>Cast Time</em>}</li>
  *   <li>{@link rpg.Ability#getRange <em>Range</em>}</li>
  *   <li>{@link rpg.Ability#getRangeUnit <em>Range Unit</em>}</li>
  *   <li>{@link rpg.Ability#getOnLevel <em>On Level</em>}</li>
  *   <li>{@link rpg.Ability#getEffects <em>Effects</em>}</li>
- *   <li>{@link rpg.Ability#getCosts <em>Costs</em>}</li>
+ *   <li>{@link rpg.Ability#getNode <em>Node</em>}</li>
+ *   <li>{@link rpg.Ability#isIsLocked <em>Is Locked</em>}</li>
  * </ul>
  * </p>
  *
  * @see rpg.RpgPackage#getAbility()
- * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='ValidCastTime'"
- *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot ValidCastTime='\n\t\tif self.castType = CastType::NO_CAST or self.castType = CastType::INSTANT then\n\t\t\tself.castTime = 0.0\n\t\telse\n\t\t\tself.castTime > 0.0\n\t\tendif' ValidCastTime$message='\'NO_CAST and INSTANT abilities have no cast time, the rest do.\''"
- * @extends CDOObject
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='ProperAbilityLevels ValidCastTime'"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot ProperAbilityLevels='\n\t\t\tself.onLevel >= self.node.minActivationLevel and self.onLevel <= self.node.maxActivationLevel' ProperAbilityLevels$message='\'All abilities must reference an appropriate node level.\'' ValidCastTime='\n\t\tif self.castType = CastType::NO_CAST or self.castType = CastType::INSTANT then\n\t\t\tself.castTime = 0.0\n\t\telse\n\t\t\tself.castTime > 0.0\n\t\tendif' ValidCastTime$message='\'NO_CAST and INSTANT abilities have no cast time, the rest do.\''"
  * @generated
  */
-public interface Ability extends CDOObject {
+public interface Ability extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -141,6 +142,33 @@ public interface Ability extends CDOObject {
 	 * @generated
 	 */
 	void setCastType(CastType value);
+
+	/**
+	 * Returns the value of the '<em><b>Cooldown</b></em>' attribute.
+	 * The default value is <code>"0"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Cooldown</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Cooldown</em>' attribute.
+	 * @see #setCooldown(double)
+	 * @see rpg.RpgPackage#getAbility_Cooldown()
+	 * @model default="0" required="true"
+	 * @generated
+	 */
+	double getCooldown();
+
+	/**
+	 * Sets the value of the '{@link rpg.Ability#getCooldown <em>Cooldown</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Cooldown</em>' attribute.
+	 * @see #getCooldown()
+	 * @generated
+	 */
+	void setCooldown(double value);
 
 	/**
 	 * Returns the value of the '<em><b>Ability Type</b></em>' attribute.
@@ -278,6 +306,7 @@ public interface Ability extends CDOObject {
 	/**
 	 * Returns the value of the '<em><b>Effects</b></em>' containment reference list.
 	 * The list contents are of type {@link rpg.Effect}.
+	 * It is bidirectional and its opposite is '{@link rpg.Effect#getAbility <em>Ability</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Effects</em>' containment reference list isn't clear,
@@ -286,25 +315,65 @@ public interface Ability extends CDOObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Effects</em>' containment reference list.
 	 * @see rpg.RpgPackage#getAbility_Effects()
-	 * @model type="rpg.Effect" containment="true" required="true"
+	 * @see rpg.Effect#getAbility
+	 * @model type="rpg.Effect" opposite="ability" containment="true" required="true"
 	 * @generated
 	 */
 	EList getEffects();
 
 	/**
-	 * Returns the value of the '<em><b>Costs</b></em>' containment reference list.
-	 * The list contents are of type {@link rpg.AbilityCost}.
+	 * Returns the value of the '<em><b>Node</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link rpg.Node#getAbilities <em>Abilities</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Costs</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Node</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Costs</em>' containment reference list.
-	 * @see rpg.RpgPackage#getAbility_Costs()
-	 * @model type="rpg.AbilityCost" containment="true" required="true"
+	 * @return the value of the '<em>Node</em>' container reference.
+	 * @see #setNode(Node)
+	 * @see rpg.RpgPackage#getAbility_Node()
+	 * @see rpg.Node#getAbilities
+	 * @model opposite="abilities" required="true" transient="false"
 	 * @generated
 	 */
-	EList getCosts();
+	Node getNode();
+
+	/**
+	 * Sets the value of the '{@link rpg.Ability#getNode <em>Node</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Node</em>' container reference.
+	 * @see #getNode()
+	 * @generated
+	 */
+	void setNode(Node value);
+
+	/**
+	 * Returns the value of the '<em><b>Is Locked</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Is Locked</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Is Locked</em>' attribute.
+	 * @see #setIsLocked(boolean)
+	 * @see rpg.RpgPackage#getAbility_IsLocked()
+	 * @model default="false" required="true"
+	 * @generated
+	 */
+	boolean isIsLocked();
+
+	/**
+	 * Sets the value of the '{@link rpg.Ability#isIsLocked <em>Is Locked</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Locked</em>' attribute.
+	 * @see #isIsLocked()
+	 * @generated
+	 */
+	void setIsLocked(boolean value);
 
 } // Ability

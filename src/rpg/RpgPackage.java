@@ -187,13 +187,22 @@ public interface RpgPackage extends EPackage {
 	int CHARACTER_CLASS__BRANCHES = 6;
 
 	/**
+	 * The feature id for the '<em><b>Is Playable</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHARACTER_CLASS__IS_PLAYABLE = 7;
+
+	/**
 	 * The number of structural features of the '<em>Character Class</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CHARACTER_CLASS_FEATURE_COUNT = 7;
+	int CHARACTER_CLASS_FEATURE_COUNT = 8;
 
 	/**
 	 * The meta object id for the '{@link rpg.impl.CharacterStatisticImpl <em>Character Statistic</em>}' class.
@@ -342,22 +351,13 @@ public interface RpgPackage extends EPackage {
 	int BRANCH__BRANCH_TYPE = 3;
 
 	/**
-	 * The feature id for the '<em><b>Start Nodes</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BRANCH__START_NODES = 4;
-
-	/**
 	 * The feature id for the '<em><b>Tooltip</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BRANCH__TOOLTIP = 5;
+	int BRANCH__TOOLTIP = 4;
 
 	/**
 	 * The feature id for the '<em><b>Is Inheritable</b></em>' attribute.
@@ -366,7 +366,7 @@ public interface RpgPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BRANCH__IS_INHERITABLE = 6;
+	int BRANCH__IS_INHERITABLE = 5;
 
 	/**
 	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
@@ -375,7 +375,16 @@ public interface RpgPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BRANCH__NODES = 7;
+	int BRANCH__NODES = 6;
+
+	/**
+	 * The feature id for the '<em><b>Character Class</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BRANCH__CHARACTER_CLASS = 7;
 
 	/**
 	 * The number of structural features of the '<em>Branch</em>' class.
@@ -451,7 +460,7 @@ public interface RpgPackage extends EPackage {
 	int NODE__CHILD_NODES = 5;
 
 	/**
-	 * The feature id for the '<em><b>Parent Nodes</b></em>' reference.
+	 * The feature id for the '<em><b>Parent Nodes</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -496,31 +505,40 @@ public interface RpgPackage extends EPackage {
 	int NODE__ACTIVATION_LEVEL = 10;
 
 	/**
-	 * The feature id for the '<em><b>Is Activated</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NODE__IS_ACTIVATED = 11;
-
-	/**
 	 * The feature id for the '<em><b>Abilities</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NODE__ABILITIES = 12;
+	int NODE__ABILITIES = 11;
 
 	/**
-	 * The feature id for the '<em><b>Talents</b></em>' containment reference.
+	 * The feature id for the '<em><b>Talents</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NODE__TALENTS = 13;
+	int NODE__TALENTS = 12;
+
+	/**
+	 * The feature id for the '<em><b>Is Locked</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NODE__IS_LOCKED = 13;
+
+	/**
+	 * The feature id for the '<em><b>Branch</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NODE__BRANCH = 14;
 
 	/**
 	 * The number of structural features of the '<em>Node</em>' class.
@@ -529,7 +547,7 @@ public interface RpgPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NODE_FEATURE_COUNT = 14;
+	int NODE_FEATURE_COUNT = 15;
 
 	/**
 	 * The meta object id for the '{@link rpg.impl.NodeActivationImpl <em>Node Activation</em>}' class.
@@ -542,22 +560,13 @@ public interface RpgPackage extends EPackage {
 	int NODE_ACTIVATION = 5;
 
 	/**
-	 * The feature id for the '<em><b>Text</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NODE_ACTIVATION__TEXT = 0;
-
-	/**
 	 * The feature id for the '<em><b>Is Auto</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NODE_ACTIVATION__IS_AUTO = 1;
+	int NODE_ACTIVATION__IS_AUTO = 0;
 
 	/**
 	 * The feature id for the '<em><b>Level</b></em>' attribute.
@@ -566,53 +575,7 @@ public interface RpgPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NODE_ACTIVATION__LEVEL = 2;
-
-	/**
-	 * The number of structural features of the '<em>Node Activation</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NODE_ACTIVATION_FEATURE_COUNT = 3;
-
-	/**
-	 * The meta object id for the '{@link rpg.impl.NodeActivationBuyImpl <em>Node Activation Buy</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see rpg.impl.NodeActivationBuyImpl
-	 * @see rpg.impl.RpgPackageImpl#getNodeActivationBuy()
-	 * @generated
-	 */
-	int NODE_ACTIVATION_BUY = 6;
-
-	/**
-	 * The feature id for the '<em><b>Text</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NODE_ACTIVATION_BUY__TEXT = NODE_ACTIVATION__TEXT;
-
-	/**
-	 * The feature id for the '<em><b>Is Auto</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NODE_ACTIVATION_BUY__IS_AUTO = NODE_ACTIVATION__IS_AUTO;
-
-	/**
-	 * The feature id for the '<em><b>Level</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NODE_ACTIVATION_BUY__LEVEL = NODE_ACTIVATION__LEVEL;
+	int NODE_ACTIVATION__LEVEL = 1;
 
 	/**
 	 * The feature id for the '<em><b>Costs</b></em>' containment reference list.
@@ -621,80 +584,34 @@ public interface RpgPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NODE_ACTIVATION_BUY__COSTS = NODE_ACTIVATION_FEATURE_COUNT + 0;
+	int NODE_ACTIVATION__COSTS = 2;
 
 	/**
-	 * The number of structural features of the '<em>Node Activation Buy</em>' class.
+	 * The feature id for the '<em><b>Requirements</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NODE_ACTIVATION_BUY_FEATURE_COUNT = NODE_ACTIVATION_FEATURE_COUNT + 1;
+	int NODE_ACTIVATION__REQUIREMENTS = 3;
 
 	/**
-	 * The meta object id for the '{@link rpg.impl.NodeActivationPropagateImpl <em>Node Activation Propagate</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see rpg.impl.NodeActivationPropagateImpl
-	 * @see rpg.impl.RpgPackageImpl#getNodeActivationPropagate()
-	 * @generated
-	 */
-	int NODE_ACTIVATION_PROPAGATE = 7;
-
-	/**
-	 * The feature id for the '<em><b>Text</b></em>' attribute.
+	 * The feature id for the '<em><b>Node</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NODE_ACTIVATION_PROPAGATE__TEXT = NODE_ACTIVATION__TEXT;
+	int NODE_ACTIVATION__NODE = 4;
 
 	/**
-	 * The feature id for the '<em><b>Is Auto</b></em>' attribute.
+	 * The number of structural features of the '<em>Node Activation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NODE_ACTIVATION_PROPAGATE__IS_AUTO = NODE_ACTIVATION__IS_AUTO;
-
-	/**
-	 * The feature id for the '<em><b>Level</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NODE_ACTIVATION_PROPAGATE__LEVEL = NODE_ACTIVATION__LEVEL;
-
-	/**
-	 * The feature id for the '<em><b>Follows Activation Of</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NODE_ACTIVATION_PROPAGATE__FOLLOWS_ACTIVATION_OF = NODE_ACTIVATION_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Required Level</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NODE_ACTIVATION_PROPAGATE__REQUIRED_LEVEL = NODE_ACTIVATION_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>Node Activation Propagate</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NODE_ACTIVATION_PROPAGATE_FEATURE_COUNT = NODE_ACTIVATION_FEATURE_COUNT + 2;
+	int NODE_ACTIVATION_FEATURE_COUNT = 5;
 
 	/**
 	 * The meta object id for the '{@link rpg.impl.ActivationCostImpl <em>Activation Cost</em>}' class.
@@ -704,7 +621,7 @@ public interface RpgPackage extends EPackage {
 	 * @see rpg.impl.RpgPackageImpl#getActivationCost()
 	 * @generated
 	 */
-	int ACTIVATION_COST = 8;
+	int ACTIVATION_COST = 6;
 
 	/**
 	 * The feature id for the '<em><b>Consume</b></em>' attribute.
@@ -734,13 +651,22 @@ public interface RpgPackage extends EPackage {
 	int ACTIVATION_COST__STATISTIC = 2;
 
 	/**
+	 * The feature id for the '<em><b>Node Activation</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTIVATION_COST__NODE_ACTIVATION = 3;
+
+	/**
 	 * The number of structural features of the '<em>Activation Cost</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVATION_COST_FEATURE_COUNT = 3;
+	int ACTIVATION_COST_FEATURE_COUNT = 4;
 
 	/**
 	 * The meta object id for the '{@link rpg.impl.RangeUnitImpl <em>Range Unit</em>}' class.
@@ -750,7 +676,7 @@ public interface RpgPackage extends EPackage {
 	 * @see rpg.impl.RpgPackageImpl#getRangeUnit()
 	 * @generated
 	 */
-	int RANGE_UNIT = 9;
+	int RANGE_UNIT = 7;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -787,7 +713,7 @@ public interface RpgPackage extends EPackage {
 	 * @see rpg.impl.RpgPackageImpl#getAbility()
 	 * @generated
 	 */
-	int ABILITY = 10;
+	int ABILITY = 8;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -826,13 +752,22 @@ public interface RpgPackage extends EPackage {
 	int ABILITY__CAST_TYPE = 3;
 
 	/**
+	 * The feature id for the '<em><b>Cooldown</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABILITY__COOLDOWN = 4;
+
+	/**
 	 * The feature id for the '<em><b>Ability Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABILITY__ABILITY_TYPE = 4;
+	int ABILITY__ABILITY_TYPE = 5;
 
 	/**
 	 * The feature id for the '<em><b>Cast Time</b></em>' attribute.
@@ -841,7 +776,7 @@ public interface RpgPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABILITY__CAST_TIME = 5;
+	int ABILITY__CAST_TIME = 6;
 
 	/**
 	 * The feature id for the '<em><b>Range</b></em>' attribute.
@@ -850,7 +785,7 @@ public interface RpgPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABILITY__RANGE = 6;
+	int ABILITY__RANGE = 7;
 
 	/**
 	 * The feature id for the '<em><b>Range Unit</b></em>' reference.
@@ -859,7 +794,7 @@ public interface RpgPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABILITY__RANGE_UNIT = 7;
+	int ABILITY__RANGE_UNIT = 8;
 
 	/**
 	 * The feature id for the '<em><b>On Level</b></em>' attribute.
@@ -868,7 +803,7 @@ public interface RpgPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABILITY__ON_LEVEL = 8;
+	int ABILITY__ON_LEVEL = 9;
 
 	/**
 	 * The feature id for the '<em><b>Effects</b></em>' containment reference list.
@@ -877,16 +812,25 @@ public interface RpgPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABILITY__EFFECTS = 9;
+	int ABILITY__EFFECTS = 10;
 
 	/**
-	 * The feature id for the '<em><b>Costs</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Node</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABILITY__COSTS = 10;
+	int ABILITY__NODE = 11;
+
+	/**
+	 * The feature id for the '<em><b>Is Locked</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABILITY__IS_LOCKED = 12;
 
 	/**
 	 * The number of structural features of the '<em>Ability</em>' class.
@@ -895,7 +839,7 @@ public interface RpgPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABILITY_FEATURE_COUNT = 11;
+	int ABILITY_FEATURE_COUNT = 13;
 
 	/**
 	 * The meta object id for the '{@link rpg.impl.EffectImpl <em>Effect</em>}' class.
@@ -905,7 +849,7 @@ public interface RpgPackage extends EPackage {
 	 * @see rpg.impl.RpgPackageImpl#getEffect()
 	 * @generated
 	 */
-	int EFFECT = 11;
+	int EFFECT = 9;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -962,13 +906,40 @@ public interface RpgPackage extends EPackage {
 	int EFFECT__INSTANTIATE = 5;
 
 	/**
-	 * The feature id for the '<em><b>Stat Change</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Ability</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EFFECT__STAT_CHANGE = 6;
+	int EFFECT__ABILITY = 6;
+
+	/**
+	 * The feature id for the '<em><b>Randomizer</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EFFECT__RANDOMIZER = 7;
+
+	/**
+	 * The feature id for the '<em><b>Changes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EFFECT__CHANGES = 8;
+
+	/**
+	 * The feature id for the '<em><b>Is Locked</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EFFECT__IS_LOCKED = 9;
 
 	/**
 	 * The number of structural features of the '<em>Effect</em>' class.
@@ -977,7 +948,71 @@ public interface RpgPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EFFECT_FEATURE_COUNT = 7;
+	int EFFECT_FEATURE_COUNT = 10;
+
+	/**
+	 * The meta object id for the '{@link rpg.impl.ChangeImpl <em>Change</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see rpg.impl.ChangeImpl
+	 * @see rpg.impl.RpgPackageImpl#getChange()
+	 * @generated
+	 */
+	int CHANGE = 18;
+
+	/**
+	 * The feature id for the '<em><b>Base Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHANGE__BASE_VALUE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Change Value Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHANGE__CHANGE_VALUE_TYPE = 1;
+
+	/**
+	 * The feature id for the '<em><b>Change Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHANGE__CHANGE_TYPE = 2;
+
+	/**
+	 * The feature id for the '<em><b>Effect</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHANGE__EFFECT = 3;
+
+	/**
+	 * The feature id for the '<em><b>Is Locked</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHANGE__IS_LOCKED = 4;
+
+	/**
+	 * The number of structural features of the '<em>Change</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHANGE_FEATURE_COUNT = 5;
 
 	/**
 	 * The meta object id for the '{@link rpg.impl.StatChangeImpl <em>Stat Change</em>}' class.
@@ -987,25 +1022,7 @@ public interface RpgPackage extends EPackage {
 	 * @see rpg.impl.RpgPackageImpl#getStatChange()
 	 * @generated
 	 */
-	int STAT_CHANGE = 12;
-
-	/**
-	 * The feature id for the '<em><b>Change Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STAT_CHANGE__CHANGE_TYPE = 0;
-
-	/**
-	 * The feature id for the '<em><b>Tick Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STAT_CHANGE__TICK_TYPE = 1;
+	int STAT_CHANGE = 10;
 
 	/**
 	 * The feature id for the '<em><b>Base Value</b></em>' attribute.
@@ -1014,16 +1031,43 @@ public interface RpgPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STAT_CHANGE__BASE_VALUE = 2;
+	int STAT_CHANGE__BASE_VALUE = CHANGE__BASE_VALUE;
 
 	/**
-	 * The feature id for the '<em><b>Tick Value</b></em>' attribute.
+	 * The feature id for the '<em><b>Change Value Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STAT_CHANGE__TICK_VALUE = 3;
+	int STAT_CHANGE__CHANGE_VALUE_TYPE = CHANGE__CHANGE_VALUE_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Change Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STAT_CHANGE__CHANGE_TYPE = CHANGE__CHANGE_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Effect</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STAT_CHANGE__EFFECT = CHANGE__EFFECT;
+
+	/**
+	 * The feature id for the '<em><b>Is Locked</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STAT_CHANGE__IS_LOCKED = CHANGE__IS_LOCKED;
 
 	/**
 	 * The feature id for the '<em><b>Changes Statistic</b></em>' reference.
@@ -1032,7 +1076,7 @@ public interface RpgPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STAT_CHANGE__CHANGES_STATISTIC = 4;
+	int STAT_CHANGE__CHANGES_STATISTIC = CHANGE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Modifiers</b></em>' containment reference list.
@@ -1041,7 +1085,34 @@ public interface RpgPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STAT_CHANGE__MODIFIERS = 5;
+	int STAT_CHANGE__MODIFIERS = CHANGE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Randomizer</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STAT_CHANGE__RANDOMIZER = CHANGE_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Tick</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STAT_CHANGE__TICK = CHANGE_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Stat Talent</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STAT_CHANGE__STAT_TALENT = CHANGE_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Stat Change</em>' class.
@@ -1050,7 +1121,7 @@ public interface RpgPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STAT_CHANGE_FEATURE_COUNT = 6;
+	int STAT_CHANGE_FEATURE_COUNT = CHANGE_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link rpg.impl.ModifierImpl <em>Modifier</em>}' class.
@@ -1060,7 +1131,7 @@ public interface RpgPackage extends EPackage {
 	 * @see rpg.impl.RpgPackageImpl#getModifier()
 	 * @generated
 	 */
-	int MODIFIER = 13;
+	int MODIFIER = 11;
 
 	/**
 	 * The feature id for the '<em><b>Change Type</b></em>' attribute.
@@ -1117,13 +1188,58 @@ public interface RpgPackage extends EPackage {
 	int MODIFIER__BASED_ON_VALUE = 5;
 
 	/**
+	 * The feature id for the '<em><b>Stat Change</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODIFIER__STAT_CHANGE = 6;
+
+	/**
+	 * The feature id for the '<em><b>Randomizer</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODIFIER__RANDOMIZER = 7;
+
+	/**
+	 * The feature id for the '<em><b>On Level</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODIFIER__ON_LEVEL = 8;
+
+	/**
+	 * The feature id for the '<em><b>Exclusive</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODIFIER__EXCLUSIVE = 9;
+
+	/**
+	 * The feature id for the '<em><b>Target Statistic</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODIFIER__TARGET_STATISTIC = 10;
+
+	/**
 	 * The number of structural features of the '<em>Modifier</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODIFIER_FEATURE_COUNT = 6;
+	int MODIFIER_FEATURE_COUNT = 11;
 
 	/**
 	 * The meta object id for the '{@link rpg.impl.TalentImpl <em>Talent</em>}' class.
@@ -1133,7 +1249,7 @@ public interface RpgPackage extends EPackage {
 	 * @see rpg.impl.RpgPackageImpl#getTalent()
 	 * @generated
 	 */
-	int TALENT = 14;
+	int TALENT = 12;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1172,59 +1288,825 @@ public interface RpgPackage extends EPackage {
 	int TALENT__DESCRIPTION = 3;
 
 	/**
+	 * The feature id for the '<em><b>Node</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TALENT__NODE = 4;
+
+	/**
+	 * The feature id for the '<em><b>On Level</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TALENT__ON_LEVEL = 5;
+
+	/**
 	 * The number of structural features of the '<em>Talent</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TALENT_FEATURE_COUNT = 4;
+	int TALENT_FEATURE_COUNT = 6;
 
 	/**
-	 * The meta object id for the '{@link rpg.impl.AbilityCostImpl <em>Ability Cost</em>}' class.
+	 * The meta object id for the '{@link rpg.impl.PropagationRequirementImpl <em>Propagation Requirement</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see rpg.impl.AbilityCostImpl
-	 * @see rpg.impl.RpgPackageImpl#getAbilityCost()
+	 * @see rpg.impl.PropagationRequirementImpl
+	 * @see rpg.impl.RpgPackageImpl#getPropagationRequirement()
 	 * @generated
 	 */
-	int ABILITY_COST = 15;
+	int PROPAGATION_REQUIREMENT = 13;
 
 	/**
-	 * The feature id for the '<em><b>Consume</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABILITY_COST__CONSUME = 0;
-
-	/**
-	 * The feature id for the '<em><b>Cost</b></em>' attribute.
+	 * The feature id for the '<em><b>Required Level</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABILITY_COST__COST = 1;
+	int PROPAGATION_REQUIREMENT__REQUIRED_LEVEL = 0;
 
 	/**
-	 * The feature id for the '<em><b>Statistic</b></em>' reference.
+	 * The feature id for the '<em><b>Follows Activation Of</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABILITY_COST__STATISTIC = 2;
+	int PROPAGATION_REQUIREMENT__FOLLOWS_ACTIVATION_OF = 1;
 
 	/**
-	 * The number of structural features of the '<em>Ability Cost</em>' class.
+	 * The feature id for the '<em><b>Node Activation</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABILITY_COST_FEATURE_COUNT = 3;
+	int PROPAGATION_REQUIREMENT__NODE_ACTIVATION = 2;
+
+	/**
+	 * The number of structural features of the '<em>Propagation Requirement</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPAGATION_REQUIREMENT_FEATURE_COUNT = 3;
+
+	/**
+	 * The meta object id for the '{@link rpg.impl.RandomizerImpl <em>Randomizer</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see rpg.impl.RandomizerImpl
+	 * @see rpg.impl.RpgPackageImpl#getRandomizer()
+	 * @generated
+	 */
+	int RANDOMIZER = 14;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RANDOMIZER__VALUE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Based On</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RANDOMIZER__BASED_ON = 1;
+
+	/**
+	 * The number of structural features of the '<em>Randomizer</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RANDOMIZER_FEATURE_COUNT = 2;
+
+	/**
+	 * The meta object id for the '{@link rpg.impl.StatTalentImpl <em>Stat Talent</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see rpg.impl.StatTalentImpl
+	 * @see rpg.impl.RpgPackageImpl#getStatTalent()
+	 * @generated
+	 */
+	int STAT_TALENT = 15;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STAT_TALENT__NAME = TALENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Tooltip</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STAT_TALENT__TOOLTIP = TALENT__TOOLTIP;
+
+	/**
+	 * The feature id for the '<em><b>Lore</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STAT_TALENT__LORE = TALENT__LORE;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STAT_TALENT__DESCRIPTION = TALENT__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Node</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STAT_TALENT__NODE = TALENT__NODE;
+
+	/**
+	 * The feature id for the '<em><b>On Level</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STAT_TALENT__ON_LEVEL = TALENT__ON_LEVEL;
+
+	/**
+	 * The feature id for the '<em><b>Stat Changes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STAT_TALENT__STAT_CHANGES = TALENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Stat Talent</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STAT_TALENT_FEATURE_COUNT = TALENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link rpg.impl.TickImpl <em>Tick</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see rpg.impl.TickImpl
+	 * @see rpg.impl.RpgPackageImpl#getTick()
+	 * @generated
+	 */
+	int TICK = 16;
+
+	/**
+	 * The feature id for the '<em><b>Tick Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TICK__TICK_TYPE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Stat Change</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TICK__STAT_CHANGE = 1;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TICK__VALUE = 2;
+
+	/**
+	 * The feature id for the '<em><b>Duration</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TICK__DURATION = 3;
+
+	/**
+	 * The number of structural features of the '<em>Tick</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TICK_FEATURE_COUNT = 4;
+
+	/**
+	 * The meta object id for the '{@link rpg.impl.CooldownChangeImpl <em>Cooldown Change</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see rpg.impl.CooldownChangeImpl
+	 * @see rpg.impl.RpgPackageImpl#getCooldownChange()
+	 * @generated
+	 */
+	int COOLDOWN_CHANGE = 17;
+
+	/**
+	 * The feature id for the '<em><b>Base Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COOLDOWN_CHANGE__BASE_VALUE = CHANGE__BASE_VALUE;
+
+	/**
+	 * The feature id for the '<em><b>Change Value Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COOLDOWN_CHANGE__CHANGE_VALUE_TYPE = CHANGE__CHANGE_VALUE_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Change Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COOLDOWN_CHANGE__CHANGE_TYPE = CHANGE__CHANGE_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Effect</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COOLDOWN_CHANGE__EFFECT = CHANGE__EFFECT;
+
+	/**
+	 * The feature id for the '<em><b>Is Locked</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COOLDOWN_CHANGE__IS_LOCKED = CHANGE__IS_LOCKED;
+
+	/**
+	 * The feature id for the '<em><b>Ability</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COOLDOWN_CHANGE__ABILITY = CHANGE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Talent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COOLDOWN_CHANGE__TALENT = CHANGE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Cooldown Talent</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COOLDOWN_CHANGE__COOLDOWN_TALENT = CHANGE_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Cooldown Change</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COOLDOWN_CHANGE_FEATURE_COUNT = CHANGE_FEATURE_COUNT + 3;
+
+	/**
+	 * The meta object id for the '{@link rpg.impl.UnlockTalentImpl <em>Unlock Talent</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see rpg.impl.UnlockTalentImpl
+	 * @see rpg.impl.RpgPackageImpl#getUnlockTalent()
+	 * @generated
+	 */
+	int UNLOCK_TALENT = 19;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNLOCK_TALENT__NAME = TALENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Tooltip</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNLOCK_TALENT__TOOLTIP = TALENT__TOOLTIP;
+
+	/**
+	 * The feature id for the '<em><b>Lore</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNLOCK_TALENT__LORE = TALENT__LORE;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNLOCK_TALENT__DESCRIPTION = TALENT__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Node</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNLOCK_TALENT__NODE = TALENT__NODE;
+
+	/**
+	 * The feature id for the '<em><b>On Level</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNLOCK_TALENT__ON_LEVEL = TALENT__ON_LEVEL;
+
+	/**
+	 * The number of structural features of the '<em>Unlock Talent</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNLOCK_TALENT_FEATURE_COUNT = TALENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link rpg.impl.UnlockAbilityImpl <em>Unlock Ability</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see rpg.impl.UnlockAbilityImpl
+	 * @see rpg.impl.RpgPackageImpl#getUnlockAbility()
+	 * @generated
+	 */
+	int UNLOCK_ABILITY = 20;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNLOCK_ABILITY__NAME = UNLOCK_TALENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Tooltip</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNLOCK_ABILITY__TOOLTIP = UNLOCK_TALENT__TOOLTIP;
+
+	/**
+	 * The feature id for the '<em><b>Lore</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNLOCK_ABILITY__LORE = UNLOCK_TALENT__LORE;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNLOCK_ABILITY__DESCRIPTION = UNLOCK_TALENT__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Node</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNLOCK_ABILITY__NODE = UNLOCK_TALENT__NODE;
+
+	/**
+	 * The feature id for the '<em><b>On Level</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNLOCK_ABILITY__ON_LEVEL = UNLOCK_TALENT__ON_LEVEL;
+
+	/**
+	 * The feature id for the '<em><b>Ability</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNLOCK_ABILITY__ABILITY = UNLOCK_TALENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Unlock Ability</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNLOCK_ABILITY_FEATURE_COUNT = UNLOCK_TALENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link rpg.impl.UnlockEffectImpl <em>Unlock Effect</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see rpg.impl.UnlockEffectImpl
+	 * @see rpg.impl.RpgPackageImpl#getUnlockEffect()
+	 * @generated
+	 */
+	int UNLOCK_EFFECT = 21;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNLOCK_EFFECT__NAME = UNLOCK_TALENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Tooltip</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNLOCK_EFFECT__TOOLTIP = UNLOCK_TALENT__TOOLTIP;
+
+	/**
+	 * The feature id for the '<em><b>Lore</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNLOCK_EFFECT__LORE = UNLOCK_TALENT__LORE;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNLOCK_EFFECT__DESCRIPTION = UNLOCK_TALENT__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Node</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNLOCK_EFFECT__NODE = UNLOCK_TALENT__NODE;
+
+	/**
+	 * The feature id for the '<em><b>On Level</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNLOCK_EFFECT__ON_LEVEL = UNLOCK_TALENT__ON_LEVEL;
+
+	/**
+	 * The feature id for the '<em><b>Effect</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNLOCK_EFFECT__EFFECT = UNLOCK_TALENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Unlock Effect</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNLOCK_EFFECT_FEATURE_COUNT = UNLOCK_TALENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link rpg.impl.UnlockChangeImpl <em>Unlock Change</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see rpg.impl.UnlockChangeImpl
+	 * @see rpg.impl.RpgPackageImpl#getUnlockChange()
+	 * @generated
+	 */
+	int UNLOCK_CHANGE = 22;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNLOCK_CHANGE__NAME = UNLOCK_TALENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Tooltip</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNLOCK_CHANGE__TOOLTIP = UNLOCK_TALENT__TOOLTIP;
+
+	/**
+	 * The feature id for the '<em><b>Lore</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNLOCK_CHANGE__LORE = UNLOCK_TALENT__LORE;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNLOCK_CHANGE__DESCRIPTION = UNLOCK_TALENT__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Node</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNLOCK_CHANGE__NODE = UNLOCK_TALENT__NODE;
+
+	/**
+	 * The feature id for the '<em><b>On Level</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNLOCK_CHANGE__ON_LEVEL = UNLOCK_TALENT__ON_LEVEL;
+
+	/**
+	 * The feature id for the '<em><b>Change</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNLOCK_CHANGE__CHANGE = UNLOCK_TALENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Unlock Change</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNLOCK_CHANGE_FEATURE_COUNT = UNLOCK_TALENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link rpg.impl.CooldownTalentImpl <em>Cooldown Talent</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see rpg.impl.CooldownTalentImpl
+	 * @see rpg.impl.RpgPackageImpl#getCooldownTalent()
+	 * @generated
+	 */
+	int COOLDOWN_TALENT = 23;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COOLDOWN_TALENT__NAME = TALENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Tooltip</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COOLDOWN_TALENT__TOOLTIP = TALENT__TOOLTIP;
+
+	/**
+	 * The feature id for the '<em><b>Lore</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COOLDOWN_TALENT__LORE = TALENT__LORE;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COOLDOWN_TALENT__DESCRIPTION = TALENT__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Node</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COOLDOWN_TALENT__NODE = TALENT__NODE;
+
+	/**
+	 * The feature id for the '<em><b>On Level</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COOLDOWN_TALENT__ON_LEVEL = TALENT__ON_LEVEL;
+
+	/**
+	 * The feature id for the '<em><b>Cooldown Changes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COOLDOWN_TALENT__COOLDOWN_CHANGES = TALENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Cooldown Talent</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COOLDOWN_TALENT_FEATURE_COUNT = TALENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link rpg.impl.UnlockModifierImpl <em>Unlock Modifier</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see rpg.impl.UnlockModifierImpl
+	 * @see rpg.impl.RpgPackageImpl#getUnlockModifier()
+	 * @generated
+	 */
+	int UNLOCK_MODIFIER = 24;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNLOCK_MODIFIER__NAME = UNLOCK_TALENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Tooltip</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNLOCK_MODIFIER__TOOLTIP = UNLOCK_TALENT__TOOLTIP;
+
+	/**
+	 * The feature id for the '<em><b>Lore</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNLOCK_MODIFIER__LORE = UNLOCK_TALENT__LORE;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNLOCK_MODIFIER__DESCRIPTION = UNLOCK_TALENT__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Node</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNLOCK_MODIFIER__NODE = UNLOCK_TALENT__NODE;
+
+	/**
+	 * The feature id for the '<em><b>On Level</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNLOCK_MODIFIER__ON_LEVEL = UNLOCK_TALENT__ON_LEVEL;
+
+	/**
+	 * The feature id for the '<em><b>Modifier</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNLOCK_MODIFIER__MODIFIER = UNLOCK_TALENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Unlock Modifier</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNLOCK_MODIFIER_FEATURE_COUNT = UNLOCK_TALENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link rpg.StatType <em>Stat Type</em>}' enum.
@@ -1234,7 +2116,7 @@ public interface RpgPackage extends EPackage {
 	 * @see rpg.impl.RpgPackageImpl#getStatType()
 	 * @generated
 	 */
-	int STAT_TYPE = 16;
+	int STAT_TYPE = 25;
 
 	/**
 	 * The meta object id for the '{@link rpg.BranchType <em>Branch Type</em>}' enum.
@@ -1244,7 +2126,7 @@ public interface RpgPackage extends EPackage {
 	 * @see rpg.impl.RpgPackageImpl#getBranchType()
 	 * @generated
 	 */
-	int BRANCH_TYPE = 17;
+	int BRANCH_TYPE = 26;
 
 	/**
 	 * The meta object id for the '{@link rpg.NodeType <em>Node Type</em>}' enum.
@@ -1254,7 +2136,7 @@ public interface RpgPackage extends EPackage {
 	 * @see rpg.impl.RpgPackageImpl#getNodeType()
 	 * @generated
 	 */
-	int NODE_TYPE = 18;
+	int NODE_TYPE = 27;
 
 	/**
 	 * The meta object id for the '{@link rpg.CastType <em>Cast Type</em>}' enum.
@@ -1264,7 +2146,7 @@ public interface RpgPackage extends EPackage {
 	 * @see rpg.impl.RpgPackageImpl#getCastType()
 	 * @generated
 	 */
-	int CAST_TYPE = 19;
+	int CAST_TYPE = 28;
 
 	/**
 	 * The meta object id for the '{@link rpg.AbilityType <em>Ability Type</em>}' enum.
@@ -1274,7 +2156,7 @@ public interface RpgPackage extends EPackage {
 	 * @see rpg.impl.RpgPackageImpl#getAbilityType()
 	 * @generated
 	 */
-	int ABILITY_TYPE = 20;
+	int ABILITY_TYPE = 29;
 
 	/**
 	 * The meta object id for the '{@link rpg.TargetType <em>Target Type</em>}' enum.
@@ -1284,7 +2166,7 @@ public interface RpgPackage extends EPackage {
 	 * @see rpg.impl.RpgPackageImpl#getTargetType()
 	 * @generated
 	 */
-	int TARGET_TYPE = 21;
+	int TARGET_TYPE = 30;
 
 	/**
 	 * The meta object id for the '{@link rpg.EffectType <em>Effect Type</em>}' enum.
@@ -1294,7 +2176,7 @@ public interface RpgPackage extends EPackage {
 	 * @see rpg.impl.RpgPackageImpl#getEffectType()
 	 * @generated
 	 */
-	int EFFECT_TYPE = 22;
+	int EFFECT_TYPE = 31;
 
 	/**
 	 * The meta object id for the '{@link rpg.ChangeType <em>Change Type</em>}' enum.
@@ -1304,7 +2186,7 @@ public interface RpgPackage extends EPackage {
 	 * @see rpg.impl.RpgPackageImpl#getChangeType()
 	 * @generated
 	 */
-	int CHANGE_TYPE = 23;
+	int CHANGE_TYPE = 32;
 
 	/**
 	 * The meta object id for the '{@link rpg.TickType <em>Tick Type</em>}' enum.
@@ -1314,7 +2196,17 @@ public interface RpgPackage extends EPackage {
 	 * @see rpg.impl.RpgPackageImpl#getTickType()
 	 * @generated
 	 */
-	int TICK_TYPE = 24;
+	int TICK_TYPE = 33;
+
+	/**
+	 * The meta object id for the '{@link rpg.ChangeValueType <em>Change Value Type</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see rpg.ChangeValueType
+	 * @see rpg.impl.RpgPackageImpl#getChangeValueType()
+	 * @generated
+	 */
+	int CHANGE_VALUE_TYPE = 34;
 
 
 	/**
@@ -1457,6 +2349,17 @@ public interface RpgPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getCharacterClass_Branches();
+
+	/**
+	 * Returns the meta object for the attribute '{@link rpg.CharacterClass#isIsPlayable <em>Is Playable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Playable</em>'.
+	 * @see rpg.CharacterClass#isIsPlayable()
+	 * @see #getCharacterClass()
+	 * @generated
+	 */
+	EAttribute getCharacterClass_IsPlayable();
 
 	/**
 	 * Returns the meta object for class '{@link rpg.CharacterStatistic <em>Character Statistic</em>}'.
@@ -1622,17 +2525,6 @@ public interface RpgPackage extends EPackage {
 	EAttribute getBranch_BranchType();
 
 	/**
-	 * Returns the meta object for the reference list '{@link rpg.Branch#getStartNodes <em>Start Nodes</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Start Nodes</em>'.
-	 * @see rpg.Branch#getStartNodes()
-	 * @see #getBranch()
-	 * @generated
-	 */
-	EReference getBranch_StartNodes();
-
-	/**
 	 * Returns the meta object for the attribute '{@link rpg.Branch#getTooltip <em>Tooltip</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1664,6 +2556,17 @@ public interface RpgPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getBranch_Nodes();
+
+	/**
+	 * Returns the meta object for the container reference '{@link rpg.Branch#getCharacterClass <em>Character Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Character Class</em>'.
+	 * @see rpg.Branch#getCharacterClass()
+	 * @see #getBranch()
+	 * @generated
+	 */
+	EReference getBranch_CharacterClass();
 
 	/**
 	 * Returns the meta object for class '{@link rpg.Node <em>Node</em>}'.
@@ -1742,10 +2645,10 @@ public interface RpgPackage extends EPackage {
 	EReference getNode_ChildNodes();
 
 	/**
-	 * Returns the meta object for the reference '{@link rpg.Node#getParentNodes <em>Parent Nodes</em>}'.
+	 * Returns the meta object for the reference list '{@link rpg.Node#getParentNodes <em>Parent Nodes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Parent Nodes</em>'.
+	 * @return the meta object for the reference list '<em>Parent Nodes</em>'.
 	 * @see rpg.Node#getParentNodes()
 	 * @see #getNode()
 	 * @generated
@@ -1797,17 +2700,6 @@ public interface RpgPackage extends EPackage {
 	EAttribute getNode_ActivationLevel();
 
 	/**
-	 * Returns the meta object for the attribute '{@link rpg.Node#isIsActivated <em>Is Activated</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Activated</em>'.
-	 * @see rpg.Node#isIsActivated()
-	 * @see #getNode()
-	 * @generated
-	 */
-	EAttribute getNode_IsActivated();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link rpg.Node#getAbilities <em>Abilities</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1819,15 +2711,37 @@ public interface RpgPackage extends EPackage {
 	EReference getNode_Abilities();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link rpg.Node#getTalents <em>Talents</em>}'.
+	 * Returns the meta object for the containment reference list '{@link rpg.Node#getTalents <em>Talents</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Talents</em>'.
+	 * @return the meta object for the containment reference list '<em>Talents</em>'.
 	 * @see rpg.Node#getTalents()
 	 * @see #getNode()
 	 * @generated
 	 */
 	EReference getNode_Talents();
+
+	/**
+	 * Returns the meta object for the attribute '{@link rpg.Node#isIsLocked <em>Is Locked</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Locked</em>'.
+	 * @see rpg.Node#isIsLocked()
+	 * @see #getNode()
+	 * @generated
+	 */
+	EAttribute getNode_IsLocked();
+
+	/**
+	 * Returns the meta object for the container reference '{@link rpg.Node#getBranch <em>Branch</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Branch</em>'.
+	 * @see rpg.Node#getBranch()
+	 * @see #getNode()
+	 * @generated
+	 */
+	EReference getNode_Branch();
 
 	/**
 	 * Returns the meta object for class '{@link rpg.NodeActivation <em>Node Activation</em>}'.
@@ -1838,17 +2752,6 @@ public interface RpgPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getNodeActivation();
-
-	/**
-	 * Returns the meta object for the attribute '{@link rpg.NodeActivation#getText <em>Text</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Text</em>'.
-	 * @see rpg.NodeActivation#getText()
-	 * @see #getNodeActivation()
-	 * @generated
-	 */
-	EAttribute getNodeActivation_Text();
 
 	/**
 	 * Returns the meta object for the attribute '{@link rpg.NodeActivation#isIsAuto <em>Is Auto</em>}'.
@@ -1873,57 +2776,37 @@ public interface RpgPackage extends EPackage {
 	EAttribute getNodeActivation_Level();
 
 	/**
-	 * Returns the meta object for class '{@link rpg.NodeActivationBuy <em>Node Activation Buy</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Node Activation Buy</em>'.
-	 * @see rpg.NodeActivationBuy
-	 * @generated
-	 */
-	EClass getNodeActivationBuy();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link rpg.NodeActivationBuy#getCosts <em>Costs</em>}'.
+	 * Returns the meta object for the containment reference list '{@link rpg.NodeActivation#getCosts <em>Costs</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Costs</em>'.
-	 * @see rpg.NodeActivationBuy#getCosts()
-	 * @see #getNodeActivationBuy()
+	 * @see rpg.NodeActivation#getCosts()
+	 * @see #getNodeActivation()
 	 * @generated
 	 */
-	EReference getNodeActivationBuy_Costs();
+	EReference getNodeActivation_Costs();
 
 	/**
-	 * Returns the meta object for class '{@link rpg.NodeActivationPropagate <em>Node Activation Propagate</em>}'.
+	 * Returns the meta object for the containment reference list '{@link rpg.NodeActivation#getRequirements <em>Requirements</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Node Activation Propagate</em>'.
-	 * @see rpg.NodeActivationPropagate
+	 * @return the meta object for the containment reference list '<em>Requirements</em>'.
+	 * @see rpg.NodeActivation#getRequirements()
+	 * @see #getNodeActivation()
 	 * @generated
 	 */
-	EClass getNodeActivationPropagate();
+	EReference getNodeActivation_Requirements();
 
 	/**
-	 * Returns the meta object for the reference '{@link rpg.NodeActivationPropagate#getFollowsActivationOf <em>Follows Activation Of</em>}'.
+	 * Returns the meta object for the container reference '{@link rpg.NodeActivation#getNode <em>Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Follows Activation Of</em>'.
-	 * @see rpg.NodeActivationPropagate#getFollowsActivationOf()
-	 * @see #getNodeActivationPropagate()
+	 * @return the meta object for the container reference '<em>Node</em>'.
+	 * @see rpg.NodeActivation#getNode()
+	 * @see #getNodeActivation()
 	 * @generated
 	 */
-	EReference getNodeActivationPropagate_FollowsActivationOf();
-
-	/**
-	 * Returns the meta object for the attribute '{@link rpg.NodeActivationPropagate#getRequiredLevel <em>Required Level</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Required Level</em>'.
-	 * @see rpg.NodeActivationPropagate#getRequiredLevel()
-	 * @see #getNodeActivationPropagate()
-	 * @generated
-	 */
-	EAttribute getNodeActivationPropagate_RequiredLevel();
+	EReference getNodeActivation_Node();
 
 	/**
 	 * Returns the meta object for class '{@link rpg.ActivationCost <em>Activation Cost</em>}'.
@@ -1967,6 +2850,17 @@ public interface RpgPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getActivationCost_Statistic();
+
+	/**
+	 * Returns the meta object for the container reference '{@link rpg.ActivationCost#getNodeActivation <em>Node Activation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Node Activation</em>'.
+	 * @see rpg.ActivationCost#getNodeActivation()
+	 * @see #getActivationCost()
+	 * @generated
+	 */
+	EReference getActivationCost_NodeActivation();
 
 	/**
 	 * Returns the meta object for class '{@link rpg.RangeUnit <em>Range Unit</em>}'.
@@ -2055,6 +2949,17 @@ public interface RpgPackage extends EPackage {
 	EAttribute getAbility_CastType();
 
 	/**
+	 * Returns the meta object for the attribute '{@link rpg.Ability#getCooldown <em>Cooldown</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Cooldown</em>'.
+	 * @see rpg.Ability#getCooldown()
+	 * @see #getAbility()
+	 * @generated
+	 */
+	EAttribute getAbility_Cooldown();
+
+	/**
 	 * Returns the meta object for the attribute '{@link rpg.Ability#getAbilityType <em>Ability Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2121,15 +3026,26 @@ public interface RpgPackage extends EPackage {
 	EReference getAbility_Effects();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link rpg.Ability#getCosts <em>Costs</em>}'.
+	 * Returns the meta object for the container reference '{@link rpg.Ability#getNode <em>Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Costs</em>'.
-	 * @see rpg.Ability#getCosts()
+	 * @return the meta object for the container reference '<em>Node</em>'.
+	 * @see rpg.Ability#getNode()
 	 * @see #getAbility()
 	 * @generated
 	 */
-	EReference getAbility_Costs();
+	EReference getAbility_Node();
+
+	/**
+	 * Returns the meta object for the attribute '{@link rpg.Ability#isIsLocked <em>Is Locked</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Locked</em>'.
+	 * @see rpg.Ability#isIsLocked()
+	 * @see #getAbility()
+	 * @generated
+	 */
+	EAttribute getAbility_IsLocked();
 
 	/**
 	 * Returns the meta object for class '{@link rpg.Effect <em>Effect</em>}'.
@@ -2208,15 +3124,48 @@ public interface RpgPackage extends EPackage {
 	EReference getEffect_Instantiate();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link rpg.Effect#getStatChange <em>Stat Change</em>}'.
+	 * Returns the meta object for the container reference '{@link rpg.Effect#getAbility <em>Ability</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Stat Change</em>'.
-	 * @see rpg.Effect#getStatChange()
+	 * @return the meta object for the container reference '<em>Ability</em>'.
+	 * @see rpg.Effect#getAbility()
 	 * @see #getEffect()
 	 * @generated
 	 */
-	EReference getEffect_StatChange();
+	EReference getEffect_Ability();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link rpg.Effect#getRandomizer <em>Randomizer</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Randomizer</em>'.
+	 * @see rpg.Effect#getRandomizer()
+	 * @see #getEffect()
+	 * @generated
+	 */
+	EReference getEffect_Randomizer();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link rpg.Effect#getChanges <em>Changes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Changes</em>'.
+	 * @see rpg.Effect#getChanges()
+	 * @see #getEffect()
+	 * @generated
+	 */
+	EReference getEffect_Changes();
+
+	/**
+	 * Returns the meta object for the attribute '{@link rpg.Effect#isIsLocked <em>Is Locked</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Locked</em>'.
+	 * @see rpg.Effect#isIsLocked()
+	 * @see #getEffect()
+	 * @generated
+	 */
+	EAttribute getEffect_IsLocked();
 
 	/**
 	 * Returns the meta object for class '{@link rpg.StatChange <em>Stat Change</em>}'.
@@ -2227,50 +3176,6 @@ public interface RpgPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getStatChange();
-
-	/**
-	 * Returns the meta object for the attribute '{@link rpg.StatChange#getChangeType <em>Change Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Change Type</em>'.
-	 * @see rpg.StatChange#getChangeType()
-	 * @see #getStatChange()
-	 * @generated
-	 */
-	EAttribute getStatChange_ChangeType();
-
-	/**
-	 * Returns the meta object for the attribute '{@link rpg.StatChange#getTickType <em>Tick Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Tick Type</em>'.
-	 * @see rpg.StatChange#getTickType()
-	 * @see #getStatChange()
-	 * @generated
-	 */
-	EAttribute getStatChange_TickType();
-
-	/**
-	 * Returns the meta object for the attribute '{@link rpg.StatChange#getBaseValue <em>Base Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Base Value</em>'.
-	 * @see rpg.StatChange#getBaseValue()
-	 * @see #getStatChange()
-	 * @generated
-	 */
-	EAttribute getStatChange_BaseValue();
-
-	/**
-	 * Returns the meta object for the attribute '{@link rpg.StatChange#getTickValue <em>Tick Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Tick Value</em>'.
-	 * @see rpg.StatChange#getTickValue()
-	 * @see #getStatChange()
-	 * @generated
-	 */
-	EAttribute getStatChange_TickValue();
 
 	/**
 	 * Returns the meta object for the reference '{@link rpg.StatChange#getChangesStatistic <em>Changes Statistic</em>}'.
@@ -2293,6 +3198,39 @@ public interface RpgPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getStatChange_Modifiers();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link rpg.StatChange#getRandomizer <em>Randomizer</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Randomizer</em>'.
+	 * @see rpg.StatChange#getRandomizer()
+	 * @see #getStatChange()
+	 * @generated
+	 */
+	EReference getStatChange_Randomizer();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link rpg.StatChange#getTick <em>Tick</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Tick</em>'.
+	 * @see rpg.StatChange#getTick()
+	 * @see #getStatChange()
+	 * @generated
+	 */
+	EReference getStatChange_Tick();
+
+	/**
+	 * Returns the meta object for the container reference '{@link rpg.StatChange#getStatTalent <em>Stat Talent</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Stat Talent</em>'.
+	 * @see rpg.StatChange#getStatTalent()
+	 * @see #getStatChange()
+	 * @generated
+	 */
+	EReference getStatChange_StatTalent();
 
 	/**
 	 * Returns the meta object for class '{@link rpg.Modifier <em>Modifier</em>}'.
@@ -2371,6 +3309,61 @@ public interface RpgPackage extends EPackage {
 	EAttribute getModifier_BasedOnValue();
 
 	/**
+	 * Returns the meta object for the container reference '{@link rpg.Modifier#getStatChange <em>Stat Change</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Stat Change</em>'.
+	 * @see rpg.Modifier#getStatChange()
+	 * @see #getModifier()
+	 * @generated
+	 */
+	EReference getModifier_StatChange();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link rpg.Modifier#getRandomizer <em>Randomizer</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Randomizer</em>'.
+	 * @see rpg.Modifier#getRandomizer()
+	 * @see #getModifier()
+	 * @generated
+	 */
+	EReference getModifier_Randomizer();
+
+	/**
+	 * Returns the meta object for the attribute '{@link rpg.Modifier#getOnLevel <em>On Level</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>On Level</em>'.
+	 * @see rpg.Modifier#getOnLevel()
+	 * @see #getModifier()
+	 * @generated
+	 */
+	EAttribute getModifier_OnLevel();
+
+	/**
+	 * Returns the meta object for the attribute '{@link rpg.Modifier#isExclusive <em>Exclusive</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Exclusive</em>'.
+	 * @see rpg.Modifier#isExclusive()
+	 * @see #getModifier()
+	 * @generated
+	 */
+	EAttribute getModifier_Exclusive();
+
+	/**
+	 * Returns the meta object for the attribute '{@link rpg.Modifier#isTargetStatistic <em>Target Statistic</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Target Statistic</em>'.
+	 * @see rpg.Modifier#isTargetStatistic()
+	 * @see #getModifier()
+	 * @generated
+	 */
+	EAttribute getModifier_TargetStatistic();
+
+	/**
 	 * Returns the meta object for class '{@link rpg.Talent <em>Talent</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2425,47 +3418,399 @@ public interface RpgPackage extends EPackage {
 	EAttribute getTalent_Description();
 
 	/**
-	 * Returns the meta object for class '{@link rpg.AbilityCost <em>Ability Cost</em>}'.
+	 * Returns the meta object for the container reference '{@link rpg.Talent#getNode <em>Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Ability Cost</em>'.
-	 * @see rpg.AbilityCost
+	 * @return the meta object for the container reference '<em>Node</em>'.
+	 * @see rpg.Talent#getNode()
+	 * @see #getTalent()
 	 * @generated
 	 */
-	EClass getAbilityCost();
+	EReference getTalent_Node();
 
 	/**
-	 * Returns the meta object for the attribute '{@link rpg.AbilityCost#isConsume <em>Consume</em>}'.
+	 * Returns the meta object for the attribute '{@link rpg.Talent#getOnLevel <em>On Level</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Consume</em>'.
-	 * @see rpg.AbilityCost#isConsume()
-	 * @see #getAbilityCost()
+	 * @return the meta object for the attribute '<em>On Level</em>'.
+	 * @see rpg.Talent#getOnLevel()
+	 * @see #getTalent()
 	 * @generated
 	 */
-	EAttribute getAbilityCost_Consume();
+	EAttribute getTalent_OnLevel();
 
 	/**
-	 * Returns the meta object for the attribute '{@link rpg.AbilityCost#getCost <em>Cost</em>}'.
+	 * Returns the meta object for class '{@link rpg.PropagationRequirement <em>Propagation Requirement</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Cost</em>'.
-	 * @see rpg.AbilityCost#getCost()
-	 * @see #getAbilityCost()
+	 * @return the meta object for class '<em>Propagation Requirement</em>'.
+	 * @see rpg.PropagationRequirement
 	 * @generated
 	 */
-	EAttribute getAbilityCost_Cost();
+	EClass getPropagationRequirement();
 
 	/**
-	 * Returns the meta object for the reference '{@link rpg.AbilityCost#getStatistic <em>Statistic</em>}'.
+	 * Returns the meta object for the attribute '{@link rpg.PropagationRequirement#getRequiredLevel <em>Required Level</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Statistic</em>'.
-	 * @see rpg.AbilityCost#getStatistic()
-	 * @see #getAbilityCost()
+	 * @return the meta object for the attribute '<em>Required Level</em>'.
+	 * @see rpg.PropagationRequirement#getRequiredLevel()
+	 * @see #getPropagationRequirement()
 	 * @generated
 	 */
-	EReference getAbilityCost_Statistic();
+	EAttribute getPropagationRequirement_RequiredLevel();
+
+	/**
+	 * Returns the meta object for the reference '{@link rpg.PropagationRequirement#getFollowsActivationOf <em>Follows Activation Of</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Follows Activation Of</em>'.
+	 * @see rpg.PropagationRequirement#getFollowsActivationOf()
+	 * @see #getPropagationRequirement()
+	 * @generated
+	 */
+	EReference getPropagationRequirement_FollowsActivationOf();
+
+	/**
+	 * Returns the meta object for the container reference '{@link rpg.PropagationRequirement#getNodeActivation <em>Node Activation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Node Activation</em>'.
+	 * @see rpg.PropagationRequirement#getNodeActivation()
+	 * @see #getPropagationRequirement()
+	 * @generated
+	 */
+	EReference getPropagationRequirement_NodeActivation();
+
+	/**
+	 * Returns the meta object for class '{@link rpg.Randomizer <em>Randomizer</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Randomizer</em>'.
+	 * @see rpg.Randomizer
+	 * @generated
+	 */
+	EClass getRandomizer();
+
+	/**
+	 * Returns the meta object for the attribute '{@link rpg.Randomizer#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see rpg.Randomizer#getValue()
+	 * @see #getRandomizer()
+	 * @generated
+	 */
+	EAttribute getRandomizer_Value();
+
+	/**
+	 * Returns the meta object for the reference '{@link rpg.Randomizer#getBasedOn <em>Based On</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Based On</em>'.
+	 * @see rpg.Randomizer#getBasedOn()
+	 * @see #getRandomizer()
+	 * @generated
+	 */
+	EReference getRandomizer_BasedOn();
+
+	/**
+	 * Returns the meta object for class '{@link rpg.StatTalent <em>Stat Talent</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Stat Talent</em>'.
+	 * @see rpg.StatTalent
+	 * @generated
+	 */
+	EClass getStatTalent();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link rpg.StatTalent#getStatChanges <em>Stat Changes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Stat Changes</em>'.
+	 * @see rpg.StatTalent#getStatChanges()
+	 * @see #getStatTalent()
+	 * @generated
+	 */
+	EReference getStatTalent_StatChanges();
+
+	/**
+	 * Returns the meta object for class '{@link rpg.Tick <em>Tick</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Tick</em>'.
+	 * @see rpg.Tick
+	 * @generated
+	 */
+	EClass getTick();
+
+	/**
+	 * Returns the meta object for the attribute '{@link rpg.Tick#getTickType <em>Tick Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Tick Type</em>'.
+	 * @see rpg.Tick#getTickType()
+	 * @see #getTick()
+	 * @generated
+	 */
+	EAttribute getTick_TickType();
+
+	/**
+	 * Returns the meta object for the container reference '{@link rpg.Tick#getStatChange <em>Stat Change</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Stat Change</em>'.
+	 * @see rpg.Tick#getStatChange()
+	 * @see #getTick()
+	 * @generated
+	 */
+	EReference getTick_StatChange();
+
+	/**
+	 * Returns the meta object for the attribute '{@link rpg.Tick#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see rpg.Tick#getValue()
+	 * @see #getTick()
+	 * @generated
+	 */
+	EAttribute getTick_Value();
+
+	/**
+	 * Returns the meta object for the attribute '{@link rpg.Tick#getDuration <em>Duration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Duration</em>'.
+	 * @see rpg.Tick#getDuration()
+	 * @see #getTick()
+	 * @generated
+	 */
+	EAttribute getTick_Duration();
+
+	/**
+	 * Returns the meta object for class '{@link rpg.CooldownChange <em>Cooldown Change</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Cooldown Change</em>'.
+	 * @see rpg.CooldownChange
+	 * @generated
+	 */
+	EClass getCooldownChange();
+
+	/**
+	 * Returns the meta object for the reference '{@link rpg.CooldownChange#getAbility <em>Ability</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Ability</em>'.
+	 * @see rpg.CooldownChange#getAbility()
+	 * @see #getCooldownChange()
+	 * @generated
+	 */
+	EReference getCooldownChange_Ability();
+
+	/**
+	 * Returns the meta object for the reference '{@link rpg.CooldownChange#getTalent <em>Talent</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Talent</em>'.
+	 * @see rpg.CooldownChange#getTalent()
+	 * @see #getCooldownChange()
+	 * @generated
+	 */
+	EReference getCooldownChange_Talent();
+
+	/**
+	 * Returns the meta object for the container reference '{@link rpg.CooldownChange#getCooldownTalent <em>Cooldown Talent</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Cooldown Talent</em>'.
+	 * @see rpg.CooldownChange#getCooldownTalent()
+	 * @see #getCooldownChange()
+	 * @generated
+	 */
+	EReference getCooldownChange_CooldownTalent();
+
+	/**
+	 * Returns the meta object for class '{@link rpg.Change <em>Change</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Change</em>'.
+	 * @see rpg.Change
+	 * @generated
+	 */
+	EClass getChange();
+
+	/**
+	 * Returns the meta object for the attribute '{@link rpg.Change#getBaseValue <em>Base Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Base Value</em>'.
+	 * @see rpg.Change#getBaseValue()
+	 * @see #getChange()
+	 * @generated
+	 */
+	EAttribute getChange_BaseValue();
+
+	/**
+	 * Returns the meta object for the attribute '{@link rpg.Change#getChangeValueType <em>Change Value Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Change Value Type</em>'.
+	 * @see rpg.Change#getChangeValueType()
+	 * @see #getChange()
+	 * @generated
+	 */
+	EAttribute getChange_ChangeValueType();
+
+	/**
+	 * Returns the meta object for the attribute '{@link rpg.Change#getChangeType <em>Change Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Change Type</em>'.
+	 * @see rpg.Change#getChangeType()
+	 * @see #getChange()
+	 * @generated
+	 */
+	EAttribute getChange_ChangeType();
+
+	/**
+	 * Returns the meta object for the container reference '{@link rpg.Change#getEffect <em>Effect</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Effect</em>'.
+	 * @see rpg.Change#getEffect()
+	 * @see #getChange()
+	 * @generated
+	 */
+	EReference getChange_Effect();
+
+	/**
+	 * Returns the meta object for the attribute '{@link rpg.Change#isIsLocked <em>Is Locked</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Locked</em>'.
+	 * @see rpg.Change#isIsLocked()
+	 * @see #getChange()
+	 * @generated
+	 */
+	EAttribute getChange_IsLocked();
+
+	/**
+	 * Returns the meta object for class '{@link rpg.UnlockTalent <em>Unlock Talent</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Unlock Talent</em>'.
+	 * @see rpg.UnlockTalent
+	 * @generated
+	 */
+	EClass getUnlockTalent();
+
+	/**
+	 * Returns the meta object for class '{@link rpg.UnlockAbility <em>Unlock Ability</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Unlock Ability</em>'.
+	 * @see rpg.UnlockAbility
+	 * @generated
+	 */
+	EClass getUnlockAbility();
+
+	/**
+	 * Returns the meta object for the reference '{@link rpg.UnlockAbility#getAbility <em>Ability</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Ability</em>'.
+	 * @see rpg.UnlockAbility#getAbility()
+	 * @see #getUnlockAbility()
+	 * @generated
+	 */
+	EReference getUnlockAbility_Ability();
+
+	/**
+	 * Returns the meta object for class '{@link rpg.UnlockEffect <em>Unlock Effect</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Unlock Effect</em>'.
+	 * @see rpg.UnlockEffect
+	 * @generated
+	 */
+	EClass getUnlockEffect();
+
+	/**
+	 * Returns the meta object for the reference '{@link rpg.UnlockEffect#getEffect <em>Effect</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Effect</em>'.
+	 * @see rpg.UnlockEffect#getEffect()
+	 * @see #getUnlockEffect()
+	 * @generated
+	 */
+	EReference getUnlockEffect_Effect();
+
+	/**
+	 * Returns the meta object for class '{@link rpg.UnlockChange <em>Unlock Change</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Unlock Change</em>'.
+	 * @see rpg.UnlockChange
+	 * @generated
+	 */
+	EClass getUnlockChange();
+
+	/**
+	 * Returns the meta object for the reference '{@link rpg.UnlockChange#getChange <em>Change</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Change</em>'.
+	 * @see rpg.UnlockChange#getChange()
+	 * @see #getUnlockChange()
+	 * @generated
+	 */
+	EReference getUnlockChange_Change();
+
+	/**
+	 * Returns the meta object for class '{@link rpg.CooldownTalent <em>Cooldown Talent</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Cooldown Talent</em>'.
+	 * @see rpg.CooldownTalent
+	 * @generated
+	 */
+	EClass getCooldownTalent();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link rpg.CooldownTalent#getCooldownChanges <em>Cooldown Changes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Cooldown Changes</em>'.
+	 * @see rpg.CooldownTalent#getCooldownChanges()
+	 * @see #getCooldownTalent()
+	 * @generated
+	 */
+	EReference getCooldownTalent_CooldownChanges();
+
+	/**
+	 * Returns the meta object for class '{@link rpg.UnlockModifier <em>Unlock Modifier</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Unlock Modifier</em>'.
+	 * @see rpg.UnlockModifier
+	 * @generated
+	 */
+	EClass getUnlockModifier();
+
+	/**
+	 * Returns the meta object for the reference '{@link rpg.UnlockModifier#getModifier <em>Modifier</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Modifier</em>'.
+	 * @see rpg.UnlockModifier#getModifier()
+	 * @see #getUnlockModifier()
+	 * @generated
+	 */
+	EReference getUnlockModifier_Modifier();
 
 	/**
 	 * Returns the meta object for enum '{@link rpg.StatType <em>Stat Type</em>}'.
@@ -2556,6 +3901,16 @@ public interface RpgPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getTickType();
+
+	/**
+	 * Returns the meta object for enum '{@link rpg.ChangeValueType <em>Change Value Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Change Value Type</em>'.
+	 * @see rpg.ChangeValueType
+	 * @generated
+	 */
+	EEnum getChangeValueType();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -2688,6 +4043,14 @@ public interface RpgPackage extends EPackage {
 		EReference CHARACTER_CLASS__BRANCHES = eINSTANCE.getCharacterClass_Branches();
 
 		/**
+		 * The meta object literal for the '<em><b>Is Playable</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CHARACTER_CLASS__IS_PLAYABLE = eINSTANCE.getCharacterClass_IsPlayable();
+
+		/**
 		 * The meta object literal for the '{@link rpg.impl.CharacterStatisticImpl <em>Character Statistic</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2812,14 +4175,6 @@ public interface RpgPackage extends EPackage {
 		EAttribute BRANCH__BRANCH_TYPE = eINSTANCE.getBranch_BranchType();
 
 		/**
-		 * The meta object literal for the '<em><b>Start Nodes</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference BRANCH__START_NODES = eINSTANCE.getBranch_StartNodes();
-
-		/**
 		 * The meta object literal for the '<em><b>Tooltip</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2842,6 +4197,14 @@ public interface RpgPackage extends EPackage {
 		 * @generated
 		 */
 		EReference BRANCH__NODES = eINSTANCE.getBranch_Nodes();
+
+		/**
+		 * The meta object literal for the '<em><b>Character Class</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BRANCH__CHARACTER_CLASS = eINSTANCE.getBranch_CharacterClass();
 
 		/**
 		 * The meta object literal for the '{@link rpg.impl.NodeImpl <em>Node</em>}' class.
@@ -2902,7 +4265,7 @@ public interface RpgPackage extends EPackage {
 		EReference NODE__CHILD_NODES = eINSTANCE.getNode_ChildNodes();
 
 		/**
-		 * The meta object literal for the '<em><b>Parent Nodes</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Parent Nodes</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -2942,14 +4305,6 @@ public interface RpgPackage extends EPackage {
 		EAttribute NODE__ACTIVATION_LEVEL = eINSTANCE.getNode_ActivationLevel();
 
 		/**
-		 * The meta object literal for the '<em><b>Is Activated</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute NODE__IS_ACTIVATED = eINSTANCE.getNode_IsActivated();
-
-		/**
 		 * The meta object literal for the '<em><b>Abilities</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2958,12 +4313,28 @@ public interface RpgPackage extends EPackage {
 		EReference NODE__ABILITIES = eINSTANCE.getNode_Abilities();
 
 		/**
-		 * The meta object literal for the '<em><b>Talents</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Talents</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference NODE__TALENTS = eINSTANCE.getNode_Talents();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Locked</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute NODE__IS_LOCKED = eINSTANCE.getNode_IsLocked();
+
+		/**
+		 * The meta object literal for the '<em><b>Branch</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference NODE__BRANCH = eINSTANCE.getNode_Branch();
 
 		/**
 		 * The meta object literal for the '{@link rpg.impl.NodeActivationImpl <em>Node Activation</em>}' class.
@@ -2974,14 +4345,6 @@ public interface RpgPackage extends EPackage {
 		 * @generated
 		 */
 		EClass NODE_ACTIVATION = eINSTANCE.getNodeActivation();
-
-		/**
-		 * The meta object literal for the '<em><b>Text</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute NODE_ACTIVATION__TEXT = eINSTANCE.getNodeActivation_Text();
 
 		/**
 		 * The meta object literal for the '<em><b>Is Auto</b></em>' attribute feature.
@@ -3000,48 +4363,28 @@ public interface RpgPackage extends EPackage {
 		EAttribute NODE_ACTIVATION__LEVEL = eINSTANCE.getNodeActivation_Level();
 
 		/**
-		 * The meta object literal for the '{@link rpg.impl.NodeActivationBuyImpl <em>Node Activation Buy</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see rpg.impl.NodeActivationBuyImpl
-		 * @see rpg.impl.RpgPackageImpl#getNodeActivationBuy()
-		 * @generated
-		 */
-		EClass NODE_ACTIVATION_BUY = eINSTANCE.getNodeActivationBuy();
-
-		/**
 		 * The meta object literal for the '<em><b>Costs</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference NODE_ACTIVATION_BUY__COSTS = eINSTANCE.getNodeActivationBuy_Costs();
+		EReference NODE_ACTIVATION__COSTS = eINSTANCE.getNodeActivation_Costs();
 
 		/**
-		 * The meta object literal for the '{@link rpg.impl.NodeActivationPropagateImpl <em>Node Activation Propagate</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see rpg.impl.NodeActivationPropagateImpl
-		 * @see rpg.impl.RpgPackageImpl#getNodeActivationPropagate()
-		 * @generated
-		 */
-		EClass NODE_ACTIVATION_PROPAGATE = eINSTANCE.getNodeActivationPropagate();
-
-		/**
-		 * The meta object literal for the '<em><b>Follows Activation Of</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Requirements</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference NODE_ACTIVATION_PROPAGATE__FOLLOWS_ACTIVATION_OF = eINSTANCE.getNodeActivationPropagate_FollowsActivationOf();
+		EReference NODE_ACTIVATION__REQUIREMENTS = eINSTANCE.getNodeActivation_Requirements();
 
 		/**
-		 * The meta object literal for the '<em><b>Required Level</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Node</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute NODE_ACTIVATION_PROPAGATE__REQUIRED_LEVEL = eINSTANCE.getNodeActivationPropagate_RequiredLevel();
+		EReference NODE_ACTIVATION__NODE = eINSTANCE.getNodeActivation_Node();
 
 		/**
 		 * The meta object literal for the '{@link rpg.impl.ActivationCostImpl <em>Activation Cost</em>}' class.
@@ -3076,6 +4419,14 @@ public interface RpgPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ACTIVATION_COST__STATISTIC = eINSTANCE.getActivationCost_Statistic();
+
+		/**
+		 * The meta object literal for the '<em><b>Node Activation</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ACTIVATION_COST__NODE_ACTIVATION = eINSTANCE.getActivationCost_NodeActivation();
 
 		/**
 		 * The meta object literal for the '{@link rpg.impl.RangeUnitImpl <em>Range Unit</em>}' class.
@@ -3146,6 +4497,14 @@ public interface RpgPackage extends EPackage {
 		EAttribute ABILITY__CAST_TYPE = eINSTANCE.getAbility_CastType();
 
 		/**
+		 * The meta object literal for the '<em><b>Cooldown</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ABILITY__COOLDOWN = eINSTANCE.getAbility_Cooldown();
+
+		/**
 		 * The meta object literal for the '<em><b>Ability Type</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3194,12 +4553,20 @@ public interface RpgPackage extends EPackage {
 		EReference ABILITY__EFFECTS = eINSTANCE.getAbility_Effects();
 
 		/**
-		 * The meta object literal for the '<em><b>Costs</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Node</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ABILITY__COSTS = eINSTANCE.getAbility_Costs();
+		EReference ABILITY__NODE = eINSTANCE.getAbility_Node();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Locked</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ABILITY__IS_LOCKED = eINSTANCE.getAbility_IsLocked();
 
 		/**
 		 * The meta object literal for the '{@link rpg.impl.EffectImpl <em>Effect</em>}' class.
@@ -3260,12 +4627,36 @@ public interface RpgPackage extends EPackage {
 		EReference EFFECT__INSTANTIATE = eINSTANCE.getEffect_Instantiate();
 
 		/**
-		 * The meta object literal for the '<em><b>Stat Change</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Ability</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference EFFECT__STAT_CHANGE = eINSTANCE.getEffect_StatChange();
+		EReference EFFECT__ABILITY = eINSTANCE.getEffect_Ability();
+
+		/**
+		 * The meta object literal for the '<em><b>Randomizer</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EFFECT__RANDOMIZER = eINSTANCE.getEffect_Randomizer();
+
+		/**
+		 * The meta object literal for the '<em><b>Changes</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EFFECT__CHANGES = eINSTANCE.getEffect_Changes();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Locked</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EFFECT__IS_LOCKED = eINSTANCE.getEffect_IsLocked();
 
 		/**
 		 * The meta object literal for the '{@link rpg.impl.StatChangeImpl <em>Stat Change</em>}' class.
@@ -3276,38 +4667,6 @@ public interface RpgPackage extends EPackage {
 		 * @generated
 		 */
 		EClass STAT_CHANGE = eINSTANCE.getStatChange();
-
-		/**
-		 * The meta object literal for the '<em><b>Change Type</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute STAT_CHANGE__CHANGE_TYPE = eINSTANCE.getStatChange_ChangeType();
-
-		/**
-		 * The meta object literal for the '<em><b>Tick Type</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute STAT_CHANGE__TICK_TYPE = eINSTANCE.getStatChange_TickType();
-
-		/**
-		 * The meta object literal for the '<em><b>Base Value</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute STAT_CHANGE__BASE_VALUE = eINSTANCE.getStatChange_BaseValue();
-
-		/**
-		 * The meta object literal for the '<em><b>Tick Value</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute STAT_CHANGE__TICK_VALUE = eINSTANCE.getStatChange_TickValue();
 
 		/**
 		 * The meta object literal for the '<em><b>Changes Statistic</b></em>' reference feature.
@@ -3324,6 +4683,30 @@ public interface RpgPackage extends EPackage {
 		 * @generated
 		 */
 		EReference STAT_CHANGE__MODIFIERS = eINSTANCE.getStatChange_Modifiers();
+
+		/**
+		 * The meta object literal for the '<em><b>Randomizer</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STAT_CHANGE__RANDOMIZER = eINSTANCE.getStatChange_Randomizer();
+
+		/**
+		 * The meta object literal for the '<em><b>Tick</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STAT_CHANGE__TICK = eINSTANCE.getStatChange_Tick();
+
+		/**
+		 * The meta object literal for the '<em><b>Stat Talent</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STAT_CHANGE__STAT_TALENT = eINSTANCE.getStatChange_StatTalent();
 
 		/**
 		 * The meta object literal for the '{@link rpg.impl.ModifierImpl <em>Modifier</em>}' class.
@@ -3384,6 +4767,46 @@ public interface RpgPackage extends EPackage {
 		EAttribute MODIFIER__BASED_ON_VALUE = eINSTANCE.getModifier_BasedOnValue();
 
 		/**
+		 * The meta object literal for the '<em><b>Stat Change</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MODIFIER__STAT_CHANGE = eINSTANCE.getModifier_StatChange();
+
+		/**
+		 * The meta object literal for the '<em><b>Randomizer</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MODIFIER__RANDOMIZER = eINSTANCE.getModifier_Randomizer();
+
+		/**
+		 * The meta object literal for the '<em><b>On Level</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MODIFIER__ON_LEVEL = eINSTANCE.getModifier_OnLevel();
+
+		/**
+		 * The meta object literal for the '<em><b>Exclusive</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MODIFIER__EXCLUSIVE = eINSTANCE.getModifier_Exclusive();
+
+		/**
+		 * The meta object literal for the '<em><b>Target Statistic</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MODIFIER__TARGET_STATISTIC = eINSTANCE.getModifier_TargetStatistic();
+
+		/**
 		 * The meta object literal for the '{@link rpg.impl.TalentImpl <em>Talent</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3426,38 +4849,324 @@ public interface RpgPackage extends EPackage {
 		EAttribute TALENT__DESCRIPTION = eINSTANCE.getTalent_Description();
 
 		/**
-		 * The meta object literal for the '{@link rpg.impl.AbilityCostImpl <em>Ability Cost</em>}' class.
+		 * The meta object literal for the '<em><b>Node</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see rpg.impl.AbilityCostImpl
-		 * @see rpg.impl.RpgPackageImpl#getAbilityCost()
 		 * @generated
 		 */
-		EClass ABILITY_COST = eINSTANCE.getAbilityCost();
+		EReference TALENT__NODE = eINSTANCE.getTalent_Node();
 
 		/**
-		 * The meta object literal for the '<em><b>Consume</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>On Level</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ABILITY_COST__CONSUME = eINSTANCE.getAbilityCost_Consume();
+		EAttribute TALENT__ON_LEVEL = eINSTANCE.getTalent_OnLevel();
 
 		/**
-		 * The meta object literal for the '<em><b>Cost</b></em>' attribute feature.
+		 * The meta object literal for the '{@link rpg.impl.PropagationRequirementImpl <em>Propagation Requirement</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
+		 * @see rpg.impl.PropagationRequirementImpl
+		 * @see rpg.impl.RpgPackageImpl#getPropagationRequirement()
 		 * @generated
 		 */
-		EAttribute ABILITY_COST__COST = eINSTANCE.getAbilityCost_Cost();
+		EClass PROPAGATION_REQUIREMENT = eINSTANCE.getPropagationRequirement();
 
 		/**
-		 * The meta object literal for the '<em><b>Statistic</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Required Level</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ABILITY_COST__STATISTIC = eINSTANCE.getAbilityCost_Statistic();
+		EAttribute PROPAGATION_REQUIREMENT__REQUIRED_LEVEL = eINSTANCE.getPropagationRequirement_RequiredLevel();
+
+		/**
+		 * The meta object literal for the '<em><b>Follows Activation Of</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PROPAGATION_REQUIREMENT__FOLLOWS_ACTIVATION_OF = eINSTANCE.getPropagationRequirement_FollowsActivationOf();
+
+		/**
+		 * The meta object literal for the '<em><b>Node Activation</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PROPAGATION_REQUIREMENT__NODE_ACTIVATION = eINSTANCE.getPropagationRequirement_NodeActivation();
+
+		/**
+		 * The meta object literal for the '{@link rpg.impl.RandomizerImpl <em>Randomizer</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see rpg.impl.RandomizerImpl
+		 * @see rpg.impl.RpgPackageImpl#getRandomizer()
+		 * @generated
+		 */
+		EClass RANDOMIZER = eINSTANCE.getRandomizer();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute RANDOMIZER__VALUE = eINSTANCE.getRandomizer_Value();
+
+		/**
+		 * The meta object literal for the '<em><b>Based On</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RANDOMIZER__BASED_ON = eINSTANCE.getRandomizer_BasedOn();
+
+		/**
+		 * The meta object literal for the '{@link rpg.impl.StatTalentImpl <em>Stat Talent</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see rpg.impl.StatTalentImpl
+		 * @see rpg.impl.RpgPackageImpl#getStatTalent()
+		 * @generated
+		 */
+		EClass STAT_TALENT = eINSTANCE.getStatTalent();
+
+		/**
+		 * The meta object literal for the '<em><b>Stat Changes</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STAT_TALENT__STAT_CHANGES = eINSTANCE.getStatTalent_StatChanges();
+
+		/**
+		 * The meta object literal for the '{@link rpg.impl.TickImpl <em>Tick</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see rpg.impl.TickImpl
+		 * @see rpg.impl.RpgPackageImpl#getTick()
+		 * @generated
+		 */
+		EClass TICK = eINSTANCE.getTick();
+
+		/**
+		 * The meta object literal for the '<em><b>Tick Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TICK__TICK_TYPE = eINSTANCE.getTick_TickType();
+
+		/**
+		 * The meta object literal for the '<em><b>Stat Change</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TICK__STAT_CHANGE = eINSTANCE.getTick_StatChange();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TICK__VALUE = eINSTANCE.getTick_Value();
+
+		/**
+		 * The meta object literal for the '<em><b>Duration</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TICK__DURATION = eINSTANCE.getTick_Duration();
+
+		/**
+		 * The meta object literal for the '{@link rpg.impl.CooldownChangeImpl <em>Cooldown Change</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see rpg.impl.CooldownChangeImpl
+		 * @see rpg.impl.RpgPackageImpl#getCooldownChange()
+		 * @generated
+		 */
+		EClass COOLDOWN_CHANGE = eINSTANCE.getCooldownChange();
+
+		/**
+		 * The meta object literal for the '<em><b>Ability</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COOLDOWN_CHANGE__ABILITY = eINSTANCE.getCooldownChange_Ability();
+
+		/**
+		 * The meta object literal for the '<em><b>Talent</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COOLDOWN_CHANGE__TALENT = eINSTANCE.getCooldownChange_Talent();
+
+		/**
+		 * The meta object literal for the '<em><b>Cooldown Talent</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COOLDOWN_CHANGE__COOLDOWN_TALENT = eINSTANCE.getCooldownChange_CooldownTalent();
+
+		/**
+		 * The meta object literal for the '{@link rpg.impl.ChangeImpl <em>Change</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see rpg.impl.ChangeImpl
+		 * @see rpg.impl.RpgPackageImpl#getChange()
+		 * @generated
+		 */
+		EClass CHANGE = eINSTANCE.getChange();
+
+		/**
+		 * The meta object literal for the '<em><b>Base Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CHANGE__BASE_VALUE = eINSTANCE.getChange_BaseValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Change Value Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CHANGE__CHANGE_VALUE_TYPE = eINSTANCE.getChange_ChangeValueType();
+
+		/**
+		 * The meta object literal for the '<em><b>Change Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CHANGE__CHANGE_TYPE = eINSTANCE.getChange_ChangeType();
+
+		/**
+		 * The meta object literal for the '<em><b>Effect</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CHANGE__EFFECT = eINSTANCE.getChange_Effect();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Locked</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CHANGE__IS_LOCKED = eINSTANCE.getChange_IsLocked();
+
+		/**
+		 * The meta object literal for the '{@link rpg.impl.UnlockTalentImpl <em>Unlock Talent</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see rpg.impl.UnlockTalentImpl
+		 * @see rpg.impl.RpgPackageImpl#getUnlockTalent()
+		 * @generated
+		 */
+		EClass UNLOCK_TALENT = eINSTANCE.getUnlockTalent();
+
+		/**
+		 * The meta object literal for the '{@link rpg.impl.UnlockAbilityImpl <em>Unlock Ability</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see rpg.impl.UnlockAbilityImpl
+		 * @see rpg.impl.RpgPackageImpl#getUnlockAbility()
+		 * @generated
+		 */
+		EClass UNLOCK_ABILITY = eINSTANCE.getUnlockAbility();
+
+		/**
+		 * The meta object literal for the '<em><b>Ability</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference UNLOCK_ABILITY__ABILITY = eINSTANCE.getUnlockAbility_Ability();
+
+		/**
+		 * The meta object literal for the '{@link rpg.impl.UnlockEffectImpl <em>Unlock Effect</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see rpg.impl.UnlockEffectImpl
+		 * @see rpg.impl.RpgPackageImpl#getUnlockEffect()
+		 * @generated
+		 */
+		EClass UNLOCK_EFFECT = eINSTANCE.getUnlockEffect();
+
+		/**
+		 * The meta object literal for the '<em><b>Effect</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference UNLOCK_EFFECT__EFFECT = eINSTANCE.getUnlockEffect_Effect();
+
+		/**
+		 * The meta object literal for the '{@link rpg.impl.UnlockChangeImpl <em>Unlock Change</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see rpg.impl.UnlockChangeImpl
+		 * @see rpg.impl.RpgPackageImpl#getUnlockChange()
+		 * @generated
+		 */
+		EClass UNLOCK_CHANGE = eINSTANCE.getUnlockChange();
+
+		/**
+		 * The meta object literal for the '<em><b>Change</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference UNLOCK_CHANGE__CHANGE = eINSTANCE.getUnlockChange_Change();
+
+		/**
+		 * The meta object literal for the '{@link rpg.impl.CooldownTalentImpl <em>Cooldown Talent</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see rpg.impl.CooldownTalentImpl
+		 * @see rpg.impl.RpgPackageImpl#getCooldownTalent()
+		 * @generated
+		 */
+		EClass COOLDOWN_TALENT = eINSTANCE.getCooldownTalent();
+
+		/**
+		 * The meta object literal for the '<em><b>Cooldown Changes</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COOLDOWN_TALENT__COOLDOWN_CHANGES = eINSTANCE.getCooldownTalent_CooldownChanges();
+
+		/**
+		 * The meta object literal for the '{@link rpg.impl.UnlockModifierImpl <em>Unlock Modifier</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see rpg.impl.UnlockModifierImpl
+		 * @see rpg.impl.RpgPackageImpl#getUnlockModifier()
+		 * @generated
+		 */
+		EClass UNLOCK_MODIFIER = eINSTANCE.getUnlockModifier();
+
+		/**
+		 * The meta object literal for the '<em><b>Modifier</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference UNLOCK_MODIFIER__MODIFIER = eINSTANCE.getUnlockModifier_Modifier();
 
 		/**
 		 * The meta object literal for the '{@link rpg.StatType <em>Stat Type</em>}' enum.
@@ -3548,6 +5257,16 @@ public interface RpgPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum TICK_TYPE = eINSTANCE.getTickType();
+
+		/**
+		 * The meta object literal for the '{@link rpg.ChangeValueType <em>Change Value Type</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see rpg.ChangeValueType
+		 * @see rpg.impl.RpgPackageImpl#getChangeValueType()
+		 * @generated
+		 */
+		EEnum CHANGE_VALUE_TYPE = eINSTANCE.getChangeValueType();
 
 	}
 

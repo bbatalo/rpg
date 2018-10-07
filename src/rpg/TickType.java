@@ -19,21 +19,6 @@ import org.eclipse.emf.common.util.AbstractEnumerator;
  */
 public final class TickType extends AbstractEnumerator {
 	/**
-	 * The '<em><b>FLAT</b></em>' literal value.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>FLAT</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @see #FLAT_LITERAL
-	 * @model
-	 * @generated
-	 * @ordered
-	 */
-	public static final int FLAT = 0;
-
-	/**
 	 * The '<em><b>PER TICK</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -64,16 +49,6 @@ public final class TickType extends AbstractEnumerator {
 	public static final int DELAYED = 2;
 
 	/**
-	 * The '<em><b>FLAT</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #FLAT
-	 * @generated
-	 * @ordered
-	 */
-	public static final TickType FLAT_LITERAL = new TickType(FLAT, "FLAT", "FLAT");
-
-	/**
 	 * The '<em><b>PER TICK</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -101,7 +76,6 @@ public final class TickType extends AbstractEnumerator {
 	 */
 	private static final TickType[] VALUES_ARRAY =
 		new TickType[] {
-			FLAT_LITERAL,
 			PER_TICK_LITERAL,
 			DELAYED_LITERAL,
 		};
@@ -154,7 +128,6 @@ public final class TickType extends AbstractEnumerator {
 	 */
 	public static TickType get(int value) {
 		switch (value) {
-			case FLAT: return FLAT_LITERAL;
 			case PER_TICK: return PER_TICK_LITERAL;
 			case DELAYED: return DELAYED_LITERAL;
 		}

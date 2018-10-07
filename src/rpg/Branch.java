@@ -2,9 +2,9 @@
  */
 package rpg;
 
-import org.eclipse.emf.cdo.CDOObject;
-
 import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -18,20 +18,19 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link rpg.Branch#getLore <em>Lore</em>}</li>
  *   <li>{@link rpg.Branch#getDescription <em>Description</em>}</li>
  *   <li>{@link rpg.Branch#getBranchType <em>Branch Type</em>}</li>
- *   <li>{@link rpg.Branch#getStartNodes <em>Start Nodes</em>}</li>
  *   <li>{@link rpg.Branch#getTooltip <em>Tooltip</em>}</li>
  *   <li>{@link rpg.Branch#isIsInheritable <em>Is Inheritable</em>}</li>
  *   <li>{@link rpg.Branch#getNodes <em>Nodes</em>}</li>
+ *   <li>{@link rpg.Branch#getCharacterClass <em>Character Class</em>}</li>
  * </ul>
  * </p>
  *
  * @see rpg.RpgPackage#getBranch()
- * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='ValidStartNodes ValidBranchTypeImplication'"
- *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot ValidStartNodes='\n\t\t\tself.startNodes->forAll(node | node.nodeType = NodeType::ROOT or node.nodeType = NodeType::STANDALONE)' ValidStartNodes$message='\'Start nodes must have either ROOT or STANDALONE type\'' ValidBranchTypeImplication='\n\t\t\tif self.branchType = BranchType::TALENT then\n\t\t\t\tself.nodes->forAll(node | node.talents->size() >= 0 and node.abilities->size() = 0)\n\t\t\telse \n\t\t\t\tself.nodes->forAll(node | node.talents->size() = 0 and node.abilities->size() >= 0)\n\t\t\tendif' ValidBranchTypeImplication$message='\'Branch type dictates what the nodes can contain: abilities or talents.\''"
- * @extends CDOObject
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='ExistingRootNode'"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot ExistingRootNode='\n\t\t\tself.nodes->exists(nodeType = NodeType::ROOT or nodeType = NodeType::STANDALONE)' ExistingRootNode$message='\'Branch must have at least one ROOT or STANDALONE node.\''"
  * @generated
  */
-public interface Branch extends CDOObject {
+public interface Branch extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -140,22 +139,6 @@ public interface Branch extends CDOObject {
 	void setBranchType(BranchType value);
 
 	/**
-	 * Returns the value of the '<em><b>Start Nodes</b></em>' reference list.
-	 * The list contents are of type {@link rpg.Node}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Start Nodes</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Start Nodes</em>' reference list.
-	 * @see rpg.RpgPackage#getBranch_StartNodes()
-	 * @model type="rpg.Node"
-	 * @generated
-	 */
-	EList getStartNodes();
-
-	/**
 	 * Returns the value of the '<em><b>Tooltip</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -211,6 +194,7 @@ public interface Branch extends CDOObject {
 	/**
 	 * Returns the value of the '<em><b>Nodes</b></em>' containment reference list.
 	 * The list contents are of type {@link rpg.Node}.
+	 * It is bidirectional and its opposite is '{@link rpg.Node#getBranch <em>Branch</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Nodes</em>' containment reference list isn't clear,
@@ -219,9 +203,38 @@ public interface Branch extends CDOObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Nodes</em>' containment reference list.
 	 * @see rpg.RpgPackage#getBranch_Nodes()
-	 * @model type="rpg.Node" containment="true" required="true"
+	 * @see rpg.Node#getBranch
+	 * @model type="rpg.Node" opposite="branch" containment="true" required="true"
 	 * @generated
 	 */
 	EList getNodes();
+
+	/**
+	 * Returns the value of the '<em><b>Character Class</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link rpg.CharacterClass#getBranches <em>Branches</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Character Class</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Character Class</em>' container reference.
+	 * @see #setCharacterClass(CharacterClass)
+	 * @see rpg.RpgPackage#getBranch_CharacterClass()
+	 * @see rpg.CharacterClass#getBranches
+	 * @model opposite="branches" required="true" transient="false"
+	 * @generated
+	 */
+	CharacterClass getCharacterClass();
+
+	/**
+	 * Sets the value of the '{@link rpg.Branch#getCharacterClass <em>Character Class</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Character Class</em>' container reference.
+	 * @see #getCharacterClass()
+	 * @generated
+	 */
+	void setCharacterClass(CharacterClass value);
 
 } // Branch

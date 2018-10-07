@@ -64,19 +64,49 @@ public final class ChangeType extends AbstractEnumerator {
 	public static final int MULTIPLY = 2;
 
 	/**
-	 * The '<em><b>MOVE LIMIT</b></em>' literal value.
+	 * The '<em><b>MOVE LIMIT UP</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>MOVE LIMIT</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>MOVE LIMIT UP</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #MOVE_LIMIT_LITERAL
+	 * @see #MOVE_LIMIT_UP_LITERAL
 	 * @model
 	 * @generated
 	 * @ordered
 	 */
-	public static final int MOVE_LIMIT = 3;
+	public static final int MOVE_LIMIT_UP = 3;
+
+	/**
+	 * The '<em><b>MOVE LIMIT DOWN</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>MOVE LIMIT DOWN</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #MOVE_LIMIT_DOWN_LITERAL
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int MOVE_LIMIT_DOWN = 4;
+
+	/**
+	 * The '<em><b>SET LIMIT</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>SET LIMIT</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #SET_LIMIT_LITERAL
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int SET_LIMIT = 5;
 
 	/**
 	 * The '<em><b>ADD</b></em>' literal object.
@@ -109,14 +139,34 @@ public final class ChangeType extends AbstractEnumerator {
 	public static final ChangeType MULTIPLY_LITERAL = new ChangeType(MULTIPLY, "MULTIPLY", "MULTIPLY");
 
 	/**
-	 * The '<em><b>MOVE LIMIT</b></em>' literal object.
+	 * The '<em><b>MOVE LIMIT UP</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #MOVE_LIMIT
+	 * @see #MOVE_LIMIT_UP
 	 * @generated
 	 * @ordered
 	 */
-	public static final ChangeType MOVE_LIMIT_LITERAL = new ChangeType(MOVE_LIMIT, "MOVE_LIMIT", "MOVE_LIMIT");
+	public static final ChangeType MOVE_LIMIT_UP_LITERAL = new ChangeType(MOVE_LIMIT_UP, "MOVE_LIMIT_UP", "MOVE_LIMIT_UP");
+
+	/**
+	 * The '<em><b>MOVE LIMIT DOWN</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #MOVE_LIMIT_DOWN
+	 * @generated
+	 * @ordered
+	 */
+	public static final ChangeType MOVE_LIMIT_DOWN_LITERAL = new ChangeType(MOVE_LIMIT_DOWN, "MOVE_LIMIT_DOWN", "MOVE_LIMIT_DOWN");
+
+	/**
+	 * The '<em><b>SET LIMIT</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #SET_LIMIT
+	 * @generated
+	 * @ordered
+	 */
+	public static final ChangeType SET_LIMIT_LITERAL = new ChangeType(SET_LIMIT, "SET_LIMIT", "SET_LIMIT");
 
 	/**
 	 * An array of all the '<em><b>Change Type</b></em>' enumerators.
@@ -129,7 +179,9 @@ public final class ChangeType extends AbstractEnumerator {
 			ADD_LITERAL,
 			SUBSTRACT_LITERAL,
 			MULTIPLY_LITERAL,
-			MOVE_LIMIT_LITERAL,
+			MOVE_LIMIT_UP_LITERAL,
+			MOVE_LIMIT_DOWN_LITERAL,
+			SET_LIMIT_LITERAL,
 		};
 
 	/**
@@ -183,7 +235,9 @@ public final class ChangeType extends AbstractEnumerator {
 			case ADD: return ADD_LITERAL;
 			case SUBSTRACT: return SUBSTRACT_LITERAL;
 			case MULTIPLY: return MULTIPLY_LITERAL;
-			case MOVE_LIMIT: return MOVE_LIMIT_LITERAL;
+			case MOVE_LIMIT_UP: return MOVE_LIMIT_UP_LITERAL;
+			case MOVE_LIMIT_DOWN: return MOVE_LIMIT_DOWN_LITERAL;
+			case SET_LIMIT: return SET_LIMIT_LITERAL;
 		}
 		return null;
 	}

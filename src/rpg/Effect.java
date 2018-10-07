@@ -2,9 +2,9 @@
  */
 package rpg;
 
-import org.eclipse.emf.cdo.CDOObject;
-
 import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -20,17 +20,19 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link rpg.Effect#getTargetType <em>Target Type</em>}</li>
  *   <li>{@link rpg.Effect#getOnLevel <em>On Level</em>}</li>
  *   <li>{@link rpg.Effect#getInstantiate <em>Instantiate</em>}</li>
- *   <li>{@link rpg.Effect#getStatChange <em>Stat Change</em>}</li>
+ *   <li>{@link rpg.Effect#getAbility <em>Ability</em>}</li>
+ *   <li>{@link rpg.Effect#getRandomizer <em>Randomizer</em>}</li>
+ *   <li>{@link rpg.Effect#getChanges <em>Changes</em>}</li>
+ *   <li>{@link rpg.Effect#isIsLocked <em>Is Locked</em>}</li>
  * </ul>
  * </p>
  *
  * @see rpg.RpgPackage#getEffect()
- * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='MeaningfulEffect'"
- *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot MeaningfulEffect='\n\t\tif self.effectType = EffectType::INSTANTIATE then\n\t\t\tself.instantiate->size() = 1\n\t\telse\n\t\t\tself.statChange->size() > 0\n\t\tendif' MeaningfulEffect$message='\'An effect must either instantiate a class or change a stat.\''"
- * @extends CDOObject
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='ProperEffectLevels MeaningfulEffect InstantiateConstraint'"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot ProperEffectLevels='\n\t\t\tself.onLevel >= self.ability.node.minActivationLevel and self.onLevel <= self.ability.node.maxActivationLevel' ProperEffectLevels$message='\'Effects must reference an appropriate node level.\'' MeaningfulEffect='\n\t\t\tif self.effectType = EffectType::INSTANTIATE then\n\t\t\t\tself.instantiate->size() = 1\n\t\t\telse\n\t\t\t\tself.changes->size() > 0\n\t\t\tendif' MeaningfulEffect$message='\'An effect must either instantiate a class or change a stat.\'' InstantiateConstraint='\n\t\t\tself.effectType = EffectType::INSTANTIATE implies self.targetType = TargetType::SELF' InstantiateConstraint$message='\'Instantiate effects can only target SELF.\''"
  * @generated
  */
-public interface Effect extends CDOObject {
+public interface Effect extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -194,19 +196,102 @@ public interface Effect extends CDOObject {
 	void setInstantiate(CharacterClass value);
 
 	/**
-	 * Returns the value of the '<em><b>Stat Change</b></em>' containment reference list.
-	 * The list contents are of type {@link rpg.StatChange}.
+	 * Returns the value of the '<em><b>Ability</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link rpg.Ability#getEffects <em>Effects</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Stat Change</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Ability</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Stat Change</em>' containment reference list.
-	 * @see rpg.RpgPackage#getEffect_StatChange()
-	 * @model type="rpg.StatChange" containment="true"
+	 * @return the value of the '<em>Ability</em>' container reference.
+	 * @see #setAbility(Ability)
+	 * @see rpg.RpgPackage#getEffect_Ability()
+	 * @see rpg.Ability#getEffects
+	 * @model opposite="effects" required="true" transient="false"
 	 * @generated
 	 */
-	EList getStatChange();
+	Ability getAbility();
+
+	/**
+	 * Sets the value of the '{@link rpg.Effect#getAbility <em>Ability</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Ability</em>' container reference.
+	 * @see #getAbility()
+	 * @generated
+	 */
+	void setAbility(Ability value);
+
+	/**
+	 * Returns the value of the '<em><b>Randomizer</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Randomizer</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Randomizer</em>' containment reference.
+	 * @see #setRandomizer(Randomizer)
+	 * @see rpg.RpgPackage#getEffect_Randomizer()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Randomizer getRandomizer();
+
+	/**
+	 * Sets the value of the '{@link rpg.Effect#getRandomizer <em>Randomizer</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Randomizer</em>' containment reference.
+	 * @see #getRandomizer()
+	 * @generated
+	 */
+	void setRandomizer(Randomizer value);
+
+	/**
+	 * Returns the value of the '<em><b>Changes</b></em>' containment reference list.
+	 * The list contents are of type {@link rpg.Change}.
+	 * It is bidirectional and its opposite is '{@link rpg.Change#getEffect <em>Effect</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Changes</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Changes</em>' containment reference list.
+	 * @see rpg.RpgPackage#getEffect_Changes()
+	 * @see rpg.Change#getEffect
+	 * @model type="rpg.Change" opposite="effect" containment="true"
+	 * @generated
+	 */
+	EList getChanges();
+
+	/**
+	 * Returns the value of the '<em><b>Is Locked</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Is Locked</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Is Locked</em>' attribute.
+	 * @see #setIsLocked(boolean)
+	 * @see rpg.RpgPackage#getEffect_IsLocked()
+	 * @model default="false" required="true"
+	 * @generated
+	 */
+	boolean isIsLocked();
+
+	/**
+	 * Sets the value of the '{@link rpg.Effect#isIsLocked <em>Is Locked</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Locked</em>' attribute.
+	 * @see #isIsLocked()
+	 * @generated
+	 */
+	void setIsLocked(boolean value);
 
 } // Effect

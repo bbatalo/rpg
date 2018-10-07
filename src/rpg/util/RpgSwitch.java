@@ -119,20 +119,6 @@ public class RpgSwitch {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case RpgPackage.NODE_ACTIVATION_BUY: {
-				NodeActivationBuy nodeActivationBuy = (NodeActivationBuy)theEObject;
-				Object result = caseNodeActivationBuy(nodeActivationBuy);
-				if (result == null) result = caseNodeActivation(nodeActivationBuy);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case RpgPackage.NODE_ACTIVATION_PROPAGATE: {
-				NodeActivationPropagate nodeActivationPropagate = (NodeActivationPropagate)theEObject;
-				Object result = caseNodeActivationPropagate(nodeActivationPropagate);
-				if (result == null) result = caseNodeActivation(nodeActivationPropagate);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case RpgPackage.ACTIVATION_COST: {
 				ActivationCost activationCost = (ActivationCost)theEObject;
 				Object result = caseActivationCost(activationCost);
@@ -160,6 +146,7 @@ public class RpgSwitch {
 			case RpgPackage.STAT_CHANGE: {
 				StatChange statChange = (StatChange)theEObject;
 				Object result = caseStatChange(statChange);
+				if (result == null) result = caseChange(statChange);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -175,9 +162,87 @@ public class RpgSwitch {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case RpgPackage.ABILITY_COST: {
-				AbilityCost abilityCost = (AbilityCost)theEObject;
-				Object result = caseAbilityCost(abilityCost);
+			case RpgPackage.PROPAGATION_REQUIREMENT: {
+				PropagationRequirement propagationRequirement = (PropagationRequirement)theEObject;
+				Object result = casePropagationRequirement(propagationRequirement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case RpgPackage.RANDOMIZER: {
+				Randomizer randomizer = (Randomizer)theEObject;
+				Object result = caseRandomizer(randomizer);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case RpgPackage.STAT_TALENT: {
+				StatTalent statTalent = (StatTalent)theEObject;
+				Object result = caseStatTalent(statTalent);
+				if (result == null) result = caseTalent(statTalent);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case RpgPackage.TICK: {
+				Tick tick = (Tick)theEObject;
+				Object result = caseTick(tick);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case RpgPackage.COOLDOWN_CHANGE: {
+				CooldownChange cooldownChange = (CooldownChange)theEObject;
+				Object result = caseCooldownChange(cooldownChange);
+				if (result == null) result = caseChange(cooldownChange);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case RpgPackage.CHANGE: {
+				Change change = (Change)theEObject;
+				Object result = caseChange(change);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case RpgPackage.UNLOCK_TALENT: {
+				UnlockTalent unlockTalent = (UnlockTalent)theEObject;
+				Object result = caseUnlockTalent(unlockTalent);
+				if (result == null) result = caseTalent(unlockTalent);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case RpgPackage.UNLOCK_ABILITY: {
+				UnlockAbility unlockAbility = (UnlockAbility)theEObject;
+				Object result = caseUnlockAbility(unlockAbility);
+				if (result == null) result = caseUnlockTalent(unlockAbility);
+				if (result == null) result = caseTalent(unlockAbility);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case RpgPackage.UNLOCK_EFFECT: {
+				UnlockEffect unlockEffect = (UnlockEffect)theEObject;
+				Object result = caseUnlockEffect(unlockEffect);
+				if (result == null) result = caseUnlockTalent(unlockEffect);
+				if (result == null) result = caseTalent(unlockEffect);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case RpgPackage.UNLOCK_CHANGE: {
+				UnlockChange unlockChange = (UnlockChange)theEObject;
+				Object result = caseUnlockChange(unlockChange);
+				if (result == null) result = caseUnlockTalent(unlockChange);
+				if (result == null) result = caseTalent(unlockChange);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case RpgPackage.COOLDOWN_TALENT: {
+				CooldownTalent cooldownTalent = (CooldownTalent)theEObject;
+				Object result = caseCooldownTalent(cooldownTalent);
+				if (result == null) result = caseTalent(cooldownTalent);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case RpgPackage.UNLOCK_MODIFIER: {
+				UnlockModifier unlockModifier = (UnlockModifier)theEObject;
+				Object result = caseUnlockModifier(unlockModifier);
+				if (result == null) result = caseUnlockTalent(unlockModifier);
+				if (result == null) result = caseTalent(unlockModifier);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -272,36 +337,6 @@ public class RpgSwitch {
 	 * @generated
 	 */
 	public Object caseNodeActivation(NodeActivation object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Node Activation Buy</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Node Activation Buy</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public Object caseNodeActivationBuy(NodeActivationBuy object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Node Activation Propagate</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Node Activation Propagate</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public Object caseNodeActivationPropagate(NodeActivationPropagate object) {
 		return null;
 	}
 
@@ -411,17 +446,182 @@ public class RpgSwitch {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Ability Cost</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Propagation Requirement</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Ability Cost</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Propagation Requirement</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseAbilityCost(AbilityCost object) {
+	public Object casePropagationRequirement(PropagationRequirement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Randomizer</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Randomizer</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public Object caseRandomizer(Randomizer object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Stat Talent</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Stat Talent</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public Object caseStatTalent(StatTalent object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Tick</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Tick</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public Object caseTick(Tick object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Cooldown Change</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Cooldown Change</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public Object caseCooldownChange(CooldownChange object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Change</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Change</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public Object caseChange(Change object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Unlock Talent</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Unlock Talent</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public Object caseUnlockTalent(UnlockTalent object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Unlock Ability</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Unlock Ability</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public Object caseUnlockAbility(UnlockAbility object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Unlock Effect</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Unlock Effect</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public Object caseUnlockEffect(UnlockEffect object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Unlock Change</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Unlock Change</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public Object caseUnlockChange(UnlockChange object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Cooldown Talent</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Cooldown Talent</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public Object caseCooldownTalent(CooldownTalent object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Unlock Modifier</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Unlock Modifier</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public Object caseUnlockModifier(UnlockModifier object) {
 		return null;
 	}
 
