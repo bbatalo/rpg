@@ -75,7 +75,7 @@ Demo:
 * Create a boss
 * ~~Create a mage, with stats~~
 * ~~Create abilities for a mage~~
-* Create talents for a mage
+* ~~Create talents for a mage~~
 * Create a warrior, with stats (using concrete syntax)
 * Create abilities for a warrior (using concrete syntax)
 * Create talents for a warrior (using concrete syntax)

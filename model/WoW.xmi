@@ -10,7 +10,7 @@
       name="Character"
       lore="No lore, generic class."
       description="A class to model any character in the game. Should be inherited for further customization"
-      childClasses="//@allClasses.1 //@allClasses.3">
+      childClasses="//@allClasses.1">
     <statistics
         name="Health"
         lore="Every living being is... living. Until it is not."
@@ -637,7 +637,6 @@
           name="Flamestrike"
           tooltip="Conjures a field of fire"
           description="Conjures a field of fire"
-          childNodes="//@allClasses.2/@branches.3/@nodes.6"
           parentNodes="//@allClasses.2/@branches.3/@nodes.3"
           maxActivationLevel="2">
         <activation
@@ -692,7 +691,6 @@
           name="Dragon Breath"
           tooltip="Breathes fire in a cone forward"
           description="Breathes fire in a cone forward"
-          childNodes="//@allClasses.2/@branches.3/@nodes.6"
           parentNodes="//@allClasses.2/@branches.3/@nodes.3">
         <activation
             level="1">
@@ -735,51 +733,8 @@
           </effects>
         </abilities>
       </nodes>
-      <nodes
-          name="Fire Elemental"
-          tooltip="Summons a Fire Elemental to serve the caster's bidding"
-          description="Summons a Fire Elemental to serve the caster's bidding"
-          parentNodes="//@allClasses.2/@branches.3/@nodes.5 //@allClasses.2/@branches.3/@nodes.4">
-        <activation
-            level="1">
-          <costs
-              cost="10.0"
-              statistic="//@allClasses.1/@statistics.1"/>
-        </activation>
-        <abilities
-            name="Summon Fire Elemental"
-            lore="Summons a fire elemental to fight for you"
-            tooltip="Summons a fire elemental to fight for you"
-            castType="CAST"
-            castTime="5.0"
-            range="5.0"
-            rangeUnit="//@rangeUnits.0"
-            onLevel="1">
-          <effects
-              name="Consume mana"
-              tooltip="Consumes mana"
-              effectType="ACTIVE"
-              onLevel="1">
-            <changes
-                xsi:type="rpg:StatChange"
-                baseValue="40.0"
-                changeValueType="PERCENTAGE"
-                changeType="SUBSTRACT"
-                changesStatistic="//@allClasses.2/@statistics.0"/>
-          </effects>
-          <effects
-              name="Summon Fire Elemental"
-              tooltip="Summons a fire elemental to do the player's bidding"
-              effectType="INSTANTIATE"
-              onLevel="1"
-              instantiate="//@allClasses.3"/>
-        </abilities>
-      </nodes>
     </branches>
   </allClasses>
-  <allClasses
-      name="Player's Fire Elemental"
-      parentClasses="//@allClasses.0"/>
   <rangeUnits
       name="Yard"
       description="One unit of in-game range is equal to one yard."/>
