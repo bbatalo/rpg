@@ -65,7 +65,7 @@ Demo:
 
 * Create dummy RPG for showcasing everything in the meta-model
 * ~~Add talents that provide basic stats for different classes~~
-* Add talents to override certain parent class abilities (e.g. leveling up - playable classes gain talent points)
+* ~~Add talents to override certain parent class abilities (e.g. leveling up - playable classes gain talent points)~~
 * ~~Create a generic character class~~
 * Create a generic NPC class
 * ~~Create a generic playable class~~
@@ -102,6 +102,7 @@ Possible:
 * Optionally merge branches upon inheritance
 * Buffs and debuffs? How to model these?
 * Add modifiers for ticks
+* Chain effects based on modifiers?
 
 ## Licence
 

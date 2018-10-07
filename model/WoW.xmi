@@ -261,6 +261,88 @@
       </nodes>
     </branches>
     <branches
+        name="Startup abilities"
+        description="Startup abilities"
+        branchType="ABILITY"
+        tooltip="Startup abilities">
+      <nodes
+          name="Startup abilities"
+          tooltip="Startup abilities"
+          description="Startup abilities"
+          nodeType="STANDALONE"
+          activationLevel="1">
+        <abilities
+            name="Level up!"
+            lore="Level up!"
+            tooltip="Level up!"
+            rangeUnit="//@rangeUnits.0"
+            onLevel="1">
+          <effects
+              name="Mage level up!"
+              tooltip="Mage level up!"
+              onLevel="1"
+              isLocked="true">
+            <changes
+                xsi:type="rpg:StatChange"
+                baseValue="15.0"
+                changeValueType="PERCENTAGE"
+                changeType="MOVE_LIMIT_UP"
+                changesStatistic="//@allClasses.2/@statistics.0"/>
+            <changes
+                xsi:type="rpg:StatChange"
+                baseValue="10.0"
+                changeValueType="PERCENTAGE"
+                changeType="MOVE_LIMIT_UP"
+                changesStatistic="//@allClasses.0/@statistics.0"/>
+            <changes
+                xsi:type="rpg:StatChange"
+                baseValue="5.0"
+                changeValueType="PERCENTAGE"
+                changeType="MOVE_LIMIT_UP"
+                changesStatistic="//@allClasses.2/@statistics.1"/>
+          </effects>
+        </abilities>
+      </nodes>
+    </branches>
+    <branches
+        name="Fire talents"
+        description="Fire talents"
+        tooltip="Fire talents">
+      <nodes
+          name="Improved fireball"
+          tooltip="Improves the fireball"
+          description=""
+          nodeType="STANDALONE"
+          maxActivationLevel="2">
+        <activation
+            level="1">
+          <costs
+              cost="1.0"
+              statistic="//@allClasses.1/@statistics.0"/>
+        </activation>
+        <activation
+            level="2">
+          <costs
+              cost="1.0"
+              statistic="//@allClasses.1/@statistics.0"/>
+        </activation>
+        <talents
+            xsi:type="rpg:UnlockEffect"
+            name="Unlock restore mana"
+            tooltip="Unlock restore mana"
+            description="Unlock restore mana"
+            onLevel="1"
+            effect="//@allClasses.2/@branches.3/@nodes.0/@abilities.0/@effects.2"/>
+        <talents
+            xsi:type="rpg:UnlockModifier"
+            name="Improved fireball"
+            tooltip="Increases fireball damage"
+            lore=""
+            description="Increases fireball damage"
+            modifier="//@allClasses.2/@branches.3/@nodes.0/@abilities.0/@effects.1/@changes.0/@modifiers.3"/>
+      </nodes>
+    </branches>
+    <branches
         name="Fire Specialization"
         lore="Fire Abilities"
         description="Fire Abilities"
@@ -271,7 +353,7 @@
           tooltip="Fireball"
           description="Fireball"
           nodeType="ROOT"
-          childNodes="//@allClasses.2/@branches.1/@nodes.1 //@allClasses.2/@branches.1/@nodes.2"
+          childNodes="//@allClasses.2/@branches.3/@nodes.1 //@allClasses.2/@branches.3/@nodes.2"
           minActivationLevel="0"
           maxActivationLevel="3"
           activationLevel="1">
@@ -318,7 +400,45 @@
                 xsi:type="rpg:StatChange"
                 baseValue="20.0"
                 changeType="SUBSTRACT"
-                changesStatistic="//@allClasses.0/@statistics.0"/>
+                changesStatistic="//@allClasses.0/@statistics.0">
+              <modifiers
+                  basedOnModifier="MULTIPLY"
+                  priorityOrder="1"
+                  basedOn="//@allClasses.2/@statistics.1"
+                  basedOnValue="0.5"/>
+              <modifiers
+                  changeType="MULTIPLY"
+                  value="1.0"
+                  basedOnModifier="MULTIPLY"
+                  priorityOrder="2"
+                  basedOn="//@allClasses.0/@statistics.3"
+                  basedOnValue="1.0"/>
+              <modifiers
+                  changeType="MULTIPLY"
+                  value="2.0"
+                  priorityOrder="3">
+                <randomizer
+                    basedOn="//@allClasses.1/@statistics.2"/>
+              </modifiers>
+              <modifiers
+                  changeType="MULTIPLY"
+                  value="1.2"
+                  priorityOrder="4"
+                  exclusive="true"/>
+            </changes>
+          </effects>
+          <effects
+              name="Restore mana"
+              tooltip="Restore mana"
+              onLevel="2"
+              isLocked="true">
+            <randomizer
+                value="15.0"/>
+            <changes
+                xsi:type="rpg:StatChange"
+                baseValue="1.0"
+                changeValueType="PERCENTAGE"
+                changesStatistic="//@allClasses.2/@statistics.0"/>
           </effects>
         </abilities>
       </nodes>
@@ -326,8 +446,8 @@
           name="Pyroblast"
           tooltip="Hurls a large boulder of fire at the enemy."
           description="Hurls a large boulder of fire at the enemy."
-          childNodes="//@allClasses.2/@branches.1/@nodes.3"
-          parentNodes="//@allClasses.2/@branches.1/@nodes.0"
+          childNodes="//@allClasses.2/@branches.3/@nodes.3"
+          parentNodes="//@allClasses.2/@branches.3/@nodes.0"
           maxActivationLevel="2">
         <activation
             level="1">
@@ -380,8 +500,8 @@
           name="Scorch"
           tooltip="Scorch"
           description="Scorch"
-          childNodes="//@allClasses.2/@branches.1/@nodes.3"
-          parentNodes="//@allClasses.2/@branches.1/@nodes.0"
+          childNodes="//@allClasses.2/@branches.3/@nodes.3"
+          parentNodes="//@allClasses.2/@branches.3/@nodes.0"
           maxActivationLevel="3">
         <activation
             level="1">
@@ -458,8 +578,8 @@
           name="Fire Blast"
           tooltip="Instantly blasts the target with a burst of fire"
           description="Instantly blasts the target with a burst of fire"
-          childNodes="//@allClasses.2/@branches.1/@nodes.5 //@allClasses.2/@branches.1/@nodes.4"
-          parentNodes="//@allClasses.2/@branches.1/@nodes.1 //@allClasses.2/@branches.1/@nodes.2">
+          childNodes="//@allClasses.2/@branches.3/@nodes.5 //@allClasses.2/@branches.3/@nodes.4"
+          parentNodes="//@allClasses.2/@branches.3/@nodes.1 //@allClasses.2/@branches.3/@nodes.2">
         <activation
             level="1">
           <costs
@@ -509,7 +629,7 @@
                 xsi:type="rpg:CooldownChange"
                 baseValue="1.0"
                 changeType="SUBSTRACT"
-                ability="//@allClasses.2/@branches.1/@nodes.3/@abilities.0"/>
+                ability="//@allClasses.2/@branches.3/@nodes.3/@abilities.0"/>
           </effects>
         </abilities>
       </nodes>
@@ -517,8 +637,8 @@
           name="Flamestrike"
           tooltip="Conjures a field of fire"
           description="Conjures a field of fire"
-          childNodes="//@allClasses.2/@branches.1/@nodes.6"
-          parentNodes="//@allClasses.2/@branches.1/@nodes.3"
+          childNodes="//@allClasses.2/@branches.3/@nodes.6"
+          parentNodes="//@allClasses.2/@branches.3/@nodes.3"
           maxActivationLevel="2">
         <activation
             level="1">
@@ -572,8 +692,8 @@
           name="Dragon Breath"
           tooltip="Breathes fire in a cone forward"
           description="Breathes fire in a cone forward"
-          childNodes="//@allClasses.2/@branches.1/@nodes.6"
-          parentNodes="//@allClasses.2/@branches.1/@nodes.3">
+          childNodes="//@allClasses.2/@branches.3/@nodes.6"
+          parentNodes="//@allClasses.2/@branches.3/@nodes.3">
         <activation
             level="1">
           <costs
@@ -619,7 +739,7 @@
           name="Fire Elemental"
           tooltip="Summons a Fire Elemental to serve the caster's bidding"
           description="Summons a Fire Elemental to serve the caster's bidding"
-          parentNodes="//@allClasses.2/@branches.1/@nodes.5 //@allClasses.2/@branches.1/@nodes.4">
+          parentNodes="//@allClasses.2/@branches.3/@nodes.5 //@allClasses.2/@branches.3/@nodes.4">
         <activation
             level="1">
           <costs
@@ -653,50 +773,6 @@
               effectType="INSTANTIATE"
               onLevel="1"
               instantiate="//@allClasses.3"/>
-        </abilities>
-      </nodes>
-    </branches>
-    <branches
-        name="Startup abilities"
-        description="Startup abilities"
-        branchType="ABILITY"
-        tooltip="Startup abilities">
-      <nodes
-          name="Startup abilities"
-          tooltip="Startup abilities"
-          description="Startup abilities"
-          nodeType="STANDALONE"
-          activationLevel="1">
-        <abilities
-            name="Level up!"
-            lore="Level up!"
-            tooltip="Level up!"
-            rangeUnit="//@rangeUnits.0"
-            onLevel="1">
-          <effects
-              name="Mage level up!"
-              tooltip="Mage level up!"
-              onLevel="1"
-              isLocked="true">
-            <changes
-                xsi:type="rpg:StatChange"
-                baseValue="15.0"
-                changeValueType="PERCENTAGE"
-                changeType="MOVE_LIMIT_UP"
-                changesStatistic="//@allClasses.2/@statistics.0"/>
-            <changes
-                xsi:type="rpg:StatChange"
-                baseValue="10.0"
-                changeValueType="PERCENTAGE"
-                changeType="MOVE_LIMIT_UP"
-                changesStatistic="//@allClasses.0/@statistics.0"/>
-            <changes
-                xsi:type="rpg:StatChange"
-                baseValue="5.0"
-                changeValueType="PERCENTAGE"
-                changeType="MOVE_LIMIT_UP"
-                changesStatistic="//@allClasses.2/@statistics.1"/>
-          </effects>
         </abilities>
       </nodes>
     </branches>
